@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "AttachmentSemanticResolutionDispositionV2": {
+      "enum": [
+        "CONFIRMED_RESOLVED",
+        "PERSISTS"
+      ],
+      "title": "AttachmentSemanticResolutionDispositionV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_semantic_finding_resolution_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "current_subject_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Current Subject Refs",
+      "type": "array"
+    },
+    "deterministic_revalidation_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "disposition": {
+      "$ref": "#/$defs/AttachmentSemanticResolutionDispositionV2"
+    },
+    "evidence_ref_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Evidence Ref Ids",
+      "type": "array"
+    },
+    "old_subject_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Old Subject Refs",
+      "type": "array"
+    },
+    "prior_finding_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "repair_plan_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "repair_result_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Repair Result Refs",
+      "type": "array"
+    },
+    "resolution_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Resolution Id",
+      "type": "string"
+    },
+    "resolution_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resolution Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-semantic-finding-resolution/v2",
+      "default": "env-mock-agent/attachment-semantic-finding-resolution/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_review_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "successor_finding_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "resolution_id",
+    "semantic_review_request_ref",
+    "prior_finding_ref",
+    "old_subject_refs",
+    "current_subject_refs",
+    "repair_plan_ref",
+    "repair_result_refs",
+    "deterministic_revalidation_ref",
+    "disposition",
+    "evidence_ref_ids",
+    "resolution_sha256"
+  ],
+  "title": "AttachmentSemanticFindingResolutionV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticFindingResolutionV2",
+  "x-schema-version": "env-mock-agent/attachment-semantic-finding-resolution/v2"
+}

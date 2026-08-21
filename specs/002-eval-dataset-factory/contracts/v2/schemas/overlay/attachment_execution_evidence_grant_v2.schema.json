@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "AttachmentExecutionSourceSpanV2": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-execution-source-span/v2",
+          "default": "env-mock-agent/attachment-execution-source-span/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "AttachmentExecutionSourceSpanV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_execution_evidence_grant_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "capability": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Capability",
+      "type": "string"
+    },
+    "capability_complete": {
+      "title": "Capability Complete",
+      "type": "boolean"
+    },
+    "evidence_ref_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Evidence Ref Id",
+      "type": "string"
+    },
+    "polarity": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "UNCERTAINTY",
+        "CONTRADICTION"
+      ],
+      "title": "Polarity",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-execution-evidence-grant/v2",
+      "default": "env-mock-agent/attachment-execution-evidence-grant/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_spans": {
+      "items": {
+        "$ref": "#/$defs/AttachmentExecutionSourceSpanV2"
+      },
+      "minItems": 1,
+      "title": "Source Spans",
+      "type": "array"
+    },
+    "subject_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    }
+  },
+  "required": [
+    "evidence_ref_id",
+    "subject_ref",
+    "source_spans",
+    "polarity",
+    "capability",
+    "capability_complete"
+  ],
+  "title": "AttachmentExecutionEvidenceGrantV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.execution_v2.AttachmentExecutionEvidenceGrantV2",
+  "x-schema-version": "env-mock-agent/attachment-execution-evidence-grant/v2"
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": "eval-factory-gold-worklist/v1",
+  "status": "PREPARED_NOT_GOLD",
+  "canary_manifest": {
+    "path": "evals/golden/eval_factory/canary_manifest.v4.json",
+    "sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+  },
+  "annotation_contract": {
+    "path": "evals/annotation/v1/contract-manifest.json",
+    "sha256": "1e4514fca3b7c5ae1c8ed53e235d8c1da2d5c7b7de0eca5e187c77dc5326f7b4"
+  },
+  "cross_stage_contract": {
+    "beads_id": "env_mock_agent-ujc.1.10",
+    "status": "FROZEN",
+    "manifest_path": "specs/002-eval-dataset-factory/contracts/v1/manifest.json",
+    "manifest_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9",
+    "required_before_gold_materialization": true
+  },
+  "required_annotation_types": [
+    "PARSER",
+    "SAFETY",
+    "LABEL",
+    "TASK",
+    "ATTACHMENT",
+    "RELEASE"
+  ],
+  "required_evaluation_components": [
+    "QuerySpec",
+    "EnvironmentSpec",
+    "RubricSet",
+    "EvaluatorSpec",
+    "ReferencePolicy",
+    "ToolPolicy",
+    "ProvenanceManifest",
+    "QualityReport",
+    "ReleaseDecision"
+  ],
+  "review_policy": {
+    "source_author_cannot_self_approve": true,
+    "safety_independent_submissions": 2,
+    "release_independent_submissions": 2,
+    "independent_adjudicator_required": true,
+    "human_review_records_required": true,
+    "synthetic_reviewer_identities_forbidden": true
+  },
+  "items": [
+    {
+      "instance_id": "LH_005",
+      "source_ref": "raw_traj://LH_005",
+      "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+      "selection_role": "STRICT_LARGE_PRE_POST_MUTATION",
+      "required_focus": [
+        "strict parser truth",
+        "pre/post mutation file-version boundaries",
+        "continuation adjudication",
+        "final-output quarantine"
+      ]
+    },
+    {
+      "instance_id": "LH_011",
+      "source_ref": "raw_traj://LH_011",
+      "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55",
+      "selection_role": "MALFORMED_REQUEST_AND_RESPONSE",
+      "required_focus": [
+        "invalid escape recovery",
+        "capability-level partial admission",
+        "truncation adjudication",
+        "negative-predicate prohibition"
+      ]
+    },
+    {
+      "instance_id": "LH_015",
+      "source_ref": "raw_traj://LH_015",
+      "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1",
+      "selection_role": "SEARCH_AND_FETCH",
+      "required_focus": [
+        "search-tool structured label",
+        "external-lead versus SourceEvidence boundary",
+        "pre/post mutation file-version boundaries",
+        "final-output quarantine"
+      ]
+    },
+    {
+      "instance_id": "LH_058",
+      "source_ref": "raw_traj://LH_058",
+      "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8",
+      "selection_role": "POWERSHELL_ERROR",
+      "required_focus": [
+        "PowerShell call/result identity",
+        "error-signature structured label",
+        "truncation adjudication",
+        "possible-mutator file-version boundary"
+      ]
+    },
+    {
+      "instance_id": "LH_067",
+      "source_ref": "raw_traj://LH_067",
+      "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d",
+      "selection_role": "INVALID_UNICODE_AND_NO_READ_CANDIDATE",
+      "required_focus": [
+        "invalid Unicode escape recovery",
+        "no-read candidate adjudication",
+        "semantic residual behavior",
+        "abstain when capability is incomplete"
+      ]
+    }
+  ]
+}

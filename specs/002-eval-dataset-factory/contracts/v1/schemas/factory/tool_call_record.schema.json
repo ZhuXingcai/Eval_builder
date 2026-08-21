@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ToolCallStatus": {
+      "enum": [
+        "PAIRED_SUCCESS",
+        "PAIRED_ERROR",
+        "ORPHAN_CALL",
+        "ORPHAN_RESULT",
+        "AMBIGUOUS",
+        "DUPLICATE_ID"
+      ],
+      "title": "ToolCallStatus",
+      "type": "string"
+    },
+    "ToolFamily": {
+      "enum": [
+        "file_read",
+        "file_write",
+        "file_edit",
+        "file_list",
+        "search",
+        "fetch",
+        "shell",
+        "code_execution",
+        "user_interaction",
+        "subagent",
+        "task_management",
+        "unknown"
+      ],
+      "title": "ToolFamily",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/tool_call_record.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "arguments_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "call_event_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "call_id": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Call Id"
+    },
+    "error_signature": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Signature"
+    },
+    "original_name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "title": "Original Name",
+      "type": "string"
+    },
+    "result_event_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "eval-factory/tool-call-record/v1",
+      "default": "eval-factory/tool-call-record/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "status": {
+      "$ref": "#/$defs/ToolCallStatus"
+    },
+    "tool_call_record_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Tool Call Record Id",
+      "type": "string"
+    },
+    "tool_family": {
+      "$ref": "#/$defs/ToolFamily"
+    },
+    "trace_ir_version_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Trace Ir Version Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tool_call_record_id",
+    "trace_ir_version_id",
+    "original_name",
+    "tool_family",
+    "status",
+    "sequence"
+  ],
+  "title": "ToolCallRecord",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.ToolCallRecord",
+  "x-schema-version": "eval-factory/tool-call-record/v1"
+}

@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_resource_termination_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "execution_handle_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "fencing_token": {
+      "minimum": 1,
+      "title": "Fencing Token",
+      "type": "integer"
+    },
+    "policy_version": {
+      "const": "attachment-resource/r6-04-v1",
+      "default": "attachment-resource/r6-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reason": {
+      "enum": [
+        "CANCELLED",
+        "EXPIRED",
+        "RESOURCE_OVERRUN"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+    },
+    "reservation_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-resource-termination-request/v2",
+      "default": "env-mock-agent/attachment-resource-termination-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "termination_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Termination Request Id",
+      "type": "string"
+    },
+    "termination_request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Termination Request Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "termination_request_id",
+    "reservation_ref",
+    "execution_handle_ref",
+    "fencing_token",
+    "reason",
+    "requested_at",
+    "termination_request_sha256"
+  ],
+  "title": "AttachmentResourceTerminationRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.resource_v2.AttachmentResourceTerminationRequestV2",
+  "x-schema-version": "env-mock-agent/attachment-resource-termination-request/v2"
+}

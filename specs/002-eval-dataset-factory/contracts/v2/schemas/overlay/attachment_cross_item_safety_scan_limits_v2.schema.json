@@ -1,0 +1,76 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_cross_item_safety_scan_limits_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "max_compression_ratio_milli": {
+      "maximum": 10000000,
+      "minimum": 1000,
+      "title": "Max Compression Ratio Milli",
+      "type": "integer"
+    },
+    "max_expanded_bytes": {
+      "maximum": 5000000000,
+      "minimum": 1,
+      "title": "Max Expanded Bytes",
+      "type": "integer"
+    },
+    "max_extracted_characters": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Extracted Characters",
+      "type": "integer"
+    },
+    "max_file_bytes": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Max File Bytes",
+      "type": "integer"
+    },
+    "max_fingerprint_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Max Fingerprint Count",
+      "type": "integer"
+    },
+    "max_inventory_members": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Inventory Members",
+      "type": "integer"
+    },
+    "max_match_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Max Match Count",
+      "type": "integer"
+    },
+    "max_nested_depth": {
+      "maximum": 16,
+      "minimum": 1,
+      "title": "Max Nested Depth",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-cross-item-safety-scan-limits/v2",
+      "default": "env-mock-agent/attachment-cross-item-safety-scan-limits/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "max_file_bytes",
+    "max_extracted_characters",
+    "max_inventory_members",
+    "max_nested_depth",
+    "max_expanded_bytes",
+    "max_compression_ratio_milli",
+    "max_fingerprint_count",
+    "max_match_count"
+  ],
+  "title": "AttachmentCrossItemSafetyScanLimitsV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.cross_item_safety_v2.AttachmentCrossItemSafetyScanLimitsV2",
+  "x-schema-version": "env-mock-agent/attachment-cross-item-safety-scan-limits/v2"
+}

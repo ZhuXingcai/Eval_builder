@@ -1,0 +1,52 @@
+{
+  "$defs": {
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/resolved_stage_node_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "depends_on": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/StageNameV2"
+      },
+      "title": "Depends On",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/resolved-stage-node/v2",
+      "default": "eval-factory/resolved-stage-node/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage": {
+      "$ref": "#/$defs/StageNameV2"
+    }
+  },
+  "required": [
+    "stage"
+  ],
+  "title": "ResolvedStageNodeV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration_v2.ResolvedStageNodeV2",
+  "x-schema-version": "eval-factory/resolved-stage-node/v2"
+}

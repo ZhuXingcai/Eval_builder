@@ -1,0 +1,230 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/user_checkpoint_interaction_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_checkpoints": {
+      "items": {
+        "$ref": "#/$defs/ApprovalCheckpoint"
+      },
+      "title": "Allowed Checkpoints",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "max_interactions_per_job": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Max Interactions Per Job",
+      "type": "integer"
+    },
+    "max_page_size": {
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Max Page Size",
+      "type": "integer"
+    },
+    "max_presentation_bytes": {
+      "maximum": 67108864,
+      "minimum": 2,
+      "title": "Max Presentation Bytes",
+      "type": "integer"
+    },
+    "max_ready_work_refs": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Ready Work Refs",
+      "type": "integer"
+    },
+    "max_requests_per_interaction": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Requests Per Interaction",
+      "type": "integer"
+    },
+    "max_source_context_bytes": {
+      "maximum": 268435456,
+      "minimum": 2,
+      "title": "Max Source Context Bytes",
+      "type": "integer"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "checkpoint-interaction/r7-07-v1",
+      "default": "checkpoint-interaction/r7-07-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/user-checkpoint-interaction-policy/v2",
+      "default": "eval-factory/user-checkpoint-interaction-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_id",
+    "max_interactions_per_job",
+    "max_requests_per_interaction",
+    "max_page_size",
+    "max_presentation_bytes",
+    "max_source_context_bytes",
+    "max_ready_work_refs",
+    "allowed_checkpoints",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "UserCheckpointInteractionPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointInteractionPolicyV2",
+  "x-schema-version": "eval-factory/user-checkpoint-interaction-policy/v2"
+}

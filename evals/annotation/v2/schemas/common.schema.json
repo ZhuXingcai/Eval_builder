@@ -1,0 +1,316 @@
+{
+  "$defs": {
+    "annotationRecord": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "SUPERSEDED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "supersedes": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ABSTAINED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "conclusion": {
+                "enum": [
+                  "INDETERMINATE",
+                  "BLOCKED"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "annotation_id": {
+          "pattern": "^ann_[a-z0-9][a-z0-9._-]{7,127}$",
+          "type": "string"
+        },
+        "annotation_type": {
+          "enum": [
+            "PARSER",
+            "SAFETY",
+            "LABEL",
+            "TASK",
+            "ATTACHMENT",
+            "RELEASE"
+          ]
+        },
+        "author_id": {
+          "maxLength": 255,
+          "minLength": 3,
+          "type": "string"
+        },
+        "author_kind": {
+          "enum": [
+            "DETERMINISTIC_SERVICE",
+            "SEMANTIC_AGENT",
+            "USER"
+          ]
+        },
+        "canary_instance_id": {
+          "pattern": "^LH_[0-9]+$",
+          "type": "string"
+        },
+        "checkpoint_preview_refs": {
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "conclusion": {
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "MIXED",
+            "NOT_APPLICABLE",
+            "INDETERMINATE",
+            "BLOCKED"
+          ]
+        },
+        "contract_manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/evidenceRef"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "finding_refs": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "governing_versions": {
+          "$ref": "#/$defs/governingVersions"
+        },
+        "guide_version": {
+          "const": "eval-factory-annotation-guide/v2"
+        },
+        "payload": {
+          "type": "object"
+        },
+        "rationale": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory-annotation/v2"
+        },
+        "source_ref": {
+          "pattern": "^raw_traj://LH_[0-9]+$",
+          "type": "string"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "status": {
+          "enum": [
+            "DRAFT",
+            "REFERENCE_READY",
+            "ABSTAINED",
+            "SUPERSEDED"
+          ]
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "subject_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "subject_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "supersedes": {
+          "items": {
+            "pattern": "^ann_[a-z0-9][a-z0-9._-]{7,127}$",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "uncertainty_codes": {
+          "$ref": "#/$defs/stringSet"
+        }
+      },
+      "required": [
+        "schema_version",
+        "annotation_id",
+        "annotation_type",
+        "canary_instance_id",
+        "source_ref",
+        "source_sha256",
+        "subject_ref",
+        "subject_version",
+        "subject_sha256",
+        "guide_version",
+        "contract_manifest_sha256",
+        "governing_versions",
+        "status",
+        "conclusion",
+        "evidence",
+        "uncertainty_codes",
+        "finding_refs",
+        "rationale",
+        "supersedes",
+        "created_at",
+        "payload",
+        "author_id",
+        "author_kind",
+        "checkpoint_preview_refs"
+      ],
+      "type": "object"
+    },
+    "evidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "type": "boolean"
+        },
+        "capability": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "capability_complete": {
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^ev_[a-z0-9][a-z0-9._-]{5,127}$",
+          "type": "string"
+        },
+        "locator_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "locator_type": {
+          "enum": [
+            "SOURCE_SPAN",
+            "TRACE_EVENT",
+            "TOOL_CALL",
+            "FILE_VERSION",
+            "INTERACTION_SEGMENT",
+            "OBJECT",
+            "PACKAGE_MEMBER",
+            "POLICY"
+          ]
+        },
+        "notes": {
+          "maxLength": 500,
+          "type": "string"
+        },
+        "source_ref": {
+          "maxLength": 512,
+          "minLength": 3,
+          "type": "string"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "supports": {
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "UNCERTAINTY",
+            "CONTRADICTION"
+          ]
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "source_ref",
+        "source_sha256",
+        "locator_type",
+        "locator_ref",
+        "supports",
+        "capability",
+        "capability_complete",
+        "approximate"
+      ],
+      "type": "object"
+    },
+    "governingVersions": {
+      "additionalProperties": false,
+      "properties": {
+        "active_contract_manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "canary_manifest_sha256": {
+          "const": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+        },
+        "safety_adr": {
+          "const": "ADR-0010"
+        },
+        "spec": {
+          "const": "002-eval-dataset-factory/approved-v2-2026-07-20"
+        },
+        "trace_adr": {
+          "const": "ADR-0009"
+        },
+        "user_approval_policy": {
+          "const": "eval-factory-user-approval/v2"
+        }
+      },
+      "required": [
+        "spec",
+        "trace_adr",
+        "safety_adr",
+        "canary_manifest_sha256",
+        "user_approval_policy",
+        "active_contract_manifest_sha256"
+      ],
+      "type": "object"
+    },
+    "identifier": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "stringSet": {
+      "items": {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/common.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Eval Factory Annotation Common Definitions v2"
+}

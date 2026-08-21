@@ -1,0 +1,75 @@
+{
+  "authority": {
+    "authorizes_attestation": false,
+    "authorizes_production_release": false,
+    "satisfies_concurrency_policy": false,
+    "satisfies_label_quality": false,
+    "satisfies_operations_slo": false,
+    "satisfies_real_trace_stability": false
+  },
+  "case_summary_set_sha256": "3e686d234f0cd12aa6d7adafbaa46041bf12a01b82d52350400eb498d41ea95f",
+  "claim_scope": "SCHEDULER_LOAD_ONLY",
+  "evidence_scope": "MECHANISM_VALIDATION_ONLY",
+  "fault_counts": [
+    {
+      "count": 125,
+      "fault_point": "AFTER_JOB_CREATE"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_WORK_GRAPH_CREATE"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_JOB_START"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_READINESS_RECORD"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_CONTROL_POLICY_BIND"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_LEASE_ACQUIRE"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_STAGE_COMPLETION"
+    },
+    {
+      "count": 125,
+      "fault_point": "AFTER_OBSERVABILITY_REFRESH"
+    }
+  ],
+  "outcome": "COMPLETE",
+  "phase_summaries": [
+    {
+      "elapsed_nanoseconds": 1000000000,
+      "job_count": 1000,
+      "operation_count": 1000,
+      "phase": "SYNTHETIC_INITIAL",
+      "throughput_millijobs_per_second": 1000000
+    },
+    {
+      "elapsed_nanoseconds": 2000000000,
+      "job_count": 1000,
+      "operation_count": 2000,
+      "phase": "CRASH_RECOVERY",
+      "throughput_millijobs_per_second": 500000
+    },
+    {
+      "elapsed_nanoseconds": 3000000000,
+      "job_count": 1000,
+      "operation_count": 3000,
+      "phase": "EXACT_REPLAY",
+      "throughput_millijobs_per_second": 333333
+    }
+  ],
+  "policy_sha256": "a8536ad59a45c0881d56cf0c78d04279ee205654cb052490d17b96cdab067972",
+  "report_sha256": "379efc9418867b04b19c710bb9d769525361c3d74ae0ff8d8f6dd67e0273caa4",
+  "schema_version": "eval-factory/scheduler-load-gold/v1",
+  "unique_job_count": 1000
+}

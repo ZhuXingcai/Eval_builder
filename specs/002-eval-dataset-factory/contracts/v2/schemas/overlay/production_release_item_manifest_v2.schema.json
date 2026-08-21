@@ -1,0 +1,411 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "LHWorkspaceExportMemberTypeV2": {
+      "enum": [
+        "DIRECTORY",
+        "FILE",
+        "NESTED_MEMBER"
+      ],
+      "title": "LHWorkspaceExportMemberTypeV2",
+      "type": "string"
+    },
+    "LHWorkspaceExportMemberV2": {
+      "additionalProperties": false,
+      "properties": {
+        "container_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "member_type": {
+          "$ref": "#/$defs/LHWorkspaceExportMemberTypeV2"
+        },
+        "normalized_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Normalized Path",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/lh-workspace-export-member/v2",
+          "default": "env-mock-agent/lh-workspace-export-member/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 5000000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "normalized_path",
+        "member_type",
+        "size_bytes",
+        "output_ref"
+      ],
+      "title": "LHWorkspaceExportMemberV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/production_release_item_manifest_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approved_projection_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "approved_release_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "attestation_authority_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "channel": {
+      "const": "PRODUCTION",
+      "default": "PRODUCTION",
+      "title": "Channel",
+      "type": "string"
+    },
+    "environment_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "expected_workspace_members": {
+      "items": {
+        "$ref": "#/$defs/LHWorkspaceExportMemberV2"
+      },
+      "title": "Expected Workspace Members",
+      "type": "array"
+    },
+    "export_profile": {
+      "const": "LH",
+      "default": "LH",
+      "title": "Export Profile",
+      "type": "string"
+    },
+    "export_profile_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Export Profile Version",
+      "type": "string"
+    },
+    "final_package_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Id",
+      "type": "string"
+    },
+    "item_manifest_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Manifest Id",
+      "type": "string"
+    },
+    "item_manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Item Manifest Sha256",
+      "type": "string"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "production-release/r8-09-v1",
+      "default": "production-release/r8-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "predecessor_decision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "predecessor_evaluation_item_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "provenance_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "quality_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "query_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "query_yaml_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Query Yaml Sha256",
+      "type": "string"
+    },
+    "registry": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Registry",
+      "type": "string"
+    },
+    "release_subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "rubric_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "rubrics_json_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Rubrics Json Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/production-release-item-manifest/v2",
+      "default": "eval-factory/production-release-item-manifest/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_nonproduction_publication_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "item_manifest_id",
+    "job_id",
+    "item_id",
+    "approved_release_result_ref",
+    "approved_projection_ref",
+    "release_subject_ref",
+    "predecessor_decision_ref",
+    "predecessor_evaluation_item_ref",
+    "query_spec_ref",
+    "rubric_set_ref",
+    "environment_spec_ref",
+    "provenance_manifest_ref",
+    "quality_report_ref",
+    "final_package_manifest_ref",
+    "package_sha256",
+    "query_yaml_sha256",
+    "rubrics_json_sha256",
+    "expected_workspace_members",
+    "attestation_authority_ref",
+    "registry",
+    "policy_ref",
+    "item_manifest_sha256",
+    "audit"
+  ],
+  "title": "ProductionReleaseItemManifestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_release_v2.ProductionReleaseItemManifestV2",
+  "x-schema-version": "eval-factory/production-release-item-manifest/v2"
+}

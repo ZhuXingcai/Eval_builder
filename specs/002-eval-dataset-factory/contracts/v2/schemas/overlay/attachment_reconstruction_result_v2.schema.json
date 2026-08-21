@@ -1,0 +1,2236 @@
+{
+  "$defs": {
+    "ArtifactBuildResult": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_build_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Build Result Id",
+          "type": "string"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "build_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "build_spec_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Build Spec Sha256",
+          "type": "string"
+        },
+        "failure": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FailureRecord"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "finding_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Finding Refs",
+          "type": "array"
+        },
+        "lineage_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Lineage Refs",
+          "type": "array"
+        },
+        "output_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "output_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Sha256"
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        },
+        "runtime": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runtime"
+        },
+        "schema_version": {
+          "const": "eval-factory/artifact-build-result/v1",
+          "default": "eval-factory/artifact-build-result/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ArtifactBuildStatus"
+        },
+        "validation_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Validation Result Refs",
+          "type": "array"
+        },
+        "worker_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Worker Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_build_result_id",
+        "build_spec_ref",
+        "build_spec_sha256",
+        "status",
+        "worker_version",
+        "audit"
+      ],
+      "title": "ArtifactBuildResult",
+      "type": "object"
+    },
+    "ArtifactBuildResultOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE",
+        "BLOCKED_DEPENDENCY"
+      ],
+      "title": "ArtifactBuildResultOutcomeV2",
+      "type": "string"
+    },
+    "ArtifactBuildResultProjectionGapV2": {
+      "enum": [
+        "BUILD_SPEC_UNAVAILABLE",
+        "DEPENDENCY_NOT_ATTEMPTED",
+        "WORKER_VERSION_UNAVAILABLE",
+        "WORKER_VERSION_UNREPRESENTABLE"
+      ],
+      "title": "ArtifactBuildResultProjectionGapV2",
+      "type": "string"
+    },
+    "ArtifactBuildResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_build_result_v2_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Build Result V2 Id",
+          "type": "string"
+        },
+        "artifact_build_result_v2_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Build Result V2 Sha256",
+          "type": "string"
+        },
+        "artifact_execution_plan_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "artifact_routing_plan_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "execution_receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactExecutionReceiptV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "frozen_projection_gap": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactBuildResultProjectionGapV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "frozen_result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactBuildResult"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "outcome": {
+          "$ref": "#/$defs/ArtifactBuildResultOutcomeV2"
+        },
+        "policy_version": {
+          "const": "artifact-results/r5-07-v1",
+          "default": "artifact-results/r5-07-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "route_entry": {
+          "$ref": "#/$defs/ArtifactRoutePlanEntryV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/artifact-build-result/v2",
+          "default": "eval-factory/artifact-build-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_build_result_v2_id",
+        "artifact_routing_plan_ref",
+        "route_entry",
+        "outcome",
+        "retryable",
+        "artifact_build_result_v2_sha256",
+        "audit"
+      ],
+      "title": "ArtifactBuildResultV2",
+      "type": "object"
+    },
+    "ArtifactBuildSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_build_spec_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Build Spec Id",
+          "type": "string"
+        },
+        "artifact_evidence_row_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "authorized_evidence_refs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Authorized Evidence Refs",
+          "type": "array"
+        },
+        "build_spec_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Build Spec Sha256",
+          "type": "string"
+        },
+        "content_contract_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "media_type": {
+          "maxLength": 255,
+          "minLength": 3,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ReconstructionMode"
+        },
+        "producer_task_view_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provider_preference": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Provider Preference",
+          "type": "array"
+        },
+        "relative_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "render_contract_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "retry_scope": {
+          "const": "ARTIFACT",
+          "title": "Retry Scope",
+          "type": "string"
+        },
+        "runtime_preference": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Runtime Preference",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/artifact-build-spec/v1",
+          "default": "eval-factory/artifact-build-spec/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "validator_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Validator Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "artifact_build_spec_id",
+        "artifact_evidence_row_ref",
+        "producer_task_view_ref",
+        "relative_path",
+        "media_type",
+        "mode",
+        "content_contract_ref",
+        "render_contract_ref",
+        "authorized_evidence_refs",
+        "provider_preference",
+        "runtime_preference",
+        "validator_ids",
+        "retry_scope",
+        "build_spec_sha256",
+        "audit"
+      ],
+      "title": "ArtifactBuildSpec",
+      "type": "object"
+    },
+    "ArtifactBuildSpecV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_build_contract_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_build_spec_v2_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Build Spec V2 Id",
+          "type": "string"
+        },
+        "artifact_build_spec_v2_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Build Spec V2 Sha256",
+          "type": "string"
+        },
+        "artifact_evidence_matrix_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_evidence_target_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_routing_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "attachment_planning_context_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "build_spec": {
+          "$ref": "#/$defs/ArtifactBuildSpec"
+        },
+        "facade_route_decision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_route_request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/artifact-build-spec/v2",
+          "default": "eval-factory/artifact-build-spec/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_model_profile_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selected_route_kind": {
+          "$ref": "#/$defs/ArtifactRouteKindV2"
+        },
+        "source_evidence_set_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "artifact_build_spec_v2_id",
+        "attachment_planning_context_ref",
+        "artifact_evidence_matrix_ref",
+        "artifact_evidence_target_ref",
+        "artifact_build_contract_ref",
+        "artifact_routing_policy_ref",
+        "facade_route_request_ref",
+        "facade_route_decision_ref",
+        "selected_route_kind",
+        "build_spec",
+        "policy_version",
+        "artifact_build_spec_v2_sha256",
+        "audit"
+      ],
+      "title": "ArtifactBuildSpecV2",
+      "type": "object"
+    },
+    "ArtifactBuildStatus": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE"
+      ],
+      "title": "ArtifactBuildStatus",
+      "type": "string"
+    },
+    "ArtifactExecutionReceiptOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE",
+        "BLOCKED_DEPENDENCY"
+      ],
+      "title": "ArtifactExecutionReceiptOutcomeV2",
+      "type": "string"
+    },
+    "ArtifactExecutionReceiptV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_execution_group_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_execution_plan_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_execution_receipt_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Execution Receipt Id",
+          "type": "string"
+        },
+        "artifact_execution_receipt_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Execution Receipt Sha256",
+          "type": "string"
+        },
+        "artifact_execution_unit_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "attempt": {
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "facade_request": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentExecutionRequestV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "facade_result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentExecutionResultV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "failed_dependency_receipt_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Failed Dependency Receipt Refs",
+          "type": "array"
+        },
+        "outcome": {
+          "$ref": "#/$defs/ArtifactExecutionReceiptOutcomeV2"
+        },
+        "policy_version": {
+          "const": "artifact-execution/r5-06-v1",
+          "default": "artifact-execution/r5-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "retry_of_receipt_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schema_version": {
+          "const": "eval-factory/artifact-execution-receipt/v2",
+          "default": "eval-factory/artifact-execution-receipt/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_execution_receipt_id",
+        "artifact_execution_plan_ref",
+        "artifact_execution_group_ref",
+        "artifact_execution_unit_ref",
+        "artifact_id",
+        "attempt",
+        "outcome",
+        "artifact_execution_receipt_sha256",
+        "audit"
+      ],
+      "title": "ArtifactExecutionReceiptV2",
+      "type": "object"
+    },
+    "ArtifactRouteEntryOutcomeV2": {
+      "enum": [
+        "ROUTED_PROVIDER",
+        "ROUTED_RUNTIME",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY"
+      ],
+      "title": "ArtifactRouteEntryOutcomeV2",
+      "type": "string"
+    },
+    "ArtifactRouteKindV2": {
+      "enum": [
+        "PROVIDER",
+        "RUNTIME"
+      ],
+      "title": "ArtifactRouteKindV2",
+      "type": "string"
+    },
+    "ArtifactRoutePlanEntryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_evidence_target_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "attachment_dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Attachment Dependency Id",
+          "type": "string"
+        },
+        "build_spec": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactBuildSpecV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "criticality": {
+          "$ref": "#/$defs/AttachmentCriticality"
+        },
+        "facade_route_decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentRouteDecisionV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "facade_route_request_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "outcome": {
+          "$ref": "#/$defs/ArtifactRouteEntryOutcomeV2"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ArtifactRoutingReasonV2"
+          },
+          "title": "Reasons",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "schema_version": {
+          "const": "eval-factory/artifact-route-plan-entry/v2",
+          "default": "eval-factory/artifact-route-plan-entry/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_evidence_target_ref",
+        "attachment_dependency_id",
+        "artifact_id",
+        "criticality",
+        "outcome"
+      ],
+      "title": "ArtifactRoutePlanEntryV2",
+      "type": "object"
+    },
+    "ArtifactRoutingReasonV2": {
+      "enum": [
+        "BUILD_CONTRACT_MISSING",
+        "EVIDENCE_MODE_BLOCKED",
+        "ROUTE_UNAVAILABLE"
+      ],
+      "title": "ArtifactRoutingReasonV2",
+      "type": "string"
+    },
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    },
+    "AttachmentExecutionEvidenceGrantV2": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "capability_complete": {
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Ref Id",
+          "type": "string"
+        },
+        "polarity": {
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "UNCERTAINTY",
+            "CONTRADICTION"
+          ],
+          "title": "Polarity",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-execution-evidence-grant/v2",
+          "default": "env-mock-agent/attachment-execution-evidence-grant/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_spans": {
+          "items": {
+            "$ref": "#/$defs/AttachmentExecutionSourceSpanV2"
+          },
+          "minItems": 1,
+          "title": "Source Spans",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "subject_ref",
+        "source_spans",
+        "polarity",
+        "capability",
+        "capability_complete"
+      ],
+      "title": "AttachmentExecutionEvidenceGrantV2",
+      "type": "object"
+    },
+    "AttachmentExecutionFailureCodeV2": {
+      "enum": [
+        "SELECTED_IMPLEMENTATION_MISSING",
+        "SELECTED_IMPLEMENTATION_MISMATCH",
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "WORLD_LEDGER_STALE",
+        "WORLD_LEDGER_FACT_MISSING",
+        "WORLD_LEDGER_MUTATION_ATTEMPT",
+        "PROVIDER_EXECUTION_FAILED",
+        "RUNTIME_EXECUTION_FAILED",
+        "RUNTIME_TIMEOUT",
+        "RUNTIME_AUTH_UNAVAILABLE",
+        "RUNTIME_TOOL_DENIED",
+        "RUNTIME_PROTOCOL_ERROR",
+        "OUTPUT_MISSING",
+        "OUTPUT_PATH_VIOLATION",
+        "IDEMPOTENCY_CONFLICT",
+        "RESOURCE_GRANT_INVALID",
+        "RESOURCE_LIMIT_EXCEEDED",
+        "RESOURCE_RENDERER_UNAVAILABLE",
+        "MODEL_GRANT_INVALID",
+        "MODEL_PROFILE_MISMATCH",
+        "MODEL_LIMIT_EXCEEDED"
+      ],
+      "title": "AttachmentExecutionFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentExecutionRequestV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "attempt": {
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "build_spec_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "content_contract_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "dependency_result_refs": {
+          "items": {
+            "$ref": "#/$defs/FacadeObjectRef"
+          },
+          "title": "Dependency Result Refs",
+          "type": "array"
+        },
+        "evidence_grants": {
+          "items": {
+            "$ref": "#/$defs/AttachmentExecutionEvidenceGrantV2"
+          },
+          "title": "Evidence Grants",
+          "type": "array"
+        },
+        "execution_group_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Execution Group Id",
+          "type": "string"
+        },
+        "execution_plan_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "execution_request_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Execution Request Id",
+          "type": "string"
+        },
+        "execution_request_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Execution Request Sha256",
+          "type": "string"
+        },
+        "idempotency_key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "locked_fact_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Locked Fact Ids",
+          "type": "array"
+        },
+        "media_type": {
+          "maxLength": 255,
+          "minLength": 3,
+          "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ReconstructionMode"
+        },
+        "model_profile_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "policy_version": {
+          "const": "artifact-execution/r5-06-v1",
+          "default": "artifact-execution/r5-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "producer_task_view_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "provider_payload_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "relative_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "render_contract_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "required_runtime_tools": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Required Runtime Tools",
+          "type": "array"
+        },
+        "retry_of_result_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "runtime_role": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Runtime Role",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-execution-request/v2",
+          "default": "env-mock-agent/attachment-execution-request/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_route_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Selected Route Id",
+          "type": "string"
+        },
+        "selected_route_kind": {
+          "$ref": "#/$defs/AttachmentExecutionRouteKindV2"
+        },
+        "selected_route_version": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route Version"
+        },
+        "world_ledger_snapshot_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        }
+      },
+      "required": [
+        "execution_request_id",
+        "execution_plan_ref",
+        "execution_group_id",
+        "artifact_id",
+        "build_spec_ref",
+        "producer_task_view_ref",
+        "content_contract_ref",
+        "render_contract_ref",
+        "selected_route_kind",
+        "selected_route_id",
+        "relative_path",
+        "media_type",
+        "mode",
+        "runtime_role",
+        "required_runtime_tools",
+        "evidence_grants",
+        "world_ledger_snapshot_ref",
+        "locked_fact_ids",
+        "dependency_result_refs",
+        "attempt",
+        "idempotency_key",
+        "execution_request_sha256"
+      ],
+      "title": "AttachmentExecutionRequestV2",
+      "type": "object"
+    },
+    "AttachmentExecutionResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "attempt": {
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "execution_request_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "execution_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Execution Result Id",
+          "type": "string"
+        },
+        "execution_result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Execution Result Sha256",
+          "type": "string"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentExecutionFailureCodeV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "output_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "output_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Sha256"
+        },
+        "policy_version": {
+          "const": "artifact-execution/r5-06-v1",
+          "default": "artifact-execution/r5-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-execution-result/v2",
+          "default": "env-mock-agent/attachment-execution-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_route_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Selected Route Id",
+          "type": "string"
+        },
+        "selected_route_kind": {
+          "$ref": "#/$defs/AttachmentExecutionRouteKindV2"
+        },
+        "status": {
+          "$ref": "#/$defs/AttachmentExecutionStatusV2"
+        },
+        "telemetry": {
+          "$ref": "#/$defs/ExecutionTelemetryV2"
+        },
+        "worker_version": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Worker Version"
+        },
+        "world_ledger_snapshot_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        }
+      },
+      "required": [
+        "execution_result_id",
+        "execution_request_ref",
+        "artifact_id",
+        "attempt",
+        "status",
+        "world_ledger_snapshot_ref",
+        "selected_route_kind",
+        "selected_route_id",
+        "retryable",
+        "telemetry",
+        "execution_result_sha256"
+      ],
+      "title": "AttachmentExecutionResultV2",
+      "type": "object"
+    },
+    "AttachmentExecutionRouteKindV2": {
+      "enum": [
+        "PROVIDER",
+        "RUNTIME"
+      ],
+      "title": "AttachmentExecutionRouteKindV2",
+      "type": "string"
+    },
+    "AttachmentExecutionSourceSpanV2": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-execution-source-span/v2",
+          "default": "env-mock-agent/attachment-execution-source-span/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "AttachmentExecutionSourceSpanV2",
+      "type": "object"
+    },
+    "AttachmentExecutionStatusV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE"
+      ],
+      "title": "AttachmentExecutionStatusV2",
+      "type": "string"
+    },
+    "AttachmentReconstructionOutcomeV2": {
+      "enum": [
+        "NOT_REQUIRED",
+        "PENDING_VALIDATION",
+        "PARTIAL_FAILURE",
+        "RETRYABLE_FAILURE",
+        "BLOCKED"
+      ],
+      "title": "AttachmentReconstructionOutcomeV2",
+      "type": "string"
+    },
+    "AttachmentReconstructionResult": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_artifact_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Accepted Artifact Refs",
+          "type": "array"
+        },
+        "artifact_result_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Artifact Result Refs",
+          "type": "array"
+        },
+        "attachment_reconstruction_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Attachment Reconstruction Result Id",
+          "type": "string"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "environment_spec_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_matrix_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "failed_artifact_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Failed Artifact Ids",
+          "type": "array"
+        },
+        "input_state_only": {
+          "title": "Input State Only",
+          "type": "boolean"
+        },
+        "package_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Package Sha256"
+        },
+        "producer_task_view_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provenance_manifest_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "quality_report_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resumable_artifact_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Resumable Artifact Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/attachment-reconstruction-result/v1",
+          "default": "eval-factory/attachment-reconstruction-result/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attachment_reconstruction_result_id",
+        "producer_task_view_ref",
+        "evidence_matrix_ref",
+        "artifact_result_refs",
+        "accepted_artifact_refs",
+        "failed_artifact_ids",
+        "resumable_artifact_ids",
+        "environment_spec_ref",
+        "provenance_manifest_ref",
+        "quality_report_ref",
+        "package_sha256",
+        "input_state_only",
+        "audit"
+      ],
+      "title": "AttachmentReconstructionResult",
+      "type": "object"
+    },
+    "AttachmentRouteCandidateKind": {
+      "enum": [
+        "PROVIDER",
+        "RUNTIME"
+      ],
+      "title": "AttachmentRouteCandidateKind",
+      "type": "string"
+    },
+    "AttachmentRouteDecisionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "capability_snapshot_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Capability Snapshot Sha256",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/AttachmentRouteOutcome"
+        },
+        "policy_version": {
+          "const": "artifact-routing/r5-05-v1",
+          "default": "artifact-routing/r5-05-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "probed_at": {
+          "format": "date-time",
+          "title": "Probed At",
+          "type": "string"
+        },
+        "route_decision_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Route Decision Id",
+          "type": "string"
+        },
+        "route_decision_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Route Decision Sha256",
+          "type": "string"
+        },
+        "route_request_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "satisfied_capability_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Satisfied Capability Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-route-decision/v2",
+          "default": "env-mock-agent/attachment-route-decision/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Id"
+        },
+        "selected_kind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentRouteCandidateKind"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selected_version": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Version"
+        },
+        "skipped": {
+          "items": {
+            "$ref": "#/$defs/AttachmentRouteSkipV2"
+          },
+          "title": "Skipped",
+          "type": "array"
+        }
+      },
+      "required": [
+        "route_decision_id",
+        "route_request_ref",
+        "outcome",
+        "satisfied_capability_ids",
+        "skipped",
+        "capability_snapshot_sha256",
+        "probed_at",
+        "route_decision_sha256"
+      ],
+      "title": "AttachmentRouteDecisionV2",
+      "type": "object"
+    },
+    "AttachmentRouteOutcome": {
+      "enum": [
+        "SELECTED_PROVIDER",
+        "SELECTED_RUNTIME",
+        "BLOCKED_CAPABILITY"
+      ],
+      "title": "AttachmentRouteOutcome",
+      "type": "string"
+    },
+    "AttachmentRouteSkipCode": {
+      "enum": [
+        "PROVIDER_PAYLOAD_MISSING",
+        "PROVIDER_UNSUPPORTED_ASSET_TYPE",
+        "PROVIDER_NOT_APPROVED",
+        "PROVIDER_UNAVAILABLE",
+        "PROVIDER_CAPABILITY_MISSING",
+        "PROVIDER_PROBE_FAILED",
+        "RUNTIME_NOT_REGISTERED",
+        "RUNTIME_UNAVAILABLE",
+        "RUNTIME_TOOL_MISSING",
+        "RUNTIME_RESUME_UNSUPPORTED",
+        "RUNTIME_PROBE_FAILED"
+      ],
+      "title": "AttachmentRouteSkipCode",
+      "type": "string"
+    },
+    "AttachmentRouteSkipV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "candidate_kind": {
+          "$ref": "#/$defs/AttachmentRouteCandidateKind"
+        },
+        "code": {
+          "$ref": "#/$defs/AttachmentRouteSkipCode"
+        },
+        "missing_capability_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Missing Capability Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-route-skip/v2",
+          "default": "env-mock-agent/attachment-route-skip/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_kind",
+        "candidate_id",
+        "code"
+      ],
+      "title": "AttachmentRouteSkipV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvidencePolarity": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "UNCERTAINTY",
+        "CONTRADICTION"
+      ],
+      "title": "EvidencePolarity",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "capability_complete": {
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Ref Id",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/EvidencePolarity"
+        },
+        "schema_version": {
+          "const": "eval-factory/evidence-ref/v1",
+          "default": "eval-factory/evidence-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_spans": {
+          "items": {
+            "$ref": "#/$defs/SourceSpanRef"
+          },
+          "minItems": 1,
+          "title": "Source Spans",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "subject_ref",
+        "source_spans",
+        "polarity",
+        "capability",
+        "capability_complete"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ExecutionTelemetryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "duration_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration Us"
+        },
+        "execution_telemetry_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Execution Telemetry Id",
+          "type": "string"
+        },
+        "execution_telemetry_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Execution Telemetry Sha256",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "execution-telemetry/r6-06-v1",
+          "default": "execution-telemetry/r6-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "reported_cost": {
+          "$ref": "#/$defs/ReportedCostV2"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/execution-telemetry/v2",
+          "default": "env-mock-agent/execution-telemetry/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "tool_availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "tool_family_counts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ToolFamilyCountV2"
+          },
+          "title": "Tool Family Counts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "execution_telemetry_id",
+        "duration_availability",
+        "tool_availability",
+        "reported_cost",
+        "observed_at",
+        "execution_telemetry_sha256"
+      ],
+      "title": "ExecutionTelemetryV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "FailureClass": {
+      "enum": [
+        "CONTESTANT_FAILURE",
+        "EVALUATOR_FAILURE",
+        "ENVIRONMENT_FAILURE",
+        "INDETERMINATE",
+        "POLICY_FAILURE",
+        "CAPABILITY_FAILURE",
+        "INTERNAL_FAILURE"
+      ],
+      "title": "FailureClass",
+      "type": "string"
+    },
+    "FailureRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Code",
+          "type": "string"
+        },
+        "detail": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TypedAttribute"
+          },
+          "title": "Detail",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "failure_class": {
+          "$ref": "#/$defs/FailureClass"
+        },
+        "message": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "eval-factory/failure-record/v1",
+          "default": "eval-factory/failure-record/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "failure_class",
+        "code",
+        "message",
+        "retryable"
+      ],
+      "title": "FailureRecord",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReconstructionMode": {
+      "enum": [
+        "TRACE_RICH",
+        "SKELETON_GUIDED",
+        "PROMPT_ONLY",
+        "BLOCKED"
+      ],
+      "title": "ReconstructionMode",
+      "type": "string"
+    },
+    "ReportedCostV2": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_microusd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Microusd"
+        },
+        "availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "currency": {
+          "const": "USD",
+          "default": "USD",
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "const": "HALF_EVEN_MICRO_USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding"
+        }
+      },
+      "required": [
+        "availability"
+      ],
+      "title": "ReportedCostV2",
+      "type": "object"
+    },
+    "SourceSpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-span-ref/v1",
+          "default": "eval-factory/source-span-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "SourceSpanRef",
+      "type": "object"
+    },
+    "TelemetryAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "DERIVED",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "TelemetryAvailabilityV2",
+      "type": "string"
+    },
+    "ToolFamilyCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "minimum": 1,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "tool_family": {
+          "$ref": "#/$defs/ToolFamilyV2"
+        }
+      },
+      "required": [
+        "tool_family",
+        "calls"
+      ],
+      "title": "ToolFamilyCountV2",
+      "type": "object"
+    },
+    "ToolFamilyV2": {
+      "enum": [
+        "FILE",
+        "SHELL",
+        "SEARCH",
+        "FETCH",
+        "RENDERER",
+        "OTHER"
+      ],
+      "title": "ToolFamilyV2",
+      "type": "string"
+    },
+    "TypedAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/typed-attribute/v1",
+          "default": "eval-factory/typed-attribute/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "TypedAttribute",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_reconstruction_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_artifact_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Accepted Artifact Refs",
+      "type": "array"
+    },
+    "artifact_execution_batch_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "artifact_execution_plan_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "artifact_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Artifact Result Refs",
+      "type": "array"
+    },
+    "artifact_results": {
+      "items": {
+        "$ref": "#/$defs/ArtifactBuildResultV2"
+      },
+      "title": "Artifact Results",
+      "type": "array"
+    },
+    "artifact_routing_plan_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "attachment_planning_context_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "attachment_reconstruction_result_v2_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Attachment Reconstruction Result V2 Id",
+      "type": "string"
+    },
+    "attachment_reconstruction_result_v2_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Attachment Reconstruction Result V2 Sha256",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "candidate_output_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Candidate Output Refs",
+      "type": "array"
+    },
+    "dependency_blocked_artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Dependency Blocked Artifact Ids",
+      "type": "array"
+    },
+    "environment_spec_ref": {
+      "title": "Environment Spec Ref",
+      "type": "null"
+    },
+    "evidence_matrix_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "failed_artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Failed Artifact Ids",
+      "type": "array"
+    },
+    "frozen_projection_gap": {
+      "const": "PRE_VALIDATION",
+      "title": "Frozen Projection Gap",
+      "type": "string"
+    },
+    "frozen_result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AttachmentReconstructionResult"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "input_state_only": {
+      "title": "Input State Only",
+      "type": "null"
+    },
+    "optional_incomplete_artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Optional Incomplete Artifact Ids",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/AttachmentReconstructionOutcomeV2"
+    },
+    "package_sha256": {
+      "title": "Package Sha256",
+      "type": "null"
+    },
+    "policy_version": {
+      "const": "artifact-results/r5-07-v1",
+      "default": "artifact-results/r5-07-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "producer_task_view_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "provenance_manifest_ref": {
+      "title": "Provenance Manifest Ref",
+      "type": "null"
+    },
+    "quality_report_ref": {
+      "title": "Quality Report Ref",
+      "type": "null"
+    },
+    "required_incomplete_artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Required Incomplete Artifact Ids",
+      "type": "array"
+    },
+    "resumable_artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Resumable Artifact Ids",
+      "type": "array"
+    },
+    "routing_compilation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "routing_request_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/attachment-reconstruction-result/v2",
+      "default": "eval-factory/attachment-reconstruction-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "attachment_reconstruction_result_v2_id",
+    "routing_request_ref",
+    "routing_compilation_result_ref",
+    "attachment_planning_context_ref",
+    "producer_task_view_ref",
+    "evidence_matrix_ref",
+    "artifact_routing_plan_ref",
+    "artifact_execution_plan_ref",
+    "artifact_execution_batch_ref",
+    "artifact_results",
+    "artifact_result_refs",
+    "outcome",
+    "candidate_output_refs",
+    "accepted_artifact_refs",
+    "failed_artifact_ids",
+    "resumable_artifact_ids",
+    "dependency_blocked_artifact_ids",
+    "required_incomplete_artifact_ids",
+    "optional_incomplete_artifact_ids",
+    "frozen_result",
+    "frozen_projection_gap",
+    "environment_spec_ref",
+    "provenance_manifest_ref",
+    "quality_report_ref",
+    "package_sha256",
+    "input_state_only",
+    "attachment_reconstruction_result_v2_sha256",
+    "audit"
+  ],
+  "title": "AttachmentReconstructionResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.attachment_v2.AttachmentReconstructionResultV2",
+  "x-schema-version": "eval-factory/attachment-reconstruction-result/v2"
+}

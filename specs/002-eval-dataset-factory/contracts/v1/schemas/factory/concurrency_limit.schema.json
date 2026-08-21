@@ -1,0 +1,55 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/concurrency_limit.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifacts_per_item": {
+      "minimum": 1,
+      "title": "Artifacts Per Item",
+      "type": "integer"
+    },
+    "items": {
+      "minimum": 1,
+      "title": "Items",
+      "type": "integer"
+    },
+    "model_requests": {
+      "minimum": 1,
+      "title": "Model Requests",
+      "type": "integer"
+    },
+    "network_requests": {
+      "minimum": 1,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "processes": {
+      "minimum": 1,
+      "title": "Processes",
+      "type": "integer"
+    },
+    "renderers": {
+      "minimum": 1,
+      "title": "Renderers",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/concurrency-limit/v1",
+      "default": "eval-factory/concurrency-limit/v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "model_requests",
+    "processes",
+    "renderers",
+    "network_requests",
+    "artifacts_per_item",
+    "items"
+  ],
+  "title": "ConcurrencyLimit",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration.ConcurrencyLimit",
+  "x-schema-version": "eval-factory/concurrency-limit/v1"
+}

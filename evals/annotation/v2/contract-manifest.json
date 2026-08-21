@@ -1,0 +1,67 @@
+{
+  "active_cross_stage_contract": {
+    "path": "specs/002-eval-dataset-factory/contracts/v2/manifest.json",
+    "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc"
+  },
+  "architecture": "v1-domain-base-plus-v2-workflow-overlay",
+  "base_annotation_contract": {
+    "path": "evals/annotation/v1/contract-manifest.json",
+    "sha256": "1e4514fca3b7c5ae1c8ed53e235d8c1da2d5c7b7de0eca5e187c77dc5326f7b4"
+  },
+  "contract_version": "eval-factory-annotation/v2",
+  "files": [
+    {
+      "path": "evals/annotation/v2/annotation-guide.md",
+      "sha256": "b8790b56f72bd6c5bdc5c8bc2c4a673eaafaa7e8ec74a746e3de176798451090"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/attachment-annotation.schema.json",
+      "sha256": "4541ccd42b97e20ea8b245da1185fc190dd248375ce0fc905bc7aafb40c4472e"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/common.schema.json",
+      "sha256": "5c5e4c0eb7532905bd92cc36012f4df715e83150076aa0b00125b55718be827d"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/label-annotation.schema.json",
+      "sha256": "8d0375b9bffc54ad70d18f7744a12576a140eb494e3245a708776979d6ed7d92"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/parser-annotation.schema.json",
+      "sha256": "53d978b5d816e98a4c35166eca89f65d6d059bf64e648b2a6798ef23c724649b"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/release-annotation.schema.json",
+      "sha256": "2ebed1998876e5066bfba65104b0c3ba71893ce4509d1da4888fe05ed7c7710f"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/safety-annotation.schema.json",
+      "sha256": "b52af7cf6d6db899691a90f281472dcf846997eee7e8ee071203e28e03b532eb"
+    },
+    {
+      "path": "evals/annotation/v2/schemas/task-annotation.schema.json",
+      "sha256": "810209c0332794d31a0155065a31aea0033f82457b9a472d42a0cc91b38d209a"
+    },
+    {
+      "path": "scripts/export_eval_factory_annotations_v2.py",
+      "sha256": "0846bb4b258a16c6bf70df72b944104f49d2cbc9847b2b5d30bc2e7bc26a691e"
+    },
+    {
+      "path": "scripts/validate_eval_factory_annotations_v2.py",
+      "sha256": "a219d6d3b0865c85420ca44df3cdb509bd4d87cce954e3012ec8fa3011b01eec"
+    }
+  ],
+  "frozen_canary_manifest": {
+    "path": "evals/golden/eval_factory/canary_manifest.v4.json",
+    "sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+  },
+  "guide_version": "eval-factory-annotation-guide/v2",
+  "historical_only_fields": [
+    "adjudication",
+    "adjudicator_id",
+    "annotator_role",
+    "required_review_roles",
+    "review_records_current"
+  ],
+  "schema_version": "eval-factory-annotation-contract-manifest/v2"
+}

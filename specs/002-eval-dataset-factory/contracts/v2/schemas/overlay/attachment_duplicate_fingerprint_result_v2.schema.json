@@ -1,0 +1,179 @@
+{
+  "$defs": {
+    "AttachmentDuplicateFingerprintFailureCodeV2": {
+      "enum": [
+        "MEDIA_UNSUPPORTED",
+        "CONTENT_INSUFFICIENT",
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "OUTPUT_HASH_MISMATCH",
+        "OUTPUT_PATH_VIOLATION",
+        "SYMLINK_UNSUPPORTED",
+        "CONTENT_UNSCANNABLE",
+        "SCAN_LIMIT_EXCEEDED",
+        "CONTAINER_UNSUPPORTED"
+      ],
+      "title": "AttachmentDuplicateFingerprintFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentDuplicateFingerprintOutcomeV2": {
+      "enum": [
+        "SUPPORTED",
+        "UNSUPPORTED",
+        "BLOCKED"
+      ],
+      "title": "AttachmentDuplicateFingerprintOutcomeV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_duplicate_fingerprint_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "environment_artifact_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "exact_content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Exact Content Sha256",
+      "type": "string"
+    },
+    "extractor_version": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extractor Version"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AttachmentDuplicateFingerprintFailureCodeV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "fingerprint_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "fingerprint_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Fingerprint Result Id",
+      "type": "string"
+    },
+    "normalization_version": {
+      "const": "attachment-duplicate-normalization/r7-01-v1",
+      "default": "attachment-duplicate-normalization/r7-01-v1",
+      "title": "Normalization Version",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/AttachmentDuplicateFingerprintOutcomeV2"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "policy_version": {
+      "const": "attachment-duplicate-fingerprint/r7-01-v1",
+      "default": "attachment-duplicate-fingerprint/r7-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-duplicate-fingerprint-result/v2",
+      "default": "env-mock-agent/attachment-duplicate-fingerprint-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shingle_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Shingle Count",
+      "type": "integer"
+    },
+    "similarity_fingerprint": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Similarity Fingerprint"
+    },
+    "token_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Token Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "fingerprint_result_id",
+    "fingerprint_request_ref",
+    "environment_artifact_ref",
+    "output_ref",
+    "exact_content_sha256",
+    "outcome",
+    "token_count",
+    "shingle_count",
+    "result_sha256"
+  ],
+  "title": "AttachmentDuplicateFingerprintResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.duplicate_v2.AttachmentDuplicateFingerprintResultV2",
+  "x-schema-version": "env-mock-agent/attachment-duplicate-fingerprint-result/v2"
+}

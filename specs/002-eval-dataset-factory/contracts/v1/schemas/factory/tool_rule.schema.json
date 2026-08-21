@@ -1,0 +1,42 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/tool_rule.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ],
+      "title": "Action",
+      "type": "string"
+    },
+    "constraints": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/tool-rule/v1",
+      "default": "eval-factory/tool-rule/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Tool",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tool",
+    "action"
+  ],
+  "title": "ToolRule",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task.ToolRule",
+  "x-schema-version": "eval-factory/tool-rule/v1"
+}

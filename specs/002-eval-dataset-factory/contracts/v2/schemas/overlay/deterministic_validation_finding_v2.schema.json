@@ -1,0 +1,278 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "DeterministicValidationFindingCategoryV2": {
+      "enum": [
+        "STRUCTURE",
+        "COVERAGE",
+        "EXECUTABILITY",
+        "SECURITY",
+        "PRIVACY",
+        "ANSWER_LEAKAGE",
+        "METADATA",
+        "PACKAGE",
+        "TRACEABILITY"
+      ],
+      "title": "DeterministicValidationFindingCategoryV2",
+      "type": "string"
+    },
+    "DeterministicValidationFindingCodeV2": {
+      "enum": [
+        "OUTPUT_EMPTY",
+        "FORMAT_INVALID",
+        "CONTENT_CONTRACT_VIOLATION",
+        "RENDER_CONTRACT_VIOLATION",
+        "SECRET_DETECTED",
+        "CONFIGURED_PII_DETECTED",
+        "RESTRICTED_FINGERPRINT_MATCH",
+        "FORBIDDEN_OUTPUT_MATCH",
+        "METADATA_POLICY_VIOLATION",
+        "LINEAGE_INCOMPLETE"
+      ],
+      "title": "DeterministicValidationFindingCodeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "Severity": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/deterministic_validation_finding_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_build_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "category": {
+      "$ref": "#/$defs/DeterministicValidationFindingCategoryV2"
+    },
+    "code": {
+      "$ref": "#/$defs/DeterministicValidationFindingCodeV2"
+    },
+    "facade_finding_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "facade_validation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "finding_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Finding Id",
+      "type": "string"
+    },
+    "finding_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Finding Sha256",
+      "type": "string"
+    },
+    "inventory_member_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "matched_fingerprint_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Matched Fingerprint Ids",
+      "type": "array"
+    },
+    "non_waivable": {
+      "title": "Non Waivable",
+      "type": "boolean"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "deterministic-validation/r5-08-v1",
+      "default": "deterministic-validation/r5-08-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "rule_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Rule Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/deterministic-validation-finding/v2",
+      "default": "eval-factory/deterministic-validation-finding/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "severity": {
+      "$ref": "#/$defs/Severity"
+    },
+    "status": {
+      "const": "OPEN",
+      "default": "OPEN",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "finding_id",
+    "artifact_build_result_ref",
+    "output_ref",
+    "facade_validation_result_ref",
+    "facade_finding_ref",
+    "severity",
+    "category",
+    "code",
+    "non_waivable",
+    "finding_sha256",
+    "audit"
+  ],
+  "title": "DeterministicValidationFindingV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.validation_v2.DeterministicValidationFindingV2",
+  "x-schema-version": "eval-factory/deterministic-validation-finding/v2"
+}

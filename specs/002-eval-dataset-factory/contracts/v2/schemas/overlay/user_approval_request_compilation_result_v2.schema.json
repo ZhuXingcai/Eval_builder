@@ -1,0 +1,370 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "UserApprovalRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_stages": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Affected Stages",
+          "type": "array"
+        },
+        "approval_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "available_decisions": {
+          "items": {
+            "$ref": "#/$defs/UserDecision"
+          },
+          "title": "Available Decisions",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "checkpoint": {
+          "$ref": "#/$defs/ApprovalCheckpoint"
+        },
+        "idempotency_key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "plan_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "preview_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Preview Refs",
+          "type": "array"
+        },
+        "projection_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "request_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "requested_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Requested By",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/user-approval-request/v2",
+          "default": "eval-factory/user-approval-request/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "request_id",
+        "checkpoint",
+        "requested_by",
+        "approval_policy_ref",
+        "subject_refs",
+        "plan_ref",
+        "projection_ref",
+        "preview_refs",
+        "available_decisions",
+        "affected_stages",
+        "idempotency_key",
+        "audit"
+      ],
+      "title": "UserApprovalRequest",
+      "type": "object"
+    },
+    "UserApprovalRequestCompilationOutcomeV2": {
+      "enum": [
+        "REQUESTED",
+        "DISABLED",
+        "NOT_REQUIRED"
+      ],
+      "title": "UserApprovalRequestCompilationOutcomeV2",
+      "type": "string"
+    },
+    "UserDecision": {
+      "enum": [
+        "ACCEPT",
+        "ADJUST",
+        "REJECT",
+        "REQUEST_MORE_EXAMPLES",
+        "DEFER"
+      ],
+      "title": "UserDecision",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/user_approval_request_compilation_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approval_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "checkpoint": {
+      "$ref": "#/$defs/ApprovalCheckpoint"
+    },
+    "dataset_job_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "generation_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/UserApprovalRequestCompilationOutcomeV2"
+    },
+    "policy_version": {
+      "const": "user-approval-request/r7-04-v1",
+      "default": "user-approval-request/r7-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "preview_character_count": {
+      "minimum": 0,
+      "title": "Preview Character Count",
+      "type": "integer"
+    },
+    "preview_ref_count": {
+      "minimum": 0,
+      "title": "Preview Ref Count",
+      "type": "integer"
+    },
+    "request_count": {
+      "minimum": 0,
+      "title": "Request Count",
+      "type": "integer"
+    },
+    "request_preview_character_counts": {
+      "default": [],
+      "items": {
+        "type": "integer"
+      },
+      "title": "Request Preview Character Counts",
+      "type": "array"
+    },
+    "request_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Request Refs",
+      "type": "array"
+    },
+    "requests": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/UserApprovalRequest"
+      },
+      "title": "Requests",
+      "type": "array"
+    },
+    "result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Result Id",
+      "type": "string"
+    },
+    "result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/user-approval-request-compilation-result/v2",
+      "default": "eval-factory/user-approval-request-compilation-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "subject_ref_count": {
+      "minimum": 0,
+      "title": "Subject Ref Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "result_id",
+    "job_id",
+    "dataset_job_spec_ref",
+    "approval_policy_ref",
+    "generation_policy_ref",
+    "checkpoint",
+    "outcome",
+    "request_count",
+    "subject_ref_count",
+    "preview_ref_count",
+    "preview_character_count",
+    "result_sha256",
+    "audit"
+  ],
+  "title": "UserApprovalRequestCompilationResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.approval_v2.UserApprovalRequestCompilationResultV2",
+  "x-schema-version": "eval-factory/user-approval-request-compilation-result/v2"
+}

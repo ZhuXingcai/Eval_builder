@@ -1,0 +1,186 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "TraceEventType": {
+      "enum": [
+        "user_text",
+        "assistant_text",
+        "system_context",
+        "tool_call",
+        "tool_result",
+        "runtime_error",
+        "continuation_marker",
+        "attachment_reference"
+      ],
+      "title": "TraceEventType",
+      "type": "string"
+    },
+    "TypedAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/typed-attribute/v1",
+          "default": "eval-factory/typed-attribute/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "TypedAttribute",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/trace_event.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attributes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TypedAttribute"
+      },
+      "title": "Attributes",
+      "type": "array"
+    },
+    "content_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "event_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_type": {
+      "$ref": "#/$defs/TraceEventType"
+    },
+    "role": {
+      "anyOf": [
+        {
+          "enum": [
+            "user",
+            "assistant",
+            "system",
+            "tool",
+            "runtime"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Role"
+    },
+    "schema_version": {
+      "const": "eval-factory/trace-event/v1",
+      "default": "eval-factory/trace-event/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "source_spans": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Source Spans",
+      "type": "array"
+    },
+    "trace_ir_version_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Trace Ir Version Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "trace_ir_version_id",
+    "sequence",
+    "event_type",
+    "source_spans"
+  ],
+  "title": "TraceEvent",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.TraceEvent",
+  "x-schema-version": "eval-factory/trace-event/v1"
+}

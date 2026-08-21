@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PipelineCancellationModeV2": {
+      "enum": [
+        "WORK",
+        "RESOURCE",
+        "MODEL",
+        "COMBINED"
+      ],
+      "title": "PipelineCancellationModeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/pipeline_cancellation_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "cancellation_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/PipelineCancellationModeV2"
+    },
+    "model_cancellation_request_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Model Cancellation Request Refs",
+      "type": "array"
+    },
+    "pending_physical_acknowledgements": {
+      "minimum": 0,
+      "title": "Pending Physical Acknowledgements",
+      "type": "integer"
+    },
+    "preserved_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Preserved Result Refs",
+      "type": "array"
+    },
+    "resource_termination_request_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Resource Termination Request Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/pipeline-cancellation-result/v2",
+      "default": "eval-factory/pipeline-cancellation-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "job_id",
+    "mode",
+    "cancellation_ref",
+    "pending_physical_acknowledgements"
+  ],
+  "title": "PipelineCancellationResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cli_v2.PipelineCancellationResultV2",
+  "x-schema-version": "eval-factory/pipeline-cancellation-result/v2"
+}

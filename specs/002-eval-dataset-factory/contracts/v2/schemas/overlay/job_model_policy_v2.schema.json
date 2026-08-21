@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/job_model_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "dataset_job_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "job_model_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Model Policy Id",
+      "type": "string"
+    },
+    "job_model_policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Job Model Policy Sha256",
+      "type": "string"
+    },
+    "max_concurrent_requests": {
+      "minimum": 1,
+      "title": "Max Concurrent Requests",
+      "type": "integer"
+    },
+    "max_model_requests": {
+      "minimum": 0,
+      "title": "Max Model Requests",
+      "type": "integer"
+    },
+    "max_model_tokens": {
+      "minimum": 0,
+      "title": "Max Model Tokens",
+      "type": "integer"
+    },
+    "model_profile_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Model Profile Refs",
+      "type": "array"
+    },
+    "model_rate_pool_policy_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Model Rate Pool Policy Refs",
+      "type": "array"
+    },
+    "policy_version": {
+      "const": "model-control/r6-03-v1",
+      "default": "model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "resolved_job_work_graph_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/job-model-policy/v2",
+      "default": "eval-factory/job-model-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "job_model_policy_id",
+    "dataset_job_spec_ref",
+    "resolved_job_work_graph_ref",
+    "model_rate_pool_policy_refs",
+    "model_profile_refs",
+    "max_concurrent_requests",
+    "max_model_requests",
+    "max_model_tokens",
+    "job_model_policy_sha256",
+    "audit"
+  ],
+  "title": "JobModelPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.model_control_v2.JobModelPolicyV2",
+  "x-schema-version": "eval-factory/job-model-policy/v2"
+}

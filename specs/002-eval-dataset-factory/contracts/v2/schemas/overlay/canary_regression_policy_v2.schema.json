@@ -1,0 +1,235 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/canary_regression_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "child_execution_profile": {
+      "const": "r6-canary/r1-r5-v1",
+      "default": "r6-canary/r1-r5-v1",
+      "title": "Child Execution Profile",
+      "type": "string"
+    },
+    "child_policy_version": {
+      "const": "r6-canary-execution/r6-parent-v1",
+      "default": "r6-canary-execution/r6-parent-v1",
+      "title": "Child Policy Version",
+      "type": "string"
+    },
+    "cohort_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "heuristic_signal_quality": {
+      "const": "heuristic_requires_annotation",
+      "default": "heuristic_requires_annotation",
+      "title": "Heuristic Signal Quality",
+      "type": "string"
+    },
+    "max_case_refs": {
+      "maximum": 100000,
+      "minimum": 24,
+      "title": "Max Case Refs",
+      "type": "integer"
+    },
+    "max_cases": {
+      "const": 30,
+      "default": 30,
+      "title": "Max Cases",
+      "type": "integer"
+    },
+    "max_report_bytes": {
+      "maximum": 100000000,
+      "minimum": 2,
+      "title": "Max Report Bytes",
+      "type": "integer"
+    },
+    "min_cases": {
+      "const": 20,
+      "default": 20,
+      "title": "Min Cases",
+      "type": "integer"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "canary-regression/r8-03-v1",
+      "default": "canary-regression/r8-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "required_case_count": {
+      "const": 24,
+      "default": 24,
+      "title": "Required Case Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/canary-regression-policy/v2",
+      "default": "eval-factory/canary-regression-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "strict_signal_quality": {
+      "const": "strict_events",
+      "default": "strict_events",
+      "title": "Strict Signal Quality",
+      "type": "string"
+    },
+    "success_verified_trait": {
+      "const": "tool.file_read",
+      "default": "tool.file_read",
+      "title": "Success Verified Trait",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_id",
+    "cohort_manifest_ref",
+    "max_case_refs",
+    "max_report_bytes",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "CanaryRegressionPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionPolicyV2",
+  "x-schema-version": "eval-factory/canary-regression-policy/v2"
+}

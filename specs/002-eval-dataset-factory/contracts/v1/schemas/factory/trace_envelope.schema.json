@@ -1,0 +1,330 @@
+{
+  "$defs": {
+    "CapabilityStatus": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "MISSING",
+        "UNKNOWN"
+      ],
+      "title": "CapabilityStatus",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ParseQuality": {
+      "enum": [
+        "STRICT",
+        "REPAIRED",
+        "PARTIAL",
+        "UNPARSEABLE"
+      ],
+      "title": "ParseQuality",
+      "type": "string"
+    },
+    "TraceCapability": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "enum": [
+            "conversation_events",
+            "tool_events",
+            "call_result_pairing",
+            "file_timeline",
+            "final_response",
+            "attachment_observations"
+          ],
+          "title": "Capability",
+          "type": "string"
+        },
+        "reason_codes": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/trace-capability/v1",
+          "default": "eval-factory/trace-capability/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/CapabilityStatus"
+        }
+      },
+      "required": [
+        "capability",
+        "status"
+      ],
+      "title": "TraceCapability",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/trace_envelope.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_name": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Adapter Name",
+      "type": "string"
+    },
+    "adapter_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Adapter Version",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "capabilities": {
+      "items": {
+        "$ref": "#/$defs/TraceCapability"
+      },
+      "minItems": 1,
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "event_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Event Refs",
+      "type": "array"
+    },
+    "file_observation_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "File Observation Refs",
+      "type": "array"
+    },
+    "parse_quality": {
+      "$ref": "#/$defs/ParseQuality"
+    },
+    "raw_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "repair_map_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Repair Map Refs",
+      "type": "array"
+    },
+    "repair_policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Repair Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/trace-envelope/v1",
+      "default": "eval-factory/trace-envelope/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "segment_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Segment Refs",
+      "type": "array"
+    },
+    "segmentation_policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Segmentation Policy Version",
+      "type": "string"
+    },
+    "source_trace_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Trace Id",
+      "type": "string"
+    },
+    "source_uri": {
+      "maxLength": 1024,
+      "minLength": 3,
+      "title": "Source Uri",
+      "type": "string"
+    },
+    "tool_call_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Tool Call Refs",
+      "type": "array"
+    },
+    "trace_ir_schema_version": {
+      "const": "v1",
+      "title": "Trace Ir Schema Version",
+      "type": "string"
+    },
+    "trace_ir_version_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Trace Ir Version Id",
+      "type": "string"
+    },
+    "unrecoverable_span_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Unrecoverable Span Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_trace_id",
+    "trace_ir_version_id",
+    "source_uri",
+    "raw_sha256",
+    "adapter_name",
+    "adapter_version",
+    "trace_ir_schema_version",
+    "repair_policy_version",
+    "segmentation_policy_version",
+    "parse_quality",
+    "capabilities",
+    "event_refs",
+    "tool_call_refs",
+    "file_observation_refs",
+    "segment_refs",
+    "audit"
+  ],
+  "title": "TraceEnvelope",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.TraceEnvelope",
+  "x-schema-version": "eval-factory/trace-envelope/v1"
+}

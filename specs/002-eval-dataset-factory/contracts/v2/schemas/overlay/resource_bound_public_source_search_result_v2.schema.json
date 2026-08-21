@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "AttachmentResourceUsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "process_starts": {
+          "minimum": 0,
+          "title": "Process Starts",
+          "type": "integer"
+        },
+        "renderer_operations": {
+          "minimum": 0,
+          "title": "Renderer Operations",
+          "type": "integer"
+        },
+        "retained_storage_bytes": {
+          "minimum": 0,
+          "title": "Retained Storage Bytes",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-resource-usage/v2",
+          "default": "env-mock-agent/attachment-resource-usage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "process_starts",
+        "renderer_operations",
+        "network_requests",
+        "retained_storage_bytes"
+      ],
+      "title": "AttachmentResourceUsageV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "PublicSourceSearchHitV2": {
+      "additionalProperties": false,
+      "properties": {
+        "provider_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "rank": {
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/public-source-search-hit/v2",
+          "default": "env-mock-agent/public-source-search-hit/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "search_hit_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Search Hit Id",
+          "type": "string"
+        },
+        "search_hit_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Search Hit Sha256",
+          "type": "string"
+        },
+        "source_uri": {
+          "maxLength": 2048,
+          "minLength": 3,
+          "title": "Source Uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "search_hit_id",
+        "source_uri",
+        "rank",
+        "provider_id",
+        "search_hit_sha256"
+      ],
+      "title": "PublicSourceSearchHitV2",
+      "type": "object"
+    },
+    "PublicSourceSearchResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "hits": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PublicSourceSearchHitV2"
+          },
+          "title": "Hits",
+          "type": "array"
+        },
+        "provider_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/public-source-search-result/v2",
+          "default": "env-mock-agent/public-source-search-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "search_request_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "search_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Search Result Id",
+          "type": "string"
+        },
+        "search_result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Search Result Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "search_result_id",
+        "search_request_ref",
+        "provider_id",
+        "search_result_sha256"
+      ],
+      "title": "PublicSourceSearchResultV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/resource_bound_public_source_search_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "resource_grant_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/resource-bound-public-source-search-result/v2",
+      "default": "env-mock-agent/resource-bound-public-source-search-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "search_result": {
+      "$ref": "#/$defs/PublicSourceSearchResultV2"
+    },
+    "usage": {
+      "$ref": "#/$defs/AttachmentResourceUsageV2"
+    }
+  },
+  "required": [
+    "resource_grant_ref",
+    "search_result",
+    "usage"
+  ],
+  "title": "ResourceBoundPublicSourceSearchResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.resource_v2.ResourceBoundPublicSourceSearchResultV2",
+  "x-schema-version": "env-mock-agent/resource-bound-public-source-search-result/v2"
+}

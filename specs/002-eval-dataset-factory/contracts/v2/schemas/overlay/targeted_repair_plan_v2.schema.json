@@ -1,0 +1,232 @@
+{
+  "$defs": {
+    "AttachmentRepairSourceV2": {
+      "enum": [
+        "DETERMINISTIC",
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY"
+      ],
+      "title": "AttachmentRepairSourceV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/targeted_repair_plan_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "deterministic_validation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "max_repair_waves": {
+      "const": 1,
+      "default": 1,
+      "title": "Max Repair Waves",
+      "type": "integer"
+    },
+    "plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "targeted-repair/r5-09-v1",
+      "default": "targeted-repair/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/targeted-repair-plan/v2",
+      "default": "eval-factory/targeted-repair-plan/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_round": {
+      "$ref": "#/$defs/AttachmentRepairSourceV2"
+    },
+    "targeted_artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Targeted Artifact Ids",
+      "type": "array"
+    },
+    "targeted_finding_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Targeted Finding Refs",
+      "type": "array"
+    },
+    "targeted_repair_plan_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Targeted Repair Plan Id",
+      "type": "string"
+    },
+    "triggering_round_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "untouched_artifact_version_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Untouched Artifact Version Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "targeted_repair_plan_id",
+    "source_round",
+    "candidate_revision_ref",
+    "deterministic_validation_result_ref",
+    "targeted_finding_refs",
+    "targeted_artifact_ids",
+    "untouched_artifact_version_refs",
+    "plan_sha256",
+    "audit"
+  ],
+  "title": "TargetedRepairPlanV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.review_v2.TargetedRepairPlanV2",
+  "x-schema-version": "eval-factory/targeted-repair-plan/v2"
+}

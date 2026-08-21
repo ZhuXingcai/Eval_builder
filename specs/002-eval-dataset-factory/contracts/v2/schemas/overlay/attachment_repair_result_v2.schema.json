@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "AttachmentRepairFailureCodeV2": {
+      "enum": [
+        "REPAIR_BACKEND_UNAVAILABLE",
+        "REPAIR_MATERIAL_MISSING",
+        "REPAIR_MATERIAL_MISMATCH",
+        "REPAIR_NOT_AUTHORIZED",
+        "REPAIR_BACKEND_FAILED",
+        "OUTPUT_UNCHANGED",
+        "OUTPUT_INVALID",
+        "VALIDATION_REGISTRATION_UNAVAILABLE",
+        "VALIDATION_REGISTRATION_FAILED"
+      ],
+      "title": "AttachmentRepairFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentRepairOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE"
+      ],
+      "title": "AttachmentRepairOutcomeV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_repair_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "attempt": {
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AttachmentRepairFailureCodeV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "outcome": {
+      "$ref": "#/$defs/AttachmentRepairOutcomeV2"
+    },
+    "output_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "output_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Sha256"
+    },
+    "policy_version": {
+      "const": "targeted-repair/r5-09-v1",
+      "default": "targeted-repair/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "repair_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "repair_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Repair Result Id",
+      "type": "string"
+    },
+    "repair_result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Repair Result Sha256",
+      "type": "string"
+    },
+    "retryable": {
+      "title": "Retryable",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-repair-result/v2",
+      "default": "env-mock-agent/attachment-repair-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_artifact_version_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "source_output_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "targeted_finding_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Targeted Finding Refs",
+      "type": "array"
+    },
+    "worker_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Worker Version"
+    }
+  },
+  "required": [
+    "repair_result_id",
+    "repair_request_ref",
+    "candidate_revision_ref",
+    "artifact_id",
+    "source_artifact_version_ref",
+    "source_output_ref",
+    "targeted_finding_refs",
+    "attempt",
+    "outcome",
+    "retryable",
+    "repair_result_sha256"
+  ],
+  "title": "AttachmentRepairResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.AttachmentRepairResultV2",
+  "x-schema-version": "env-mock-agent/attachment-repair-result/v2"
+}

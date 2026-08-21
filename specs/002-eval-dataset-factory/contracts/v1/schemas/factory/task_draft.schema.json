@@ -1,0 +1,519 @@
+{
+  "$defs": {
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    },
+    "AttachmentDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "criticality": {
+          "$ref": "#/$defs/AttachmentCriticality"
+        },
+        "dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Dependency Id",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "evidence_priority": {
+          "$ref": "#/$defs/EvidencePriority"
+        },
+        "schema_version": {
+          "const": "eval-factory/attachment-dependency/v1",
+          "default": "eval-factory/attachment-dependency/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dependency_id",
+        "description",
+        "criticality",
+        "evidence_priority",
+        "evidence"
+      ],
+      "title": "AttachmentDependency",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvidencePolarity": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "UNCERTAINTY",
+        "CONTRADICTION"
+      ],
+      "title": "EvidencePolarity",
+      "type": "string"
+    },
+    "EvidencePriority": {
+      "enum": [
+        "DIRECT_OBSERVATION",
+        "EXPLICIT_REQUIREMENT",
+        "INFERRED_DEPENDENCY"
+      ],
+      "title": "EvidencePriority",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "capability_complete": {
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Ref Id",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/EvidencePolarity"
+        },
+        "schema_version": {
+          "const": "eval-factory/evidence-ref/v1",
+          "default": "eval-factory/evidence-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_spans": {
+          "items": {
+            "$ref": "#/$defs/SourceSpanRef"
+          },
+          "minItems": 1,
+          "title": "Source Spans",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "subject_ref",
+        "source_spans",
+        "polarity",
+        "capability",
+        "capability_complete"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "RequirementConflict": {
+      "enum": [
+        "NONE",
+        "RESOLVED_BY_HIGHER_PRIORITY",
+        "UNRESOLVED"
+      ],
+      "title": "RequirementConflict",
+      "type": "string"
+    },
+    "RequirementLineage": {
+      "additionalProperties": false,
+      "properties": {
+        "conflict_status": {
+          "$ref": "#/$defs/RequirementConflict"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "evidence_priority": {
+          "$ref": "#/$defs/EvidencePriority"
+        },
+        "requirement_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/requirement-lineage/v1",
+          "default": "eval-factory/requirement-lineage/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "statement": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "statement",
+        "evidence_priority",
+        "evidence",
+        "conflict_status"
+      ],
+      "title": "RequirementLineage",
+      "type": "object"
+    },
+    "SelectionFirewall": {
+      "additionalProperties": false,
+      "properties": {
+        "completed_deliverable_excluded": {
+          "title": "Completed Deliverable Excluded",
+          "type": "boolean"
+        },
+        "final_answer_excluded": {
+          "title": "Final Answer Excluded",
+          "type": "boolean"
+        },
+        "grader_rules_excluded": {
+          "title": "Grader Rules Excluded",
+          "type": "boolean"
+        },
+        "hidden_selection_signals_excluded": {
+          "title": "Hidden Selection Signals Excluded",
+          "type": "boolean"
+        },
+        "private_reference_excluded": {
+          "title": "Private Reference Excluded",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "eval-factory/selection-firewall/v1",
+          "default": "eval-factory/selection-firewall/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "trajectory_specific_steps_excluded": {
+          "title": "Trajectory Specific Steps Excluded",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "final_answer_excluded",
+        "completed_deliverable_excluded",
+        "private_reference_excluded",
+        "grader_rules_excluded",
+        "hidden_selection_signals_excluded",
+        "trajectory_specific_steps_excluded"
+      ],
+      "title": "SelectionFirewall",
+      "type": "object"
+    },
+    "SourceSpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-span-ref/v1",
+          "default": "eval-factory/source-span-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "SourceSpanRef",
+      "type": "object"
+    },
+    "TaskDraftStatus": {
+      "enum": [
+        "CANDIDATE",
+        "NEEDS_REVIEW",
+        "BLOCKED"
+      ],
+      "title": "TaskDraftStatus",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/task_draft.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tools": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Allowed Tools",
+      "type": "array"
+    },
+    "attachment_dependencies": {
+      "items": {
+        "$ref": "#/$defs/AttachmentDependency"
+      },
+      "title": "Attachment Dependencies",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "evaluation_claim": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Evaluation Claim",
+      "type": "string"
+    },
+    "forbidden_outputs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Forbidden Outputs",
+      "type": "array"
+    },
+    "required_capabilities": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Required Capabilities",
+      "type": "array"
+    },
+    "requirement_lineage": {
+      "items": {
+        "$ref": "#/$defs/RequirementLineage"
+      },
+      "minItems": 1,
+      "title": "Requirement Lineage",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/task-draft/v1",
+      "default": "eval-factory/task-draft/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selection_context_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "selection_firewall": {
+      "$ref": "#/$defs/SelectionFirewall"
+    },
+    "status": {
+      "$ref": "#/$defs/TaskDraftStatus"
+    },
+    "task_draft_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Task Draft Id",
+      "type": "string"
+    },
+    "task_episode_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Task Episode Refs",
+      "type": "array"
+    },
+    "task_intent": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Task Intent",
+      "type": "string"
+    },
+    "uncertainties": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Uncertainties",
+      "type": "array"
+    },
+    "visible_prompt": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Visible Prompt",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_draft_id",
+    "selection_context_ref",
+    "task_episode_refs",
+    "visible_prompt",
+    "task_intent",
+    "evaluation_claim",
+    "required_capabilities",
+    "allowed_tools",
+    "forbidden_outputs",
+    "attachment_dependencies",
+    "requirement_lineage",
+    "selection_firewall",
+    "status",
+    "audit"
+  ],
+  "title": "TaskDraft",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task.TaskDraft",
+  "x-schema-version": "eval-factory/task-draft/v1"
+}

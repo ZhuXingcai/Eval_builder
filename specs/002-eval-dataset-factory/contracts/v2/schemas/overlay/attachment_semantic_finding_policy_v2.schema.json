@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "AttachmentSemanticFindingScopeV2": {
+      "enum": [
+        "ITEM",
+        "ARTIFACT"
+      ],
+      "title": "AttachmentSemanticFindingScopeV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewRoundV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY",
+        "LEAKAGE_EXECUTABILITY"
+      ],
+      "title": "AttachmentSemanticReviewRoundV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewSeverityV2": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "AttachmentSemanticReviewSeverityV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_semantic_finding_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_repair_allowed": {
+      "title": "Artifact Repair Allowed",
+      "type": "boolean"
+    },
+    "non_waivable": {
+      "title": "Non Waivable",
+      "type": "boolean"
+    },
+    "round": {
+      "$ref": "#/$defs/AttachmentSemanticReviewRoundV2"
+    },
+    "scope": {
+      "$ref": "#/$defs/AttachmentSemanticFindingScopeV2"
+    },
+    "severity": {
+      "$ref": "#/$defs/AttachmentSemanticReviewSeverityV2"
+    }
+  },
+  "required": [
+    "round",
+    "severity",
+    "scope",
+    "non_waivable",
+    "artifact_repair_allowed"
+  ],
+  "title": "AttachmentSemanticFindingPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticFindingPolicyV2"
+}

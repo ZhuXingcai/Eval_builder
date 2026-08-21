@@ -1,0 +1,253 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ProductionReadinessAttestationStateV2": {
+      "enum": [
+        "ACTIVE",
+        "INVALIDATED",
+        "EXPIRED"
+      ],
+      "title": "ProductionReadinessAttestationStateV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/production_readiness_attestation_projection_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attestation_series_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Attestation Series Id",
+      "type": "string"
+    },
+    "attestation_version": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Attestation Version",
+      "type": "integer"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "frozen_attestation_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "invalidation_record_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "issuer_count": {
+      "maximum": 100,
+      "minimum": 2,
+      "title": "Issuer Count",
+      "type": "integer"
+    },
+    "issuer_registry_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "prerequisite_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "previous_projection_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "projection_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Projection Id",
+      "type": "string"
+    },
+    "projection_revision": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Projection Revision",
+      "type": "integer"
+    },
+    "projection_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Projection Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/production-readiness-attestation-projection/v2",
+      "default": "eval-factory/production-readiness-attestation-projection/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/ProductionReadinessAttestationStateV2"
+    },
+    "valid_from": {
+      "format": "date-time",
+      "title": "Valid From",
+      "type": "string"
+    },
+    "valid_until": {
+      "format": "date-time",
+      "title": "Valid Until",
+      "type": "string"
+    },
+    "version_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "projection_id",
+    "attestation_series_id",
+    "attestation_version",
+    "projection_revision",
+    "frozen_attestation_ref",
+    "version_set_ref",
+    "prerequisite_ref",
+    "issuer_registry_ref",
+    "issuer_count",
+    "valid_from",
+    "valid_until",
+    "state",
+    "projection_sha256",
+    "audit"
+  ],
+  "title": "ProductionReadinessAttestationProjectionV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessAttestationProjectionV2",
+  "x-schema-version": "eval-factory/production-readiness-attestation-projection/v2"
+}

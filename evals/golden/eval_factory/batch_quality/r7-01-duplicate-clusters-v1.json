@@ -1,0 +1,98 @@
+{
+  "clustering_mode": "CONNECTED_COMPONENTS",
+  "direct_pair_authority": true,
+  "normalization_versions": {
+    "attachment": "attachment-duplicate-normalization/r7-01-v1",
+    "task": "task-duplicate-normalization/r7-01-v1"
+  },
+  "policy_version": "duplicate-detection/r7-01-v1",
+  "scenarios": [
+    {
+      "cluster_count": 1,
+      "cluster_member_counts": [
+        2
+      ],
+      "direct_pair_count": 1,
+      "exact_pair_count": 1,
+      "near_pair_count": 0,
+      "scenario_id": "exact-task",
+      "subject_kind": "TASK",
+      "unsupported_count": 0
+    },
+    {
+      "cluster_count": 1,
+      "cluster_member_counts": [
+        2
+      ],
+      "direct_pair_count": 1,
+      "exact_pair_count": 0,
+      "near_pair_count": 1,
+      "scenario_id": "near-task",
+      "subject_kind": "TASK",
+      "unsupported_count": 0
+    },
+    {
+      "cluster_count": 0,
+      "cluster_member_counts": [],
+      "direct_pair_count": 0,
+      "exact_pair_count": 0,
+      "near_pair_count": 0,
+      "scenario_id": "unrelated",
+      "subject_kind": "TASK",
+      "unsupported_count": 0
+    },
+    {
+      "cluster_count": 1,
+      "cluster_member_counts": [
+        3
+      ],
+      "direct_pair_count": 2,
+      "exact_pair_count": 0,
+      "near_pair_count": 2,
+      "scenario_id": "connected-transitive",
+      "subject_kind": "ATTACHMENT",
+      "transitive_unobserved_pair_count": 1,
+      "unsupported_count": 0
+    },
+    {
+      "cluster_count": 2,
+      "cluster_member_counts": [
+        2,
+        3
+      ],
+      "direct_pair_count": 3,
+      "exact_pair_count": 1,
+      "near_pair_count": 2,
+      "scenario_id": "multi-cluster",
+      "subject_kind": "ATTACHMENT",
+      "unsupported_count": 0
+    },
+    {
+      "cluster_count": 0,
+      "cluster_member_counts": [],
+      "direct_pair_count": 0,
+      "exact_pair_count": 0,
+      "near_pair_count": 0,
+      "scenario_id": "no-attachment",
+      "subject_kind": "ATTACHMENT",
+      "unsupported_count": 0
+    },
+    {
+      "cluster_count": 0,
+      "cluster_member_counts": [],
+      "direct_pair_count": 0,
+      "exact_only": true,
+      "exact_pair_count": 0,
+      "near_pair_count": 0,
+      "scenario_id": "unsupported-attachment",
+      "subject_kind": "ATTACHMENT",
+      "unsupported_count": 1,
+      "unsupported_failure_code": "MEDIA_UNSUPPORTED"
+    }
+  ],
+  "schema_version": "eval-factory/duplicate-cluster-gold/r7-01-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ]
+}

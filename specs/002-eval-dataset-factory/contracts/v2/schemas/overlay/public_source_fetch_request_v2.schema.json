@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/public_source_fetch_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_host_suffixes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Host Suffixes",
+      "type": "array"
+    },
+    "allowed_schemes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Schemes",
+      "type": "array"
+    },
+    "fetch_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Fetch Request Id",
+      "type": "string"
+    },
+    "fetch_request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Fetch Request Sha256",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "max_bytes": {
+      "minimum": 1,
+      "title": "Max Bytes",
+      "type": "integer"
+    },
+    "provider_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "retrieval_policy_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/public-source-fetch-request/v2",
+      "default": "env-mock-agent/public-source-fetch-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_approval_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "source_uri": {
+      "maxLength": 2048,
+      "minLength": 3,
+      "title": "Source Uri",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fetch_request_id",
+    "source_uri",
+    "provider_id",
+    "max_bytes",
+    "allowed_schemes",
+    "allowed_host_suffixes",
+    "source_approval_ref",
+    "retrieval_policy_ref",
+    "idempotency_key",
+    "fetch_request_sha256"
+  ],
+  "title": "PublicSourceFetchRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.retrieval_v2.PublicSourceFetchRequestV2",
+  "x-schema-version": "env-mock-agent/public-source-fetch-request/v2"
+}

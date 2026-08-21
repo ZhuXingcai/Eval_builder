@@ -1,0 +1,276 @@
+{
+  "$defs": {
+    "BatchAuditFindingCodeV2": {
+      "enum": [
+        "MISSING_OUTBOX_WITNESS",
+        "DUPLICATE_OUTBOX_WITNESS",
+        "MISSING_TERMINAL_METRICS",
+        "METRICS_BINDING_MISMATCH",
+        "MISSING_MODEL_EVENT",
+        "MISSING_RESOURCE_EVENT",
+        "LEASE_EVENT_GAP",
+        "RESERVATION_EVENT_GAP",
+        "RETRY_CHAIN_MISMATCH",
+        "CROSS_SCOPE_REFERENCE",
+        "CLOCK_REGRESSION",
+        "PROJECTION_DRIFT",
+        "UNEXPECTED_SOURCE_RECORD"
+      ],
+      "title": "BatchAuditFindingCodeV2",
+      "type": "string"
+    },
+    "BatchAuditFindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/BatchAuditFindingCodeV2"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "subject_refs"
+      ],
+      "title": "BatchAuditFindingV2",
+      "type": "object"
+    },
+    "BatchAuditOutcomeV2": {
+      "enum": [
+        "COMPLETE",
+        "INCOMPLETE"
+      ],
+      "title": "BatchAuditOutcomeV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/batch_audit_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attempt_metrics_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Attempt Metrics Refs",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "audit_event_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Audit Event Refs",
+      "type": "array"
+    },
+    "batch_audit_report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Batch Audit Report Id",
+      "type": "string"
+    },
+    "batch_audit_report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Batch Audit Report Sha256",
+      "type": "string"
+    },
+    "batch_metrics_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "expected_work_unit_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Expected Work Unit Refs",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/BatchAuditFindingV2"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "item_metrics_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Item Metrics Refs",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/BatchAuditOutcomeV2"
+    },
+    "policy_version": {
+      "const": "batch-observability/r6-06-v1",
+      "default": "batch-observability/r6-06-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "resolved_job_work_graph_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/batch-audit-report/v2",
+      "default": "eval-factory/batch-audit-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_fingerprint": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Fingerprint",
+      "type": "string"
+    }
+  },
+  "required": [
+    "batch_audit_report_id",
+    "resolved_job_work_graph_ref",
+    "source_fingerprint",
+    "outcome",
+    "expected_work_unit_refs",
+    "audit_event_refs",
+    "attempt_metrics_refs",
+    "item_metrics_refs",
+    "batch_metrics_ref",
+    "findings",
+    "batch_audit_report_sha256",
+    "audit"
+  ],
+  "title": "BatchAuditReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.observability_v2.BatchAuditReportV2",
+  "x-schema-version": "eval-factory/batch-audit-report/v2"
+}

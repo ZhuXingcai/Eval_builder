@@ -1,0 +1,387 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PromptLeakageCategoryV2": {
+      "enum": [
+        "FINAL_ANSWER",
+        "COMPLETED_DELIVERABLE",
+        "PRIVATE_REFERENCE",
+        "GRADER_RULE",
+        "HIDDEN_PASS_CONDITION",
+        "HIDDEN_SELECTION_SIGNAL",
+        "TRAJECTORY_SPECIFIC_STEP"
+      ],
+      "title": "PromptLeakageCategoryV2",
+      "type": "string"
+    },
+    "PromptLeakageDetectorV2": {
+      "enum": [
+        "DETERMINISTIC_FINGERPRINT",
+        "SEMANTIC_RESIDUAL"
+      ],
+      "title": "PromptLeakageDetectorV2",
+      "type": "string"
+    },
+    "TaskPromptSafetyCheckOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "NOT_EVALUATED"
+      ],
+      "title": "TaskPromptSafetyCheckOutcomeV2",
+      "type": "string"
+    },
+    "TaskPromptSafetyCheckV2": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/PromptLeakageCategoryV2"
+        },
+        "detector_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Detector Ids",
+          "type": "array"
+        },
+        "finding_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Finding Ids",
+          "type": "array"
+        },
+        "outcome": {
+          "$ref": "#/$defs/TaskPromptSafetyCheckOutcomeV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/task-prompt-safety-check/v2",
+          "default": "eval-factory/task-prompt-safety-check/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "outcome"
+      ],
+      "title": "TaskPromptSafetyCheckV2",
+      "type": "object"
+    },
+    "TaskPromptSafetyFindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/PromptLeakageCategoryV2"
+        },
+        "detector": {
+          "$ref": "#/$defs/PromptLeakageDetectorV2"
+        },
+        "finding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "matched_fingerprint_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Matched Fingerprint Ids",
+          "type": "array"
+        },
+        "non_waivable": {
+          "const": true,
+          "default": true,
+          "title": "Non Waivable",
+          "type": "boolean"
+        },
+        "prompt_span_end": {
+          "exclusiveMinimum": 0,
+          "title": "Prompt Span End",
+          "type": "integer"
+        },
+        "prompt_span_start": {
+          "minimum": 0,
+          "title": "Prompt Span Start",
+          "type": "integer"
+        },
+        "rule_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/task-prompt-safety-finding/v2",
+          "default": "eval-factory/task-prompt-safety-finding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "category",
+        "detector",
+        "prompt_span_start",
+        "prompt_span_end",
+        "rule_id"
+      ],
+      "title": "TaskPromptSafetyFindingV2",
+      "type": "object"
+    },
+    "TaskPromptSafetyGateStatusV2": {
+      "enum": [
+        "PASSED",
+        "BLOCKED"
+      ],
+      "title": "TaskPromptSafetyGateStatusV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/task_prompt_safety_gate_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/TaskPromptSafetyCheckV2"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "deterministic_scan_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "findings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TaskPromptSafetyFindingV2"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "gate_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Gate Sha256",
+      "type": "string"
+    },
+    "leakage_reference_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "model_profile": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Profile"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "prompt_version": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prompt Version"
+    },
+    "schema_version": {
+      "const": "eval-factory/task-prompt-safety-gate/v2",
+      "default": "eval-factory/task-prompt-safety-gate/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_assessment_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "source_task_draft_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "status": {
+      "$ref": "#/$defs/TaskPromptSafetyGateStatusV2"
+    },
+    "task_prompt_safety_gate_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Task Prompt Safety Gate Id",
+      "type": "string"
+    },
+    "visible_prompt_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Visible Prompt Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_prompt_safety_gate_id",
+    "source_task_draft_ref",
+    "leakage_reference_set_ref",
+    "deterministic_scan_ref",
+    "visible_prompt_sha256",
+    "status",
+    "checks",
+    "policy_version",
+    "gate_sha256",
+    "audit"
+  ],
+  "title": "TaskPromptSafetyGateV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.TaskPromptSafetyGateV2",
+  "x-schema-version": "eval-factory/task-prompt-safety-gate/v2"
+}

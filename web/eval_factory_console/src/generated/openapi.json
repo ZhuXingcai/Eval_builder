@@ -1,0 +1,3581 @@
+{
+  "components": {
+    "schemas": {
+      "AttachmentGenerationPlanV2": {
+        "additionalProperties": false,
+        "properties": {
+          "attachment_planning_context_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "evidence_bundle_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "max_parallel_groups": {
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Max Parallel Groups",
+            "type": "integer"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "plan_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Plan Id",
+            "type": "string"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "predecessor_plan_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "producer_task_view_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "quality_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/attachment-generation-plan/v2",
+            "default": "eval-factory/attachment-generation-plan/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "solvability_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "total_cost_micro_usd": {
+            "maximum": 10000000000000.0,
+            "minimum": 0.0,
+            "title": "Total Cost Micro Usd",
+            "type": "integer"
+          },
+          "total_model_requests": {
+            "maximum": 10000000.0,
+            "minimum": 0.0,
+            "title": "Total Model Requests",
+            "type": "integer"
+          },
+          "total_model_tokens": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Total Model Tokens",
+            "type": "integer"
+          },
+          "works": {
+            "items": {
+              "$ref": "#/components/schemas/AttachmentMockWorkV2"
+            },
+            "maxItems": 100000,
+            "minItems": 1,
+            "title": "Works",
+            "type": "array"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "plan_id",
+          "run_ref",
+          "plan_version",
+          "predecessor_plan_ref",
+          "producer_task_view_ref",
+          "evidence_bundle_ref",
+          "attachment_planning_context_ref",
+          "works",
+          "max_parallel_groups",
+          "quality_policy_ref",
+          "solvability_policy_ref",
+          "total_model_requests",
+          "total_model_tokens",
+          "total_cost_micro_usd"
+        ],
+        "title": "AttachmentGenerationPlanV2",
+        "type": "object"
+      },
+      "AttachmentMockWorkV2": {
+        "additionalProperties": false,
+        "properties": {
+          "acceptance_check_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Acceptance Check Refs",
+            "type": "array"
+          },
+          "agent_role": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Agent Role",
+            "type": "string"
+          },
+          "allowed_tool_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Allowed Tool Ids",
+            "type": "array"
+          },
+          "artifact_group_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "artifact_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 100000,
+            "minItems": 1,
+            "title": "Artifact Ids",
+            "type": "array"
+          },
+          "data_classifications": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Data Classifications",
+            "type": "array"
+          },
+          "data_purposes": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Data Purposes",
+            "type": "array"
+          },
+          "dependency_work_keys": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Dependency Work Keys",
+            "type": "array"
+          },
+          "input_object_types": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Input Object Types",
+            "type": "array"
+          },
+          "max_attempts": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Max Attempts",
+            "type": "integer"
+          },
+          "max_cost_micro_usd": {
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Max Cost Micro Usd",
+            "type": "integer"
+          },
+          "max_model_requests": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Max Model Requests",
+            "type": "integer"
+          },
+          "max_model_tokens": {
+            "maximum": 1000000000.0,
+            "minimum": 0.0,
+            "title": "Max Model Tokens",
+            "type": "integer"
+          },
+          "output_object_types": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Output Object Types",
+            "type": "array"
+          },
+          "required_capability_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Required Capability Ids",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/attachment-mock-work/v2",
+            "default": "eval-factory/attachment-mock-work/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "work_key": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Work Key",
+            "type": "string"
+          },
+          "workspace_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          }
+        },
+        "required": [
+          "work_key",
+          "artifact_group_ref",
+          "artifact_ids",
+          "agent_role",
+          "input_object_types",
+          "output_object_types",
+          "required_capability_ids",
+          "allowed_tool_ids",
+          "data_purposes",
+          "data_classifications",
+          "workspace_policy_ref",
+          "acceptance_check_refs",
+          "max_attempts",
+          "max_model_requests",
+          "max_model_tokens",
+          "max_cost_micro_usd"
+        ],
+        "title": "AttachmentMockWorkV2",
+        "type": "object"
+      },
+      "ContractAudit": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "created_by": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Created By",
+            "type": "string"
+          },
+          "governing_versions": {
+            "items": {
+              "$ref": "#/components/schemas/VersionBinding"
+            },
+            "minItems": 1,
+            "title": "Governing Versions",
+            "type": "array"
+          },
+          "input_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "title": "Input Refs",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/contract-audit/v1",
+            "default": "eval-factory/contract-audit/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "created_at",
+          "created_by",
+          "governing_versions"
+        ],
+        "title": "ContractAudit",
+        "type": "object"
+      },
+      "CriteriaRubricGoalV2": {
+        "additionalProperties": false,
+        "properties": {
+          "allowed_tool_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Allowed Tool Ids",
+            "type": "array"
+          },
+          "attachment_dependency_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "title": "Attachment Dependency Ids",
+            "type": "array"
+          },
+          "evaluator_binding_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Evaluator Binding Id",
+            "type": "string"
+          },
+          "goal_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Goal Id",
+            "type": "string"
+          },
+          "goal_summary": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Goal Summary",
+            "type": "string"
+          },
+          "judged_object_kind": {
+            "$ref": "#/components/schemas/RubricJudgedObjectKindV2"
+          },
+          "prompt_requirement_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "title": "Prompt Requirement Ids",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/criteria-rubric-goal/v2",
+            "default": "eval-factory/criteria-rubric-goal/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "visibility": {
+            "const": "EVALUATOR_ONLY",
+            "default": "EVALUATOR_ONLY",
+            "title": "Visibility",
+            "type": "string"
+          },
+          "weight_basis_points": {
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Weight Basis Points",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "goal_id",
+          "goal_summary",
+          "judged_object_kind",
+          "evaluator_binding_id",
+          "weight_basis_points"
+        ],
+        "title": "CriteriaRubricGoalV2",
+        "type": "object"
+      },
+      "CriteriaRubricPlanV2": {
+        "additionalProperties": false,
+        "properties": {
+          "acceptance_check_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Acceptance Check Refs",
+            "type": "array"
+          },
+          "agent_role": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Agent Role",
+            "type": "string"
+          },
+          "allowed_attachment_dependency_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "title": "Allowed Attachment Dependency Ids",
+            "type": "array"
+          },
+          "allowed_evaluator_binding_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Allowed Evaluator Binding Ids",
+            "type": "array"
+          },
+          "allowed_prompt_requirement_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Allowed Prompt Requirement Ids",
+            "type": "array"
+          },
+          "allowed_reference_modes": {
+            "items": {
+              "$ref": "#/components/schemas/ReferenceMode"
+            },
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "Allowed Reference Modes",
+            "type": "array"
+          },
+          "allowed_task_tool_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Allowed Task Tool Ids",
+            "type": "array"
+          },
+          "attachment_quality_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "criterion_goals": {
+            "items": {
+              "$ref": "#/components/schemas/CriteriaRubricGoalV2"
+            },
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Criterion Goals",
+            "type": "array"
+          },
+          "data_classifications": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Data Classifications",
+            "type": "array"
+          },
+          "data_purpose": {
+            "const": "criteria-rubric-authoring",
+            "default": "criteria-rubric-authoring",
+            "title": "Data Purpose",
+            "type": "string"
+          },
+          "max_attempts": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Max Attempts",
+            "type": "integer"
+          },
+          "max_cost_micro_usd": {
+            "maximum": 1000000000000.0,
+            "minimum": 1.0,
+            "title": "Max Cost Micro Usd",
+            "type": "integer"
+          },
+          "max_model_requests": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Max Model Requests",
+            "type": "integer"
+          },
+          "max_model_tokens": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Max Model Tokens",
+            "type": "integer"
+          },
+          "model_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "plan_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Plan Id",
+            "type": "string"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "predecessor_plan_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "prompt_template_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "required_attachment_dependency_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "title": "Required Attachment Dependency Ids",
+            "type": "array"
+          },
+          "required_capability_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Required Capability Ids",
+            "type": "array"
+          },
+          "required_prompt_requirement_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Required Prompt Requirement Ids",
+            "type": "array"
+          },
+          "required_task_tool_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Required Task Tool Ids",
+            "type": "array"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/criteria-rubric-plan/v2",
+            "default": "eval-factory/criteria-rubric-plan/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "selected_reference_mode": {
+            "$ref": "#/components/schemas/ReferenceMode"
+          },
+          "solvability_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "specialist_tool_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Specialist Tool Ids",
+            "type": "array"
+          },
+          "task_draft_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "tool_catalog_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "plan_id",
+          "run_ref",
+          "plan_version",
+          "predecessor_plan_ref",
+          "task_draft_ref",
+          "attachment_quality_ref",
+          "solvability_ref",
+          "allowed_prompt_requirement_ids",
+          "required_prompt_requirement_ids",
+          "criterion_goals",
+          "allowed_evaluator_binding_ids",
+          "allowed_reference_modes",
+          "selected_reference_mode",
+          "tool_catalog_ref",
+          "agent_role",
+          "required_capability_ids",
+          "specialist_tool_ids",
+          "data_classifications",
+          "prompt_template_ref",
+          "model_policy_ref",
+          "acceptance_check_refs",
+          "max_attempts",
+          "max_model_requests",
+          "max_model_tokens",
+          "max_cost_micro_usd"
+        ],
+        "title": "CriteriaRubricPlanV2",
+        "type": "object"
+      },
+      "DatasetBuildPlanTaskV2": {
+        "additionalProperties": false,
+        "properties": {
+          "acceptance_check_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Acceptance Check Refs",
+            "type": "array"
+          },
+          "agent_role": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Agent Role",
+            "type": "string"
+          },
+          "dependency_task_keys": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Dependency Task Keys",
+            "type": "array"
+          },
+          "input_object_types": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Input Object Types",
+            "type": "array"
+          },
+          "max_attempts": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Max Attempts",
+            "type": "integer"
+          },
+          "max_cost_micro_usd": {
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Max Cost Micro Usd",
+            "type": "integer"
+          },
+          "max_model_requests": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Max Model Requests",
+            "type": "integer"
+          },
+          "max_model_tokens": {
+            "maximum": 1000000000.0,
+            "minimum": 0.0,
+            "title": "Max Model Tokens",
+            "type": "integer"
+          },
+          "output_object_types": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Output Object Types",
+            "type": "array"
+          },
+          "plan_review_kind": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanKindV2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "required_capability_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Required Capability Ids",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/dataset-build-plan-task/v2",
+            "default": "eval-factory/dataset-build-plan-task/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "stage": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Stage",
+            "type": "string"
+          },
+          "task_key": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Task Key",
+            "type": "string"
+          },
+          "task_kind": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Task Kind",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_key",
+          "stage",
+          "task_kind",
+          "agent_role",
+          "output_object_types",
+          "required_capability_ids",
+          "acceptance_check_refs",
+          "max_attempts",
+          "max_model_requests",
+          "max_model_tokens",
+          "max_cost_micro_usd"
+        ],
+        "title": "DatasetBuildPlanTaskV2",
+        "type": "object"
+      },
+      "DatasetBuildPlanV2": {
+        "additionalProperties": false,
+        "properties": {
+          "assumptions": {
+            "default": [],
+            "items": {
+              "maxLength": 1000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Assumptions",
+            "type": "array"
+          },
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "goals": {
+            "items": {
+              "maxLength": 1000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 128,
+            "minItems": 1,
+            "title": "Goals",
+            "type": "array"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "plan_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Plan Id",
+            "type": "string"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "predecessor_plan_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "required_review_kinds": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/PlanKindV2"
+            },
+            "maxItems": 7,
+            "title": "Required Review Kinds",
+            "type": "array"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/dataset-build-plan/v2",
+            "default": "eval-factory/dataset-build-plan/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "stage_order": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Stage Order",
+            "type": "array"
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/DatasetBuildPlanTaskV2"
+            },
+            "maxItems": 100000,
+            "minItems": 1,
+            "title": "Tasks",
+            "type": "array"
+          },
+          "total_cost_micro_usd": {
+            "maximum": 10000000000000.0,
+            "minimum": 0.0,
+            "title": "Total Cost Micro Usd",
+            "type": "integer"
+          },
+          "total_model_requests": {
+            "maximum": 10000000.0,
+            "minimum": 0.0,
+            "title": "Total Model Requests",
+            "type": "integer"
+          },
+          "total_model_tokens": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Total Model Tokens",
+            "type": "integer"
+          },
+          "unresolved_questions": {
+            "default": [],
+            "items": {
+              "maxLength": 1000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Unresolved Questions",
+            "type": "array"
+          },
+          "user_constraints": {
+            "default": [],
+            "items": {
+              "maxLength": 1000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "User Constraints",
+            "type": "array"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "plan_id",
+          "run_ref",
+          "plan_version",
+          "predecessor_plan_ref",
+          "goals",
+          "stage_order",
+          "tasks",
+          "total_model_requests",
+          "total_model_tokens",
+          "total_cost_micro_usd"
+        ],
+        "title": "DatasetBuildPlanV2",
+        "type": "object"
+      },
+      "DatasetDeliveryPlanV2": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregate_result_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "blocked_binding_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000000,
+            "title": "Blocked Binding Refs",
+            "type": "array"
+          },
+          "candidate_item_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000000,
+            "minItems": 1,
+            "title": "Candidate Item Refs",
+            "type": "array"
+          },
+          "candidate_projection_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000000,
+            "minItems": 1,
+            "title": "Candidate Projection Refs",
+            "type": "array"
+          },
+          "candidate_stage_head_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000000,
+            "minItems": 1,
+            "title": "Candidate Stage Head Refs",
+            "type": "array"
+          },
+          "max_files": {
+            "maximum": 10000000.0,
+            "minimum": 1.0,
+            "title": "Max Files",
+            "type": "integer"
+          },
+          "max_total_bytes": {
+            "maximum": 10000000000000.0,
+            "minimum": 1.0,
+            "title": "Max Total Bytes",
+            "type": "integer"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "output_target_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "plan_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Plan Id",
+            "type": "string"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "predecessor_plan_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "production_release_allowed": {
+            "const": false,
+            "default": false,
+            "title": "Production Release Allowed",
+            "type": "boolean"
+          },
+          "rejected_binding_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000000,
+            "title": "Rejected Binding Refs",
+            "type": "array"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/dataset-delivery-plan/v2",
+            "default": "eval-factory/dataset-delivery-plan/v2",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "plan_id",
+          "run_ref",
+          "plan_version",
+          "predecessor_plan_ref",
+          "aggregate_result_ref",
+          "candidate_item_refs",
+          "candidate_projection_refs",
+          "candidate_stage_head_refs",
+          "output_target_ref",
+          "max_files",
+          "max_total_bytes"
+        ],
+        "title": "DatasetDeliveryPlanV2",
+        "type": "object"
+      },
+      "GradingDesignPlanV2": {
+        "additionalProperties": false,
+        "properties": {
+          "acceptance_check_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Acceptance Check Refs",
+            "type": "array"
+          },
+          "agent_role": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Agent Role",
+            "type": "string"
+          },
+          "aggregation_mode": {
+            "$ref": "#/components/schemas/JudgeAggregationModeV2"
+          },
+          "allowed_judge_model_profile_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Allowed Judge Model Profile Refs",
+            "type": "array"
+          },
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "criteria_rubric_result_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "data_classifications": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "title": "Data Classifications",
+            "type": "array"
+          },
+          "data_purpose": {
+            "const": "grading-design-authoring",
+            "default": "grading-design-authoring",
+            "title": "Data Purpose",
+            "type": "string"
+          },
+          "escalate_on_reference_unavailable": {
+            "title": "Escalate On Reference Unavailable",
+            "type": "boolean"
+          },
+          "evaluator_spec_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "generator_model_profile_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "judge_input_schema_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "judge_output_schema_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "judge_prompt_template_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "judge_tasks": {
+            "items": {
+              "$ref": "#/components/schemas/JudgeTaskMappingV2"
+            },
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Judge Tasks",
+            "type": "array"
+          },
+          "max_attempts": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Max Attempts",
+            "type": "integer"
+          },
+          "max_cost_micro_usd": {
+            "maximum": 1000000000000.0,
+            "minimum": 1.0,
+            "title": "Max Cost Micro Usd",
+            "type": "integer"
+          },
+          "max_model_requests": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Max Model Requests",
+            "type": "integer"
+          },
+          "max_model_tokens": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Max Model Tokens",
+            "type": "integer"
+          },
+          "minimum_confidence_basis_points": {
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "title": "Minimum Confidence Basis Points",
+            "type": "integer"
+          },
+          "model_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "passing_score_basis_points": {
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Passing Score Basis Points",
+            "type": "integer"
+          },
+          "plan_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Plan Id",
+            "type": "string"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "predecessor_plan_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reference_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "required_capability_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Required Capability Ids",
+            "type": "array"
+          },
+          "required_output_fields": {
+            "items": {
+              "pattern": "^[A-Z][A-Z0-9_]{1,127}$",
+              "type": "string"
+            },
+            "maxItems": 16,
+            "minItems": 4,
+            "title": "Required Output Fields",
+            "type": "array"
+          },
+          "rubric_set_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/grading-design-plan/v2",
+            "default": "eval-factory/grading-design-plan/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "specialist_tool_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Specialist Tool Ids",
+            "type": "array"
+          },
+          "tool_policy_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "plan_id",
+          "run_ref",
+          "plan_version",
+          "predecessor_plan_ref",
+          "criteria_rubric_result_ref",
+          "rubric_set_ref",
+          "evaluator_spec_ref",
+          "reference_policy_ref",
+          "tool_policy_ref",
+          "generator_model_profile_ref",
+          "judge_tasks",
+          "aggregation_mode",
+          "passing_score_basis_points",
+          "minimum_confidence_basis_points",
+          "escalate_on_reference_unavailable",
+          "judge_input_schema_ref",
+          "judge_output_schema_ref",
+          "required_output_fields",
+          "allowed_judge_model_profile_refs",
+          "judge_prompt_template_ref",
+          "agent_role",
+          "required_capability_ids",
+          "specialist_tool_ids",
+          "data_classifications",
+          "model_policy_ref",
+          "acceptance_check_refs",
+          "max_attempts",
+          "max_model_requests",
+          "max_model_tokens",
+          "max_cost_micro_usd"
+        ],
+        "title": "GradingDesignPlanV2",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "JudgeAggregationModeV2": {
+        "enum": [
+          "WEIGHTED_SUM",
+          "ALL_CRITICAL"
+        ],
+        "title": "JudgeAggregationModeV2",
+        "type": "string"
+      },
+      "JudgeTaskMappingV2": {
+        "additionalProperties": false,
+        "properties": {
+          "criterion_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Criterion Ids",
+            "type": "array"
+          },
+          "evaluator_binding_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Evaluator Binding Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/judge-task-mapping/v2",
+            "default": "eval-factory/judge-task-mapping/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "score_weight_basis_points": {
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Score Weight Basis Points",
+            "type": "integer"
+          },
+          "task_key": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Task Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_key",
+          "criterion_ids",
+          "evaluator_binding_id",
+          "score_weight_basis_points"
+        ],
+        "title": "JudgeTaskMappingV2",
+        "type": "object"
+      },
+      "ObjectRef": {
+        "additionalProperties": false,
+        "properties": {
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "object_type": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Type",
+            "type": "string"
+          },
+          "object_version": {
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Object Version",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/object-ref/v1",
+            "default": "eval-factory/object-ref/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "object_type",
+          "object_id",
+          "object_version",
+          "object_sha256"
+        ],
+        "title": "ObjectRef",
+        "type": "object"
+      },
+      "PlanDecisionKindV2": {
+        "enum": [
+          "APPROVE",
+          "EDIT",
+          "REJECT",
+          "DEFER",
+          "REQUEST_MORE"
+        ],
+        "title": "PlanDecisionKindV2",
+        "type": "string"
+      },
+      "PlanDecisionV2": {
+        "additionalProperties": false,
+        "properties": {
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "decided_at": {
+            "format": "date-time",
+            "title": "Decided At",
+            "type": "string"
+          },
+          "decided_by": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Decided By",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/PlanDecisionKindV2"
+          },
+          "decision_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Decision Id",
+            "type": "string"
+          },
+          "expected_plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Expected Plan Version",
+            "type": "integer"
+          },
+          "idempotency_key": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "reason_code": {
+            "pattern": "^[A-Z][A-Z0-9_]{1,127}$",
+            "title": "Reason Code",
+            "type": "string"
+          },
+          "review_request_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "revision_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-decision/v2",
+            "default": "eval-factory/plan-decision/v2",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "decision_id",
+          "review_request_ref",
+          "expected_plan_version",
+          "decision",
+          "revision_ref",
+          "decided_by",
+          "reason_code",
+          "idempotency_key",
+          "decided_at"
+        ],
+        "title": "PlanDecisionV2",
+        "type": "object"
+      },
+      "PlanKindV2": {
+        "enum": [
+          "GLOBAL_BUILD",
+          "TRACE_CLEANING",
+          "TASK_REWRITE",
+          "ATTACHMENT_GENERATION",
+          "CRITERIA_RUBRIC",
+          "GRADING_DESIGN",
+          "FINAL_DELIVERY"
+        ],
+        "title": "PlanKindV2",
+        "type": "string"
+      },
+      "PlanReviewApiContractV1": {
+        "additionalProperties": false,
+        "properties": {
+          "decision_actions": {
+            "items": {
+              "$ref": "#/components/schemas/PlanDecisionKindV2"
+            },
+            "title": "Decision Actions",
+            "type": "array"
+          },
+          "principal_header": {
+            "const": "X-Eval-Factory-Principal",
+            "default": "X-Eval-Factory-Principal",
+            "title": "Principal Header",
+            "type": "string"
+          },
+          "review_states": {
+            "items": {
+              "$ref": "#/components/schemas/PlanReviewStateV2"
+            },
+            "title": "Review States",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-review-api-contract/v1",
+            "default": "eval-factory/plan-review-api-contract/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "decision_actions",
+          "review_states"
+        ],
+        "title": "PlanReviewApiContractV1",
+        "type": "object"
+      },
+      "PlanReviewPageV1": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PlanReviewViewV1"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "minimum": 0.0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-review-page/v1",
+            "default": "eval-factory/plan-review-page/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "offset",
+          "limit",
+          "total"
+        ],
+        "title": "PlanReviewPageV1",
+        "type": "object"
+      },
+      "PlanReviewPresentationV2": {
+        "additionalProperties": false,
+        "properties": {
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "editable_paths": {
+            "default": [],
+            "items": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Editable Paths",
+            "type": "array"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "plan_kind": {
+            "$ref": "#/components/schemas/PlanKindV2"
+          },
+          "plan_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "presentation_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Presentation Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-review-presentation/v2",
+            "default": "eval-factory/plan-review-presentation/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "summary_lines": {
+            "items": {
+              "maxLength": 1000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Summary Lines",
+            "type": "array"
+          },
+          "title": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "warning_codes": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Z][A-Z0-9_]{1,127}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Warning Codes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "presentation_id",
+          "plan_ref",
+          "plan_kind",
+          "title",
+          "summary_lines"
+        ],
+        "title": "PlanReviewPresentationV2",
+        "type": "object"
+      },
+      "PlanReviewRequestV2": {
+        "additionalProperties": false,
+        "properties": {
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "plan_kind": {
+            "$ref": "#/components/schemas/PlanKindV2"
+          },
+          "plan_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "presentation_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "requested_by": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Requested By",
+            "type": "string"
+          },
+          "review_request_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Review Request Id",
+            "type": "string"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-review-request/v2",
+            "default": "eval-factory/plan-review-request/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "state": {
+            "const": "PENDING_REVIEW",
+            "default": "PENDING_REVIEW",
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "review_request_id",
+          "run_ref",
+          "plan_ref",
+          "plan_kind",
+          "plan_version",
+          "presentation_ref",
+          "requested_by"
+        ],
+        "title": "PlanReviewRequestV2",
+        "type": "object"
+      },
+      "PlanReviewResultV2": {
+        "additionalProperties": false,
+        "properties": {
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "decision_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "plan_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "result_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Result Id",
+            "type": "string"
+          },
+          "resume_token_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "review_request_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-review-result/v2",
+            "default": "eval-factory/plan-review-result/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/components/schemas/PlanReviewStateV2"
+          },
+          "successor_plan_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "result_id",
+          "review_request_ref",
+          "plan_ref",
+          "plan_version",
+          "state",
+          "decision_ref",
+          "successor_plan_ref",
+          "resume_token_ref"
+        ],
+        "title": "PlanReviewResultV2",
+        "type": "object"
+      },
+      "PlanReviewStateV2": {
+        "enum": [
+          "PENDING_REVIEW",
+          "APPROVED",
+          "REJECTED",
+          "DEFERRED",
+          "REVISION_REQUESTED",
+          "SUPERSEDED",
+          "RESUMED"
+        ],
+        "title": "PlanReviewStateV2",
+        "type": "string"
+      },
+      "PlanReviewViewV1": {
+        "additionalProperties": false,
+        "properties": {
+          "current_run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanDecisionV2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "plan": {
+            "$ref": "#/components/schemas/ReviewablePlanV2"
+          },
+          "presentation": {
+            "$ref": "#/components/schemas/PlanReviewPresentationV2"
+          },
+          "request": {
+            "$ref": "#/components/schemas/PlanReviewRequestV2"
+          },
+          "result": {
+            "$ref": "#/components/schemas/PlanReviewResultV2"
+          },
+          "revision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanRevisionV2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-review-view/v1",
+            "default": "eval-factory/plan-review-view/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "current_run_ref",
+          "request",
+          "presentation",
+          "result",
+          "plan",
+          "decision",
+          "revision"
+        ],
+        "title": "PlanReviewViewV1",
+        "type": "object"
+      },
+      "PlanRevisionV2": {
+        "additionalProperties": false,
+        "properties": {
+          "audit": {
+            "$ref": "#/components/schemas/ContractAudit"
+          },
+          "base_plan_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "base_plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Base Plan Version",
+            "type": "integer"
+          },
+          "changed_paths": {
+            "items": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Changed Paths",
+            "type": "array"
+          },
+          "invalidated_object_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 100000,
+            "title": "Invalidated Object Refs",
+            "type": "array"
+          },
+          "object_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Object Id",
+            "type": "string"
+          },
+          "object_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Object Sha256",
+            "type": "string"
+          },
+          "review_request_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "revised_by": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Revised By",
+            "type": "string"
+          },
+          "revision_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Revision Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/plan-revision/v2",
+            "default": "eval-factory/plan-revision/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "successor_plan_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "successor_plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 2.0,
+            "title": "Successor Plan Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "object_id",
+          "object_sha256",
+          "audit",
+          "revision_id",
+          "review_request_ref",
+          "base_plan_ref",
+          "successor_plan_ref",
+          "base_plan_version",
+          "successor_plan_version",
+          "changed_paths",
+          "revised_by"
+        ],
+        "title": "PlanRevisionV2",
+        "type": "object"
+      },
+      "ReferenceMode": {
+        "enum": [
+          "NONE",
+          "STRUCTURED_EXPECTATIONS",
+          "PRIVATE_ANSWER",
+          "TRACE_BEHAVIOR",
+          "HUMAN_ONLY"
+        ],
+        "title": "ReferenceMode",
+        "type": "string"
+      },
+      "ReviewablePlanV2": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/DatasetBuildPlanV2"
+          },
+          {
+            "$ref": "#/components/schemas/AttachmentGenerationPlanV2"
+          },
+          {
+            "$ref": "#/components/schemas/CriteriaRubricPlanV2"
+          },
+          {
+            "$ref": "#/components/schemas/GradingDesignPlanV2"
+          },
+          {
+            "$ref": "#/components/schemas/DatasetDeliveryPlanV2"
+          }
+        ]
+      },
+      "RubricJudgedObjectKindV2": {
+        "enum": [
+          "CONTESTANT_RESPONSE",
+          "OUTPUT_ARTIFACT",
+          "WORKSPACE_STATE",
+          "TOOL_BEHAVIOR",
+          "STRUCTURED_VALUE"
+        ],
+        "title": "RubricJudgedObjectKindV2",
+        "type": "string"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "VersionBinding": {
+        "additionalProperties": false,
+        "properties": {
+          "component": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Component",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/version-binding/v1",
+            "default": "eval-factory/version-binding/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "component",
+          "version"
+        ],
+        "title": "VersionBinding",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Strict shared PlanReview API for CLI/Web HITL parity.",
+    "title": "Eval Dataset Factory Plan Console API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/plan-reviews": {
+      "get": {
+        "operationId": "list_reviews_api_plan_reviews_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "run_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Run Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PlanReviewStateV2"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "PENDING_REVIEW",
+              "title": "State"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 500,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewPageV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Reviews"
+      }
+    },
+    "/api/plan-reviews/contract": {
+      "get": {
+        "operationId": "contract_api_plan_reviews_contract_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewApiContractV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Contract"
+      }
+    },
+    "/api/plan-reviews/decision": {
+      "post": {
+        "operationId": "decide_api_plan_reviews_decision_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$defs": {
+                  "PlanDecisionKindV2": {
+                    "enum": [
+                      "APPROVE",
+                      "EDIT",
+                      "REJECT",
+                      "DEFER",
+                      "REQUEST_MORE"
+                    ],
+                    "title": "PlanDecisionKindV2",
+                    "type": "string"
+                  },
+                  "PlanReviewDecisionSubmissionV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "decided_by": {
+                        "maxLength": 256,
+                        "minLength": 3,
+                        "title": "Decided By",
+                        "type": "string"
+                      },
+                      "decision": {
+                        "$ref": "#/$defs/PlanDecisionKindV2"
+                      },
+                      "expected_plan_version": {
+                        "maximum": 1000000,
+                        "minimum": 1,
+                        "title": "Expected Plan Version",
+                        "type": "integer"
+                      },
+                      "idempotency_key": {
+                        "maxLength": 256,
+                        "minLength": 3,
+                        "title": "Idempotency Key",
+                        "type": "string"
+                      },
+                      "reason_code": {
+                        "maxLength": 128,
+                        "minLength": 1,
+                        "title": "Reason Code",
+                        "type": "string"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/plan-review-decision-submission/v1",
+                        "default": "eval-factory/plan-review-decision-submission/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "expected_plan_version",
+                      "decision",
+                      "decided_by",
+                      "reason_code",
+                      "idempotency_key"
+                    ],
+                    "title": "PlanReviewDecisionSubmissionV1",
+                    "type": "object"
+                  }
+                },
+                "additionalProperties": false,
+                "properties": {
+                  "review_id": {
+                    "title": "Review Id",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/plan-review-decision-command/v1",
+                    "default": "eval-factory/plan-review-decision-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  },
+                  "submission": {
+                    "$ref": "#/$defs/PlanReviewDecisionSubmissionV1"
+                  }
+                },
+                "required": [
+                  "review_id",
+                  "submission"
+                ],
+                "title": "PlanReviewDecisionCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewViewV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Decide"
+      }
+    },
+    "/api/plan-reviews/edit": {
+      "post": {
+        "operationId": "edit_api_plan_reviews_edit_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$defs": {
+                  "AttachmentMockWorkV2": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "acceptance_check_refs": {
+                        "items": {
+                          "$ref": "#/$defs/ObjectRef"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Acceptance Check Refs",
+                        "type": "array"
+                      },
+                      "agent_role": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Agent Role",
+                        "type": "string"
+                      },
+                      "allowed_tool_ids": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Allowed Tool Ids",
+                        "type": "array"
+                      },
+                      "artifact_group_ref": {
+                        "$ref": "#/$defs/ObjectRef"
+                      },
+                      "artifact_ids": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 100000,
+                        "minItems": 1,
+                        "title": "Artifact Ids",
+                        "type": "array"
+                      },
+                      "data_classifications": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 64,
+                        "minItems": 1,
+                        "title": "Data Classifications",
+                        "type": "array"
+                      },
+                      "data_purposes": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 64,
+                        "minItems": 1,
+                        "title": "Data Purposes",
+                        "type": "array"
+                      },
+                      "dependency_work_keys": {
+                        "default": [],
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "title": "Dependency Work Keys",
+                        "type": "array"
+                      },
+                      "input_object_types": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Input Object Types",
+                        "type": "array"
+                      },
+                      "max_attempts": {
+                        "maximum": 100,
+                        "minimum": 1,
+                        "title": "Max Attempts",
+                        "type": "integer"
+                      },
+                      "max_cost_micro_usd": {
+                        "maximum": 1000000000000,
+                        "minimum": 0,
+                        "title": "Max Cost Micro Usd",
+                        "type": "integer"
+                      },
+                      "max_model_requests": {
+                        "maximum": 1000000,
+                        "minimum": 0,
+                        "title": "Max Model Requests",
+                        "type": "integer"
+                      },
+                      "max_model_tokens": {
+                        "maximum": 1000000000,
+                        "minimum": 0,
+                        "title": "Max Model Tokens",
+                        "type": "integer"
+                      },
+                      "output_object_types": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Output Object Types",
+                        "type": "array"
+                      },
+                      "required_capability_ids": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Required Capability Ids",
+                        "type": "array"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/attachment-mock-work/v2",
+                        "default": "eval-factory/attachment-mock-work/v2",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "work_key": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Work Key",
+                        "type": "string"
+                      },
+                      "workspace_policy_ref": {
+                        "$ref": "#/$defs/ObjectRef"
+                      }
+                    },
+                    "required": [
+                      "work_key",
+                      "artifact_group_ref",
+                      "artifact_ids",
+                      "agent_role",
+                      "input_object_types",
+                      "output_object_types",
+                      "required_capability_ids",
+                      "allowed_tool_ids",
+                      "data_purposes",
+                      "data_classifications",
+                      "workspace_policy_ref",
+                      "acceptance_check_refs",
+                      "max_attempts",
+                      "max_model_requests",
+                      "max_model_tokens",
+                      "max_cost_micro_usd"
+                    ],
+                    "title": "AttachmentMockWorkV2",
+                    "type": "object"
+                  },
+                  "AttachmentPlanEditableFieldsV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "max_parallel_groups": {
+                        "maximum": 10000,
+                        "minimum": 1,
+                        "title": "Max Parallel Groups",
+                        "type": "integer"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/attachment-plan-editable-fields/v1",
+                        "default": "eval-factory/attachment-plan-editable-fields/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "works": {
+                        "items": {
+                          "$ref": "#/$defs/AttachmentMockWorkV2"
+                        },
+                        "maxItems": 100000,
+                        "minItems": 1,
+                        "title": "Works",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "works",
+                      "max_parallel_groups"
+                    ],
+                    "title": "AttachmentPlanEditableFieldsV1",
+                    "type": "object"
+                  },
+                  "CriteriaRubricGoalV2": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "allowed_tool_ids": {
+                        "default": [],
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "title": "Allowed Tool Ids",
+                        "type": "array"
+                      },
+                      "attachment_dependency_ids": {
+                        "default": [],
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 10000,
+                        "title": "Attachment Dependency Ids",
+                        "type": "array"
+                      },
+                      "evaluator_binding_id": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Evaluator Binding Id",
+                        "type": "string"
+                      },
+                      "goal_id": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Goal Id",
+                        "type": "string"
+                      },
+                      "goal_summary": {
+                        "maxLength": 1000,
+                        "minLength": 1,
+                        "title": "Goal Summary",
+                        "type": "string"
+                      },
+                      "judged_object_kind": {
+                        "$ref": "#/$defs/RubricJudgedObjectKindV2"
+                      },
+                      "prompt_requirement_ids": {
+                        "default": [],
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 10000,
+                        "title": "Prompt Requirement Ids",
+                        "type": "array"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/criteria-rubric-goal/v2",
+                        "default": "eval-factory/criteria-rubric-goal/v2",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "visibility": {
+                        "const": "EVALUATOR_ONLY",
+                        "default": "EVALUATOR_ONLY",
+                        "title": "Visibility",
+                        "type": "string"
+                      },
+                      "weight_basis_points": {
+                        "maximum": 10000,
+                        "minimum": 1,
+                        "title": "Weight Basis Points",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "goal_id",
+                      "goal_summary",
+                      "judged_object_kind",
+                      "evaluator_binding_id",
+                      "weight_basis_points"
+                    ],
+                    "title": "CriteriaRubricGoalV2",
+                    "type": "object"
+                  },
+                  "CriteriaRubricPlanEditableFieldsV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "acceptance_check_refs": {
+                        "items": {
+                          "$ref": "#/$defs/ObjectRef"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Acceptance Check Refs",
+                        "type": "array"
+                      },
+                      "allowed_evaluator_binding_ids": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 1,
+                        "title": "Allowed Evaluator Binding Ids",
+                        "type": "array"
+                      },
+                      "allowed_reference_modes": {
+                        "items": {
+                          "$ref": "#/$defs/ReferenceMode"
+                        },
+                        "maxItems": 5,
+                        "minItems": 1,
+                        "title": "Allowed Reference Modes",
+                        "type": "array"
+                      },
+                      "criterion_goals": {
+                        "items": {
+                          "$ref": "#/$defs/CriteriaRubricGoalV2"
+                        },
+                        "maxItems": 10000,
+                        "minItems": 1,
+                        "title": "Criterion Goals",
+                        "type": "array"
+                      },
+                      "max_attempts": {
+                        "maximum": 100,
+                        "minimum": 1,
+                        "title": "Max Attempts",
+                        "type": "integer"
+                      },
+                      "max_cost_micro_usd": {
+                        "maximum": 1000000000000,
+                        "minimum": 1,
+                        "title": "Max Cost Micro Usd",
+                        "type": "integer"
+                      },
+                      "max_model_requests": {
+                        "maximum": 1000000,
+                        "minimum": 1,
+                        "title": "Max Model Requests",
+                        "type": "integer"
+                      },
+                      "max_model_tokens": {
+                        "maximum": 1000000000,
+                        "minimum": 1,
+                        "title": "Max Model Tokens",
+                        "type": "integer"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/criteria-rubric-plan-editable-fields/v1",
+                        "default": "eval-factory/criteria-rubric-plan-editable-fields/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "selected_reference_mode": {
+                        "$ref": "#/$defs/ReferenceMode"
+                      }
+                    },
+                    "required": [
+                      "criterion_goals",
+                      "allowed_evaluator_binding_ids",
+                      "allowed_reference_modes",
+                      "selected_reference_mode",
+                      "acceptance_check_refs",
+                      "max_attempts",
+                      "max_model_requests",
+                      "max_model_tokens",
+                      "max_cost_micro_usd"
+                    ],
+                    "title": "CriteriaRubricPlanEditableFieldsV1",
+                    "type": "object"
+                  },
+                  "DatasetBuildPlanTaskV2": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "acceptance_check_refs": {
+                        "items": {
+                          "$ref": "#/$defs/ObjectRef"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Acceptance Check Refs",
+                        "type": "array"
+                      },
+                      "agent_role": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Agent Role",
+                        "type": "string"
+                      },
+                      "dependency_task_keys": {
+                        "default": [],
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "title": "Dependency Task Keys",
+                        "type": "array"
+                      },
+                      "input_object_types": {
+                        "default": [],
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "title": "Input Object Types",
+                        "type": "array"
+                      },
+                      "max_attempts": {
+                        "maximum": 100,
+                        "minimum": 1,
+                        "title": "Max Attempts",
+                        "type": "integer"
+                      },
+                      "max_cost_micro_usd": {
+                        "maximum": 1000000000000,
+                        "minimum": 0,
+                        "title": "Max Cost Micro Usd",
+                        "type": "integer"
+                      },
+                      "max_model_requests": {
+                        "maximum": 1000000,
+                        "minimum": 0,
+                        "title": "Max Model Requests",
+                        "type": "integer"
+                      },
+                      "max_model_tokens": {
+                        "maximum": 1000000000,
+                        "minimum": 0,
+                        "title": "Max Model Tokens",
+                        "type": "integer"
+                      },
+                      "output_object_types": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Output Object Types",
+                        "type": "array"
+                      },
+                      "plan_review_kind": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/PlanKindV2"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "required_capability_ids": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Required Capability Ids",
+                        "type": "array"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/dataset-build-plan-task/v2",
+                        "default": "eval-factory/dataset-build-plan-task/v2",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "stage": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Stage",
+                        "type": "string"
+                      },
+                      "task_key": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Task Key",
+                        "type": "string"
+                      },
+                      "task_kind": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Task Kind",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "task_key",
+                      "stage",
+                      "task_kind",
+                      "agent_role",
+                      "output_object_types",
+                      "required_capability_ids",
+                      "acceptance_check_refs",
+                      "max_attempts",
+                      "max_model_requests",
+                      "max_model_tokens",
+                      "max_cost_micro_usd"
+                    ],
+                    "title": "DatasetBuildPlanTaskV2",
+                    "type": "object"
+                  },
+                  "DatasetDeliveryPlanEditableFieldsV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "max_files": {
+                        "maximum": 10000000,
+                        "minimum": 1,
+                        "title": "Max Files",
+                        "type": "integer"
+                      },
+                      "max_total_bytes": {
+                        "maximum": 10000000000000,
+                        "minimum": 1,
+                        "title": "Max Total Bytes",
+                        "type": "integer"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/dataset-delivery-plan-editable-fields/v1",
+                        "default": "eval-factory/dataset-delivery-plan-editable-fields/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "max_files",
+                      "max_total_bytes"
+                    ],
+                    "title": "DatasetDeliveryPlanEditableFieldsV1",
+                    "type": "object"
+                  },
+                  "GlobalPlanEditableFieldsV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "assumptions": {
+                        "default": [],
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "title": "Assumptions",
+                        "type": "array"
+                      },
+                      "goals": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 128,
+                        "minItems": 1,
+                        "title": "Goals",
+                        "type": "array"
+                      },
+                      "required_review_kinds": {
+                        "default": [],
+                        "items": {
+                          "$ref": "#/$defs/PlanKindV2"
+                        },
+                        "maxItems": 7,
+                        "title": "Required Review Kinds",
+                        "type": "array"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/global-plan-editable-fields/v1",
+                        "default": "eval-factory/global-plan-editable-fields/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "stage_order": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 64,
+                        "minItems": 1,
+                        "title": "Stage Order",
+                        "type": "array"
+                      },
+                      "tasks": {
+                        "items": {
+                          "$ref": "#/$defs/DatasetBuildPlanTaskV2"
+                        },
+                        "maxItems": 100000,
+                        "minItems": 1,
+                        "title": "Tasks",
+                        "type": "array"
+                      },
+                      "total_cost_micro_usd": {
+                        "maximum": 10000000000000,
+                        "minimum": 0,
+                        "title": "Total Cost Micro Usd",
+                        "type": "integer"
+                      },
+                      "total_model_requests": {
+                        "maximum": 10000000,
+                        "minimum": 0,
+                        "title": "Total Model Requests",
+                        "type": "integer"
+                      },
+                      "total_model_tokens": {
+                        "maximum": 10000000000,
+                        "minimum": 0,
+                        "title": "Total Model Tokens",
+                        "type": "integer"
+                      },
+                      "unresolved_questions": {
+                        "default": [],
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "title": "Unresolved Questions",
+                        "type": "array"
+                      },
+                      "user_constraints": {
+                        "default": [],
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "title": "User Constraints",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "goals",
+                      "stage_order",
+                      "tasks",
+                      "total_model_requests",
+                      "total_model_tokens",
+                      "total_cost_micro_usd"
+                    ],
+                    "title": "GlobalPlanEditableFieldsV1",
+                    "type": "object"
+                  },
+                  "GradingDesignPlanEditableFieldsV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "acceptance_check_refs": {
+                        "items": {
+                          "$ref": "#/$defs/ObjectRef"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Acceptance Check Refs",
+                        "type": "array"
+                      },
+                      "aggregation_mode": {
+                        "$ref": "#/$defs/JudgeAggregationModeV2"
+                      },
+                      "allowed_judge_model_profile_refs": {
+                        "items": {
+                          "$ref": "#/$defs/ObjectRef"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 1,
+                        "title": "Allowed Judge Model Profile Refs",
+                        "type": "array"
+                      },
+                      "escalate_on_reference_unavailable": {
+                        "title": "Escalate On Reference Unavailable",
+                        "type": "boolean"
+                      },
+                      "judge_tasks": {
+                        "items": {
+                          "$ref": "#/$defs/JudgeTaskMappingV2"
+                        },
+                        "maxItems": 10000,
+                        "minItems": 1,
+                        "title": "Judge Tasks",
+                        "type": "array"
+                      },
+                      "max_attempts": {
+                        "maximum": 100,
+                        "minimum": 1,
+                        "title": "Max Attempts",
+                        "type": "integer"
+                      },
+                      "max_cost_micro_usd": {
+                        "maximum": 1000000000000,
+                        "minimum": 1,
+                        "title": "Max Cost Micro Usd",
+                        "type": "integer"
+                      },
+                      "max_model_requests": {
+                        "maximum": 1000000,
+                        "minimum": 1,
+                        "title": "Max Model Requests",
+                        "type": "integer"
+                      },
+                      "max_model_tokens": {
+                        "maximum": 1000000000,
+                        "minimum": 1,
+                        "title": "Max Model Tokens",
+                        "type": "integer"
+                      },
+                      "minimum_confidence_basis_points": {
+                        "maximum": 10000,
+                        "minimum": 0,
+                        "title": "Minimum Confidence Basis Points",
+                        "type": "integer"
+                      },
+                      "passing_score_basis_points": {
+                        "maximum": 10000,
+                        "minimum": 1,
+                        "title": "Passing Score Basis Points",
+                        "type": "integer"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/grading-design-plan-editable-fields/v1",
+                        "default": "eval-factory/grading-design-plan-editable-fields/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "judge_tasks",
+                      "aggregation_mode",
+                      "passing_score_basis_points",
+                      "minimum_confidence_basis_points",
+                      "escalate_on_reference_unavailable",
+                      "allowed_judge_model_profile_refs",
+                      "acceptance_check_refs",
+                      "max_attempts",
+                      "max_model_requests",
+                      "max_model_tokens",
+                      "max_cost_micro_usd"
+                    ],
+                    "title": "GradingDesignPlanEditableFieldsV1",
+                    "type": "object"
+                  },
+                  "JudgeAggregationModeV2": {
+                    "enum": [
+                      "WEIGHTED_SUM",
+                      "ALL_CRITICAL"
+                    ],
+                    "title": "JudgeAggregationModeV2",
+                    "type": "string"
+                  },
+                  "JudgeTaskMappingV2": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "criterion_ids": {
+                        "items": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "type": "string"
+                        },
+                        "maxItems": 10000,
+                        "minItems": 1,
+                        "title": "Criterion Ids",
+                        "type": "array"
+                      },
+                      "evaluator_binding_id": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Evaluator Binding Id",
+                        "type": "string"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/judge-task-mapping/v2",
+                        "default": "eval-factory/judge-task-mapping/v2",
+                        "title": "Schema Version",
+                        "type": "string"
+                      },
+                      "score_weight_basis_points": {
+                        "maximum": 10000,
+                        "minimum": 1,
+                        "title": "Score Weight Basis Points",
+                        "type": "integer"
+                      },
+                      "task_key": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Task Key",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "task_key",
+                      "criterion_ids",
+                      "evaluator_binding_id",
+                      "score_weight_basis_points"
+                    ],
+                    "title": "JudgeTaskMappingV2",
+                    "type": "object"
+                  },
+                  "ObjectRef": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "object_id": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Object Id",
+                        "type": "string"
+                      },
+                      "object_sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "title": "Object Sha256",
+                        "type": "string"
+                      },
+                      "object_type": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Object Type",
+                        "type": "string"
+                      },
+                      "object_version": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "title": "Object Version",
+                        "type": "string"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/object-ref/v1",
+                        "default": "eval-factory/object-ref/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "object_type",
+                      "object_id",
+                      "object_version",
+                      "object_sha256"
+                    ],
+                    "title": "ObjectRef",
+                    "type": "object"
+                  },
+                  "PlanKindV2": {
+                    "enum": [
+                      "GLOBAL_BUILD",
+                      "TRACE_CLEANING",
+                      "TASK_REWRITE",
+                      "ATTACHMENT_GENERATION",
+                      "CRITERIA_RUBRIC",
+                      "GRADING_DESIGN",
+                      "FINAL_DELIVERY"
+                    ],
+                    "title": "PlanKindV2",
+                    "type": "string"
+                  },
+                  "PlanReviewEditPayloadV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "changed_paths": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 256,
+                        "minItems": 1,
+                        "title": "Changed Paths",
+                        "type": "array"
+                      },
+                      "decided_by": {
+                        "maxLength": 256,
+                        "minLength": 3,
+                        "title": "Decided By",
+                        "type": "string"
+                      },
+                      "edited_plan": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/GlobalPlanEditableFieldsV1"
+                          },
+                          {
+                            "$ref": "#/$defs/AttachmentPlanEditableFieldsV1"
+                          },
+                          {
+                            "$ref": "#/$defs/CriteriaRubricPlanEditableFieldsV1"
+                          },
+                          {
+                            "$ref": "#/$defs/DatasetDeliveryPlanEditableFieldsV1"
+                          },
+                          {
+                            "$ref": "#/$defs/GradingDesignPlanEditableFieldsV1"
+                          }
+                        ],
+                        "title": "Edited Plan"
+                      },
+                      "expected_plan_version": {
+                        "maximum": 1000000,
+                        "minimum": 1,
+                        "title": "Expected Plan Version",
+                        "type": "integer"
+                      },
+                      "idempotency_key": {
+                        "maxLength": 256,
+                        "minLength": 3,
+                        "title": "Idempotency Key",
+                        "type": "string"
+                      },
+                      "invalidated_object_refs": {
+                        "default": [],
+                        "items": {
+                          "$ref": "#/$defs/ObjectRef"
+                        },
+                        "maxItems": 100000,
+                        "title": "Invalidated Object Refs",
+                        "type": "array"
+                      },
+                      "reason_code": {
+                        "maxLength": 128,
+                        "minLength": 1,
+                        "title": "Reason Code",
+                        "type": "string"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/plan-review-edit-payload/v1",
+                        "default": "eval-factory/plan-review-edit-payload/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "expected_plan_version",
+                      "edited_plan",
+                      "changed_paths",
+                      "decided_by",
+                      "reason_code",
+                      "idempotency_key"
+                    ],
+                    "title": "PlanReviewEditPayloadV1",
+                    "type": "object"
+                  },
+                  "ReferenceMode": {
+                    "enum": [
+                      "NONE",
+                      "STRUCTURED_EXPECTATIONS",
+                      "PRIVATE_ANSWER",
+                      "TRACE_BEHAVIOR",
+                      "HUMAN_ONLY"
+                    ],
+                    "title": "ReferenceMode",
+                    "type": "string"
+                  },
+                  "RubricJudgedObjectKindV2": {
+                    "enum": [
+                      "CONTESTANT_RESPONSE",
+                      "OUTPUT_ARTIFACT",
+                      "WORKSPACE_STATE",
+                      "TOOL_BEHAVIOR",
+                      "STRUCTURED_VALUE"
+                    ],
+                    "title": "RubricJudgedObjectKindV2",
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "properties": {
+                  "review_id": {
+                    "title": "Review Id",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/plan-review-edit-command/v1",
+                    "default": "eval-factory/plan-review-edit-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  },
+                  "submission": {
+                    "$ref": "#/$defs/PlanReviewEditPayloadV1"
+                  }
+                },
+                "required": [
+                  "review_id",
+                  "submission"
+                ],
+                "title": "PlanReviewEditCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewViewV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Edit"
+      }
+    },
+    "/api/plan-reviews/export": {
+      "get": {
+        "operationId": "export_api_plan_reviews_export_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "review_id",
+            "required": true,
+            "schema": {
+              "title": "Review Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewViewV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Export"
+      }
+    },
+    "/api/plan-reviews/resume": {
+      "post": {
+        "operationId": "resume_api_plan_reviews_resume_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$defs": {
+                  "PlanReviewResumeSubmissionV1": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "expected_plan_version": {
+                        "maximum": 1000000,
+                        "minimum": 1,
+                        "title": "Expected Plan Version",
+                        "type": "integer"
+                      },
+                      "idempotency_key": {
+                        "maxLength": 256,
+                        "minLength": 3,
+                        "title": "Idempotency Key",
+                        "type": "string"
+                      },
+                      "resumed_by": {
+                        "maxLength": 256,
+                        "minLength": 3,
+                        "title": "Resumed By",
+                        "type": "string"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/plan-review-resume-submission/v1",
+                        "default": "eval-factory/plan-review-resume-submission/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "expected_plan_version",
+                      "resumed_by",
+                      "idempotency_key"
+                    ],
+                    "title": "PlanReviewResumeSubmissionV1",
+                    "type": "object"
+                  }
+                },
+                "additionalProperties": false,
+                "properties": {
+                  "review_id": {
+                    "title": "Review Id",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/plan-review-resume-command/v1",
+                    "default": "eval-factory/plan-review-resume-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  },
+                  "submission": {
+                    "$ref": "#/$defs/PlanReviewResumeSubmissionV1"
+                  }
+                },
+                "required": [
+                  "review_id",
+                  "submission"
+                ],
+                "title": "PlanReviewResumeCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewViewV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Resume"
+      }
+    },
+    "/api/plan-reviews/show": {
+      "get": {
+        "operationId": "show_api_plan_reviews_show_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "review_id",
+            "required": true,
+            "schema": {
+              "title": "Review Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReviewViewV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Show"
+      }
+    }
+  }
+}

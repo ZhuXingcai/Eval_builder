@@ -1,0 +1,86 @@
+{
+  "schema_version": "eval-factory/r7-09-lh-nonproduction-publication-gold/v1",
+  "claim_scope": "NONPRODUCTION_ONLY",
+  "policy_version": "release-publication/r7-09-v1",
+  "cases": [
+    {
+      "case_id": "lh-default-query-inclusion",
+      "channel": "CANARY",
+      "query_authority": "PROFILE_DEFAULT",
+      "expected_outcome": "PUBLISHED",
+      "query_yaml_included": true
+    },
+    {
+      "case_id": "lh-explicit-query-inclusion",
+      "channel": "INTERNAL_REVIEW",
+      "query_authority": "ACCEPTED_INCLUDE_QUERY_YAML",
+      "expected_outcome": "PUBLISHED",
+      "query_yaml_included": true
+    },
+    {
+      "case_id": "lh-query-omit-blocked",
+      "channel": "CANARY",
+      "query_authority": "OMIT_QUERY_YAML",
+      "expected_outcome": "BLOCKED_POLICY"
+    },
+    {
+      "case_id": "lh-query-ask-per-task-blocked",
+      "channel": "CANARY",
+      "query_authority": "ASK_PER_TASK",
+      "expected_outcome": "BLOCKED_POLICY"
+    },
+    {
+      "case_id": "mixed-approved-rejected-partition",
+      "channel": "CANARY",
+      "expected_outcome": "PUBLISHED",
+      "approved_item_count": 1,
+      "rejected_item_count": 1
+    },
+    {
+      "case_id": "stale-approved-source",
+      "channel": "CANARY",
+      "expected_outcome": "BLOCKED_STALE_AUTHORITY"
+    },
+    {
+      "case_id": "bundle-hash-drift",
+      "channel": "CANARY",
+      "expected_outcome": "BLOCKED_INTEGRITY"
+    },
+    {
+      "case_id": "registry-namespace-drift",
+      "channel": "INTERNAL_REVIEW",
+      "expected_outcome": "BLOCKED_INTEGRITY"
+    },
+    {
+      "case_id": "exact-idempotent-replay",
+      "channel": "CANARY",
+      "expected_outcome": "REPLAYED"
+    },
+    {
+      "case_id": "changed-idempotency-request",
+      "channel": "CANARY",
+      "expected_outcome": "IDEMPOTENCY_CONFLICT"
+    },
+    {
+      "case_id": "projection-rebuild",
+      "channel": "CANARY",
+      "expected_outcome": "REBUILT"
+    },
+    {
+      "case_id": "generic-profile-blocked",
+      "channel": "CANARY",
+      "expected_outcome": "BLOCKED_PROFILE"
+    },
+    {
+      "case_id": "production-channel-blocked",
+      "channel": "PRODUCTION",
+      "expected_outcome": "BLOCKED_PRODUCTION"
+    }
+  ],
+  "forbidden_authority": [
+    "ATTESTATION",
+    "GENERIC_FALLBACK",
+    "PRODUCTION_REGISTRY",
+    "REVOCATION"
+  ]
+}

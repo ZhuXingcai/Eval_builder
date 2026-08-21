@@ -1,0 +1,120 @@
+{
+  "schema_version": "eval-factory-gold/r8-07-production-readiness-review-v1",
+  "policy_version": "production-readiness-review/r8-07-v1",
+  "evidence_classes": [
+    "PRODUCTION_ORGANIZATION_REVIEW",
+    "MECHANISM_VALIDATION_ONLY",
+    "REPOSITORY_PENDING_ONLY"
+  ],
+  "required_domains": [
+    "SECURITY",
+    "PRIVACY",
+    "RELEASE_PERMISSION",
+    "OPERATIONS_SLO"
+  ],
+  "operations_slo_metrics": [
+    "THROUGHPUT_MILLIJOBS_PER_SECOND",
+    "P50_LATENCY_MICROSECONDS",
+    "P95_LATENCY_MICROSECONDS",
+    "MODEL_REQUESTS_PER_JOB_MILLI",
+    "COST_MICRO_USD_PER_JOB",
+    "QUEUE_WAIT_P95_MICROSECONDS",
+    "ERROR_RATE_BASIS_POINTS",
+    "RESUME_SUCCESS_BASIS_POINTS"
+  ],
+  "accepted_predecessors": {
+    "r8_02_report_sha256": "f5b6f5f6cab238f9c7a34196a06769393bbd4da6db75424c5dc43d34a98a58a7",
+    "r8_03_report_sha256": "375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f",
+    "r8_04_report_sha256": "730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f",
+    "r8_06_report_sha256": "842c375004468b7258ef5750ca39e778ec9a0be363e3729c74044b35c24b74a7"
+  },
+  "repository_pending": {
+    "repository_evidence_sha256": "60f0652872f8b30cb78148e349f5c3ac89ccb2bba8206dfe8f3e0c7edcfb69ca",
+    "policy_sha256": "c157f156d397589e2c1b5a479aad00ace498c76d4744d44214af3875535a3437",
+    "accepted_report_sha256": "659eed1f5157d18b8ffce7b3624eba01ee2f7f93fddb7d873073726cb96f4fa5",
+    "expected_outcome": "APPROVALS_PENDING",
+    "approved_domain_count": 0,
+    "pending_domain_count": 4,
+    "rejected_domain_count": 0,
+    "satisfies_sc_013": false,
+    "authorizes_attestation": false,
+    "authorizes_production_release": false,
+    "private_and_public_store_file_count": 7,
+    "private_and_public_store_bytes": 17291,
+    "exact_replay": "UNCHANGED",
+    "external_verification_count": 0,
+    "model_or_provider_execution_count": 0
+  },
+  "cases": [
+    {
+      "case_id": "synthetic-four-domain-approved",
+      "expected_outcome": "APPROVED",
+      "evidence_class": "MECHANISM_VALIDATION_ONLY",
+      "satisfies_sc_013": false
+    },
+    {
+      "case_id": "synthetic-production-authority-approved",
+      "expected_outcome": "APPROVED",
+      "evidence_class": "PRODUCTION_ORGANIZATION_REVIEW",
+      "satisfies_sc_013": true
+    },
+    {
+      "case_id": "missing-privacy-approval",
+      "expected_outcome": "APPROVALS_PENDING",
+      "expected_reason": "APPROVAL_MISSING"
+    },
+    {
+      "case_id": "expired-security-approval",
+      "expected_outcome": "APPROVALS_PENDING",
+      "expected_reason": "APPROVAL_EXPIRED"
+    },
+    {
+      "case_id": "trusted-release-rejection",
+      "expected_outcome": "REJECTED",
+      "expected_reason": "TRUSTED_REJECTION"
+    },
+    {
+      "case_id": "operations-slo-threshold-miss",
+      "expected_outcome": "REJECTED",
+      "expected_reason": "OPERATIONS_SLO_THRESHOLD_NOT_MET"
+    },
+    {
+      "case_id": "operations-slo-incomplete",
+      "expected_outcome": "APPROVALS_PENDING",
+      "expected_reason": "OPERATIONS_SLO_EVIDENCE_INCOMPLETE"
+    },
+    {
+      "case_id": "project-owner-self-sign",
+      "expected_error": "AUTHORIZATION_ERROR"
+    },
+    {
+      "case_id": "changed-series-version-request",
+      "expected_error": "POLICY_ERROR"
+    },
+    {
+      "case_id": "exact-accepted-replay",
+      "expected_report": "ORIGINAL_REPORT",
+      "expected_additional_files": 0,
+      "expected_additional_external_verifications": 0
+    }
+  ],
+  "forbidden_surface": [
+    "authority principal",
+    "approver identity",
+    "signature or registry proof value",
+    "organization contact",
+    "approval reason text",
+    "incident route contact",
+    "private object reference",
+    "raw SLO sample",
+    "physical path",
+    "credential",
+    "raw trace or member identity",
+    "private reference",
+    "model payload",
+    "original final output",
+    "grader rule",
+    "hidden condition",
+    "caught exception text"
+  ]
+}

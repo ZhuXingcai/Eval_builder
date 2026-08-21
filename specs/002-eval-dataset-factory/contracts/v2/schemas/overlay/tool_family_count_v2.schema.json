@@ -1,0 +1,37 @@
+{
+  "$defs": {
+    "ToolFamilyV2": {
+      "enum": [
+        "FILE",
+        "SHELL",
+        "SEARCH",
+        "FETCH",
+        "RENDERER",
+        "OTHER"
+      ],
+      "title": "ToolFamilyV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/tool_family_count_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "calls": {
+      "minimum": 1,
+      "title": "Calls",
+      "type": "integer"
+    },
+    "tool_family": {
+      "$ref": "#/$defs/ToolFamilyV2"
+    }
+  },
+  "required": [
+    "tool_family",
+    "calls"
+  ],
+  "title": "ToolFamilyCountV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.telemetry_v2.ToolFamilyCountV2"
+}

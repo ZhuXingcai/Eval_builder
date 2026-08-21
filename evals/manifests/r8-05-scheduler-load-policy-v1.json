@@ -1,0 +1,53 @@
+{
+  "schema_version": "eval-factory/scheduler-load-policy/v2",
+  "policy_id": "scheduler-load-policy://sha256/a8536ad59a45c0881d56cf0c78d04279ee205654cb052490d17b96cdab067972",
+  "workload_seed": "scheduler-load/r8-05-v1",
+  "required_job_count": 1000,
+  "worker_count": 1,
+  "requested_stages": [
+    "trace_index"
+  ],
+  "require_fault_per_job": true,
+  "require_resume_success": true,
+  "require_exact_replay": true,
+  "max_unexpected_retries": 0,
+  "required_stage_results_per_job": 1,
+  "required_attempt_metrics_per_job": 1,
+  "fault_points": [
+    "AFTER_JOB_CREATE",
+    "AFTER_WORK_GRAPH_CREATE",
+    "AFTER_JOB_START",
+    "AFTER_READINESS_RECORD",
+    "AFTER_CONTROL_POLICY_BIND",
+    "AFTER_LEASE_ACQUIRE",
+    "AFTER_STAGE_COMPLETION",
+    "AFTER_OBSERVABILITY_REFRESH"
+  ],
+  "plan_policy_version": "dataset-job-stage-policy/r6-01-v1",
+  "work_graph_policy_version": "dataset-work-graph/r6-02-v1",
+  "work_control_policy_version": "work-control/r6-05-v1",
+  "observability_policy_version": "batch-observability/r6-06-v1",
+  "lease_duration_seconds": 300,
+  "heartbeat_extension_seconds": 60,
+  "max_attempts": 1,
+  "retry_delay_seconds": [],
+  "retry_lease_expiry": false,
+  "max_private_bytes": 100000000,
+  "max_report_bytes": 100000000,
+  "policy_version": "scheduler-load/r8-05-v1",
+  "policy_sha256": "a8536ad59a45c0881d56cf0c78d04279ee205654cb052490d17b96cdab067972",
+  "audit": {
+    "schema_version": "eval-factory/contract-audit/v1",
+    "created_at": "2026-08-02T00:00:00Z",
+    "created_by": "r8-05-scheduler-load",
+    "governing_versions": [
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "scheduler-load",
+        "version": "scheduler-load/r8-05-v1",
+        "sha256": null
+      }
+    ],
+    "input_refs": []
+  }
+}

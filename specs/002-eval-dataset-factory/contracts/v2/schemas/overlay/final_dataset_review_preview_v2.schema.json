@@ -1,0 +1,275 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "FinalReviewScope": {
+      "enum": [
+        "NONE",
+        "PROMPTS",
+        "SELECTED_ITEMS",
+        "FULL_DATASET"
+      ],
+      "title": "FinalReviewScope",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/final_dataset_review_preview_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "automated_hard_gates_passed": {
+      "const": true,
+      "default": true,
+      "title": "Automated Hard Gates Passed",
+      "type": "boolean"
+    },
+    "dataset_projection_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "open_low_severity_finding_count": {
+      "minimum": 0,
+      "title": "Open Low Severity Finding Count",
+      "type": "integer"
+    },
+    "open_low_severity_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Open Low Severity Finding Refs",
+      "type": "array"
+    },
+    "preview_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Preview Id",
+      "type": "string"
+    },
+    "preview_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Preview Sha256",
+      "type": "string"
+    },
+    "projection_policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Projection Policy Version",
+      "type": "string"
+    },
+    "prompt_count": {
+      "minimum": 0,
+      "title": "Prompt Count",
+      "type": "integer"
+    },
+    "prompt_projection_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Prompt Projection Refs",
+      "type": "array"
+    },
+    "quality_summary_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Quality Summary Refs",
+      "type": "array"
+    },
+    "sample_navigation_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Sample Navigation Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/final-dataset-review-preview/v2",
+      "default": "eval-factory/final-dataset-review-preview/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/FinalReviewScope"
+    },
+    "selected_item_count": {
+      "minimum": 0,
+      "title": "Selected Item Count",
+      "type": "integer"
+    },
+    "selected_item_projection_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Selected Item Projection Refs",
+      "type": "array"
+    },
+    "subject_count": {
+      "minimum": 1,
+      "title": "Subject Count",
+      "type": "integer"
+    },
+    "subject_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Subject Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "preview_id",
+    "scope",
+    "subject_refs",
+    "quality_summary_refs",
+    "subject_count",
+    "prompt_count",
+    "selected_item_count",
+    "open_low_severity_finding_count",
+    "projection_policy_version",
+    "preview_sha256",
+    "audit"
+  ],
+  "title": "FinalDatasetReviewPreviewV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.approval_v2.FinalDatasetReviewPreviewV2",
+  "x-schema-version": "eval-factory/final-dataset-review-preview/v2"
+}

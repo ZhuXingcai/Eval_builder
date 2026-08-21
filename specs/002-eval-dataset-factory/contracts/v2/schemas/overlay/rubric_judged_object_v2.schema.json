@@ -1,0 +1,50 @@
+{
+  "$defs": {
+    "RubricJudgedObjectKindV2": {
+      "enum": [
+        "CONTESTANT_RESPONSE",
+        "OUTPUT_ARTIFACT",
+        "WORKSPACE_STATE",
+        "TOOL_BEHAVIOR",
+        "STRUCTURED_VALUE"
+      ],
+      "title": "RubricJudgedObjectKindV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/rubric_judged_object_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "judged_object_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Judged Object Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/RubricJudgedObjectKindV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/rubric-judged-object/v2",
+      "default": "eval-factory/rubric-judged-object/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "judged_object_id",
+    "kind",
+    "description"
+  ],
+  "title": "RubricJudgedObjectV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.RubricJudgedObjectV2",
+  "x-schema-version": "eval-factory/rubric-judged-object/v2"
+}

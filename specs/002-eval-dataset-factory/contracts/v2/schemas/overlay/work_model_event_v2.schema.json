@@ -1,0 +1,356 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ModelUsageSourceV2": {
+      "enum": [
+        "REPORTED",
+        "CONSERVATIVE_ALLOWANCE"
+      ],
+      "title": "ModelUsageSourceV2",
+      "type": "string"
+    },
+    "ModelUsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_creation_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Creation Input Tokens",
+          "type": "integer"
+        },
+        "cache_read_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Input Tokens",
+          "type": "integer"
+        },
+        "charged_tokens": {
+          "minimum": 0,
+          "title": "Charged Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "policy_version": {
+          "const": "model-control/r6-03-v1",
+          "default": "model-control/r6-03-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "requests": {
+          "minimum": 0,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/model-usage/v2",
+          "default": "eval-factory/model-usage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ModelUsageSourceV2"
+        }
+      },
+      "required": [
+        "requests",
+        "input_tokens",
+        "output_tokens",
+        "cache_creation_input_tokens",
+        "cache_read_input_tokens",
+        "charged_tokens",
+        "source"
+      ],
+      "title": "ModelUsageV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    },
+    "WorkModelEventKindV2": {
+      "enum": [
+        "ADMITTED",
+        "COMPLETED_RELEASED",
+        "BACKPRESSURED_RELEASED",
+        "USAGE_OVERRUN_RELEASED",
+        "RELEASE_PENDING_ACK",
+        "ACKNOWLEDGED_RELEASED",
+        "QUARANTINED"
+      ],
+      "title": "WorkModelEventKindV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/work_model_event_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "blocked_until": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blocked Until"
+    },
+    "bucket_version": {
+      "minimum": 1,
+      "title": "Bucket Version",
+      "type": "integer"
+    },
+    "effective_at": {
+      "format": "date-time",
+      "title": "Effective At",
+      "type": "string"
+    },
+    "event_kind": {
+      "$ref": "#/$defs/WorkModelEventKindV2"
+    },
+    "model_cancellation_request_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "model_cancellation_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "policy_version": {
+      "const": "model-control/r6-03-v1",
+      "default": "model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "provider_backpressure_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "refunded_request_allowance": {
+      "minimum": 0,
+      "title": "Refunded Request Allowance",
+      "type": "integer"
+    },
+    "refunded_token_allowance": {
+      "minimum": 0,
+      "title": "Refunded Token Allowance",
+      "type": "integer"
+    },
+    "released_concurrency": {
+      "minimum": 0,
+      "title": "Released Concurrency",
+      "type": "integer"
+    },
+    "reservation_version": {
+      "minimum": 0,
+      "title": "Reservation Version",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/work-model-event/v2",
+      "default": "eval-factory/work-model-event/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "usage": {
+      "$ref": "#/$defs/ModelUsageV2"
+    },
+    "work_lease_event_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "work_model_event_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Work Model Event Id",
+      "type": "string"
+    },
+    "work_model_event_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Model Event Sha256",
+      "type": "string"
+    },
+    "work_model_reservation_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "work_model_event_id",
+    "work_model_reservation_ref",
+    "event_kind",
+    "reservation_version",
+    "bucket_version",
+    "effective_at",
+    "usage",
+    "refunded_request_allowance",
+    "refunded_token_allowance",
+    "released_concurrency",
+    "work_model_event_sha256",
+    "audit"
+  ],
+  "title": "WorkModelEventV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.model_control_v2.WorkModelEventV2",
+  "x-schema-version": "eval-factory/work-model-event/v2"
+}

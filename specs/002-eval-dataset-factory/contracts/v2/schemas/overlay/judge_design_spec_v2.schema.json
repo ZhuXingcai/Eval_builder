@@ -1,0 +1,351 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "JudgeAggregationModeV2": {
+      "enum": [
+        "WEIGHTED_SUM",
+        "ALL_CRITICAL"
+      ],
+      "title": "JudgeAggregationModeV2",
+      "type": "string"
+    },
+    "JudgeTaskMappingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "criterion_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "maxItems": 10000,
+          "minItems": 1,
+          "title": "Criterion Ids",
+          "type": "array"
+        },
+        "evaluator_binding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evaluator Binding Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/judge-task-mapping/v2",
+          "default": "eval-factory/judge-task-mapping/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "score_weight_basis_points": {
+          "maximum": 10000,
+          "minimum": 1,
+          "title": "Score Weight Basis Points",
+          "type": "integer"
+        },
+        "task_key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Task Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_key",
+        "criterion_ids",
+        "evaluator_binding_id",
+        "score_weight_basis_points"
+      ],
+      "title": "JudgeTaskMappingV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/judge_design_spec_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "aggregation_mode": {
+      "$ref": "#/$defs/JudgeAggregationModeV2"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "criteria_rubric_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "design_spec_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Design Spec Id",
+      "type": "string"
+    },
+    "escalate_on_reference_unavailable": {
+      "title": "Escalate On Reference Unavailable",
+      "type": "boolean"
+    },
+    "evaluator_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "gateway_invocation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "gateway_receipt_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "generator_model_profile_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "judge_input_schema_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "judge_output_schema_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "judge_tasks": {
+      "items": {
+        "$ref": "#/$defs/JudgeTaskMappingV2"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "title": "Judge Tasks",
+      "type": "array"
+    },
+    "minimum_confidence_basis_points": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Minimum Confidence Basis Points",
+      "type": "integer"
+    },
+    "object_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Object Id",
+      "type": "string"
+    },
+    "object_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Object Sha256",
+      "type": "string"
+    },
+    "passing_score_basis_points": {
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Passing Score Basis Points",
+      "type": "integer"
+    },
+    "plan_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "judge-design/v1",
+      "default": "judge-design/v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "private_material_inventory_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Private Material Inventory Sha256",
+      "type": "string"
+    },
+    "prompt_rendering_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "prompt_template_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "proposal_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reference_grant_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 10000,
+      "title": "Reference Grant Refs",
+      "type": "array"
+    },
+    "reference_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "required_output_fields": {
+      "items": {
+        "pattern": "^[A-Z][A-Z0-9_]{1,127}$",
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 4,
+      "title": "Required Output Fields",
+      "type": "array"
+    },
+    "route_decision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "rubric_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/judge-design-spec/v2",
+      "default": "eval-factory/judge-design-spec/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_judge_model_profile_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "tool_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "object_id",
+    "object_sha256",
+    "audit",
+    "design_spec_id",
+    "plan_ref",
+    "criteria_rubric_result_ref",
+    "rubric_set_ref",
+    "evaluator_spec_ref",
+    "reference_policy_ref",
+    "tool_policy_ref",
+    "prompt_template_ref",
+    "prompt_rendering_ref",
+    "route_decision_ref",
+    "gateway_receipt_ref",
+    "gateway_invocation_result_ref",
+    "proposal_ref",
+    "selected_judge_model_profile_ref",
+    "generator_model_profile_ref",
+    "judge_tasks",
+    "aggregation_mode",
+    "passing_score_basis_points",
+    "minimum_confidence_basis_points",
+    "escalate_on_reference_unavailable",
+    "judge_input_schema_ref",
+    "judge_output_schema_ref",
+    "required_output_fields",
+    "private_material_inventory_sha256"
+  ],
+  "title": "JudgeDesignSpecV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.agent_system_v2.JudgeDesignSpecV2",
+  "x-schema-version": "eval-factory/judge-design-spec/v2"
+}

@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "EnvironmentStrategyChoice": {
+      "enum": [
+        "TRACE_FAITHFUL_MOCK",
+        "REWRITE_STANDARD_ENV",
+        "EXCLUDE_TASK"
+      ],
+      "title": "EnvironmentStrategyChoice",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/environment_alternative.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "blocking_reason": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blocking Reason"
+    },
+    "capability_impact": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Capability Impact",
+      "type": "string"
+    },
+    "feasible": {
+      "title": "Feasible",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/environment-alternative/v2",
+      "default": "eval-factory/environment-alternative/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "strategy": {
+      "$ref": "#/$defs/EnvironmentStrategyChoice"
+    }
+  },
+  "required": [
+    "strategy",
+    "feasible",
+    "capability_impact"
+  ],
+  "title": "EnvironmentAlternative",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.approval.EnvironmentAlternative",
+  "x-schema-version": "eval-factory/environment-alternative/v2"
+}

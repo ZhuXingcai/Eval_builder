@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/model_invocation_cancellation_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "cancellation_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Cancellation Request Id",
+      "type": "string"
+    },
+    "cancellation_request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Cancellation Request Sha256",
+      "type": "string"
+    },
+    "fencing_token": {
+      "minimum": 1,
+      "title": "Fencing Token",
+      "type": "integer"
+    },
+    "invocation_handle_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "policy_version": {
+      "const": "attachment-model-control/r6-03-v1",
+      "default": "attachment-model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reason": {
+      "enum": [
+        "CANCELLED",
+        "EXPIRED",
+        "USAGE_OVERRUN"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+    },
+    "reservation_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/model-invocation-cancellation-request/v2",
+      "default": "env-mock-agent/model-invocation-cancellation-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cancellation_request_id",
+    "reservation_ref",
+    "invocation_handle_ref",
+    "fencing_token",
+    "reason",
+    "requested_at",
+    "cancellation_request_sha256"
+  ],
+  "title": "ModelInvocationCancellationRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.model_control_v2.ModelInvocationCancellationRequestV2",
+  "x-schema-version": "env-mock-agent/model-invocation-cancellation-request/v2"
+}

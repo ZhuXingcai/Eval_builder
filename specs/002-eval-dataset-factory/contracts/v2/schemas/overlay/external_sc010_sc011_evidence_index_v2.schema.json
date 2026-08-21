@@ -1,0 +1,369 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ExternalRealTraceStabilityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "STABILITY_THRESHOLD_NOT_MET",
+        "STATISTICAL_GATE_PENDING",
+        "INCOMPLETE"
+      ],
+      "title": "ExternalRealTraceStabilityOutcomeV2",
+      "type": "string"
+    },
+    "LabelQualityEvidenceClassV2": {
+      "enum": [
+        "PRODUCTION_INDEPENDENT_TEST",
+        "MECHANISM_VALIDATION_ONLY",
+        "REPOSITORY_PENDING_ONLY"
+      ],
+      "title": "LabelQualityEvidenceClassV2",
+      "type": "string"
+    },
+    "LabelQualityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "STATISTICAL_GATE_PENDING"
+      ],
+      "title": "LabelQualityOutcomeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "TypedAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/typed-attribute/v1",
+          "default": "eval-factory/typed-attribute/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "title": "TypedAttribute",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/external_sc010_sc011_evidence_index_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "admission_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "authorizes_approval": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Approval",
+      "type": "boolean"
+    },
+    "authorizes_attestation": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Attestation",
+      "type": "boolean"
+    },
+    "authorizes_production_release": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Production Release",
+      "type": "boolean"
+    },
+    "authorizes_sc_012": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Sc 012",
+      "type": "boolean"
+    },
+    "authorizes_sc_013": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Sc 013",
+      "type": "boolean"
+    },
+    "authorizes_sc_014": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Sc 014",
+      "type": "boolean"
+    },
+    "authorizes_sc_015": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Sc 015",
+      "type": "boolean"
+    },
+    "dataset_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "evidence_class_counts": {
+      "items": {
+        "$ref": "#/$defs/TypedAttribute"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Evidence Class Counts",
+      "type": "array"
+    },
+    "freeze_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "label_evidence_class": {
+      "$ref": "#/$defs/LabelQualityEvidenceClassV2"
+    },
+    "label_quality_outcome": {
+      "$ref": "#/$defs/LabelQualityOutcomeV2"
+    },
+    "label_quality_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "label_report_satisfies_sc_010": {
+      "title": "Label Report Satisfies Sc 010",
+      "type": "boolean"
+    },
+    "object_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Object Id",
+      "type": "string"
+    },
+    "object_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Object Sha256",
+      "type": "string"
+    },
+    "observation_summary_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "observed_stability_threshold_met": {
+      "title": "Observed Stability Threshold Met",
+      "type": "boolean"
+    },
+    "package_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "external-evidence/r8-10-v1",
+      "default": "external-evidence/r8-10-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "requirement_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "satisfies_sc_010": {
+      "title": "Satisfies Sc 010",
+      "type": "boolean"
+    },
+    "satisfies_sc_011": {
+      "title": "Satisfies Sc 011",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/external-sc010-sc011-evidence-index/v2",
+      "default": "eval-factory/external-sc010-sc011-evidence-index/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stability_outcome": {
+      "$ref": "#/$defs/ExternalRealTraceStabilityOutcomeV2"
+    },
+    "stability_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "unique_real_trace_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Unique Real Trace Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "object_id",
+    "object_sha256",
+    "audit",
+    "package_manifest_ref",
+    "admission_report_ref",
+    "requirement_spec_ref",
+    "observation_summary_ref",
+    "freeze_result_ref",
+    "label_quality_report_ref",
+    "label_quality_outcome",
+    "label_evidence_class",
+    "label_report_satisfies_sc_010",
+    "stability_report_ref",
+    "stability_outcome",
+    "unique_real_trace_count",
+    "observed_stability_threshold_met",
+    "evidence_class_counts",
+    "satisfies_sc_010",
+    "satisfies_sc_011"
+  ],
+  "title": "ExternalSc010Sc011EvidenceIndexV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.external_evidence_v2.ExternalSc010Sc011EvidenceIndexV2",
+  "x-schema-version": "eval-factory/external-sc010-sc011-evidence-index/v2"
+}

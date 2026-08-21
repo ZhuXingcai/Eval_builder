@@ -1,0 +1,388 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ProductionAttestationEvidenceClassV2": {
+      "enum": [
+        "PRODUCTION_VERIFIED",
+        "MECHANISM_VALIDATION_ONLY",
+        "REPOSITORY_PENDING_ONLY"
+      ],
+      "title": "ProductionAttestationEvidenceClassV2",
+      "type": "string"
+    },
+    "ProductionReadinessGateV2": {
+      "enum": [
+        "SC_010_LABEL_QUALITY",
+        "SC_011_REAL_TRACE_STABILITY",
+        "SC_012_RESOURCE_POLICY",
+        "SC_013_ORGANIZATION_APPROVALS",
+        "SC_014_ZERO_OPEN_GATES"
+      ],
+      "title": "ProductionReadinessGateV2",
+      "type": "string"
+    },
+    "ProductionReadinessInvalidationPolicyV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "max_invalidation_refs": {
+          "maximum": 10000,
+          "minimum": 1,
+          "title": "Max Invalidation Refs",
+          "type": "integer"
+        },
+        "max_projection_revisions": {
+          "maximum": 1000000,
+          "minimum": 2,
+          "title": "Max Projection Revisions",
+          "type": "integer"
+        },
+        "policy_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "policy_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Policy Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "production-readiness-attestation/r8-08-v1",
+          "default": "production-readiness-attestation/r8-08-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "required_triggers": {
+          "default": [
+            "SYSTEM_VERSION_CHANGED",
+            "BASE_CONTRACT_MANIFEST_CHANGED",
+            "OVERLAY_CONTRACT_MANIFEST_CHANGED",
+            "SCHEMA_SET_CHANGED",
+            "POLICY_SET_CHANGED",
+            "EVIDENCE_SUPERSEDED",
+            "ISSUER_REGISTRY_CHANGED",
+            "ISSUER_REVOKED_OR_EXPIRED",
+            "ATTESTATION_EXPIRED",
+            "EXPLICIT_INCIDENT_REVOCATION",
+            "EXPLICIT_RELEASE_REVOCATION"
+          ],
+          "items": {
+            "$ref": "#/$defs/ProductionReadinessInvalidationTriggerV2"
+          },
+          "title": "Required Triggers",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/production-readiness-invalidation-policy/v2",
+          "default": "eval-factory/production-readiness-invalidation-policy/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy_id",
+        "max_projection_revisions",
+        "max_invalidation_refs",
+        "policy_sha256",
+        "audit"
+      ],
+      "title": "ProductionReadinessInvalidationPolicyV2",
+      "type": "object"
+    },
+    "ProductionReadinessInvalidationTriggerV2": {
+      "enum": [
+        "SYSTEM_VERSION_CHANGED",
+        "BASE_CONTRACT_MANIFEST_CHANGED",
+        "OVERLAY_CONTRACT_MANIFEST_CHANGED",
+        "SCHEMA_SET_CHANGED",
+        "POLICY_SET_CHANGED",
+        "EVIDENCE_SUPERSEDED",
+        "ISSUER_REGISTRY_CHANGED",
+        "ISSUER_REVOKED_OR_EXPIRED",
+        "ATTESTATION_EXPIRED",
+        "EXPLICIT_INCIDENT_REVOCATION",
+        "EXPLICIT_RELEASE_REVOCATION"
+      ],
+      "title": "ProductionReadinessInvalidationTriggerV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/production_readiness_attestation_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "base_contract_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "evidence_class": {
+      "$ref": "#/$defs/ProductionAttestationEvidenceClassV2"
+    },
+    "expected_system_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Expected System Version",
+      "type": "string"
+    },
+    "invalidation_policy": {
+      "$ref": "#/$defs/ProductionReadinessInvalidationPolicyV2"
+    },
+    "max_evidence_refs": {
+      "maximum": 100000,
+      "minimum": 5,
+      "title": "Max Evidence Refs",
+      "type": "integer"
+    },
+    "max_private_bytes": {
+      "maximum": 1000000000000,
+      "minimum": 2,
+      "title": "Max Private Bytes",
+      "type": "integer"
+    },
+    "max_report_bytes": {
+      "maximum": 100000000,
+      "minimum": 2,
+      "title": "Max Report Bytes",
+      "type": "integer"
+    },
+    "maximum_validity_seconds": {
+      "maximum": 315360000,
+      "minimum": 1,
+      "title": "Maximum Validity Seconds",
+      "type": "integer"
+    },
+    "minimum_issuer_count": {
+      "maximum": 100,
+      "minimum": 2,
+      "title": "Minimum Issuer Count",
+      "type": "integer"
+    },
+    "overlay_contract_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "production-readiness-attestation/r8-08-v1",
+      "default": "production-readiness-attestation/r8-08-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "release_profile_decision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "repository_pending_evidence_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "required_gates": {
+      "default": [
+        "SC_010_LABEL_QUALITY",
+        "SC_011_REAL_TRACE_STABILITY",
+        "SC_012_RESOURCE_POLICY",
+        "SC_013_ORGANIZATION_APPROVALS",
+        "SC_014_ZERO_OPEN_GATES"
+      ],
+      "items": {
+        "$ref": "#/$defs/ProductionReadinessGateV2"
+      },
+      "title": "Required Gates",
+      "type": "array"
+    },
+    "required_policy_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Required Policy Refs",
+      "type": "array"
+    },
+    "required_schema_manifest_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 128,
+      "minItems": 2,
+      "title": "Required Schema Manifest Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/production-readiness-attestation-policy/v2",
+      "default": "eval-factory/production-readiness-attestation-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "trusted_issuer_registry_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "policy_id",
+    "expected_system_version",
+    "base_contract_manifest_ref",
+    "overlay_contract_manifest_ref",
+    "required_schema_manifest_refs",
+    "required_policy_refs",
+    "release_profile_decision_ref",
+    "repository_pending_evidence_ref",
+    "invalidation_policy",
+    "evidence_class",
+    "minimum_issuer_count",
+    "maximum_validity_seconds",
+    "max_evidence_refs",
+    "max_private_bytes",
+    "max_report_bytes",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "ProductionReadinessAttestationPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessAttestationPolicyV2",
+  "x-schema-version": "eval-factory/production-readiness-attestation-policy/v2"
+}

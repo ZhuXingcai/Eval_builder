@@ -1,0 +1,37 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/facade/facade_object_ref.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "object_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Object Id",
+      "type": "string"
+    },
+    "object_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Object Sha256",
+      "type": "string"
+    },
+    "object_type": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Object Type",
+      "type": "string"
+    },
+    "object_version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Object Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "object_type",
+    "object_id",
+    "object_version",
+    "object_sha256"
+  ],
+  "title": "FacadeObjectRef",
+  "type": "object",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.contracts.FacadeObjectRef"
+}

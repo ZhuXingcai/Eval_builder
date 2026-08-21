@@ -1,0 +1,1337 @@
+{
+  "$defs": {
+    "CandidatePackageInventoryEntryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_build_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "artifact_validation_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "build_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "container_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "derivation_root_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Derivation Root Refs",
+          "type": "array"
+        },
+        "entry_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Entry Sha256",
+          "type": "string"
+        },
+        "inventory_member": {
+          "$ref": "#/$defs/PackageInventoryMember"
+        },
+        "inventory_member_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/candidate-package-inventory-entry/v2",
+          "default": "eval-factory/candidate-package-inventory-entry/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "inventory_member",
+        "inventory_member_ref",
+        "artifact_build_result_ref",
+        "artifact_validation_result_ref",
+        "output_ref",
+        "build_spec_ref",
+        "derivation_root_refs",
+        "entry_sha256"
+      ],
+      "title": "CandidatePackageInventoryEntryV2",
+      "type": "object"
+    },
+    "ContentRiskLabel": {
+      "enum": [
+        "ANSWER_BEARING",
+        "HIDDEN_PASS_CONDITION",
+        "SECRET",
+        "RESTRICTED_PII",
+        "PROMPT_INJECTION",
+        "UNSCANNABLE_CONTENT"
+      ],
+      "title": "ContentRiskLabel",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "Disposition": {
+      "enum": [
+        "ALLOW_INPUT_EVIDENCE",
+        "ALLOW_STRUCTURE_ONLY",
+        "ALLOW_EXTERNAL_LEAD_ONLY",
+        "NEEDS_REVIEW",
+        "QUARANTINE",
+        "REJECT"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "EnvironmentArtifactV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "artifact_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Sha256",
+          "type": "string"
+        },
+        "artifact_validation_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "attachment_dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Attachment Dependency Id",
+          "type": "string"
+        },
+        "candidate_artifact_version_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "logical_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Logical Path",
+          "type": "string"
+        },
+        "media_type": {
+          "maxLength": 255,
+          "minLength": 3,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "package_inventory_entry_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Package Inventory Entry Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/environment-artifact/v2",
+          "default": "eval-factory/environment-artifact/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "attachment_dependency_id",
+        "candidate_artifact_version_ref",
+        "output_ref",
+        "logical_path",
+        "media_type",
+        "content_sha256",
+        "size_bytes",
+        "artifact_validation_result_ref",
+        "package_inventory_entry_refs",
+        "artifact_sha256"
+      ],
+      "title": "EnvironmentArtifactV2",
+      "type": "object"
+    },
+    "EnvironmentSpecV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Artifact Refs",
+          "type": "array"
+        },
+        "artifacts": {
+          "items": {
+            "$ref": "#/$defs/EnvironmentArtifactV2"
+          },
+          "title": "Artifacts",
+          "type": "array"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_artifact_version_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Candidate Artifact Version Refs",
+          "type": "array"
+        },
+        "candidate_revision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "environment_spec_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Environment Spec Id",
+          "type": "string"
+        },
+        "environment_spec_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Environment Spec Sha256",
+          "type": "string"
+        },
+        "final_package_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "input_state_only": {
+          "const": true,
+          "default": true,
+          "title": "Input State Only",
+          "type": "boolean"
+        },
+        "package_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Package Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "item-quality/r5-10-v1",
+          "default": "item-quality/r5-10-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provenance_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/environment-spec/v2",
+          "default": "eval-factory/environment-spec/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "environment_spec_id",
+        "candidate_revision_ref",
+        "final_package_manifest_ref",
+        "provenance_manifest_ref",
+        "candidate_artifact_version_refs",
+        "artifacts",
+        "artifact_refs",
+        "package_sha256",
+        "environment_spec_sha256",
+        "audit"
+      ],
+      "title": "EnvironmentSpecV2",
+      "type": "object"
+    },
+    "FinalPackageManifestV2": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_artifact_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Accepted Artifact Refs",
+          "type": "array"
+        },
+        "artifact_validation_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Artifact Validation Result Refs",
+          "type": "array"
+        },
+        "artifact_version_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Artifact Version Refs",
+          "type": "array"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_inventory_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "candidate_revision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "deterministic_validation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "entries": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CandidatePackageInventoryEntryV2"
+          },
+          "title": "Entries",
+          "type": "array"
+        },
+        "entry_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Entry Refs",
+          "type": "array"
+        },
+        "final_package_manifest_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Final Package Manifest Id",
+          "type": "string"
+        },
+        "input_state_only": {
+          "const": true,
+          "default": true,
+          "title": "Input State Only",
+          "type": "boolean"
+        },
+        "manifest_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Manifest Sha256",
+          "type": "string"
+        },
+        "output_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Output Refs",
+          "type": "array"
+        },
+        "package_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Package Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "item-quality/r5-10-v1",
+          "default": "item-quality/r5-10-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/final-package-manifest/v2",
+          "default": "eval-factory/final-package-manifest/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_deterministic_validation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "final_package_manifest_id",
+        "candidate_revision_ref",
+        "deterministic_validation_ref",
+        "source_deterministic_validation_ref",
+        "package_sha256",
+        "manifest_sha256",
+        "audit"
+      ],
+      "title": "FinalPackageManifestV2",
+      "type": "object"
+    },
+    "ItemQualityFailureCodeV2": {
+      "enum": [
+        "PACKAGE_INVENTORY_MISSING",
+        "PACKAGE_INVENTORY_MISMATCH",
+        "PACKAGE_MEMBER_INVALID",
+        "PACKAGE_PATH_COLLISION",
+        "PACKAGE_CONTENT_HASH_MISSING",
+        "PACKAGE_HASH_MISMATCH",
+        "PROVENANCE_INCOMPLETE",
+        "PROVENANCE_UNSAFE",
+        "ENVIRONMENT_INCOMPLETE"
+      ],
+      "title": "ItemQualityFailureCodeV2",
+      "type": "string"
+    },
+    "ItemQualityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "REQUIRES_REPAIR",
+        "REJECTED",
+        "BLOCKED",
+        "UPSTREAM_INCOMPLETE"
+      ],
+      "title": "ItemQualityOutcomeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "OriginClass": {
+      "enum": [
+        "USER_SUPPLIED_INPUT",
+        "PREEXISTING_WORKSPACE_INPUT",
+        "SYSTEM_OR_HARNESS_CONTEXT",
+        "AGENT_RETRIEVED_EXTERNAL",
+        "AGENT_GENERATED_INTERMEDIATE",
+        "AGENT_GENERATED_FINAL",
+        "UNKNOWN"
+      ],
+      "title": "OriginClass",
+      "type": "string"
+    },
+    "PackageInventoryMember": {
+      "additionalProperties": false,
+      "properties": {
+        "container_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Container Ref"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "member_type": {
+          "enum": [
+            "DIRECTORY",
+            "FILE",
+            "NESTED_MEMBER"
+          ],
+          "title": "Member Type",
+          "type": "string"
+        },
+        "normalized_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Normalized Path",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/package-inventory-member/v1",
+          "default": "eval-factory/package-inventory-member/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "normalized_path",
+        "member_type",
+        "size_bytes"
+      ],
+      "title": "PackageInventoryMember",
+      "type": "object"
+    },
+    "PackageMemberProvenanceV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_validation_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "binding_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Binding Sha256",
+          "type": "string"
+        },
+        "build_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "candidate_artifact_version_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "derivation_closure_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Derivation Closure Refs",
+          "type": "array"
+        },
+        "final_package_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "inventory_entry": {
+          "$ref": "#/$defs/CandidatePackageInventoryEntryV2"
+        },
+        "inventory_entry_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "inventory_member_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "package_member_provenance_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Package Member Provenance Id",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "item-quality/r5-10-v1",
+          "default": "item-quality/r5-10-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provenance_decision": {
+          "$ref": "#/$defs/ProvenanceDecision"
+        },
+        "provenance_decision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/package-member-provenance/v2",
+          "default": "eval-factory/package-member-provenance/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "package_member_provenance_id",
+        "final_package_manifest_ref",
+        "inventory_entry",
+        "inventory_entry_ref",
+        "inventory_member_ref",
+        "candidate_artifact_version_ref",
+        "output_ref",
+        "build_spec_ref",
+        "artifact_validation_result_ref",
+        "derivation_closure_refs",
+        "provenance_decision",
+        "provenance_decision_ref",
+        "binding_sha256",
+        "audit"
+      ],
+      "title": "PackageMemberProvenanceV2",
+      "type": "object"
+    },
+    "ProvenanceDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "content_risk_labels": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ContentRiskLabel"
+          },
+          "title": "Content Risk Labels",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "derived_from": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Derived From",
+          "type": "array"
+        },
+        "disposition": {
+          "$ref": "#/$defs/Disposition"
+        },
+        "origin_class": {
+          "$ref": "#/$defs/OriginClass"
+        },
+        "policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provenance_decision_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Provenance Decision Id",
+          "type": "string"
+        },
+        "review_required": {
+          "title": "Review Required",
+          "type": "boolean"
+        },
+        "rule_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/provenance-decision/v1",
+          "default": "eval-factory/provenance-decision/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_event_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Source Event Refs",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "subject_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Sha256",
+          "type": "string"
+        },
+        "taint_labels": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TaintLabel"
+          },
+          "title": "Taint Labels",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility"
+        }
+      },
+      "required": [
+        "provenance_decision_id",
+        "subject_ref",
+        "origin_class",
+        "visibility",
+        "disposition",
+        "rule_ids",
+        "confidence",
+        "review_required",
+        "policy_version",
+        "subject_sha256",
+        "audit"
+      ],
+      "title": "ProvenanceDecision",
+      "type": "object"
+    },
+    "ProvenanceManifestV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_revision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "entries": {
+          "items": {
+            "$ref": "#/$defs/PackageMemberProvenanceV2"
+          },
+          "title": "Entries",
+          "type": "array"
+        },
+        "entry_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Entry Refs",
+          "type": "array"
+        },
+        "exact_set_verified": {
+          "const": true,
+          "default": true,
+          "title": "Exact Set Verified",
+          "type": "boolean"
+        },
+        "final_package_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "package_inventory_entry_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Package Inventory Entry Refs",
+          "type": "array"
+        },
+        "package_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Package Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "item-quality/r5-10-v1",
+          "default": "item-quality/r5-10-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provenance_manifest_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Provenance Manifest Id",
+          "type": "string"
+        },
+        "provenance_manifest_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Provenance Manifest Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/provenance-manifest/v2",
+          "default": "eval-factory/provenance-manifest/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provenance_manifest_id",
+        "final_package_manifest_ref",
+        "candidate_revision_ref",
+        "package_sha256",
+        "package_inventory_entry_refs",
+        "entries",
+        "entry_refs",
+        "provenance_manifest_sha256",
+        "audit"
+      ],
+      "title": "ProvenanceManifestV2",
+      "type": "object"
+    },
+    "QualityReportV2": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_artifact_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Accepted Artifact Refs",
+          "type": "array"
+        },
+        "approvable": {
+          "title": "Approvable",
+          "type": "boolean"
+        },
+        "artifact_validation_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Artifact Validation Result Refs",
+          "type": "array"
+        },
+        "artifact_version_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Artifact Version Refs",
+          "type": "array"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_inventory_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "candidate_revision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "current_finding_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Current Finding Refs",
+          "type": "array"
+        },
+        "deterministic_validation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "environment_spec_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ItemQualityFailureCodeV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "final_package_manifest_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "input_state_only": {
+          "anyOf": [
+            {
+              "const": true,
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input State Only"
+        },
+        "open_p0_count": {
+          "minimum": 0,
+          "title": "Open P0 Count",
+          "type": "integer"
+        },
+        "open_p1_count": {
+          "minimum": 0,
+          "title": "Open P1 Count",
+          "type": "integer"
+        },
+        "outcome": {
+          "$ref": "#/$defs/ItemQualityOutcomeV2"
+        },
+        "output_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Output Refs",
+          "type": "array"
+        },
+        "package_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Package Sha256"
+        },
+        "policy_version": {
+          "const": "item-quality/r5-10-v1",
+          "default": "item-quality/r5-10-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provenance_manifest_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "quality_report_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Quality Report Id",
+          "type": "string"
+        },
+        "quality_report_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Quality Report Sha256",
+          "type": "string"
+        },
+        "r4_task_contract_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "repair_plan_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Repair Plan Refs",
+          "type": "array"
+        },
+        "repair_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Repair Result Refs",
+          "type": "array"
+        },
+        "resolution_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Resolution Refs",
+          "type": "array"
+        },
+        "review_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/quality-report/v2",
+          "default": "eval-factory/quality-report/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_round_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Semantic Round Result Refs",
+          "type": "array"
+        },
+        "semantic_workflow_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "source_deterministic_validation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "stage_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Stage Result Refs",
+          "type": "array"
+        },
+        "stale_finding_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Stale Finding Refs",
+          "type": "array"
+        },
+        "unresolved_non_waivable_count": {
+          "minimum": 0,
+          "title": "Unresolved Non Waivable Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "quality_report_id",
+        "r4_task_contract_set_ref",
+        "review_policy_ref",
+        "semantic_workflow_result_ref",
+        "candidate_revision_ref",
+        "deterministic_validation_ref",
+        "source_deterministic_validation_ref",
+        "outcome",
+        "open_p0_count",
+        "open_p1_count",
+        "unresolved_non_waivable_count",
+        "approvable",
+        "quality_report_sha256",
+        "audit"
+      ],
+      "title": "QualityReportV2",
+      "type": "object"
+    },
+    "TaintLabel": {
+      "enum": [
+        "FINAL_OUTPUT_DERIVED",
+        "PRIVATE_REFERENCE_DERIVED",
+        "GRADER_RULE_DERIVED",
+        "UNKNOWN_DERIVATION",
+        "SENSITIVE_SOURCE_DERIVED",
+        "UNTRUSTED_INSTRUCTION_DERIVED"
+      ],
+      "title": "TaintLabel",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    },
+    "Visibility": {
+      "enum": [
+        "PRIVATE_STORE",
+        "PRIVILEGED_AUDIT",
+        "STAGE_PROJECTION",
+        "EVALUATOR_PROJECTION",
+        "CONTESTANT_VISIBLE",
+        "PUBLIC_RELEASE"
+      ],
+      "title": "Visibility",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/item_quality_compilation_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_artifact_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Accepted Artifact Refs",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "batch_quality_report_ref": {
+      "default": null,
+      "title": "Batch Quality Report Ref",
+      "type": "null"
+    },
+    "environment_spec": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EnvironmentSpecV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "environment_spec_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "evaluation_item_ref": {
+      "default": null,
+      "title": "Evaluation Item Ref",
+      "type": "null"
+    },
+    "final_package_manifest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FinalPackageManifestV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "final_package_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "input_state_only": {
+      "anyOf": [
+        {
+          "const": true,
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input State Only"
+    },
+    "item_quality_compilation_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Quality Compilation Result Id",
+      "type": "string"
+    },
+    "package_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Sha256"
+    },
+    "policy_version": {
+      "const": "item-quality/r5-10-v1",
+      "default": "item-quality/r5-10-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "provenance_manifest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ProvenanceManifestV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "provenance_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "quality_report": {
+      "$ref": "#/$defs/QualityReportV2"
+    },
+    "quality_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "release_decision_ref": {
+      "default": null,
+      "title": "Release Decision Ref",
+      "type": "null"
+    },
+    "result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/item-quality-compilation-result/v2",
+      "default": "eval-factory/item-quality-compilation-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "item_quality_compilation_result_id",
+    "quality_report",
+    "quality_report_ref",
+    "result_sha256",
+    "audit"
+  ],
+  "title": "ItemQualityCompilationResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.quality_v2.ItemQualityCompilationResultV2",
+  "x-schema-version": "eval-factory/item-quality-compilation-result/v2"
+}

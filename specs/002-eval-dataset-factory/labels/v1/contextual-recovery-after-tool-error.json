@@ -1,0 +1,73 @@
+{
+  "schema_version": "eval-factory/label-spec/v1",
+  "label_spec_id": "label-spec://contextual-recovery-after-tool-error/v1",
+  "label_version": "v1",
+  "name": "contextual_recovery_after_tool_error",
+  "requirement": "Match when a capability-complete deterministic sequence first proves an executed tool error followed by further task-directed action, and bounded semantic evidence shows that the later action meaningfully adapts strategy toward the same user intent rather than merely repeating the identical failed call or abandoning the task.",
+  "positive_predicates": [
+    {
+      "schema_version": "eval-factory/structured-predicate/v1",
+      "predicate_id": "predicate://contextual-recovery/prerequisite/v1",
+      "fact_type": "InteractionSegment",
+      "field_path": "error_then_subsequent_task_action",
+      "operator": "SEQUENCE",
+      "expected_value": true,
+      "window_events": 50,
+      "required_capability": "tool_events"
+    }
+  ],
+  "negative_predicates": [
+    {
+      "schema_version": "eval-factory/structured-predicate/v1",
+      "predicate_id": "predicate://contextual-recovery/no-prerequisite/v1",
+      "fact_type": "InteractionSegment",
+      "field_path": "error_then_subsequent_task_action",
+      "operator": "NOT_EXISTS",
+      "expected_value": true,
+      "window_events": 50,
+      "required_capability": "tool_events"
+    }
+  ],
+  "semantic_residual": {
+    "schema_version": "eval-factory/semantic-residual-spec/v1",
+    "residual_id": "semantic-residual://contextual-recovery/v1",
+    "question": "Given only the authorized error event, the immediately relevant user-intent span, and subsequent bounded actions, did the agent materially adapt its strategy and continue toward the same intent? Answer ABSTAIN when intent continuity, action meaning, or relevant spans are incomplete.",
+    "evidence_bundle_purpose": "label-contextual-recovery",
+    "allowed_evidence_types": [
+      "user_text",
+      "tool_call",
+      "tool_result",
+      "assistant_text"
+    ],
+    "abstain_conditions": [
+      "user intent is not recoverable from authorized spans",
+      "the error or subsequent action is approximate or ambiguous",
+      "relevant action content is truncated or outside the authorized budget",
+      "the later action could be an identical retry with no meaningful adaptation"
+    ],
+    "model_profile": "internal-semantic-labeler-v1",
+    "prompt_version": "contextual-recovery-label-prompt/v1"
+  },
+  "decision_threshold": 0.85,
+  "review_threshold": 0.7,
+  "audit": {
+    "schema_version": "eval-factory/contract-audit/v1",
+    "created_at": "2026-07-20T00:00:00Z",
+    "created_by": "r0-11-approved-decision",
+    "governing_versions": [
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "eval-factory-spec",
+        "version": "approved-2026-07-19",
+        "sha256": null
+      },
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "cross-stage-contracts",
+        "version": "v1",
+        "sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+      }
+    ],
+    "input_refs": []
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "$defs": {
+    "CanaryRegressionOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "INCOMPLETE"
+      ],
+      "title": "CanaryRegressionOutcomeV2",
+      "type": "string"
+    },
+    "ConcurrencyExperimentOutcomeV2": {
+      "enum": [
+        "NON_MODEL_RECOMMENDED",
+        "RECOMMENDATION_PENDING",
+        "INCOMPLETE"
+      ],
+      "title": "ConcurrencyExperimentOutcomeV2",
+      "type": "string"
+    },
+    "LabelQualityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "STATISTICAL_GATE_PENDING"
+      ],
+      "title": "LabelQualityOutcomeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "RealTraceStabilityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "STABILITY_THRESHOLD_NOT_MET",
+        "STATISTICAL_GATE_PENDING",
+        "INCOMPLETE"
+      ],
+      "title": "RealTraceStabilityOutcomeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/production_readiness_prerequisite_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "canary_regression_claim_scope": {
+      "const": "CANARY_REGRESSION_ONLY",
+      "default": "CANARY_REGRESSION_ONLY",
+      "title": "Canary Regression Claim Scope",
+      "type": "string"
+    },
+    "canary_regression_outcome": {
+      "$ref": "#/$defs/CanaryRegressionOutcomeV2"
+    },
+    "canary_regression_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "concurrency_experiment_claim_scope": {
+      "const": "CANARY_WORKER_STORAGE_ONLY",
+      "default": "CANARY_WORKER_STORAGE_ONLY",
+      "title": "Concurrency Experiment Claim Scope",
+      "type": "string"
+    },
+    "concurrency_experiment_outcome": {
+      "$ref": "#/$defs/ConcurrencyExperimentOutcomeV2"
+    },
+    "concurrency_experiment_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "label_quality_claim_scope": {
+      "default": "REPOSITORY_PENDING_ONLY",
+      "enum": [
+        "PRODUCTION_INDEPENDENT_TEST",
+        "MECHANISM_VALIDATION_ONLY",
+        "REPOSITORY_PENDING_ONLY"
+      ],
+      "title": "Label Quality Claim Scope",
+      "type": "string"
+    },
+    "label_quality_outcome": {
+      "$ref": "#/$defs/LabelQualityOutcomeV2"
+    },
+    "label_quality_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "predecessor_authorizes_approval": {
+      "const": false,
+      "default": false,
+      "title": "Predecessor Authorizes Approval",
+      "type": "boolean"
+    },
+    "predecessor_authorizes_attestation": {
+      "const": false,
+      "default": false,
+      "title": "Predecessor Authorizes Attestation",
+      "type": "boolean"
+    },
+    "predecessor_authorizes_production_release": {
+      "const": false,
+      "default": false,
+      "title": "Predecessor Authorizes Production Release",
+      "type": "boolean"
+    },
+    "real_trace_stability_claim_scope": {
+      "const": "REAL_TRACE_STABILITY_ONLY",
+      "default": "REAL_TRACE_STABILITY_ONLY",
+      "title": "Real Trace Stability Claim Scope",
+      "type": "string"
+    },
+    "real_trace_stability_outcome": {
+      "$ref": "#/$defs/RealTraceStabilityOutcomeV2"
+    },
+    "real_trace_stability_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "release_profile_decision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "repository_evidence_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "satisfies_sc_010": {
+      "title": "Satisfies Sc 010",
+      "type": "boolean"
+    },
+    "satisfies_sc_011": {
+      "title": "Satisfies Sc 011",
+      "type": "boolean"
+    },
+    "satisfies_sc_012": {
+      "title": "Satisfies Sc 012",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/production-readiness-prerequisite-summary/v2",
+      "default": "eval-factory/production-readiness-prerequisite-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "label_quality_report_ref",
+    "canary_regression_report_ref",
+    "real_trace_stability_report_ref",
+    "concurrency_experiment_report_ref",
+    "release_profile_decision_ref",
+    "label_quality_outcome",
+    "canary_regression_outcome",
+    "real_trace_stability_outcome",
+    "concurrency_experiment_outcome",
+    "satisfies_sc_010",
+    "satisfies_sc_011",
+    "satisfies_sc_012"
+  ],
+  "title": "ProductionReadinessPrerequisiteSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_readiness_review_v2.ProductionReadinessPrerequisiteSummaryV2",
+  "x-schema-version": "eval-factory/production-readiness-prerequisite-summary/v2"
+}

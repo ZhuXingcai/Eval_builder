@@ -1,0 +1,285 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ExternalEvidenceAdmissionOutcomeV2": {
+      "enum": [
+        "ADMITTED",
+        "BLOCKED"
+      ],
+      "title": "ExternalEvidenceAdmissionOutcomeV2",
+      "type": "string"
+    },
+    "ExternalEvidenceAdmissionReasonV2": {
+      "enum": [
+        "NONE",
+        "INVALID_PACKAGE",
+        "CORPUS_INSUFFICIENT",
+        "PARTITION_OVERLAP",
+        "MATERIAL_INTEGRITY_FAILED",
+        "REQUIREMENT_STALE",
+        "REFERENCE_POLICY_STALE",
+        "OBSERVATION_POLICY_STALE"
+      ],
+      "title": "ExternalEvidenceAdmissionReasonV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/external_evidence_admission_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "admitted_source_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Admitted Source Count",
+      "type": "integer"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "duplicate_source_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Duplicate Source Count",
+      "type": "integer"
+    },
+    "manifest_verified": {
+      "title": "Manifest Verified",
+      "type": "boolean"
+    },
+    "material_closure_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "material_verified": {
+      "title": "Material Verified",
+      "type": "boolean"
+    },
+    "object_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Object Id",
+      "type": "string"
+    },
+    "object_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Object Sha256",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/ExternalEvidenceAdmissionOutcomeV2"
+    },
+    "overlap_source_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Overlap Source Count",
+      "type": "integer"
+    },
+    "package_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "external-evidence/r8-10-v1",
+      "default": "external-evidence/r8-10-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "#/$defs/ExternalEvidenceAdmissionReasonV2"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "rejected_source_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Rejected Source Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/external-evidence-admission-report/v2",
+      "default": "eval-factory/external-evidence-admission-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Source Count",
+      "type": "integer"
+    },
+    "total_raw_bytes": {
+      "maximum": 1000000000000,
+      "minimum": 0,
+      "title": "Total Raw Bytes",
+      "type": "integer"
+    },
+    "unique_raw_hash_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Unique Raw Hash Count",
+      "type": "integer"
+    },
+    "unique_trace_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Unique Trace Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "object_id",
+    "object_sha256",
+    "audit",
+    "package_manifest_ref",
+    "outcome",
+    "reason_codes",
+    "source_count",
+    "admitted_source_count",
+    "rejected_source_count",
+    "unique_trace_count",
+    "unique_raw_hash_count",
+    "duplicate_source_count",
+    "overlap_source_count",
+    "total_raw_bytes",
+    "manifest_verified",
+    "material_verified"
+  ],
+  "title": "ExternalEvidenceAdmissionReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.external_evidence_v2.ExternalEvidenceAdmissionReportV2",
+  "x-schema-version": "eval-factory/external-evidence-admission-report/v2"
+}

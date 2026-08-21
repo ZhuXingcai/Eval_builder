@@ -1,0 +1,333 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ProductionReleaseEvidenceClassV2": {
+      "enum": [
+        "PRODUCTION_VERIFIED",
+        "MECHANISM_VALIDATION_ONLY",
+        "REPOSITORY_PENDING_ONLY"
+      ],
+      "title": "ProductionReleaseEvidenceClassV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/production_release_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_production_registry_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Allowed Production Registry Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "allowed_profile": {
+      "const": "LH",
+      "default": "LH",
+      "title": "Allowed Profile",
+      "type": "string"
+    },
+    "allowed_profile_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Allowed Profile Version",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "base_contract_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "baseline_attested_policy_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Baseline Attested Policy Refs",
+      "type": "array"
+    },
+    "evidence_class": {
+      "$ref": "#/$defs/ProductionReleaseEvidenceClassV2"
+    },
+    "expected_system_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Expected System Version",
+      "type": "string"
+    },
+    "forbidden_nonproduction_registry_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Forbidden Nonproduction Registry Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "max_items": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Items",
+      "type": "integer"
+    },
+    "max_manifest_refs": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Max Manifest Refs",
+      "type": "integer"
+    },
+    "max_registry_bytes": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Max Registry Bytes",
+      "type": "integer"
+    },
+    "max_report_bytes": {
+      "maximum": 100000000,
+      "minimum": 1,
+      "title": "Max Report Bytes",
+      "type": "integer"
+    },
+    "max_workspace_bytes_per_item": {
+      "maximum": 5000000000,
+      "minimum": 1,
+      "title": "Max Workspace Bytes Per Item",
+      "type": "integer"
+    },
+    "max_workspace_members_per_item": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Workspace Members Per Item",
+      "type": "integer"
+    },
+    "overlay_contract_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "production-release/r8-09-v1",
+      "default": "production-release/r8-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "release_profile_decision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "release_profile_decision_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Release Profile Decision Sha256",
+      "type": "string"
+    },
+    "repository_attestation_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "repository_evidence_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "required_attestation_policy_version": {
+      "const": "production-readiness-attestation/r8-08-v1",
+      "default": "production-readiness-attestation/r8-08-v1",
+      "title": "Required Attestation Policy Version",
+      "type": "string"
+    },
+    "required_schema_manifest_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 128,
+      "minItems": 2,
+      "title": "Required Schema Manifest Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/production-release-policy/v2",
+      "default": "eval-factory/production-release-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_id",
+    "evidence_class",
+    "expected_system_version",
+    "base_contract_manifest_ref",
+    "overlay_contract_manifest_ref",
+    "required_schema_manifest_refs",
+    "baseline_attested_policy_refs",
+    "release_profile_decision_ref",
+    "release_profile_decision_sha256",
+    "allowed_production_registry_ids",
+    "forbidden_nonproduction_registry_ids",
+    "max_items",
+    "max_workspace_members_per_item",
+    "max_workspace_bytes_per_item",
+    "max_manifest_refs",
+    "max_registry_bytes",
+    "max_report_bytes",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "ProductionReleasePolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_release_v2.ProductionReleasePolicyV2",
+  "x-schema-version": "eval-factory/production-release-policy/v2"
+}

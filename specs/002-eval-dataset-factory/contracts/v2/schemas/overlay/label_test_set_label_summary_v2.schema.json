@@ -1,0 +1,169 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelTestSetBalanceStatusV2": {
+      "enum": [
+        "ACHIEVED",
+        "SOURCE_POPULATION_LIMITED",
+        "INSUFFICIENT"
+      ],
+      "title": "LabelTestSetBalanceStatusV2",
+      "type": "string"
+    },
+    "LabelTestSetClassCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "$ref": "#/$defs/LabelDecisionValueV2"
+        },
+        "eligible_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Eligible Count",
+          "type": "integer"
+        },
+        "required_minimum": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Required Minimum",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-test-set-class-count/v2",
+          "default": "eval-factory/label-test-set-class-count/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Selected Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "decision",
+        "eligible_count",
+        "selected_count",
+        "required_minimum"
+      ],
+      "title": "LabelTestSetClassCountV2",
+      "type": "object"
+    },
+    "LabelTestSetEvaluationKindV2": {
+      "enum": [
+        "STRUCTURED",
+        "SEMANTIC"
+      ],
+      "title": "LabelTestSetEvaluationKindV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_test_set_label_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "balance_status": {
+      "$ref": "#/$defs/LabelTestSetBalanceStatusV2"
+    },
+    "class_counts": {
+      "items": {
+        "$ref": "#/$defs/LabelTestSetClassCountV2"
+      },
+      "title": "Class Counts",
+      "type": "array"
+    },
+    "eligible_total": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Eligible Total",
+      "type": "integer"
+    },
+    "evaluation_kind": {
+      "$ref": "#/$defs/LabelTestSetEvaluationKindV2"
+    },
+    "label_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "required_total": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Required Total",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-test-set-label-summary/v2",
+      "default": "eval-factory/label-test-set-label-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_total": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Selected Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "label_spec_ref",
+    "evaluation_kind",
+    "class_counts",
+    "required_total",
+    "eligible_total",
+    "selected_total",
+    "balance_status"
+  ],
+  "title": "LabelTestSetLabelSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.LabelTestSetLabelSummaryV2",
+  "x-schema-version": "eval-factory/label-test-set-label-summary/v2"
+}

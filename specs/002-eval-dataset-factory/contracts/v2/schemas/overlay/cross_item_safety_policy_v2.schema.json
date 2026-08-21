@@ -1,0 +1,365 @@
+{
+  "$defs": {
+    "AttachmentCrossItemSafetyScanLimitsV2": {
+      "additionalProperties": false,
+      "properties": {
+        "max_compression_ratio_milli": {
+          "maximum": 10000000,
+          "minimum": 1000,
+          "title": "Max Compression Ratio Milli",
+          "type": "integer"
+        },
+        "max_expanded_bytes": {
+          "maximum": 5000000000,
+          "minimum": 1,
+          "title": "Max Expanded Bytes",
+          "type": "integer"
+        },
+        "max_extracted_characters": {
+          "maximum": 10000000,
+          "minimum": 1,
+          "title": "Max Extracted Characters",
+          "type": "integer"
+        },
+        "max_file_bytes": {
+          "maximum": 1000000000,
+          "minimum": 1,
+          "title": "Max File Bytes",
+          "type": "integer"
+        },
+        "max_fingerprint_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Max Fingerprint Count",
+          "type": "integer"
+        },
+        "max_inventory_members": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Max Inventory Members",
+          "type": "integer"
+        },
+        "max_match_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Max Match Count",
+          "type": "integer"
+        },
+        "max_nested_depth": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Max Nested Depth",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-cross-item-safety-scan-limits/v2",
+          "default": "env-mock-agent/attachment-cross-item-safety-scan-limits/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "max_file_bytes",
+        "max_extracted_characters",
+        "max_inventory_members",
+        "max_nested_depth",
+        "max_expanded_bytes",
+        "max_compression_ratio_milli",
+        "max_fingerprint_count",
+        "max_match_count"
+      ],
+      "title": "AttachmentCrossItemSafetyScanLimitsV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/cross_item_safety_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "answer_reuse_window_token_count": {
+      "const": 8,
+      "default": 8,
+      "title": "Answer Reuse Window Token Count",
+      "type": "integer"
+    },
+    "attachment_policy_version": {
+      "const": "attachment-cross-item-safety/r7-02-v1",
+      "default": "attachment-cross-item-safety/r7-02-v1",
+      "title": "Attachment Policy Version",
+      "type": "string"
+    },
+    "attachment_scan_limits": {
+      "$ref": "#/$defs/AttachmentCrossItemSafetyScanLimitsV2"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "classification_mode": {
+      "const": "CATEGORY_EXACT",
+      "default": "CATEGORY_EXACT",
+      "title": "Classification Mode",
+      "type": "string"
+    },
+    "clustering_mode": {
+      "const": "CONNECTED_COMPONENTS",
+      "default": "CONNECTED_COMPONENTS",
+      "title": "Clustering Mode",
+      "type": "string"
+    },
+    "cross_item_safety_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Cross Item Safety Policy Id",
+      "type": "string"
+    },
+    "max_answer_source_pairs": {
+      "maximum": 100000000,
+      "minimum": 0,
+      "title": "Max Answer Source Pairs",
+      "type": "integer"
+    },
+    "max_answer_window_comparisons": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Max Answer Window Comparisons",
+      "type": "integer"
+    },
+    "max_attachments": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Max Attachments",
+      "type": "integer"
+    },
+    "max_clusters": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Clusters",
+      "type": "integer"
+    },
+    "max_foreign_fingerprints_per_target": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Foreign Fingerprints Per Target",
+      "type": "integer"
+    },
+    "max_items": {
+      "maximum": 100000,
+      "minimum": 2,
+      "title": "Max Items",
+      "type": "integer"
+    },
+    "max_prompt_characters": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Prompt Characters",
+      "type": "integer"
+    },
+    "max_prompt_scan_comparisons": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Max Prompt Scan Comparisons",
+      "type": "integer"
+    },
+    "max_reuse_pairs": {
+      "maximum": 100000000,
+      "minimum": 0,
+      "title": "Max Reuse Pairs",
+      "type": "integer"
+    },
+    "max_total_fingerprints": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Total Fingerprints",
+      "type": "integer"
+    },
+    "max_visible_matches": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Visible Matches",
+      "type": "integer"
+    },
+    "min_answer_reuse_coverage_bps": {
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Min Answer Reuse Coverage Bps",
+      "type": "integer"
+    },
+    "min_shared_answer_windows": {
+      "maximum": 100000,
+      "minimum": 2,
+      "title": "Min Shared Answer Windows",
+      "type": "integer"
+    },
+    "normalization_version": {
+      "const": "task-prompt-leakage-normalization/r4-04-v1",
+      "default": "task-prompt-leakage-normalization/r4-04-v1",
+      "title": "Normalization Version",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "cross-item-safety/r7-02-v1",
+      "default": "cross-item-safety/r7-02-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/cross-item-safety-policy/v2",
+      "default": "eval-factory/cross-item-safety-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cross_item_safety_policy_id",
+    "min_shared_answer_windows",
+    "min_answer_reuse_coverage_bps",
+    "max_items",
+    "max_attachments",
+    "max_total_fingerprints",
+    "max_foreign_fingerprints_per_target",
+    "max_prompt_characters",
+    "max_prompt_scan_comparisons",
+    "max_answer_source_pairs",
+    "max_answer_window_comparisons",
+    "max_visible_matches",
+    "max_reuse_pairs",
+    "max_clusters",
+    "attachment_scan_limits",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "CrossItemSafetyPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cross_item_safety_v2.CrossItemSafetyPolicyV2",
+  "x-schema-version": "eval-factory/cross-item-safety-policy/v2"
+}

@@ -1,0 +1,194 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "SemanticReviewRoundV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY",
+        "LEAKAGE_EXECUTABILITY"
+      ],
+      "title": "SemanticReviewRoundV2",
+      "type": "string"
+    },
+    "SemanticReviewerRoleV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY_REVIEWER",
+        "REALISM_CONSISTENCY_REVIEWER",
+        "LEAKAGE_EXECUTABILITY_REVIEWER"
+      ],
+      "title": "SemanticReviewerRoleV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/semantic_review_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "max_repair_waves_per_transition": {
+      "const": 1,
+      "default": 1,
+      "title": "Max Repair Waves Per Transition",
+      "type": "integer"
+    },
+    "model_profile_refs": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      ],
+      "title": "Model Profile Refs",
+      "type": "array"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "semantic-review/r5-09-v1",
+      "default": "semantic-review/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "projection_policy_refs": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      ],
+      "title": "Projection Policy Refs",
+      "type": "array"
+    },
+    "prompt_versions": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "Prompt Versions",
+      "type": "array"
+    },
+    "roles_in_order": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/SemanticReviewerRoleV2"
+        },
+        {
+          "$ref": "#/$defs/SemanticReviewerRoleV2"
+        },
+        {
+          "$ref": "#/$defs/SemanticReviewerRoleV2"
+        }
+      ],
+      "title": "Roles In Order",
+      "type": "array"
+    },
+    "rounds_in_order": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/SemanticReviewRoundV2"
+        },
+        {
+          "$ref": "#/$defs/SemanticReviewRoundV2"
+        },
+        {
+          "$ref": "#/$defs/SemanticReviewRoundV2"
+        }
+      ],
+      "title": "Rounds In Order",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/semantic-review-policy/v2",
+      "default": "eval-factory/semantic-review-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_review_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Semantic Review Policy Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "semantic_review_policy_id",
+    "rounds_in_order",
+    "roles_in_order",
+    "model_profile_refs",
+    "prompt_versions",
+    "projection_policy_refs",
+    "policy_sha256"
+  ],
+  "title": "SemanticReviewPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.review_v2.SemanticReviewPolicyV2",
+  "x-schema-version": "eval-factory/semantic-review-policy/v2"
+}

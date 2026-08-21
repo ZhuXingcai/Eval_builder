@@ -1,0 +1,1308 @@
+{
+  "annotation_contract": {
+    "path": "evals/annotation/v1/contract-manifest.json",
+    "sha256": "1e4514fca3b7c5ae1c8ed53e235d8c1da2d5c7b7de0eca5e187c77dc5326f7b4"
+  },
+  "case_count": 70,
+  "cases": [
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_005/parser/parser-1",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "parser-1",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_005/parser/adjudication",
+      "depends_on": [
+        "review-case://LH_005/parser/parser-1"
+      ],
+      "instance_id": "LH_005",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_005/safety/safety-1",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-1",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_005/safety/safety-2",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-2",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_005/safety/adjudication",
+      "depends_on": [
+        "review-case://LH_005/safety/safety-1",
+        "review-case://LH_005/safety/safety-2"
+      ],
+      "instance_id": "LH_005",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_005/label/label-1",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "label-1",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_005/label/adjudication",
+      "depends_on": [
+        "review-case://LH_005/label/label-1"
+      ],
+      "instance_id": "LH_005",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_005/task/task-1",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "task-1",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_005/task/adjudication",
+      "depends_on": [
+        "review-case://LH_005/task/task-1"
+      ],
+      "instance_id": "LH_005",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_005/attachment/attachment-1",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "attachment-1",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_005/attachment/adjudication",
+      "depends_on": [
+        "review-case://LH_005/attachment/attachment-1"
+      ],
+      "instance_id": "LH_005",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_005/release/release-1",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-1",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_005/release/release-2",
+      "depends_on": [],
+      "instance_id": "LH_005",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-2",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_005/release/adjudication",
+      "depends_on": [
+        "review-case://LH_005/release/release-1",
+        "review-case://LH_005/release/release-2",
+        "review-case://LH_005/parser/adjudication",
+        "review-case://LH_005/safety/adjudication",
+        "review-case://LH_005/label/adjudication",
+        "review-case://LH_005/task/adjudication",
+        "review-case://LH_005/attachment/adjudication"
+      ],
+      "instance_id": "LH_005",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "RELEASE_AUTHORITY",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_005",
+        "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_011/parser/parser-1",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "parser-1",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_011/parser/adjudication",
+      "depends_on": [
+        "review-case://LH_011/parser/parser-1"
+      ],
+      "instance_id": "LH_011",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_011/safety/safety-1",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-1",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_011/safety/safety-2",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-2",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_011/safety/adjudication",
+      "depends_on": [
+        "review-case://LH_011/safety/safety-1",
+        "review-case://LH_011/safety/safety-2"
+      ],
+      "instance_id": "LH_011",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_011/label/label-1",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "label-1",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_011/label/adjudication",
+      "depends_on": [
+        "review-case://LH_011/label/label-1"
+      ],
+      "instance_id": "LH_011",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_011/task/task-1",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "task-1",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_011/task/adjudication",
+      "depends_on": [
+        "review-case://LH_011/task/task-1"
+      ],
+      "instance_id": "LH_011",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_011/attachment/attachment-1",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "attachment-1",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_011/attachment/adjudication",
+      "depends_on": [
+        "review-case://LH_011/attachment/attachment-1"
+      ],
+      "instance_id": "LH_011",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_011/release/release-1",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-1",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_011/release/release-2",
+      "depends_on": [],
+      "instance_id": "LH_011",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-2",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_011/release/adjudication",
+      "depends_on": [
+        "review-case://LH_011/release/release-1",
+        "review-case://LH_011/release/release-2",
+        "review-case://LH_011/parser/adjudication",
+        "review-case://LH_011/safety/adjudication",
+        "review-case://LH_011/label/adjudication",
+        "review-case://LH_011/task/adjudication",
+        "review-case://LH_011/attachment/adjudication"
+      ],
+      "instance_id": "LH_011",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "RELEASE_AUTHORITY",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_011",
+        "source_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_015/parser/parser-1",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "parser-1",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_015/parser/adjudication",
+      "depends_on": [
+        "review-case://LH_015/parser/parser-1"
+      ],
+      "instance_id": "LH_015",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_015/safety/safety-1",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-1",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_015/safety/safety-2",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-2",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_015/safety/adjudication",
+      "depends_on": [
+        "review-case://LH_015/safety/safety-1",
+        "review-case://LH_015/safety/safety-2"
+      ],
+      "instance_id": "LH_015",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_015/label/label-1",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "label-1",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_015/label/adjudication",
+      "depends_on": [
+        "review-case://LH_015/label/label-1"
+      ],
+      "instance_id": "LH_015",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_015/task/task-1",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "task-1",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_015/task/adjudication",
+      "depends_on": [
+        "review-case://LH_015/task/task-1"
+      ],
+      "instance_id": "LH_015",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_015/attachment/attachment-1",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "attachment-1",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_015/attachment/adjudication",
+      "depends_on": [
+        "review-case://LH_015/attachment/attachment-1"
+      ],
+      "instance_id": "LH_015",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_015/release/release-1",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-1",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_015/release/release-2",
+      "depends_on": [],
+      "instance_id": "LH_015",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-2",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_015/release/adjudication",
+      "depends_on": [
+        "review-case://LH_015/release/release-1",
+        "review-case://LH_015/release/release-2",
+        "review-case://LH_015/parser/adjudication",
+        "review-case://LH_015/safety/adjudication",
+        "review-case://LH_015/label/adjudication",
+        "review-case://LH_015/task/adjudication",
+        "review-case://LH_015/attachment/adjudication"
+      ],
+      "instance_id": "LH_015",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "RELEASE_AUTHORITY",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_015",
+        "source_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_058/parser/parser-1",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "parser-1",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_058/parser/adjudication",
+      "depends_on": [
+        "review-case://LH_058/parser/parser-1"
+      ],
+      "instance_id": "LH_058",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_058/safety/safety-1",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-1",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_058/safety/safety-2",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-2",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_058/safety/adjudication",
+      "depends_on": [
+        "review-case://LH_058/safety/safety-1",
+        "review-case://LH_058/safety/safety-2"
+      ],
+      "instance_id": "LH_058",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_058/label/label-1",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "label-1",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_058/label/adjudication",
+      "depends_on": [
+        "review-case://LH_058/label/label-1"
+      ],
+      "instance_id": "LH_058",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_058/task/task-1",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "task-1",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_058/task/adjudication",
+      "depends_on": [
+        "review-case://LH_058/task/task-1"
+      ],
+      "instance_id": "LH_058",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_058/attachment/attachment-1",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "attachment-1",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_058/attachment/adjudication",
+      "depends_on": [
+        "review-case://LH_058/attachment/attachment-1"
+      ],
+      "instance_id": "LH_058",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_058/release/release-1",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-1",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_058/release/release-2",
+      "depends_on": [],
+      "instance_id": "LH_058",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-2",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_058/release/adjudication",
+      "depends_on": [
+        "review-case://LH_058/release/release-1",
+        "review-case://LH_058/release/release-2",
+        "review-case://LH_058/parser/adjudication",
+        "review-case://LH_058/safety/adjudication",
+        "review-case://LH_058/label/adjudication",
+        "review-case://LH_058/task/adjudication",
+        "review-case://LH_058/attachment/adjudication"
+      ],
+      "instance_id": "LH_058",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "RELEASE_AUTHORITY",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_058",
+        "source_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_067/parser/parser-1",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "parser-1",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "PARSER",
+      "assignee": null,
+      "case_id": "review-case://LH_067/parser/adjudication",
+      "depends_on": [
+        "review-case://LH_067/parser/parser-1"
+      ],
+      "instance_id": "LH_067",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-parser-audit/v1",
+      "required_role": "AUDITOR",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_067/safety/safety-1",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-1",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_067/safety/safety-2",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "safety-2",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "SAFETY",
+      "assignee": null,
+      "case_id": "review-case://LH_067/safety/adjudication",
+      "depends_on": [
+        "review-case://LH_067/safety/safety-1",
+        "review-case://LH_067/safety/safety-2"
+      ],
+      "instance_id": "LH_067",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://privileged-provenance-audit/v1",
+      "required_role": "PROVENANCE_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_067/label/label-1",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "label-1",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "LABEL",
+      "assignee": null,
+      "case_id": "review-case://LH_067/label/adjudication",
+      "depends_on": [
+        "review-case://LH_067/label/label-1"
+      ],
+      "instance_id": "LH_067",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://structured-labeler/v1",
+      "required_role": "LABEL_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_067/task/task-1",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "task-1",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "TASK",
+      "assignee": null,
+      "case_id": "review-case://LH_067/task/adjudication",
+      "depends_on": [
+        "review-case://LH_067/task/task-1"
+      ],
+      "instance_id": "LH_067",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://task-author-selection-context/v1",
+      "required_role": "TASK_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_067/attachment/attachment-1",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "attachment-1",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "ATTACHMENT",
+      "assignee": null,
+      "case_id": "review-case://LH_067/attachment/adjudication",
+      "depends_on": [
+        "review-case://LH_067/attachment/attachment-1"
+      ],
+      "instance_id": "LH_067",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://artifact-reviewer/v1",
+      "required_role": "ARTIFACT_REVIEWER",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_067/release/release-1",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-1",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_067/release/release-2",
+      "depends_on": [],
+      "instance_id": "LH_067",
+      "phase": "SUBMISSION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "ITEM_REVIEWER",
+      "slot": "release-2",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    },
+    {
+      "annotation_type": "RELEASE",
+      "assignee": null,
+      "case_id": "review-case://LH_067/release/adjudication",
+      "depends_on": [
+        "review-case://LH_067/release/release-1",
+        "review-case://LH_067/release/release-2",
+        "review-case://LH_067/parser/adjudication",
+        "review-case://LH_067/safety/adjudication",
+        "review-case://LH_067/label/adjudication",
+        "review-case://LH_067/task/adjudication",
+        "review-case://LH_067/attachment/adjudication"
+      ],
+      "instance_id": "LH_067",
+      "phase": "ADJUDICATION",
+      "projection_policy": "projection://release-authority-hash-only/v1",
+      "required_role": "RELEASE_AUTHORITY",
+      "slot": "adjudication",
+      "source": {
+        "source_ref": "raw_traj://LH_067",
+        "source_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d"
+      },
+      "status": "PENDING",
+      "synthetic_identity_allowed": false
+    }
+  ],
+  "cross_stage_contract": {
+    "beads_id": "env_mock_agent-ujc.1.10",
+    "manifest_path": "specs/002-eval-dataset-factory/contracts/v1/manifest.json",
+    "manifest_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9",
+    "required_before_gold_materialization": true,
+    "status": "FROZEN"
+  },
+  "schema_version": "eval-factory-gold-review-queue/v1",
+  "status": "AWAITING_HUMAN_ASSIGNMENT",
+  "synthetic_reviewer_identities_forbidden": true,
+  "worklist": {
+    "path": "evals/golden/eval_factory/evaluation_items/v1/gold-worklist.json",
+    "sha256": "57e1731796a722d87249a376392c0b4626ebd0bc87311b1d021bab6eb33edad7"
+  }
+}

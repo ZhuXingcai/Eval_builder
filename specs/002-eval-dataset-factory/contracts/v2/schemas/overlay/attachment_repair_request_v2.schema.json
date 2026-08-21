@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "AttachmentRepairSourceV2": {
+      "enum": [
+        "DETERMINISTIC",
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY"
+      ],
+      "title": "AttachmentRepairSourceV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_repair_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "artifact_version_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "attempt": {
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "build_spec_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "execution_result_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "output_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "targeted-repair/r5-09-v1",
+      "default": "targeted-repair/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "prior_repair_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "repair_plan_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "repair_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Repair Request Id",
+      "type": "string"
+    },
+    "repair_request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Repair Request Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-repair-request/v2",
+      "default": "env-mock-agent/attachment-repair-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_round": {
+      "$ref": "#/$defs/AttachmentRepairSourceV2"
+    },
+    "targeted_finding_codes": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Targeted Finding Codes",
+      "type": "array"
+    },
+    "targeted_finding_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Targeted Finding Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "repair_request_id",
+    "repair_plan_ref",
+    "source_round",
+    "candidate_revision_ref",
+    "artifact_id",
+    "artifact_version_ref",
+    "build_spec_ref",
+    "execution_result_ref",
+    "output_ref",
+    "output_sha256",
+    "targeted_finding_refs",
+    "targeted_finding_codes",
+    "attempt",
+    "idempotency_key",
+    "repair_request_sha256"
+  ],
+  "title": "AttachmentRepairRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.AttachmentRepairRequestV2",
+  "x-schema-version": "env-mock-agent/attachment-repair-request/v2"
+}

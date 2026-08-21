@@ -1,0 +1,241 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReleaseChannel": {
+      "enum": [
+        "CANARY",
+        "INTERNAL_REVIEW",
+        "PRODUCTION"
+      ],
+      "title": "ReleaseChannel",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/release_projection_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_channels": {
+      "items": {
+        "$ref": "#/$defs/ReleaseChannel"
+      },
+      "minItems": 1,
+      "title": "Allowed Channels",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "allowed_export_profiles": {
+      "items": {
+        "const": "LH",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Export Profiles",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "max_chain_depth": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Chain Depth",
+      "type": "integer"
+    },
+    "max_current_head_refs": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Max Current Head Refs",
+      "type": "integer"
+    },
+    "max_label_decision_refs": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Label Decision Refs",
+      "type": "integer"
+    },
+    "max_revalidation_reports": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Revalidation Reports",
+      "type": "integer"
+    },
+    "max_source_trace_refs": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Source Trace Refs",
+      "type": "integer"
+    },
+    "max_user_decision_refs": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max User Decision Refs",
+      "type": "integer"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "release-projection/r7-08-v1",
+      "default": "release-projection/r7-08-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "release_projection_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Release Projection Policy Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/release-projection-policy/v2",
+      "default": "eval-factory/release-projection-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "release_projection_policy_id",
+    "max_source_trace_refs",
+    "max_label_decision_refs",
+    "max_user_decision_refs",
+    "max_revalidation_reports",
+    "max_current_head_refs",
+    "max_chain_depth",
+    "allowed_channels",
+    "allowed_export_profiles",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "ReleaseProjectionPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release_projection_v2.ReleaseProjectionPolicyV2",
+  "x-schema-version": "eval-factory/release-projection-policy/v2"
+}

@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "SchedulerLoadPhaseV2": {
+      "enum": [
+        "SYNTHETIC_INITIAL",
+        "CRASH_RECOVERY",
+        "EXACT_REPLAY"
+      ],
+      "title": "SchedulerLoadPhaseV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/scheduler_load_phase_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "elapsed_nanoseconds": {
+      "maximum": 1000000000000000000,
+      "minimum": 1,
+      "title": "Elapsed Nanoseconds",
+      "type": "integer"
+    },
+    "job_count": {
+      "const": 1000,
+      "default": 1000,
+      "title": "Job Count",
+      "type": "integer"
+    },
+    "operation_count": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Operation Count",
+      "type": "integer"
+    },
+    "phase": {
+      "$ref": "#/$defs/SchedulerLoadPhaseV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/scheduler-load-phase-summary/v2",
+      "default": "eval-factory/scheduler-load-phase-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "throughput_millijobs_per_second": {
+      "maximum": 1000000000000000000,
+      "minimum": 1,
+      "title": "Throughput Millijobs Per Second",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "phase",
+    "operation_count",
+    "elapsed_nanoseconds",
+    "throughput_millijobs_per_second"
+  ],
+  "title": "SchedulerLoadPhaseSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadPhaseSummaryV2",
+  "x-schema-version": "eval-factory/scheduler-load-phase-summary/v2"
+}

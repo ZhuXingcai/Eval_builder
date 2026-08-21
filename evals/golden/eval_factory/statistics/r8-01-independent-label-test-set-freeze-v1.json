@@ -1,0 +1,119 @@
+{
+  "schema_version": "eval-factory-gold/r8-01-independent-label-test-set-freeze-v1",
+  "claim_scope": "MECHANISM_VALIDATION_ONLY",
+  "policy_version": "independent-label-test-set/r8-01-v1",
+  "real_corpus": {
+    "eligible_source_count": 91,
+    "required_semantic_count": 100,
+    "outcome": "STATISTICAL_GATE_PENDING",
+    "production_statistical_authority": false
+  },
+  "thresholds": {
+    "structured_match_minimum": 50,
+    "structured_no_match_minimum": 50,
+    "semantic_total_minimum": 100
+  },
+  "cases": [
+    {
+      "case_id": "synthetic-structured-balanced",
+      "evaluation_kind": "STRUCTURED",
+      "eligible_counts": {
+        "MATCH": 60,
+        "NO_MATCH": 60,
+        "ABSTAIN": 3
+      },
+      "selected_counts": {
+        "MATCH": 50,
+        "NO_MATCH": 50,
+        "ABSTAIN": 0
+      },
+      "balance_status": "ACHIEVED",
+      "expected_outcome": "FROZEN"
+    },
+    {
+      "case_id": "synthetic-semantic-balanced",
+      "evaluation_kind": "SEMANTIC",
+      "eligible_counts": {
+        "MATCH": 50,
+        "NO_MATCH": 50,
+        "ABSTAIN": 50
+      },
+      "selected_counts": {
+        "MATCH": 34,
+        "NO_MATCH": 33,
+        "ABSTAIN": 33
+      },
+      "balance_status": "ACHIEVED",
+      "expected_outcome": "FROZEN"
+    },
+    {
+      "case_id": "synthetic-semantic-source-limited",
+      "evaluation_kind": "SEMANTIC",
+      "eligible_counts": {
+        "MATCH": 70,
+        "NO_MATCH": 70,
+        "ABSTAIN": 0
+      },
+      "selected_counts": {
+        "MATCH": 50,
+        "NO_MATCH": 50,
+        "ABSTAIN": 0
+      },
+      "balance_status": "SOURCE_POPULATION_LIMITED",
+      "expected_outcome": "FROZEN"
+    },
+    {
+      "case_id": "real-corpus-insufficient",
+      "evaluation_kind": "SEMANTIC",
+      "eligible_total": 91,
+      "required_total": 100,
+      "shortage_reason": "TOTAL_SHORTAGE",
+      "expected_outcome": "STATISTICAL_GATE_PENDING"
+    },
+    {
+      "case_id": "partition-trace-overlap",
+      "expected_error": "PARTITION_TRACE_OVERLAP"
+    },
+    {
+      "case_id": "partition-raw-hash-alias",
+      "expected_error": "PARTITION_RAW_HASH_OVERLAP"
+    },
+    {
+      "case_id": "unauthorized-access",
+      "expected_access_outcome": "DENIED"
+    },
+    {
+      "case_id": "authorized-statistical-access",
+      "expected_access_outcome": "GRANTED",
+      "material_verified": true
+    },
+    {
+      "case_id": "exact-freeze-replay",
+      "expected_replay": "ORIGINAL_RESULT"
+    },
+    {
+      "case_id": "changed-idempotency-request",
+      "expected_error": "IDEMPOTENCY_CONFLICT"
+    },
+    {
+      "case_id": "private-material-corruption",
+      "expected_error": "MATERIAL_INTEGRITY_FAILED"
+    },
+    {
+      "case_id": "current-head-rebuild",
+      "expected_rebuild": "LATEST_FROZEN_AUTHORITY"
+    }
+  ],
+  "forbidden_surface": [
+    "raw trace content",
+    "trace membership",
+    "annotation membership",
+    "expected reference labels",
+    "physical private-store paths",
+    "credentials",
+    "private references",
+    "grader rules",
+    "hidden conditions",
+    "original final outputs"
+  ]
+}

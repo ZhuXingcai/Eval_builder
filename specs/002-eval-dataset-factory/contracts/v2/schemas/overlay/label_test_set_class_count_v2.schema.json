@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_test_set_class_count_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "decision": {
+      "$ref": "#/$defs/LabelDecisionValueV2"
+    },
+    "eligible_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Eligible Count",
+      "type": "integer"
+    },
+    "required_minimum": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Required Minimum",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-test-set-class-count/v2",
+      "default": "eval-factory/label-test-set-class-count/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Selected Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "decision",
+    "eligible_count",
+    "selected_count",
+    "required_minimum"
+  ],
+  "title": "LabelTestSetClassCountV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.LabelTestSetClassCountV2",
+  "x-schema-version": "eval-factory/label-test-set-class-count/v2"
+}

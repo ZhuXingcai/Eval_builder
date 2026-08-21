@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/environment_artifact_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "artifact_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Artifact Sha256",
+      "type": "string"
+    },
+    "artifact_validation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "attachment_dependency_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Attachment Dependency Id",
+      "type": "string"
+    },
+    "candidate_artifact_version_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "logical_path": {
+      "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+      "title": "Logical Path",
+      "type": "string"
+    },
+    "media_type": {
+      "maxLength": 255,
+      "minLength": 3,
+      "title": "Media Type",
+      "type": "string"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "package_inventory_entry_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Package Inventory Entry Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/environment-artifact/v2",
+      "default": "eval-factory/environment-artifact/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 0,
+      "title": "Size Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "attachment_dependency_id",
+    "candidate_artifact_version_ref",
+    "output_ref",
+    "logical_path",
+    "media_type",
+    "content_sha256",
+    "size_bytes",
+    "artifact_validation_result_ref",
+    "package_inventory_entry_refs",
+    "artifact_sha256"
+  ],
+  "title": "EnvironmentArtifactV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.quality_v2.EnvironmentArtifactV2",
+  "x-schema-version": "eval-factory/environment-artifact/v2"
+}

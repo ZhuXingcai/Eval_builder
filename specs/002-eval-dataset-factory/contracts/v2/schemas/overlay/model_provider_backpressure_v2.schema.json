@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ModelProviderBackpressureKindV2": {
+      "enum": [
+        "RATE_LIMITED",
+        "OVERLOADED"
+      ],
+      "title": "ModelProviderBackpressureKindV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/model_provider_backpressure_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "descriptor_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "kind": {
+      "$ref": "#/$defs/ModelProviderBackpressureKindV2"
+    },
+    "model_provider_backpressure_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Model Provider Backpressure Id",
+      "type": "string"
+    },
+    "model_provider_backpressure_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Model Provider Backpressure Sha256",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "attachment-model-control/r6-03-v1",
+      "default": "attachment-model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "retry_at": {
+      "format": "date-time",
+      "title": "Retry At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/model-provider-backpressure/v2",
+      "default": "env-mock-agent/model-provider-backpressure/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "model_provider_backpressure_id",
+    "descriptor_ref",
+    "kind",
+    "retry_at",
+    "observed_at",
+    "model_provider_backpressure_sha256"
+  ],
+  "title": "ModelProviderBackpressureV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.model_control_v2.ModelProviderBackpressureV2",
+  "x-schema-version": "env-mock-agent/model-provider-backpressure/v2"
+}

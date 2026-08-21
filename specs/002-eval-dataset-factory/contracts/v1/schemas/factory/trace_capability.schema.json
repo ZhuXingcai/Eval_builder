@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "CapabilityStatus": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "MISSING",
+        "UNKNOWN"
+      ],
+      "title": "CapabilityStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/trace_capability.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "capability": {
+      "enum": [
+        "conversation_events",
+        "tool_events",
+        "call_result_pairing",
+        "file_timeline",
+        "final_response",
+        "attachment_observations"
+      ],
+      "title": "Capability",
+      "type": "string"
+    },
+    "reason_codes": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/trace-capability/v1",
+      "default": "eval-factory/trace-capability/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/CapabilityStatus"
+    }
+  },
+  "required": [
+    "capability",
+    "status"
+  ],
+  "title": "TraceCapability",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.TraceCapability",
+  "x-schema-version": "eval-factory/trace-capability/v1"
+}

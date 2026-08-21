@@ -1,0 +1,229 @@
+{
+  "$defs": {
+    "MetricScopeV2": {
+      "enum": [
+        "JOB",
+        "ITEM",
+        "STAGE",
+        "MODEL_PROFILE",
+        "TOOL_FAMILY",
+        "ARTIFACT"
+      ],
+      "title": "MetricScopeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/metric_slice_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "backpressure_events": {
+      "minimum": 0,
+      "title": "Backpressure Events",
+      "type": "integer"
+    },
+    "cache_creation_input_tokens": {
+      "minimum": 0,
+      "title": "Cache Creation Input Tokens",
+      "type": "integer"
+    },
+    "cache_hit_attempts": {
+      "minimum": 0,
+      "title": "Cache Hit Attempts",
+      "type": "integer"
+    },
+    "cache_miss_attempts": {
+      "minimum": 0,
+      "title": "Cache Miss Attempts",
+      "type": "integer"
+    },
+    "cache_read_input_tokens": {
+      "minimum": 0,
+      "title": "Cache Read Input Tokens",
+      "type": "integer"
+    },
+    "cache_unavailable_attempts": {
+      "minimum": 0,
+      "title": "Cache Unavailable Attempts",
+      "type": "integer"
+    },
+    "cancelled_attempts": {
+      "minimum": 0,
+      "title": "Cancelled Attempts",
+      "type": "integer"
+    },
+    "charged_tokens": {
+      "minimum": 0,
+      "title": "Charged Tokens",
+      "type": "integer"
+    },
+    "conservative_usage_attempts": {
+      "minimum": 0,
+      "title": "Conservative Usage Attempts",
+      "type": "integer"
+    },
+    "error_events": {
+      "minimum": 0,
+      "title": "Error Events",
+      "type": "integer"
+    },
+    "execution_samples_us": {
+      "default": [],
+      "items": {
+        "type": "integer"
+      },
+      "title": "Execution Samples Us",
+      "type": "array"
+    },
+    "input_tokens": {
+      "minimum": 0,
+      "title": "Input Tokens",
+      "type": "integer"
+    },
+    "model_requests": {
+      "minimum": 0,
+      "title": "Model Requests",
+      "type": "integer"
+    },
+    "network_requests": {
+      "minimum": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "output_tokens": {
+      "minimum": 0,
+      "title": "Output Tokens",
+      "type": "integer"
+    },
+    "process_starts": {
+      "minimum": 0,
+      "title": "Process Starts",
+      "type": "integer"
+    },
+    "queue_wait_samples_us": {
+      "default": [],
+      "items": {
+        "type": "integer"
+      },
+      "title": "Queue Wait Samples Us",
+      "type": "array"
+    },
+    "renderer_operations": {
+      "minimum": 0,
+      "title": "Renderer Operations",
+      "type": "integer"
+    },
+    "reported_cost_microusd": {
+      "minimum": 0,
+      "title": "Reported Cost Microusd",
+      "type": "integer"
+    },
+    "reported_usage_attempts": {
+      "minimum": 0,
+      "title": "Reported Usage Attempts",
+      "type": "integer"
+    },
+    "resume_attempts": {
+      "minimum": 0,
+      "title": "Resume Attempts",
+      "type": "integer"
+    },
+    "retained_storage_bytes": {
+      "minimum": 0,
+      "title": "Retained Storage Bytes",
+      "type": "integer"
+    },
+    "retry_attempts": {
+      "minimum": 0,
+      "title": "Retry Attempts",
+      "type": "integer"
+    },
+    "retryable_attempts": {
+      "minimum": 0,
+      "title": "Retryable Attempts",
+      "type": "integer"
+    },
+    "scope": {
+      "$ref": "#/$defs/MetricScopeV2"
+    },
+    "scope_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Scope Id",
+      "type": "string"
+    },
+    "succeeded_attempts": {
+      "minimum": 0,
+      "title": "Succeeded Attempts",
+      "type": "integer"
+    },
+    "terminal_attempts": {
+      "minimum": 0,
+      "title": "Terminal Attempts",
+      "type": "integer"
+    },
+    "terminal_non_success_attempts": {
+      "minimum": 0,
+      "title": "Terminal Non Success Attempts",
+      "type": "integer"
+    },
+    "tool_calls": {
+      "minimum": 0,
+      "title": "Tool Calls",
+      "type": "integer"
+    },
+    "total_samples_us": {
+      "default": [],
+      "items": {
+        "type": "integer"
+      },
+      "title": "Total Samples Us",
+      "type": "array"
+    },
+    "unavailable_cost_attempts": {
+      "minimum": 0,
+      "title": "Unavailable Cost Attempts",
+      "type": "integer"
+    },
+    "work_units": {
+      "minimum": 0,
+      "title": "Work Units",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "scope",
+    "scope_id",
+    "work_units",
+    "terminal_attempts",
+    "succeeded_attempts",
+    "retryable_attempts",
+    "terminal_non_success_attempts",
+    "cancelled_attempts",
+    "retry_attempts",
+    "resume_attempts",
+    "model_requests",
+    "input_tokens",
+    "output_tokens",
+    "cache_creation_input_tokens",
+    "cache_read_input_tokens",
+    "charged_tokens",
+    "reported_usage_attempts",
+    "conservative_usage_attempts",
+    "cache_hit_attempts",
+    "cache_miss_attempts",
+    "cache_unavailable_attempts",
+    "process_starts",
+    "renderer_operations",
+    "network_requests",
+    "retained_storage_bytes",
+    "tool_calls",
+    "reported_cost_microusd",
+    "unavailable_cost_attempts",
+    "backpressure_events",
+    "error_events"
+  ],
+  "title": "MetricSliceV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.observability_v2.MetricSliceV2"
+}

@@ -1,0 +1,652 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ParseQuality": {
+      "enum": [
+        "STRICT",
+        "REPAIRED",
+        "PARTIAL",
+        "UNPARSEABLE"
+      ],
+      "title": "ParseQuality",
+      "type": "string"
+    },
+    "RealTraceStabilityCaseOutcomeV2": {
+      "enum": [
+        "STABLE",
+        "UNSTABLE",
+        "INFRASTRUCTURE_ERROR",
+        "INCOMPLETE"
+      ],
+      "title": "RealTraceStabilityCaseOutcomeV2",
+      "type": "string"
+    },
+    "RealTraceStabilityCaseSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "assigned_fault_point": {
+          "$ref": "#/$defs/RealTraceStabilityFaultPointV2"
+        },
+        "attempt_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Attempt Count",
+          "type": "integer"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "case_summary_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Case Summary Id",
+          "type": "string"
+        },
+        "case_summary_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Case Summary Sha256",
+          "type": "string"
+        },
+        "completion_witness_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Completion Witness Count",
+          "type": "integer"
+        },
+        "fault_observed": {
+          "title": "Fault Observed",
+          "type": "boolean"
+        },
+        "outcome": {
+          "$ref": "#/$defs/RealTraceStabilityCaseOutcomeV2"
+        },
+        "parse_quality": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ParseQuality"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "policy_version": {
+          "const": "real-trace-stability/r8-04-v1",
+          "default": "real-trace-stability/r8-04-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "private_case_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "reason_code": {
+          "$ref": "#/$defs/RealTraceStabilityReasonCodeV2"
+        },
+        "replay_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Replay Count",
+          "type": "integer"
+        },
+        "replay_stable": {
+          "title": "Replay Stable",
+          "type": "boolean"
+        },
+        "resume_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Resume Count",
+          "type": "integer"
+        },
+        "resume_succeeded": {
+          "title": "Resume Succeeded",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "eval-factory/real-trace-stability-case-summary/v2",
+          "default": "eval-factory/real-trace-stability-case-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stage_result_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Stage Result Count",
+          "type": "integer"
+        },
+        "threshold_matched": {
+          "title": "Threshold Matched",
+          "type": "boolean"
+        },
+        "unexpected_retry_count": {
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Unexpected Retry Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "case_summary_id",
+        "private_case_result_ref",
+        "outcome",
+        "reason_code",
+        "assigned_fault_point",
+        "fault_observed",
+        "resume_succeeded",
+        "replay_stable",
+        "attempt_count",
+        "unexpected_retry_count",
+        "resume_count",
+        "replay_count",
+        "stage_result_count",
+        "completion_witness_count",
+        "threshold_matched",
+        "case_summary_sha256",
+        "audit"
+      ],
+      "title": "RealTraceStabilityCaseSummaryV2",
+      "type": "object"
+    },
+    "RealTraceStabilityCategoryCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/real-trace-stability-category-count/v2",
+          "default": "eval-factory/real-trace-stability-category-count/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "count"
+      ],
+      "title": "RealTraceStabilityCategoryCountV2",
+      "type": "object"
+    },
+    "RealTraceStabilityCorpusSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "category_counts": {
+          "items": {
+            "$ref": "#/$defs/RealTraceStabilityCategoryCountV2"
+          },
+          "maxItems": 1000,
+          "minItems": 1,
+          "title": "Category Counts",
+          "type": "array"
+        },
+        "corpus_summary_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Corpus Summary Id",
+          "type": "string"
+        },
+        "corpus_summary_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Corpus Summary Sha256",
+          "type": "string"
+        },
+        "eligible_unique_trace_count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Eligible Unique Trace Count",
+          "type": "integer"
+        },
+        "maximum_raw_bytes": {
+          "maximum": 1000000000,
+          "minimum": 1,
+          "title": "Maximum Raw Bytes",
+          "type": "integer"
+        },
+        "minimum_raw_bytes": {
+          "maximum": 1000000000,
+          "minimum": 1,
+          "title": "Minimum Raw Bytes",
+          "type": "integer"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "policy_version": {
+          "const": "real-trace-stability/r8-04-v1",
+          "default": "real-trace-stability/r8-04-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "private_inventory_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "required_unique_trace_count": {
+          "const": 100,
+          "default": 100,
+          "title": "Required Unique Trace Count",
+          "type": "integer"
+        },
+        "sample_status": {
+          "$ref": "#/$defs/RealTraceStabilitySampleStatusV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/real-trace-stability-corpus-summary/v2",
+          "default": "eval-factory/real-trace-stability-corpus-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "shortfall_count": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Shortfall Count",
+          "type": "integer"
+        },
+        "source_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "total_raw_bytes": {
+          "maximum": 1000000000000,
+          "minimum": 1,
+          "title": "Total Raw Bytes",
+          "type": "integer"
+        },
+        "unique_instance_count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Unique Instance Count",
+          "type": "integer"
+        },
+        "unique_raw_hash_count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Unique Raw Hash Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "corpus_summary_id",
+        "source_manifest_ref",
+        "policy_ref",
+        "private_inventory_ref",
+        "eligible_unique_trace_count",
+        "unique_instance_count",
+        "unique_raw_hash_count",
+        "shortfall_count",
+        "sample_status",
+        "total_raw_bytes",
+        "minimum_raw_bytes",
+        "maximum_raw_bytes",
+        "category_counts",
+        "corpus_summary_sha256",
+        "audit"
+      ],
+      "title": "RealTraceStabilityCorpusSummaryV2",
+      "type": "object"
+    },
+    "RealTraceStabilityFaultPointV2": {
+      "enum": [
+        "before_source_registration",
+        "after_source_registration",
+        "after_trace_store_persist",
+        "before_stage_completion"
+      ],
+      "title": "RealTraceStabilityFaultPointV2",
+      "type": "string"
+    },
+    "RealTraceStabilityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "STABILITY_THRESHOLD_NOT_MET",
+        "STATISTICAL_GATE_PENDING",
+        "INCOMPLETE"
+      ],
+      "title": "RealTraceStabilityOutcomeV2",
+      "type": "string"
+    },
+    "RealTraceStabilityReasonCodeV2": {
+      "enum": [
+        "NONE",
+        "TRACE_RUN_FAILED",
+        "EXPECTED_FAULT_NOT_OBSERVED",
+        "RESUME_FAILED",
+        "UNEXPECTED_RETRY",
+        "REPLAY_MISMATCH",
+        "DUPLICATE_COMPLETION",
+        "MATERIAL_INTEGRITY_ERROR",
+        "CHILD_STATE_INCOMPLETE",
+        "INTERNAL_ERROR"
+      ],
+      "title": "RealTraceStabilityReasonCodeV2",
+      "type": "string"
+    },
+    "RealTraceStabilitySampleStatusV2": {
+      "enum": [
+        "SUFFICIENT",
+        "INSUFFICIENT"
+      ],
+      "title": "RealTraceStabilitySampleStatusV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/real_trace_stability_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "case_summaries": {
+      "items": {
+        "$ref": "#/$defs/RealTraceStabilityCaseSummaryV2"
+      },
+      "maxItems": 100000,
+      "minItems": 1,
+      "title": "Case Summaries",
+      "type": "array"
+    },
+    "case_summary_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 100000,
+      "minItems": 1,
+      "title": "Case Summary Refs",
+      "type": "array"
+    },
+    "claim_scope": {
+      "const": "REAL_TRACE_STABILITY_ONLY",
+      "default": "REAL_TRACE_STABILITY_ONLY",
+      "title": "Claim Scope",
+      "type": "string"
+    },
+    "corpus_summary": {
+      "$ref": "#/$defs/RealTraceStabilityCorpusSummaryV2"
+    },
+    "corpus_summary_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "fault_point_counts": {
+      "items": {
+        "$ref": "#/$defs/RealTraceStabilityCategoryCountV2"
+      },
+      "title": "Fault Point Counts",
+      "type": "array"
+    },
+    "incomplete_case_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Incomplete Case Refs",
+      "type": "array"
+    },
+    "infrastructure_error_case_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Infrastructure Error Case Refs",
+      "type": "array"
+    },
+    "observed_threshold_met": {
+      "title": "Observed Threshold Met",
+      "type": "boolean"
+    },
+    "outcome": {
+      "$ref": "#/$defs/RealTraceStabilityOutcomeV2"
+    },
+    "parse_quality_counts": {
+      "items": {
+        "$ref": "#/$defs/RealTraceStabilityCategoryCountV2"
+      },
+      "title": "Parse Quality Counts",
+      "type": "array"
+    },
+    "parse_quality_unavailable_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Parse Quality Unavailable Count",
+      "type": "integer"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "real-trace-stability/r8-04-v1",
+      "default": "real-trace-stability/r8-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "private_result_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "sample_status": {
+      "$ref": "#/$defs/RealTraceStabilitySampleStatusV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/real-trace-stability-report/v2",
+      "default": "eval-factory/real-trace-stability-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stable_case_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Stable Case Refs",
+      "type": "array"
+    },
+    "total_attempts": {
+      "minimum": 0,
+      "title": "Total Attempts",
+      "type": "integer"
+    },
+    "total_completion_witnesses": {
+      "minimum": 0,
+      "title": "Total Completion Witnesses",
+      "type": "integer"
+    },
+    "total_replays": {
+      "minimum": 0,
+      "title": "Total Replays",
+      "type": "integer"
+    },
+    "total_resumes": {
+      "minimum": 0,
+      "title": "Total Resumes",
+      "type": "integer"
+    },
+    "total_stage_results": {
+      "minimum": 0,
+      "title": "Total Stage Results",
+      "type": "integer"
+    },
+    "total_unexpected_retries": {
+      "minimum": 0,
+      "title": "Total Unexpected Retries",
+      "type": "integer"
+    },
+    "unstable_case_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Unstable Case Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "report_id",
+    "policy_ref",
+    "corpus_summary",
+    "corpus_summary_ref",
+    "private_result_set_ref",
+    "case_summaries",
+    "case_summary_refs",
+    "stable_case_refs",
+    "unstable_case_refs",
+    "infrastructure_error_case_refs",
+    "incomplete_case_refs",
+    "parse_quality_counts",
+    "parse_quality_unavailable_count",
+    "fault_point_counts",
+    "total_attempts",
+    "total_unexpected_retries",
+    "total_resumes",
+    "total_replays",
+    "total_stage_results",
+    "total_completion_witnesses",
+    "observed_threshold_met",
+    "sample_status",
+    "outcome",
+    "report_sha256",
+    "audit"
+  ],
+  "title": "RealTraceStabilityReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityReportV2",
+  "x-schema-version": "eval-factory/real-trace-stability-report/v2"
+}

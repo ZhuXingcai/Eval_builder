@@ -1,0 +1,251 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvaluatorReferenceDataClassV2": {
+      "enum": [
+        "NONE",
+        "RESTRICTED_EVAL_CONTROL",
+        "PRIVATE_REFERENCE",
+        "RESTRICTED_TRACE_SPAN",
+        "HUMAN_ONLY_REFERENCE"
+      ],
+      "title": "EvaluatorReferenceDataClassV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReferenceMode": {
+      "enum": [
+        "NONE",
+        "STRUCTURED_EXPECTATIONS",
+        "PRIVATE_ANSWER",
+        "TRACE_BEHAVIOR",
+        "HUMAN_ONLY"
+      ],
+      "title": "ReferenceMode",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/reference_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_producer_access": {
+      "const": false,
+      "default": false,
+      "title": "Attachment Producer Access",
+      "type": "boolean"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "contestant_access": {
+      "const": false,
+      "default": false,
+      "title": "Contestant Access",
+      "type": "boolean"
+    },
+    "evaluator_access": {
+      "title": "Evaluator Access",
+      "type": "boolean"
+    },
+    "evaluator_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "human_only_access": {
+      "title": "Human Only Access",
+      "type": "boolean"
+    },
+    "mode": {
+      "$ref": "#/$defs/ReferenceMode"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reference_data_class": {
+      "$ref": "#/$defs/EvaluatorReferenceDataClassV2"
+    },
+    "reference_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Reference Policy Id",
+      "type": "string"
+    },
+    "reference_policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Reference Policy Sha256",
+      "type": "string"
+    },
+    "reference_policy_version": {
+      "minimum": 1,
+      "title": "Reference Policy Version",
+      "type": "integer"
+    },
+    "reference_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Reference Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/reference-policy/v2",
+      "default": "eval-factory/reference-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "supersedes_reference_policy_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "reference_policy_id",
+    "reference_policy_version",
+    "evaluator_spec_ref",
+    "mode",
+    "reference_data_class",
+    "evaluator_access",
+    "human_only_access",
+    "policy_version",
+    "reference_policy_sha256",
+    "audit"
+  ],
+  "title": "ReferencePolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.ReferencePolicyV2",
+  "x-schema-version": "eval-factory/reference-policy/v2"
+}

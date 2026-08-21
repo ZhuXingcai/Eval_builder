@@ -1,0 +1,244 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "LHWorkspaceExportFailureCodeV2": {
+      "enum": [
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "SOURCE_PATH_VIOLATION",
+        "DESTINATION_PATH_VIOLATION",
+        "SYMLINK_UNSUPPORTED",
+        "SPECIAL_FILE_UNSUPPORTED",
+        "SOURCE_HASH_MISMATCH",
+        "COPIED_HASH_MISMATCH",
+        "INVENTORY_MISMATCH",
+        "EXPORT_LIMIT_EXCEEDED",
+        "CONTAINER_UNSUPPORTED"
+      ],
+      "title": "LHWorkspaceExportFailureCodeV2",
+      "type": "string"
+    },
+    "LHWorkspaceExportMemberTypeV2": {
+      "enum": [
+        "DIRECTORY",
+        "FILE",
+        "NESTED_MEMBER"
+      ],
+      "title": "LHWorkspaceExportMemberTypeV2",
+      "type": "string"
+    },
+    "LHWorkspaceExportMemberV2": {
+      "additionalProperties": false,
+      "properties": {
+        "container_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "member_type": {
+          "$ref": "#/$defs/LHWorkspaceExportMemberTypeV2"
+        },
+        "normalized_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Normalized Path",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/lh-workspace-export-member/v2",
+          "default": "env-mock-agent/lh-workspace-export-member/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 5000000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "normalized_path",
+        "member_type",
+        "size_bytes",
+        "output_ref"
+      ],
+      "title": "LHWorkspaceExportMemberV2",
+      "type": "object"
+    },
+    "LHWorkspaceExportOutcomeV2": {
+      "enum": [
+        "EXPORTED",
+        "BLOCKED"
+      ],
+      "title": "LHWorkspaceExportOutcomeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/l_h_workspace_export_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "copied_output_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Copied Output Refs",
+      "type": "array"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LHWorkspaceExportFailureCodeV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "observed_members": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LHWorkspaceExportMemberV2"
+      },
+      "title": "Observed Members",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/LHWorkspaceExportOutcomeV2"
+    },
+    "policy_version": {
+      "const": "lh-release-export/r7-09-v1",
+      "default": "lh-release-export/r7-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Result Id",
+      "type": "string"
+    },
+    "result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/lh-workspace-export-result/v2",
+      "default": "env-mock-agent/lh-workspace-export-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "workspace_file_count": {
+      "default": 0,
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Workspace File Count",
+      "type": "integer"
+    },
+    "workspace_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workspace Sha256"
+    },
+    "workspace_total_bytes": {
+      "default": 0,
+      "maximum": 5000000000,
+      "minimum": 0,
+      "title": "Workspace Total Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "result_id",
+    "request_ref",
+    "outcome",
+    "result_sha256"
+  ],
+  "title": "LHWorkspaceExportResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.release_export_v2.LHWorkspaceExportResultV2",
+  "x-schema-version": "env-mock-agent/lh-workspace-export-result/v2"
+}

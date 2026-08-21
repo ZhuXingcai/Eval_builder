@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "AttachmentDuplicateFingerprintLimitsV2": {
+      "additionalProperties": false,
+      "properties": {
+        "fingerprint_bits": {
+          "const": 256,
+          "title": "Fingerprint Bits",
+          "type": "integer"
+        },
+        "max_compression_ratio_milli": {
+          "maximum": 10000000,
+          "minimum": 1000,
+          "title": "Max Compression Ratio Milli",
+          "type": "integer"
+        },
+        "max_expanded_bytes": {
+          "maximum": 5000000000,
+          "minimum": 1,
+          "title": "Max Expanded Bytes",
+          "type": "integer"
+        },
+        "max_extracted_characters": {
+          "maximum": 10000000,
+          "minimum": 1,
+          "title": "Max Extracted Characters",
+          "type": "integer"
+        },
+        "max_file_bytes": {
+          "maximum": 1000000000,
+          "minimum": 1,
+          "title": "Max File Bytes",
+          "type": "integer"
+        },
+        "max_inventory_members": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Max Inventory Members",
+          "type": "integer"
+        },
+        "max_nested_depth": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Max Nested Depth",
+          "type": "integer"
+        },
+        "min_token_count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Min Token Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2",
+          "default": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "shingle_size": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Shingle Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_file_bytes",
+        "max_extracted_characters",
+        "max_inventory_members",
+        "max_nested_depth",
+        "max_expanded_bytes",
+        "max_compression_ratio_milli",
+        "min_token_count",
+        "shingle_size",
+        "fingerprint_bits"
+      ],
+      "title": "AttachmentDuplicateFingerprintLimitsV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_duplicate_fingerprint_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_validation_result_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "candidate_artifact_version_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "environment_artifact_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "fingerprint_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Fingerprint Request Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "item_quality_result_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "limits": {
+      "$ref": "#/$defs/AttachmentDuplicateFingerprintLimitsV2"
+    },
+    "logical_path": {
+      "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+      "title": "Logical Path",
+      "type": "string"
+    },
+    "media_type": {
+      "maxLength": 255,
+      "minLength": 3,
+      "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+      "title": "Media Type",
+      "type": "string"
+    },
+    "normalization_version": {
+      "const": "attachment-duplicate-normalization/r7-01-v1",
+      "default": "attachment-duplicate-normalization/r7-01-v1",
+      "title": "Normalization Version",
+      "type": "string"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "policy_version": {
+      "const": "attachment-duplicate-fingerprint/r7-01-v1",
+      "default": "attachment-duplicate-fingerprint/r7-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-duplicate-fingerprint-request/v2",
+      "default": "env-mock-agent/attachment-duplicate-fingerprint-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "size_bytes": {
+      "maximum": 5000000000,
+      "minimum": 0,
+      "title": "Size Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "fingerprint_request_id",
+    "item_quality_result_ref",
+    "environment_artifact_ref",
+    "candidate_artifact_version_ref",
+    "output_ref",
+    "artifact_validation_result_ref",
+    "logical_path",
+    "media_type",
+    "content_sha256",
+    "size_bytes",
+    "limits",
+    "idempotency_key",
+    "request_sha256"
+  ],
+  "title": "AttachmentDuplicateFingerprintRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.duplicate_v2.AttachmentDuplicateFingerprintRequestV2",
+  "x-schema-version": "env-mock-agent/attachment-duplicate-fingerprint-request/v2"
+}

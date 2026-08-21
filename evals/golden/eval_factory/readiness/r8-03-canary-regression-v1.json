@@ -1,0 +1,311 @@
+{
+  "schema_version": "eval-factory-gold/r8-03-canary-regression-v1",
+  "claim_scope": "CANARY_REGRESSION_ONLY",
+  "policy_version": "canary-regression/r8-03-v1",
+  "authority": {
+    "cohort_manifest_sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6",
+    "policy_sha256": "ee4c13adeb90dfd446de834424a0b6c482d421111bbd52cdaf3e9e9fd5580365",
+    "template_sha256": "767f49450b3a22b7b9460814fa594d91d00b2df3df22afd784a3a0ca377d68be",
+    "report_sha256": "375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f"
+  },
+  "expectations": {
+    "must_succeed_ids": [
+      "LH_005",
+      "LH_006",
+      "LH_015",
+      "LH_019",
+      "LH_035",
+      "LH_040",
+      "LH_041",
+      "LH_046",
+      "LH_057",
+      "LH_058",
+      "LH_065",
+      "LH_066",
+      "LH_075",
+      "LH_077",
+      "LH_102"
+    ],
+    "any_typed_terminal_ids": [
+      "LH_011",
+      "LH_032",
+      "LH_067",
+      "LH_079",
+      "LH_089",
+      "LH_093",
+      "LH_098",
+      "LH_100",
+      "LH_101"
+    ]
+  },
+  "observed": {
+    "outcome": "PASSED",
+    "succeeded_ids": [
+      "LH_005",
+      "LH_006",
+      "LH_011",
+      "LH_015",
+      "LH_019",
+      "LH_032",
+      "LH_035",
+      "LH_040",
+      "LH_041",
+      "LH_046",
+      "LH_057",
+      "LH_058",
+      "LH_065",
+      "LH_066",
+      "LH_067",
+      "LH_075",
+      "LH_077",
+      "LH_079",
+      "LH_089",
+      "LH_093",
+      "LH_098",
+      "LH_100",
+      "LH_101",
+      "LH_102"
+    ],
+    "blocked_ids": [],
+    "failed_ids": [],
+    "infrastructure_error_ids": [],
+    "incomplete_ids": [],
+    "mismatched_ids": [],
+    "totals": {
+      "work_units": 240,
+      "work_leases": 240,
+      "stage_runs": 216,
+      "attempts": 240,
+      "retries": 0,
+      "resumes": 0,
+      "provider_invocations": 24
+    },
+    "stage_summaries": [
+      {
+        "stage": "trace_index",
+        "reached_count": 24,
+        "terminal_count": 0
+      },
+      {
+        "stage": "safety",
+        "reached_count": 24,
+        "terminal_count": 0
+      },
+      {
+        "stage": "label",
+        "reached_count": 24,
+        "terminal_count": 0
+      },
+      {
+        "stage": "task_authoring",
+        "reached_count": 24,
+        "terminal_count": 0
+      },
+      {
+        "stage": "attachment",
+        "reached_count": 24,
+        "terminal_count": 0
+      },
+      {
+        "stage": "item_quality",
+        "reached_count": 24,
+        "terminal_count": 24
+      }
+    ]
+  },
+  "case_results": [
+    {
+      "instance_id": "LH_005",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "f60f4ddda519376010ed592905905c81f1a8c12022d04f1942d7061ae400338a"
+    },
+    {
+      "instance_id": "LH_006",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "27823754288f9cb05b7a5ddac6bf5725ab85b8f1a44f55b595eade3b8be98fdb"
+    },
+    {
+      "instance_id": "LH_011",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "b9ef19b3b015947ba62a71ddf2b8abd4d17a554d7d82611c7359cea51a91fa9c"
+    },
+    {
+      "instance_id": "LH_015",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "415108635bf7eacf95c6a497924f4e660b43d2f726ee14c4ef72d71c14d8d705"
+    },
+    {
+      "instance_id": "LH_019",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "214dbd284b5a2e605474a9bd873c4da155e934a6f2ee356ce8d3f6193b3b1199"
+    },
+    {
+      "instance_id": "LH_032",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "e446c187456618f5531f9cb6f833e7f7b43de7917b97f0f9cc59a1beef8d5fa8"
+    },
+    {
+      "instance_id": "LH_035",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "5cfbc8eb1f4902c324db51a783218536addf18e93f5262777be803a2306a8d26"
+    },
+    {
+      "instance_id": "LH_040",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "2c0488689cb62f76390aa8ce99917737ce6f5a0c944481452b5ca4da0228ef67"
+    },
+    {
+      "instance_id": "LH_041",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "6141a39b7594f1b62530c603e085ee23a9c9ac7dd0d416e1893a043db7b0fbea"
+    },
+    {
+      "instance_id": "LH_046",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "1adef42f0e0b39d423beeb5cd4eb8d599f382ba7ee6a5326de53036faa0bda98"
+    },
+    {
+      "instance_id": "LH_057",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "586f23e22fec9334d12ad3e95ed19aae669d4dbdbd4f1e39c08327723cce4f6e"
+    },
+    {
+      "instance_id": "LH_058",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "eef1613ff06b0819310206ff9b16841e01712fb79f74a83450492c2087727aae"
+    },
+    {
+      "instance_id": "LH_065",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "87209fe7589e450fe58dacfe2894ee07d1873e06c94256b7677d8802bcd7159f"
+    },
+    {
+      "instance_id": "LH_066",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "1fe4669dc6ab946bce392b507b6eb2283e01d4a523bf9763318bf7f578ba0965"
+    },
+    {
+      "instance_id": "LH_067",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "d231de9752b23330cc1d93935cb4b6f4a1e75be0e6713014e0fe55a3d43b8ab8"
+    },
+    {
+      "instance_id": "LH_075",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "78c26b758a5c75ae84a8308067a82d820667ac2dc2b4d85bea4c635fea3f1f39"
+    },
+    {
+      "instance_id": "LH_077",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "9240451ecf5e02d0f290902c2c7ad94635a51647ed3bed6a013b0d1fb7b0a748"
+    },
+    {
+      "instance_id": "LH_079",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "596bc95a6ebc7bb15edf48b31c31d84731782622f3922e1202a5413be0f8839a"
+    },
+    {
+      "instance_id": "LH_089",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "5a5b964c9d2fdc84c356b575a76328b2d8452ac6ab5974851684d86a202853be"
+    },
+    {
+      "instance_id": "LH_093",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "a91a5538dd1faae5b59f93a23e53ebfcfadb3a8afff44de26abf6975f00891c2"
+    },
+    {
+      "instance_id": "LH_098",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "e1744e4444b0b15d94600fce1c0ac9c96b2d182529b7213e99dd010c06498baf"
+    },
+    {
+      "instance_id": "LH_100",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "d5364ef1f99c257574d190226127179f59fc3a638a538b1dcb059103dc20d762"
+    },
+    {
+      "instance_id": "LH_101",
+      "expectation": "ANY_TYPED_TERMINAL",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "cd12a31ea5013fb2ada6534d8790027602e735a361df36922d0127689d4e9b9c"
+    },
+    {
+      "instance_id": "LH_102",
+      "expectation": "MUST_SUCCEED",
+      "observed_outcome": "SUCCEEDED",
+      "case_result_sha256": "84733c844ede5b04f8e7be15a0bd7c25fe2959ae0691fec8a5fd343fcb9ef30a"
+    }
+  ],
+  "verification_cases": [
+    {
+      "case_id": "real-24-sequential",
+      "expected_outcome": "PASSED"
+    },
+    {
+      "case_id": "exact-report-replay",
+      "expected_replay": "ORIGINAL_REPORT"
+    },
+    {
+      "case_id": "cross-hash-seed-template-admission",
+      "expected_outcome": "STABLE"
+    },
+    {
+      "case_id": "report-cas-orphan",
+      "expected_error": "REPORT_INTEGRITY_FAILED"
+    },
+    {
+      "case_id": "report-content-corruption",
+      "expected_error": "REPORT_INTEGRITY_FAILED"
+    },
+    {
+      "case_id": "single-child-internal-error",
+      "expected_outcome": "COMPLETE_TYPED_REPORT"
+    }
+  ],
+  "claim_boundaries": {
+    "statistical_authority": false,
+    "stability_authority": false,
+    "load_authority": false,
+    "approval_authority": false,
+    "release_authority": false,
+    "production_attestation": false
+  },
+  "forbidden_surface": [
+    "source filenames or physical paths",
+    "raw trace content",
+    "seed payloads",
+    "task or prompt bodies",
+    "attachment bytes",
+    "provider payloads",
+    "private references",
+    "grader rules",
+    "hidden conditions",
+    "credentials",
+    "runtime transcripts",
+    "exception text",
+    "original final outputs"
+  ]
+}

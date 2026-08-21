@@ -1,0 +1,1032 @@
+{
+  "$defs": {
+    "AttachmentCandidateRevisionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_artifact_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Accepted Artifact Refs",
+          "type": "array"
+        },
+        "artifact_version_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Artifact Version Refs",
+          "type": "array"
+        },
+        "artifact_versions": {
+          "items": {
+            "$ref": "#/$defs/CandidateArtifactVersionV2"
+          },
+          "title": "Artifact Versions",
+          "type": "array"
+        },
+        "attachment_candidate_revision_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Attachment Candidate Revision Id",
+          "type": "string"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "base_reconstruction_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "candidate_output_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Candidate Output Refs",
+          "type": "array"
+        },
+        "candidate_revision_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Candidate Revision Sha256",
+          "type": "string"
+        },
+        "changed_artifact_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Changed Artifact Ids",
+          "type": "array"
+        },
+        "environment_spec_ref": {
+          "default": null,
+          "title": "Environment Spec Ref",
+          "type": "null"
+        },
+        "input_state_only": {
+          "default": null,
+          "title": "Input State Only",
+          "type": "null"
+        },
+        "package_sha256": {
+          "default": null,
+          "title": "Package Sha256",
+          "type": "null"
+        },
+        "policy_version": {
+          "const": "candidate-revision/r5-09-v1",
+          "default": "candidate-revision/r5-09-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "predecessor_revision_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "provenance_manifest_ref": {
+          "default": null,
+          "title": "Provenance Manifest Ref",
+          "type": "null"
+        },
+        "quality_report_ref": {
+          "default": null,
+          "title": "Quality Report Ref",
+          "type": "null"
+        },
+        "repair_plan_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "repair_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Repair Result Refs",
+          "type": "array"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/attachment-candidate-revision/v2",
+          "default": "eval-factory/attachment-candidate-revision/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attachment_candidate_revision_id",
+        "revision",
+        "base_reconstruction_result_ref",
+        "artifact_versions",
+        "artifact_version_refs",
+        "candidate_output_refs",
+        "changed_artifact_ids",
+        "candidate_revision_sha256",
+        "audit"
+      ],
+      "title": "AttachmentCandidateRevisionV2",
+      "type": "object"
+    },
+    "AttachmentSemanticReviewFindingCodeV2": {
+      "enum": [
+        "REQUIRED_COVERAGE_MISSING",
+        "DEPENDENCY_NOT_SOLVABLE",
+        "PUBLIC_RUBRIC_UNREACHABLE",
+        "SAFE_EVIDENCE_INSUFFICIENT",
+        "CAPABILITY_CONTRACT_MISMATCH",
+        "WORLD_FACT_INCONSISTENT",
+        "SOURCE_EVIDENCE_INCONSISTENT",
+        "ARTIFACT_CONTENT_UNREALISTIC",
+        "CROSS_ARTIFACT_INCONSISTENT",
+        "ARTIFACT_METADATA_INCONSISTENT",
+        "ANSWER_BEARING_CONTENT",
+        "COMPLETED_DELIVERABLE_EXPOSED",
+        "PRIVATE_REFERENCE_DERIVATION",
+        "GRADER_RULE_DISCLOSURE",
+        "HIDDEN_PASS_CONDITION_DISCLOSURE",
+        "ORIGINAL_FINAL_OUTPUT_DERIVATION",
+        "EXECUTABILITY_FAILURE",
+        "EVALUATOR_CONTRACT_MISMATCH",
+        "TOOL_POLICY_MISMATCH"
+      ],
+      "title": "AttachmentSemanticReviewFindingCodeV2",
+      "type": "string"
+    },
+    "CandidateArtifactVersionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "artifact_version": {
+          "minimum": 1,
+          "title": "Artifact Version",
+          "type": "integer"
+        },
+        "artifact_version_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Artifact Version Sha256",
+          "type": "string"
+        },
+        "attachment_dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Attachment Dependency Id",
+          "type": "string"
+        },
+        "base_artifact_build_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "build_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "candidate_artifact_version_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Candidate Artifact Version Id",
+          "type": "string"
+        },
+        "declared_validator_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Declared Validator Ids",
+          "type": "array"
+        },
+        "derivation_root_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Derivation Root Refs",
+          "type": "array"
+        },
+        "execution_request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "execution_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "logical_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Logical Path",
+          "type": "string"
+        },
+        "media_type": {
+          "maxLength": 255,
+          "minLength": 3,
+          "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "output_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Output Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "candidate-revision/r5-09-v1",
+          "default": "candidate-revision/r5-09-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "predecessor_artifact_version_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "repaired_artifact_result_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schema_version": {
+          "const": "eval-factory/candidate-artifact-version/v2",
+          "default": "eval-factory/candidate-artifact-version/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_artifact_version_id",
+        "artifact_id",
+        "attachment_dependency_id",
+        "artifact_version",
+        "base_artifact_build_result_ref",
+        "build_spec_ref",
+        "execution_request_ref",
+        "execution_result_ref",
+        "output_ref",
+        "output_sha256",
+        "logical_path",
+        "media_type",
+        "declared_validator_ids",
+        "derivation_root_refs",
+        "artifact_version_sha256"
+      ],
+      "title": "CandidateArtifactVersionV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "SemanticFindingResolutionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "current_subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Current Subject Refs",
+          "type": "array"
+        },
+        "deterministic_revalidation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "disposition": {
+          "enum": [
+            "CONFIRMED_RESOLVED",
+            "PERSISTS"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "evidence_ref_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Evidence Ref Ids",
+          "type": "array"
+        },
+        "facade_resolution_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "old_subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Old Subject Refs",
+          "type": "array"
+        },
+        "policy_version": {
+          "const": "semantic-review/r5-09-v1",
+          "default": "semantic-review/r5-09-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "prior_finding_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "repair_plan_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "repair_result_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Repair Result Refs",
+          "type": "array"
+        },
+        "resolution_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Resolution Sha256",
+          "type": "string"
+        },
+        "resolving_stage_run_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/semantic-finding-resolution/v2",
+          "default": "eval-factory/semantic-finding-resolution/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_finding_resolution_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Semantic Finding Resolution Id",
+          "type": "string"
+        },
+        "successor_finding_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "semantic_finding_resolution_id",
+        "facade_resolution_ref",
+        "resolving_stage_run_ref",
+        "prior_finding_ref",
+        "old_subject_refs",
+        "current_subject_refs",
+        "repair_plan_ref",
+        "repair_result_refs",
+        "deterministic_revalidation_ref",
+        "disposition",
+        "evidence_ref_ids",
+        "resolution_sha256",
+        "audit"
+      ],
+      "title": "SemanticFindingResolutionV2",
+      "type": "object"
+    },
+    "SemanticFindingScopeV2": {
+      "enum": [
+        "ITEM",
+        "ARTIFACT"
+      ],
+      "title": "SemanticFindingScopeV2",
+      "type": "string"
+    },
+    "SemanticReviewFindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Artifact Ids",
+          "type": "array"
+        },
+        "artifact_repair_allowed": {
+          "title": "Artifact Repair Allowed",
+          "type": "boolean"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_revision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "code": {
+          "$ref": "#/$defs/AttachmentSemanticReviewFindingCodeV2"
+        },
+        "evidence_ref_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Evidence Ref Ids",
+          "type": "array"
+        },
+        "facade_finding_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_review_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "finding_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Finding Sha256",
+          "type": "string"
+        },
+        "non_waivable": {
+          "title": "Non Waivable",
+          "type": "boolean"
+        },
+        "policy_version": {
+          "const": "semantic-review/r5-09-v1",
+          "default": "semantic-review/r5-09-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "predecessor_finding_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "round": {
+          "$ref": "#/$defs/SemanticReviewRoundV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/semantic-review-finding/v2",
+          "default": "eval-factory/semantic-review-finding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/SemanticFindingScopeV2"
+        },
+        "semantic_review_finding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Semantic Review Finding Id",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "status": {
+          "const": "OPEN",
+          "default": "OPEN",
+          "title": "Status",
+          "type": "string"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "semantic_review_finding_id",
+        "facade_finding_ref",
+        "facade_review_result_ref",
+        "round",
+        "scope",
+        "code",
+        "candidate_revision_ref",
+        "subject_refs",
+        "artifact_ids",
+        "evidence_ref_ids",
+        "severity",
+        "non_waivable",
+        "artifact_repair_allowed",
+        "finding_sha256",
+        "audit"
+      ],
+      "title": "SemanticReviewFindingV2",
+      "type": "object"
+    },
+    "SemanticReviewRoundOutcomeV2": {
+      "enum": [
+        "ACCEPTED",
+        "REQUIRES_REPAIR",
+        "REJECTED",
+        "ABSTAINED",
+        "BLOCKED"
+      ],
+      "title": "SemanticReviewRoundOutcomeV2",
+      "type": "string"
+    },
+    "SemanticReviewRoundResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_revision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "clean_context_attestation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "context_view_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "deterministic_validation_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_review_request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_review_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "finding_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Finding Refs",
+          "type": "array"
+        },
+        "outcome": {
+          "$ref": "#/$defs/SemanticReviewRoundOutcomeV2"
+        },
+        "policy_version": {
+          "const": "semantic-review/r5-09-v1",
+          "default": "semantic-review/r5-09-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "predecessor_round_result_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "prior_finding_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Prior Finding Refs",
+          "type": "array"
+        },
+        "prior_repair_plan_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Prior Repair Plan Refs",
+          "type": "array"
+        },
+        "prior_repair_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Prior Repair Result Refs",
+          "type": "array"
+        },
+        "resolution_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Resolution Refs",
+          "type": "array"
+        },
+        "reviewer_role": {
+          "$ref": "#/$defs/SemanticReviewerRoleV2"
+        },
+        "round": {
+          "$ref": "#/$defs/SemanticReviewRoundV2"
+        },
+        "round_result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Round Result Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/semantic-review-round-result/v2",
+          "default": "eval-factory/semantic-review-round-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_review_round_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Semantic Review Round Result Id",
+          "type": "string"
+        },
+        "stage_run_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "semantic_review_round_result_id",
+        "round",
+        "reviewer_role",
+        "stage_run_ref",
+        "context_view_ref",
+        "clean_context_attestation_ref",
+        "facade_review_request_ref",
+        "facade_review_result_ref",
+        "candidate_revision_ref",
+        "deterministic_validation_result_ref",
+        "outcome",
+        "accepted",
+        "round_result_sha256",
+        "audit"
+      ],
+      "title": "SemanticReviewRoundResultV2",
+      "type": "object"
+    },
+    "SemanticReviewRoundV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY",
+        "LEAKAGE_EXECUTABILITY"
+      ],
+      "title": "SemanticReviewRoundV2",
+      "type": "string"
+    },
+    "SemanticReviewWorkflowOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "REQUIRES_REPAIR",
+        "REJECTED",
+        "BLOCKED",
+        "UPSTREAM_INCOMPLETE"
+      ],
+      "title": "SemanticReviewWorkflowOutcomeV2",
+      "type": "string"
+    },
+    "SemanticReviewerRoleV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY_REVIEWER",
+        "REALISM_CONSISTENCY_REVIEWER",
+        "LEAKAGE_EXECUTABILITY_REVIEWER"
+      ],
+      "title": "SemanticReviewerRoleV2",
+      "type": "string"
+    },
+    "Severity": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/semantic_review_workflow_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_artifact_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Accepted Artifact Refs",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "current_candidate_revision": {
+      "$ref": "#/$defs/AttachmentCandidateRevisionV2"
+    },
+    "current_candidate_revision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "current_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Current Finding Refs",
+      "type": "array"
+    },
+    "deterministic_validation_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Deterministic Validation Result Refs",
+      "type": "array"
+    },
+    "environment_spec_ref": {
+      "default": null,
+      "title": "Environment Spec Ref",
+      "type": "null"
+    },
+    "initial_candidate_revision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "initial_deterministic_validation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "input_state_only": {
+      "default": null,
+      "title": "Input State Only",
+      "type": "null"
+    },
+    "outcome": {
+      "$ref": "#/$defs/SemanticReviewWorkflowOutcomeV2"
+    },
+    "package_sha256": {
+      "default": null,
+      "title": "Package Sha256",
+      "type": "null"
+    },
+    "policy_version": {
+      "const": "semantic-review/r5-09-v1",
+      "default": "semantic-review/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "provenance_manifest_ref": {
+      "default": null,
+      "title": "Provenance Manifest Ref",
+      "type": "null"
+    },
+    "quality_report_ref": {
+      "default": null,
+      "title": "Quality Report Ref",
+      "type": "null"
+    },
+    "repair_plan_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Repair Plan Refs",
+      "type": "array"
+    },
+    "repair_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Repair Result Refs",
+      "type": "array"
+    },
+    "resolution_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Resolution Refs",
+      "type": "array"
+    },
+    "review_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "round_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Round Result Refs",
+      "type": "array"
+    },
+    "round_results": {
+      "items": {
+        "$ref": "#/$defs/SemanticReviewRoundResultV2"
+      },
+      "title": "Round Results",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/semantic-review-workflow-result/v2",
+      "default": "eval-factory/semantic-review-workflow-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_findings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SemanticReviewFindingV2"
+      },
+      "title": "Semantic Findings",
+      "type": "array"
+    },
+    "semantic_resolutions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SemanticFindingResolutionV2"
+      },
+      "title": "Semantic Resolutions",
+      "type": "array"
+    },
+    "semantic_review_workflow_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Semantic Review Workflow Result Id",
+      "type": "string"
+    },
+    "stage_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Stage Result Refs",
+      "type": "array"
+    },
+    "stale_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Stale Finding Refs",
+      "type": "array"
+    },
+    "workflow_result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Workflow Result Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "semantic_review_workflow_result_id",
+    "initial_candidate_revision_ref",
+    "initial_deterministic_validation_result_ref",
+    "review_policy_ref",
+    "current_candidate_revision",
+    "current_candidate_revision_ref",
+    "deterministic_validation_result_refs",
+    "round_results",
+    "round_result_refs",
+    "stage_result_refs",
+    "outcome",
+    "workflow_result_sha256",
+    "audit"
+  ],
+  "title": "SemanticReviewWorkflowResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.review_v2.SemanticReviewWorkflowResultV2",
+  "x-schema-version": "eval-factory/semantic-review-workflow-result/v2"
+}

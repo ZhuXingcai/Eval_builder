@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.eval-factory.local/annotation/v1/parser-annotation.schema.json",
+  "title": "Eval Factory Parser Annotation v1",
+  "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/annotationRecord",
+  "properties": {
+    "annotation_type": {
+      "const": "PARSER"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "$defs": {
+    "capabilityStatus": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "MISSING",
+        "UNKNOWN"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parse_outcome",
+        "capability_truth",
+        "repair_expectations",
+        "event_expectations",
+        "call_result_expectations",
+        "source_span_accuracy",
+        "negative_predicate_capabilities",
+        "blocking_reason"
+      ],
+      "properties": {
+        "parse_outcome": {
+          "enum": [
+            "STRICT",
+            "REPAIRED",
+            "PARTIAL",
+            "UNPARSEABLE"
+          ]
+        },
+        "capability_truth": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "conversation_events",
+            "tool_events",
+            "call_result_pairing",
+            "file_timeline",
+            "final_response",
+            "attachment_observations"
+          ],
+          "properties": {
+            "conversation_events": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "tool_events": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "call_result_pairing": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "file_timeline": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "final_response": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "attachment_observations": {
+              "$ref": "#/$defs/capabilityStatus"
+            }
+          }
+        },
+        "repair_expectations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "field",
+              "rule_id",
+              "expected_outcome",
+              "semantic_critical",
+              "evidence_ref_ids"
+            ],
+            "properties": {
+              "field": {
+                "enum": [
+                  "request",
+                  "response",
+                  "extra"
+                ]
+              },
+              "rule_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "expected_outcome": {
+                "enum": [
+                  "APPLY",
+                  "REJECT",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "semantic_critical": {
+                "type": "boolean"
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              }
+            }
+          }
+        },
+        "event_expectations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event_type",
+              "expected_count",
+              "evidence_ref_ids"
+            ],
+            "properties": {
+              "event_type": {
+                "enum": [
+                  "user_text",
+                  "assistant_text",
+                  "system_context",
+                  "tool_call",
+                  "tool_result",
+                  "runtime_error",
+                  "continuation_marker",
+                  "attachment_reference"
+                ]
+              },
+              "expected_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              }
+            }
+          }
+        },
+        "call_result_expectations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "call_ref",
+              "result_ref",
+              "relationship",
+              "evidence_ref_ids"
+            ],
+            "properties": {
+              "call_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 255
+              },
+              "result_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 255
+              },
+              "relationship": {
+                "enum": [
+                  "PAIRED",
+                  "ORPHAN_CALL",
+                  "ORPHAN_RESULT",
+                  "AMBIGUOUS",
+                  "DUPLICATE_ID"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              }
+            }
+          }
+        },
+        "source_span_accuracy": {
+          "enum": [
+            "EXACT",
+            "APPROXIMATE",
+            "MIXED",
+            "UNAVAILABLE"
+          ]
+        },
+        "negative_predicate_capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "conversation_events",
+              "tool_events",
+              "call_result_pairing",
+              "file_timeline",
+              "final_response",
+              "attachment_observations"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "blocking_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_resource_grant_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "execution_handle_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "fencing_token": {
+      "minimum": 1,
+      "title": "Fencing Token",
+      "type": "integer"
+    },
+    "network_request_limit": {
+      "minimum": 0,
+      "title": "Network Request Limit",
+      "type": "integer"
+    },
+    "operation_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "policy_version": {
+      "const": "attachment-resource/r6-04-v1",
+      "default": "attachment-resource/r6-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "process_limit": {
+      "minimum": 0,
+      "title": "Process Limit",
+      "type": "integer"
+    },
+    "renderer_limit": {
+      "minimum": 0,
+      "title": "Renderer Limit",
+      "type": "integer"
+    },
+    "reservation_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "resource_grant_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Resource Grant Id",
+      "type": "string"
+    },
+    "resource_grant_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resource Grant Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-resource-grant/v2",
+      "default": "env-mock-agent/attachment-resource-grant/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "storage_byte_limit": {
+      "minimum": 0,
+      "title": "Storage Byte Limit",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "resource_grant_id",
+    "reservation_ref",
+    "execution_handle_ref",
+    "operation_ref",
+    "fencing_token",
+    "process_limit",
+    "renderer_limit",
+    "network_request_limit",
+    "storage_byte_limit",
+    "resource_grant_sha256"
+  ],
+  "title": "AttachmentResourceGrantV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.resource_v2.AttachmentResourceGrantV2",
+  "x-schema-version": "env-mock-agent/attachment-resource-grant/v2"
+}

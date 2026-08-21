@@ -1,0 +1,46 @@
+{
+  "$defs": {
+    "SchedulerLoadFaultPointV2": {
+      "enum": [
+        "AFTER_JOB_CREATE",
+        "AFTER_WORK_GRAPH_CREATE",
+        "AFTER_JOB_START",
+        "AFTER_READINESS_RECORD",
+        "AFTER_CONTROL_POLICY_BIND",
+        "AFTER_LEASE_ACQUIRE",
+        "AFTER_STAGE_COMPLETION",
+        "AFTER_OBSERVABILITY_REFRESH"
+      ],
+      "title": "SchedulerLoadFaultPointV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/scheduler_load_fault_count_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "count": {
+      "const": 125,
+      "default": 125,
+      "title": "Count",
+      "type": "integer"
+    },
+    "fault_point": {
+      "$ref": "#/$defs/SchedulerLoadFaultPointV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/scheduler-load-fault-count/v2",
+      "default": "eval-factory/scheduler-load-fault-count/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fault_point"
+  ],
+  "title": "SchedulerLoadFaultCountV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadFaultCountV2",
+  "x-schema-version": "eval-factory/scheduler-load-fault-count/v2"
+}

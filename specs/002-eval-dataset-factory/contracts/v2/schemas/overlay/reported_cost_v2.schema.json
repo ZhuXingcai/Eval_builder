@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "TelemetryAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "DERIVED",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "TelemetryAvailabilityV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/reported_cost_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "amount_microusd": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Amount Microusd"
+    },
+    "availability": {
+      "$ref": "#/$defs/TelemetryAvailabilityV2"
+    },
+    "currency": {
+      "const": "USD",
+      "default": "USD",
+      "title": "Currency",
+      "type": "string"
+    },
+    "rounding": {
+      "anyOf": [
+        {
+          "const": "HALF_EVEN_MICRO_USD",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rounding"
+    }
+  },
+  "required": [
+    "availability"
+  ],
+  "title": "ReportedCostV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.telemetry_v2.ReportedCostV2"
+}

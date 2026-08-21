@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.eval-factory.local/annotation/v1/release-annotation.schema.json",
+  "title": "Eval Factory Release Annotation v1",
+  "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/annotationRecord",
+  "properties": {
+    "annotation_type": {
+      "const": "RELEASE"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "sha256"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 512
+        },
+        "sha256": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/sha256"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component_hashes",
+        "package_manifest_sha256",
+        "package_provenance_exact_set",
+        "hard_gate_findings",
+        "required_review_roles",
+        "review_records_current",
+        "channel",
+        "registry_target",
+        "registry_isolated",
+        "production_attestation",
+        "expected_action",
+        "expected_state",
+        "release_allowed"
+      ],
+      "properties": {
+        "component_hashes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "query_spec",
+            "environment_spec",
+            "rubric_set",
+            "evaluator_spec",
+            "reference_policy",
+            "tool_policy",
+            "provenance_manifest",
+            "quality_report"
+          ],
+          "properties": {
+            "query_spec": {
+              "$ref": "#/$defs/component"
+            },
+            "environment_spec": {
+              "$ref": "#/$defs/component"
+            },
+            "rubric_set": {
+              "$ref": "#/$defs/component"
+            },
+            "evaluator_spec": {
+              "$ref": "#/$defs/component"
+            },
+            "reference_policy": {
+              "$ref": "#/$defs/component"
+            },
+            "tool_policy": {
+              "$ref": "#/$defs/component"
+            },
+            "provenance_manifest": {
+              "$ref": "#/$defs/component"
+            },
+            "quality_report": {
+              "$ref": "#/$defs/component"
+            }
+          }
+        },
+        "package_manifest_sha256": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/sha256"
+        },
+        "package_provenance_exact_set": {
+          "type": "boolean"
+        },
+        "hard_gate_findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "finding_ref",
+              "severity",
+              "status",
+              "non_waivable",
+              "evidence_ref_ids"
+            ],
+            "properties": {
+              "finding_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 255
+              },
+              "severity": {
+                "enum": [
+                  "P0",
+                  "P1",
+                  "P2",
+                  "P3"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "OPEN",
+                  "RESOLVED",
+                  "SUPERSEDED"
+                ]
+              },
+              "non_waivable": {
+                "type": "boolean"
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              }
+            }
+          }
+        },
+        "required_review_roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "LABEL_REVIEWER",
+              "TASK_REVIEWER",
+              "PROVENANCE_REVIEWER",
+              "ARTIFACT_REVIEWER",
+              "RUBRIC_REVIEWER",
+              "EVALUATOR_REVIEWER",
+              "PRIVACY_REVIEWER",
+              "SAFETY_EXCEPTION_REVIEWER",
+              "ITEM_REVIEWER",
+              "RELEASE_AUTHORITY",
+              "AUDITOR"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "review_records_current": {
+          "type": "boolean"
+        },
+        "channel": {
+          "enum": [
+            "CANARY",
+            "INTERNAL_REVIEW",
+            "PRODUCTION"
+          ]
+        },
+        "registry_target": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "registry_isolated": {
+          "type": "boolean"
+        },
+        "production_attestation": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/component"
+            }
+          ]
+        },
+        "expected_action": {
+          "enum": [
+            "SUBMIT_REVIEW",
+            "APPROVE",
+            "REJECT",
+            "PUBLISH",
+            "REVOKE",
+            "BLOCK"
+          ]
+        },
+        "expected_state": {
+          "enum": [
+            "CANDIDATE",
+            "NEEDS_REVIEW",
+            "REJECTED",
+            "APPROVED",
+            "RELEASED",
+            "REVOKED"
+          ]
+        },
+        "release_allowed": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "channel": {
+                "const": "PRODUCTION"
+              }
+            },
+            "required": [
+              "channel"
+            ]
+          },
+          "then": {
+            "properties": {
+              "production_attestation": {
+                "$ref": "#/$defs/component"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

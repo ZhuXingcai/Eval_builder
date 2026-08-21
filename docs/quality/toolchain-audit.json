@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "tools": {
+    "libreoffice": {
+      "status": "missing"
+    },
+    "ffmpeg": {
+      "status": "missing"
+    },
+    "ffprobe": {
+      "status": "missing"
+    },
+    "pandoc": {
+      "status": "missing"
+    },
+    "pdftotext": {
+      "status": "missing"
+    },
+    "pdfinfo": {
+      "status": "missing"
+    },
+    "tesseract": {
+      "status": "missing"
+    },
+    "qpdf": {
+      "status": "missing"
+    },
+    "ghostscript": {
+      "status": "missing"
+    },
+    "imagemagick": {
+      "status": "missing"
+    }
+  },
+  "providers": [
+    {
+      "name": "text",
+      "asset_types": [
+        "txt",
+        "text",
+        "md",
+        "markdown",
+        "html",
+        "rtf"
+      ],
+      "available": true,
+      "reason": ""
+    },
+    {
+      "name": "structured",
+      "asset_types": [
+        "json",
+        "yaml",
+        "yml"
+      ],
+      "available": true,
+      "reason": ""
+    },
+    {
+      "name": "docx",
+      "asset_types": [
+        "docx"
+      ],
+      "available": true,
+      "reason": ""
+    },
+    {
+      "name": "xlsx",
+      "asset_types": [
+        "xlsx"
+      ],
+      "available": true,
+      "reason": ""
+    },
+    {
+      "name": "pdf",
+      "asset_types": [
+        "pdf"
+      ],
+      "available": true,
+      "reason": ""
+    },
+    {
+      "name": "code_project",
+      "asset_types": [
+        "code",
+        "project",
+        "directory"
+      ],
+      "available": true,
+      "reason": ""
+    }
+  ]
+}

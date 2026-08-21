@@ -1,0 +1,33 @@
+{
+  "schema_version": "eval-factory-release-profile-decision/v1",
+  "decision_id": "release-profile-decision://r0-11/v1",
+  "status": "APPROVED",
+  "approved_spec": "002-eval-dataset-factory/approved-2026-07-19",
+  "contract_manifest_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9",
+  "profiles": [
+    {
+      "profile": "LH",
+      "profile_version": "v1",
+      "decision": "REQUIRED",
+      "enabled_channels": [
+        "CANARY",
+        "INTERNAL_REVIEW"
+      ],
+      "production_enabled": false,
+      "production_gate": "R8_PRODUCTION_READINESS_ATTESTATION",
+      "registry_isolation_required": true,
+      "reason": "LH is the mandatory first release profile and already has an existing compatibility adapter and three-item export boundary."
+    },
+    {
+      "profile": "GENERIC",
+      "profile_version": "v1",
+      "decision": "DEFERRED_APPROVAL_REQUIRED",
+      "enabled_channels": [],
+      "production_enabled": false,
+      "production_gate": "NEW_APPROVED_RELEASE_PROFILE_DECISION",
+      "registry_isolation_required": true,
+      "reason": "Generic output remains useful for development but is not an approved dataset release profile in the first slice."
+    }
+  ],
+  "approved_at": "2026-07-20T00:00:00Z"
+}

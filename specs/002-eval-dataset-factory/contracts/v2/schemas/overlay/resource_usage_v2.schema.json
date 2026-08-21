@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "NonModelResourceVectorV2": {
+      "additionalProperties": false,
+      "properties": {
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 0,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 0,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/non-model-resource-vector/v2",
+          "default": "eval-factory/non-model-resource-vector/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "storage_bytes": {
+          "minimum": 0,
+          "title": "Storage Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "processes",
+        "renderers",
+        "network_requests",
+        "storage_bytes"
+      ],
+      "title": "NonModelResourceVectorV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/resource_usage_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "observed": {
+      "$ref": "#/$defs/NonModelResourceVectorV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/resource-usage/v2",
+      "default": "eval-factory/resource-usage/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "usage_policy_version": {
+      "const": "resource-control/r6-04-v1",
+      "default": "resource-control/r6-04-v1",
+      "title": "Usage Policy Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "observed"
+  ],
+  "title": "ResourceUsageV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.resource_v2.ResourceUsageV2",
+  "x-schema-version": "eval-factory/resource-usage/v2"
+}

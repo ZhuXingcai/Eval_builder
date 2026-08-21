@@ -1,0 +1,91 @@
+{
+  "schema_version": "eval-factory-r5-10-gold/v1",
+  "policy_version": "item-quality/r5-10-v1",
+  "scenarios": [
+    {
+      "scenario_id": "clean-package-pass",
+      "workflow_outcome": "PASSED",
+      "current_finding_count": 0,
+      "package_member_count": 1,
+      "provenance_binding_count": 1,
+      "environment_artifact_count": 1,
+      "quality_outcome": "PASSED",
+      "approvable": true,
+      "final_package": true
+    },
+    {
+      "scenario_id": "repaired-candidate-pass",
+      "workflow_outcome": "PASSED",
+      "repair_result_count": 1,
+      "current_finding_count": 0,
+      "stale_finding_count": 1,
+      "current_resolution_count": 1,
+      "quality_outcome": "PASSED",
+      "approvable": true,
+      "final_package": true
+    },
+    {
+      "scenario_id": "empty-package-pass",
+      "workflow_outcome": "PASSED",
+      "package_member_count": 0,
+      "provenance_binding_count": 0,
+      "environment_artifact_count": 0,
+      "quality_outcome": "PASSED",
+      "approvable": true,
+      "final_package": true
+    },
+    {
+      "scenario_id": "item-requires-repair",
+      "workflow_outcome": "REQUIRES_REPAIR",
+      "current_finding_count": 1,
+      "open_p1_count": 1,
+      "quality_outcome": "REQUIRES_REPAIR",
+      "approvable": false,
+      "final_package": false
+    },
+    {
+      "scenario_id": "non-waivable-rejected",
+      "workflow_outcome": "REJECTED",
+      "current_finding_count": 1,
+      "open_p0_count": 1,
+      "unresolved_non_waivable_count": 1,
+      "quality_outcome": "REJECTED",
+      "approvable": false,
+      "final_package": false
+    },
+    {
+      "scenario_id": "review-blocked",
+      "workflow_outcome": "BLOCKED",
+      "quality_outcome": "BLOCKED",
+      "approvable": false,
+      "final_package": false
+    },
+    {
+      "scenario_id": "upstream-incomplete",
+      "workflow_outcome": "UPSTREAM_INCOMPLETE",
+      "quality_outcome": "UPSTREAM_INCOMPLETE",
+      "approvable": false,
+      "final_package": false
+    },
+    {
+      "scenario_id": "package-inventory-mismatch",
+      "workflow_outcome": "PASSED",
+      "package_failure_code": "PACKAGE_INVENTORY_MISMATCH",
+      "quality_outcome": "BLOCKED",
+      "approvable": false,
+      "final_package": false
+    },
+    {
+      "scenario_id": "stale-subject-rejected",
+      "workflow_outcome": "PASSED",
+      "structural_error": "STALE_SUBJECT",
+      "quality_report_emitted": false,
+      "final_package": false
+    }
+  ],
+  "downstream_boundary": {
+    "evaluation_item_ref": null,
+    "batch_quality_report_ref": null,
+    "release_decision_ref": null
+  }
+}

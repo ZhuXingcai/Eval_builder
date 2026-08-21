@@ -1,0 +1,115 @@
+{
+  "schema_version": "eval-factory/production-readiness-review-policy/v2",
+  "policy_id": "production-readiness-review-policy://sha256/c157f156d397589e2c1b5a479aad00ace498c76d4744d44214af3875535a3437",
+  "data_classification_policy_refs": [
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "data-classification-policy",
+      "object_id": "data-classification-policy://v1",
+      "object_version": "v1",
+      "object_sha256": "a6d2c3e136c9920199ef4bd49d2cde0f470e516feb935aced5b23ea29ac4feb0"
+    },
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "data-classification-policy",
+      "object_id": "data-classification-policy://v2",
+      "object_version": "v2",
+      "object_sha256": "e264870a49de9c2e2e1ecfcc582055d05da9da8bb3e0cebd8210de175023875f"
+    }
+  ],
+  "user_approval_policy_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "user-approval-policy",
+    "object_id": "user-approval-policy://v2",
+    "object_version": "v2",
+    "object_sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f"
+  },
+  "release_profile_decision_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "release-profile-decision",
+    "object_id": "release-profile-decision://r0-11/v1",
+    "object_version": "v1",
+    "object_sha256": "6b4c0f86d76757c2ea7a6331022e2d6926cfb79f1424dfc664929ff6357d5ace"
+  },
+  "repository_pending_evidence_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "production-readiness-review-repository-evidence",
+    "object_id": "production-readiness-review-repository-evidence://r8-07/v1",
+    "object_version": "json/v1",
+    "object_sha256": "60f0652872f8b30cb78148e349f5c3ac89ccb2bba8206dfe8f3e0c7edcfb69ca"
+  },
+  "trusted_authority_registry_ref": null,
+  "evidence_class": "REPOSITORY_PENDING_ONLY",
+  "required_domains": [
+    "SECURITY",
+    "PRIVACY",
+    "RELEASE_PERMISSION",
+    "OPERATIONS_SLO"
+  ],
+  "required_operations_metrics": [
+    "THROUGHPUT_MILLIJOBS_PER_SECOND",
+    "P50_LATENCY_MICROSECONDS",
+    "P95_LATENCY_MICROSECONDS",
+    "MODEL_REQUESTS_PER_JOB_MILLI",
+    "COST_MICRO_USD_PER_JOB",
+    "QUEUE_WAIT_P95_MICROSECONDS",
+    "ERROR_RATE_BASIS_POINTS",
+    "RESUME_SUCCESS_BASIS_POINTS"
+  ],
+  "max_approvals": 4,
+  "max_evidence_refs": 64,
+  "max_private_bytes": 100000000,
+  "max_report_bytes": 10000000,
+  "policy_version": "production-readiness-review/r8-07-v1",
+  "policy_sha256": "c157f156d397589e2c1b5a479aad00ace498c76d4744d44214af3875535a3437",
+  "audit": {
+    "schema_version": "eval-factory/contract-audit/v1",
+    "created_at": "2026-08-03T00:00:00Z",
+    "created_by": "r8-07-policy-authority",
+    "governing_versions": [
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "production-readiness-review",
+        "version": "production-readiness-review/r8-07-v1",
+        "sha256": null
+      }
+    ],
+    "input_refs": [
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "data-classification-policy",
+        "object_id": "data-classification-policy://v1",
+        "object_version": "v1",
+        "object_sha256": "a6d2c3e136c9920199ef4bd49d2cde0f470e516feb935aced5b23ea29ac4feb0"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "data-classification-policy",
+        "object_id": "data-classification-policy://v2",
+        "object_version": "v2",
+        "object_sha256": "e264870a49de9c2e2e1ecfcc582055d05da9da8bb3e0cebd8210de175023875f"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "production-readiness-review-repository-evidence",
+        "object_id": "production-readiness-review-repository-evidence://r8-07/v1",
+        "object_version": "json/v1",
+        "object_sha256": "60f0652872f8b30cb78148e349f5c3ac89ccb2bba8206dfe8f3e0c7edcfb69ca"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "release-profile-decision",
+        "object_id": "release-profile-decision://r0-11/v1",
+        "object_version": "v1",
+        "object_sha256": "6b4c0f86d76757c2ea7a6331022e2d6926cfb79f1424dfc664929ff6357d5ace"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "user-approval-policy",
+        "object_id": "user-approval-policy://v2",
+        "object_version": "v2",
+        "object_sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f"
+      }
+    ]
+  }
+}

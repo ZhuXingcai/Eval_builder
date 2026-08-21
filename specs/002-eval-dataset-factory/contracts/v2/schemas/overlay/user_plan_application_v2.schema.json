@@ -1,0 +1,305 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/user_plan_application_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "adjustment_effect_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "affected_item_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Affected Item Ids",
+      "type": "array"
+    },
+    "application_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Application Id",
+      "type": "string"
+    },
+    "application_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Application Sha256",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "batch_revalidation_required": {
+      "const": true,
+      "default": true,
+      "title": "Batch Revalidation Required",
+      "type": "boolean"
+    },
+    "checkpoint": {
+      "$ref": "#/$defs/ApprovalCheckpoint"
+    },
+    "decision_commit_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "decision_record_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "excluded_item_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Excluded Item Ids",
+      "type": "array"
+    },
+    "final_checkpoint_reapproval_required": {
+      "title": "Final Checkpoint Reapproval Required",
+      "type": "boolean"
+    },
+    "invalidated_object_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Invalidated Object Refs",
+      "type": "array"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "user-plan-application/r7-06-v1",
+      "default": "user-plan-application/r7-06-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "preserved_object_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Preserved Object Refs",
+      "type": "array"
+    },
+    "replacement_root_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Replacement Root Refs",
+      "type": "array"
+    },
+    "required_checkpoint_reapprovals": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ApprovalCheckpoint"
+      },
+      "title": "Required Checkpoint Reapprovals",
+      "type": "array"
+    },
+    "restart_stages": {
+      "items": {
+        "$ref": "#/$defs/StageNameV2"
+      },
+      "minItems": 1,
+      "title": "Restart Stages",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/user-plan-application/v2",
+      "default": "eval-factory/user-plan-application/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_root_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Source Root Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "application_id",
+    "job_id",
+    "decision_commit_ref",
+    "decision_record_ref",
+    "adjustment_effect_ref",
+    "checkpoint",
+    "source_root_refs",
+    "replacement_root_refs",
+    "invalidated_object_refs",
+    "affected_item_ids",
+    "restart_stages",
+    "final_checkpoint_reapproval_required",
+    "policy_ref",
+    "application_sha256",
+    "audit"
+  ],
+  "title": "UserPlanApplicationV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.approval_application_v2.UserPlanApplicationV2",
+  "x-schema-version": "eval-factory/user-plan-application/v2"
+}

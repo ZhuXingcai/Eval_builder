@@ -1,0 +1,79 @@
+{
+  "cases": [
+    {
+      "checkpoint": "LABEL_PLAN",
+      "expected_job_status": "BLOCKED",
+      "expected_state": "PENDING_DECISION",
+      "name": "enabled-label-pauses",
+      "outcome": "PAUSED"
+    },
+    {
+      "checkpoint": "LABEL_PLAN",
+      "expected_interaction_count": 0,
+      "expected_job_status": "RUNNING",
+      "name": "disabled-label-does-not-pause",
+      "outcome": "DISABLED"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "expected_interaction_count": 0,
+      "expected_job_status": "RUNNING",
+      "name": "environment-not-required-does-not-pause",
+      "outcome": "NOT_REQUIRED"
+    },
+    {
+      "checkpoint": "LABEL_PLAN",
+      "decision": "ACCEPT",
+      "expected_job_status": "BLOCKED",
+      "expected_resume_disposition": "DIRECT",
+      "expected_state": "RESUMABLE",
+      "name": "accept-requires-explicit-resume"
+    },
+    {
+      "checkpoint": "TASK_REWRITE_PLAN",
+      "decision": "ADJUST",
+      "expected_job_status": "BLOCKED",
+      "expected_resume_disposition": "AFTER_REVALIDATION",
+      "expected_state": "WAITING_REVALIDATION",
+      "name": "adjust-waits-for-r7-06"
+    },
+    {
+      "checkpoint": "LABEL_PLAN",
+      "decision": "REQUEST_MORE_EXAMPLES",
+      "expected_job_status": "BLOCKED",
+      "expected_resume_disposition": "WAITING_REVISION",
+      "expected_state": "WAITING_REVISION",
+      "name": "request-more-remains-blocked"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "decision": "DEFER",
+      "expected_job_status": "BLOCKED",
+      "expected_resume_disposition": "DEFERRED",
+      "expected_state": "DEFERRED",
+      "name": "defer-remains-blocked"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "decision": "REJECT",
+      "expected_job_status": "FAILED",
+      "expected_resume_disposition": "TERMINATED",
+      "expected_state": "TERMINATED",
+      "name": "plan-reject-terminates-job"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "decision": "REJECT",
+      "expected_job_status": "BLOCKED",
+      "expected_resume_disposition": "DIRECT",
+      "expected_state": "RESUMABLE",
+      "name": "final-reject-resumes-to-r7-08"
+    },
+    {
+      "expected_error": "CHECKPOINT_REQUIRED",
+      "name": "generic-resume-cannot-bypass-checkpoint"
+    }
+  ],
+  "policy_version": "checkpoint-interaction/r7-07-v1",
+  "schema_version": "eval-factory/checkpoint-interaction-gold/v1"
+}

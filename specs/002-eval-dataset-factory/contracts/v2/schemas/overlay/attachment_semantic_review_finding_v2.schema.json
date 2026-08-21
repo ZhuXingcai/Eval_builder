@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "AttachmentSemanticFindingScopeV2": {
+      "enum": [
+        "ITEM",
+        "ARTIFACT"
+      ],
+      "title": "AttachmentSemanticFindingScopeV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewFindingCodeV2": {
+      "enum": [
+        "REQUIRED_COVERAGE_MISSING",
+        "DEPENDENCY_NOT_SOLVABLE",
+        "PUBLIC_RUBRIC_UNREACHABLE",
+        "SAFE_EVIDENCE_INSUFFICIENT",
+        "CAPABILITY_CONTRACT_MISMATCH",
+        "WORLD_FACT_INCONSISTENT",
+        "SOURCE_EVIDENCE_INCONSISTENT",
+        "ARTIFACT_CONTENT_UNREALISTIC",
+        "CROSS_ARTIFACT_INCONSISTENT",
+        "ARTIFACT_METADATA_INCONSISTENT",
+        "ANSWER_BEARING_CONTENT",
+        "COMPLETED_DELIVERABLE_EXPOSED",
+        "PRIVATE_REFERENCE_DERIVATION",
+        "GRADER_RULE_DISCLOSURE",
+        "HIDDEN_PASS_CONDITION_DISCLOSURE",
+        "ORIGINAL_FINAL_OUTPUT_DERIVATION",
+        "EXECUTABILITY_FAILURE",
+        "EVALUATOR_CONTRACT_MISMATCH",
+        "TOOL_POLICY_MISMATCH"
+      ],
+      "title": "AttachmentSemanticReviewFindingCodeV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewRoundV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY",
+        "LEAKAGE_EXECUTABILITY"
+      ],
+      "title": "AttachmentSemanticReviewRoundV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewSeverityV2": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "AttachmentSemanticReviewSeverityV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_semantic_review_finding_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Artifact Ids",
+      "type": "array"
+    },
+    "artifact_repair_allowed": {
+      "title": "Artifact Repair Allowed",
+      "type": "boolean"
+    },
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "code": {
+      "$ref": "#/$defs/AttachmentSemanticReviewFindingCodeV2"
+    },
+    "evidence_ref_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Evidence Ref Ids",
+      "type": "array"
+    },
+    "finding_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Finding Id",
+      "type": "string"
+    },
+    "finding_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Finding Sha256",
+      "type": "string"
+    },
+    "non_waivable": {
+      "title": "Non Waivable",
+      "type": "boolean"
+    },
+    "predecessor_finding_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "round": {
+      "$ref": "#/$defs/AttachmentSemanticReviewRoundV2"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-semantic-review-finding/v2",
+      "default": "env-mock-agent/attachment-semantic-review-finding/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/AttachmentSemanticFindingScopeV2"
+    },
+    "semantic_review_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "severity": {
+      "$ref": "#/$defs/AttachmentSemanticReviewSeverityV2"
+    },
+    "subject_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Subject Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "finding_id",
+    "semantic_review_request_ref",
+    "round",
+    "scope",
+    "code",
+    "candidate_revision_ref",
+    "subject_refs",
+    "artifact_ids",
+    "evidence_ref_ids",
+    "severity",
+    "non_waivable",
+    "artifact_repair_allowed",
+    "finding_sha256"
+  ],
+  "title": "AttachmentSemanticReviewFindingV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticReviewFindingV2",
+  "x-schema-version": "env-mock-agent/attachment-semantic-review-finding/v2"
+}

@@ -1,0 +1,566 @@
+{
+  "compatibility_policy": {
+    "path": "specs/002-eval-dataset-factory/contracts/compatibility-policy-v1.md",
+    "sha256": "f41a17d79aee67e2536272b90d2732962905712a3bb969af3c87d168d1fdc3d9"
+  },
+  "contract_set_version": "v1",
+  "contracts": [
+    {
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.contracts.AttachmentArtifactRequest",
+      "schema_path": "schemas/facade/attachment_artifact_request.schema.json",
+      "schema_sha256": "d2ec865e5e9711911c95dcc2dd384a65e1e7690ae188bd0c95fd4890aed230c7",
+      "schema_version": null
+    },
+    {
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.contracts.AttachmentArtifactResult",
+      "schema_path": "schemas/facade/attachment_artifact_result.schema.json",
+      "schema_sha256": "3e5fb354a45d14929ca383f58a79315b6c228bd6bbda1c6e9f8b0482e2909e58",
+      "schema_version": null
+    },
+    {
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.contracts.AttachmentReconstructionRequest",
+      "schema_path": "schemas/facade/attachment_reconstruction_request.schema.json",
+      "schema_sha256": "195d068330a66e5a9959c6f377ea16e25fd588795cc3d5fc5140f178b2ac7c90",
+      "schema_version": "env-mock-agent/attachment-reconstruction-request/v1"
+    },
+    {
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.contracts.AttachmentReconstructionResult",
+      "schema_path": "schemas/facade/attachment_reconstruction_result.schema.json",
+      "schema_sha256": "a320986064281c324884c00a45a757d5e1209d6652a8528bc70e7d712c32cfb1",
+      "schema_version": "env-mock-agent/attachment-reconstruction-result/v1"
+    },
+    {
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.contracts.FacadeObjectRef",
+      "schema_path": "schemas/facade/facade_object_ref.schema.json",
+      "schema_sha256": "3a6937bec206936127ea22a2d1cf3bd58c0ab4700b2b402ab9ba34ee25ae9001",
+      "schema_version": null
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment.ArtifactBuildResult",
+      "schema_path": "schemas/factory/artifact_build_result.schema.json",
+      "schema_sha256": "3e9370b26688e7a73ffa242f384dfc911974b76cc293a80eb5032e43696d9cc1",
+      "schema_version": "eval-factory/artifact-build-result/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment.ArtifactBuildSpec",
+      "schema_path": "schemas/factory/artifact_build_spec.schema.json",
+      "schema_sha256": "5a69c920793c9b827e6aece25d5c44f140dd46c98a6289ff8d086b8c41748666",
+      "schema_version": "eval-factory/artifact-build-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment.ArtifactEvidenceMatrix",
+      "schema_path": "schemas/factory/artifact_evidence_matrix.schema.json",
+      "schema_sha256": "bda29fa0f58f8f9bfeff73fde355dba69e54007159b27640211e9f38fe523de1",
+      "schema_version": "eval-factory/artifact-evidence-matrix/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment.ArtifactEvidenceRow",
+      "schema_path": "schemas/factory/artifact_evidence_row.schema.json",
+      "schema_sha256": "ec8cb3065910ea7ee9ca7532c6f2ad95ba3991ef348c44b800ec5ba4c9113e4c",
+      "schema_version": "eval-factory/artifact-evidence-row/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.AttachmentDependency",
+      "schema_path": "schemas/factory/attachment_dependency.schema.json",
+      "schema_sha256": "d684edcf7ac735c6e808a6b84a128f1ca6e5fa799f20df3682b5c667547f336b",
+      "schema_version": "eval-factory/attachment-dependency/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment.AttachmentReconstructionResult",
+      "schema_path": "schemas/factory/attachment_reconstruction_result.schema.json",
+      "schema_sha256": "c4e03c1e8b57da22db4004601be279268b6d566245508dfc53154a7b11031352",
+      "schema_version": "eval-factory/attachment-reconstruction-result/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.BatchQualityReport",
+      "schema_path": "schemas/factory/batch_quality_report.schema.json",
+      "schema_sha256": "c62ce6616e40cbda283ddead68d31ddfe7717c6ee08d9cb0bda9427389d5467b",
+      "schema_version": "eval-factory/batch-quality-report/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release.CompatibilityDeclaration",
+      "schema_path": "schemas/factory/compatibility_declaration.schema.json",
+      "schema_sha256": "5806504dda0db167f0e9e90d7e36e82f886f163581e8029ce891aa7c023241e5",
+      "schema_version": "eval-factory/compatibility-declaration/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.ConcurrencyLimit",
+      "schema_path": "schemas/factory/concurrency_limit.schema.json",
+      "schema_sha256": "f0d51f54641c70eb4ee94f2afffe9bb1de2a9f06313dc7bae0c3f9c3555a31ff",
+      "schema_version": "eval-factory/concurrency-limit/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.ContractAudit",
+      "schema_path": "schemas/factory/contract_audit.schema.json",
+      "schema_sha256": "a4e0e5ed4f9f56abd6ccfd1e2ef49576760a1feb2f77a907f7a585b8eeeaad81",
+      "schema_version": "eval-factory/contract-audit/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.DatasetJobSpec",
+      "schema_path": "schemas/factory/dataset_job_spec.schema.json",
+      "schema_sha256": "43e3d3f00e4f55103a7b37d2a94f038cef15a109414a0b3f9304581c54a14dc0",
+      "schema_version": "eval-factory/dataset-job-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.EnvironmentArtifact",
+      "schema_path": "schemas/factory/environment_artifact.schema.json",
+      "schema_sha256": "1007e07aee8cd7e65cba4616e410864dafbc6abe5789f1c3795ecb9efd05c025",
+      "schema_version": "eval-factory/environment-artifact/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.EnvironmentSpec",
+      "schema_path": "schemas/factory/environment_spec.schema.json",
+      "schema_sha256": "240ef874a4b2b0b1a1cc620e3dce67001c0031a36ec08f0688377afcf86f3175",
+      "schema_version": "eval-factory/environment-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release.EvaluationItem",
+      "schema_path": "schemas/factory/evaluation_item.schema.json",
+      "schema_sha256": "27caaa64e273dcf742d92be0607fb763a24358bf6079e8f3ff23dc75f7c9a8e1",
+      "schema_version": "eval-factory/evaluation-item/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release.EvaluationItemComponents",
+      "schema_path": "schemas/factory/evaluation_item_components.schema.json",
+      "schema_sha256": "ad12e569d9be28c2bbf4db30346fb771ed9d83b3aa8d87a856f1e9286f7e975d",
+      "schema_version": "eval-factory/evaluation-item-components/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.EvaluatorSpec",
+      "schema_path": "schemas/factory/evaluator_spec.schema.json",
+      "schema_sha256": "58fb32f4b24c6cb7b070714894f7dcfead34c509b675f3ba4c23a7be5520b992",
+      "schema_version": "eval-factory/evaluator-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.EvidenceBundle",
+      "schema_path": "schemas/factory/evidence_bundle.schema.json",
+      "schema_sha256": "bfcab2f8731910e7a2e3ba3d9478ffd612ee4c3c36cef3e5b18cb5fc89194059",
+      "schema_version": "eval-factory/evidence-bundle/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.EvidenceRef",
+      "schema_path": "schemas/factory/evidence_ref.schema.json",
+      "schema_sha256": "02f45e251949b850b55aa5d963de6498efbfe57ea288a9e30b515947a6f83006",
+      "schema_version": "eval-factory/evidence-ref/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.ExportTarget",
+      "schema_path": "schemas/factory/export_target.schema.json",
+      "schema_sha256": "26d3eca6b71487542bc3e80f2f35def7aa754018fc91f48feb86db5be1d8fd89",
+      "schema_version": "eval-factory/export-target/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.FailureRecord",
+      "schema_path": "schemas/factory/failure_record.schema.json",
+      "schema_sha256": "c026d28202ca2b4c55ad6e1de59a35fab2978987b33042eda423461fc0b11495",
+      "schema_version": "eval-factory/failure-record/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.FileObservation",
+      "schema_path": "schemas/factory/file_observation.schema.json",
+      "schema_sha256": "dde1866b9a14532cf1dc3cee80d96af7ac0878eacde95f5d677bee501d1f8952",
+      "schema_version": "eval-factory/file-observation/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.HumanReviewRecord",
+      "schema_path": "schemas/factory/human_review_record.schema.json",
+      "schema_sha256": "45d568d0377b13c0a431444e96056f88f7e047b317313215f5fb77069eaa0825",
+      "schema_version": "eval-factory/human-review-record/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.InteractionSegment",
+      "schema_path": "schemas/factory/interaction_segment.schema.json",
+      "schema_sha256": "87367c28078f69b5ce02871c30ed6e1a085f150ad8910f8328c7a14d92c28266",
+      "schema_version": "eval-factory/interaction-segment/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling.LabelDecision",
+      "schema_path": "schemas/factory/label_decision.schema.json",
+      "schema_sha256": "eb9abcbec43c932b1b8fd52476c98681bb5cbdbd0d453739b5dc6a9fcb028222",
+      "schema_version": "eval-factory/label-decision/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling.LabelSpec",
+      "schema_path": "schemas/factory/label_spec.schema.json",
+      "schema_sha256": "34cb3a967364beb5fbe031a42feedbcf2a376709c1f113226d7d85a7605e6063",
+      "schema_version": "eval-factory/label-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.ObjectRef",
+      "schema_path": "schemas/factory/object_ref.schema.json",
+      "schema_sha256": "0562128464e1f40e6c89d1128a14f803a5e743f2fcc779acd7d6bdf3c13ebf04",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.PackageInventoryMember",
+      "schema_path": "schemas/factory/package_inventory_member.schema.json",
+      "schema_sha256": "eac24b4d603af744f3ef1c8d8c0092a3e486d7ace18b999e2039b0a3b5b49762",
+      "schema_version": "eval-factory/package-inventory-member/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.ProducerTaskView",
+      "schema_path": "schemas/factory/producer_task_view.schema.json",
+      "schema_sha256": "90c9c78e8b4059d542ba6cdd6d75fba1fbae7d13c7a38a1ecc3a2ba1f02953d2",
+      "schema_version": "eval-factory/producer-task-view/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release.ProductionReadinessAttestation",
+      "schema_path": "schemas/factory/production_readiness_attestation.schema.json",
+      "schema_sha256": "8516b3dd0c6ee6dee7cea8dc35f81b9b8bfcb910a3c4d3e9bdfcfbee9eec44ca",
+      "schema_version": "eval-factory/production-readiness-attestation/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.ProjectionPolicy",
+      "schema_path": "schemas/factory/projection_policy.schema.json",
+      "schema_sha256": "bf027b5d76258544e75398fa1bb8780d525aaa059fbd7b7449b0249878f84385",
+      "schema_version": "eval-factory/projection-policy/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.ProvenanceDecision",
+      "schema_path": "schemas/factory/provenance_decision.schema.json",
+      "schema_sha256": "ad7ce6c4789866010f5f43e897943ef128f95a515d0b8c2cc17a8e50b8128268",
+      "schema_version": "eval-factory/provenance-decision/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.ProvenanceManifest",
+      "schema_path": "schemas/factory/provenance_manifest.schema.json",
+      "schema_sha256": "429109d93546bc4050ec4c169e7c48a2c4a6c2562b47e5ed90a31f337f9fe615",
+      "schema_version": "eval-factory/provenance-manifest/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.ProvenanceManifestEntry",
+      "schema_path": "schemas/factory/provenance_manifest_entry.schema.json",
+      "schema_sha256": "4b2945db70b80e30eb9b834add3fd64ee2e9d78414639ef78cc77acd34e768df",
+      "schema_version": "eval-factory/provenance-manifest-entry/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.QualityReport",
+      "schema_path": "schemas/factory/quality_report.schema.json",
+      "schema_sha256": "2c4343a6759309838ada78eca920d9c1c52ae6b0c5b5239d92ac105ced5a5e65",
+      "schema_version": "eval-factory/quality-report/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.QuerySpec",
+      "schema_path": "schemas/factory/query_spec.schema.json",
+      "schema_sha256": "1d49afda12688e9393770b0957eacc1f5c7497bd8cf4cb4a0778ae561762a081",
+      "schema_version": "eval-factory/query-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.ReferencePolicy",
+      "schema_path": "schemas/factory/reference_policy.schema.json",
+      "schema_sha256": "d4de0552c95abe357c84d6da255c7536b55cd071122180fc17cdc515567b0d7b",
+      "schema_version": "eval-factory/reference-policy/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release.ReleaseDecision",
+      "schema_path": "schemas/factory/release_decision.schema.json",
+      "schema_sha256": "88e8684cf5a894d4f32c71e14694936b8589e6ac8c2e0ca60afb894684aaf4c4",
+      "schema_version": "eval-factory/release-decision/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.RepairMap",
+      "schema_path": "schemas/factory/repair_map.schema.json",
+      "schema_sha256": "2c1302a692c2ca3036414c689cdf677405424431e73cee9679d5afdd6408d94e",
+      "schema_version": "eval-factory/repair-map/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.RepairSegment",
+      "schema_path": "schemas/factory/repair_segment.schema.json",
+      "schema_sha256": "a02384946ad6fac52047b58aecc08071b1affb11ded05425a41cb00c130a501c",
+      "schema_version": "eval-factory/repair-segment/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.RequirementLineage",
+      "schema_path": "schemas/factory/requirement_lineage.schema.json",
+      "schema_sha256": "cdf54b6be59ed5752ee0d7e7e2e04a2479706796bb44badb1d7c4e6ae42f52a9",
+      "schema_version": "eval-factory/requirement-lineage/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.ResourceBudget",
+      "schema_path": "schemas/factory/resource_budget.schema.json",
+      "schema_sha256": "2145c0971fd621dd28c1fe701d4cbc35b38baaf36c4c067f00fb99341287de3e",
+      "schema_version": "eval-factory/resource-budget/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.ReviewQuorum",
+      "schema_path": "schemas/factory/review_quorum.schema.json",
+      "schema_sha256": "d5517f7430d3f1575f555a2d8fc9e2e3ffcffee855b959660689922c9ebb78bf",
+      "schema_version": "eval-factory/review-quorum/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.ReviewRecordInvalidation",
+      "schema_path": "schemas/factory/review_record_invalidation.schema.json",
+      "schema_sha256": "1e5d08bf496e049ea59a77c71a2530931e0059c8cea33640ba32db043a5c628c",
+      "schema_version": "eval-factory/review-record-invalidation/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.ReviewerFinding",
+      "schema_path": "schemas/factory/reviewer_finding.schema.json",
+      "schema_sha256": "b35c9e1a99a2163dc2ce3df1f59a60c654889c4577258000184e3a0aa99f85e8",
+      "schema_version": "eval-factory/reviewer-finding/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.RubricCriterion",
+      "schema_path": "schemas/factory/rubric_criterion.schema.json",
+      "schema_sha256": "783f8ddb6c3992b198092e3d0bc78b13493b02663cdb87b400414d940a7921f8",
+      "schema_version": "eval-factory/rubric-criterion/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.RubricSet",
+      "schema_path": "schemas/factory/rubric_set.schema.json",
+      "schema_sha256": "95fbd335d8c1b57fc3d0988271eabe470fe4f3b2213eb8602879c1f00acf7554",
+      "schema_version": "eval-factory/rubric-set/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling.SelectionContext",
+      "schema_path": "schemas/factory/selection_context.schema.json",
+      "schema_sha256": "6102038aee0a7066a6d3a2cfc448a096b05fc24ba3d5ecbc967d43287322f730",
+      "schema_version": "eval-factory/selection-context/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.SelectionFirewall",
+      "schema_path": "schemas/factory/selection_firewall.schema.json",
+      "schema_sha256": "c1f962663e344de65dfb4fd06493c32bd956a28619d4a88d73039a2cd128c84e",
+      "schema_version": "eval-factory/selection-firewall/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling.SemanticResidualSpec",
+      "schema_path": "schemas/factory/semantic_residual_spec.schema.json",
+      "schema_sha256": "77f22abf79c0a88cf90ffabfc7c9df8e0e8e53fae207e06d95fecf2a15789e35",
+      "schema_version": "eval-factory/semantic-residual-spec/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality.SemanticReviewResult",
+      "schema_path": "schemas/factory/semantic_review_result.schema.json",
+      "schema_sha256": "f87eb7b073ade460b92ce7c4bee60a9b0dfdf2241554dc7ec6d16e473c2e642b",
+      "schema_version": "eval-factory/semantic-review-result/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.SourceEvidence",
+      "schema_path": "schemas/factory/source_evidence.schema.json",
+      "schema_sha256": "f68f021ef7d04e76cc46033d97cad2e18d588264ae5b7066580c66568b92bca7",
+      "schema_version": "eval-factory/source-evidence/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.SourceSpan",
+      "schema_path": "schemas/factory/source_span.schema.json",
+      "schema_sha256": "7f7ffd615655f4e2b31b72353d8c517a593aa98c9ed4350205b9d0b3b61f4506",
+      "schema_version": "eval-factory/source-span/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.SourceSpanRef",
+      "schema_path": "schemas/factory/source_span_ref.schema.json",
+      "schema_sha256": "407d146618b1f9a45226adeabe526e51f6699ec835b3b1ef86ff4cc8eb23acc0",
+      "schema_version": "eval-factory/source-span-ref/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.StageResult",
+      "schema_path": "schemas/factory/stage_result.schema.json",
+      "schema_sha256": "0fd1ecc8a3e406a6ddd39314ec7fe2f9d7aa4242cf1ca51daedf116914266d2d",
+      "schema_version": "eval-factory/stage-result/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.StageRun",
+      "schema_path": "schemas/factory/stage_run.schema.json",
+      "schema_sha256": "46d89503be607d0939597579f3b56052dc93da2c28b053622d8f8ae0d60c3312",
+      "schema_version": "eval-factory/stage-run/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling.StructuredPredicate",
+      "schema_path": "schemas/factory/structured_predicate.schema.json",
+      "schema_sha256": "5bb8bd2977d12109a2ea578a5b57aaa0f66ce2ab8db0dfdbed1f4c1a733a9054",
+      "schema_version": "eval-factory/structured-predicate/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.safety.TaintEdge",
+      "schema_path": "schemas/factory/taint_edge.schema.json",
+      "schema_sha256": "0115c2820ae1f65c7424c61d8c027bdc1899dd80be0cb52fc674d029dd3ee046",
+      "schema_version": "eval-factory/taint-edge/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.TaskDraft",
+      "schema_path": "schemas/factory/task_draft.schema.json",
+      "schema_sha256": "949df7cb05140e29df54d5e2ea3d8d4ad8bfebabd55a91def5be3f5ea3c70071",
+      "schema_version": "eval-factory/task-draft/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.TaskEpisode",
+      "schema_path": "schemas/factory/task_episode.schema.json",
+      "schema_sha256": "6abcaaf861be0ac6b6bd4b8a623844e95dc394de2a8480f7f42f514e31dfd12c",
+      "schema_version": "eval-factory/task-episode/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.ToolCallRecord",
+      "schema_path": "schemas/factory/tool_call_record.schema.json",
+      "schema_sha256": "a1aae81d98e791258083c331c7baa25b61f55d50519299ee24ad4bf1d677a1bd",
+      "schema_version": "eval-factory/tool-call-record/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.ToolPolicy",
+      "schema_path": "schemas/factory/tool_policy.schema.json",
+      "schema_sha256": "992a0f87557d2cb0d7dfcd1318eebc796c70d1de6a431c3d9a6dfdfbd2cb3132",
+      "schema_version": "eval-factory/tool-policy/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task.ToolRule",
+      "schema_path": "schemas/factory/tool_rule.schema.json",
+      "schema_sha256": "d591d7f056df06c62b9b48d2a94c2ae4053962ed354b140312b9df2da019feb4",
+      "schema_version": "eval-factory/tool-rule/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.TraceCapability",
+      "schema_path": "schemas/factory/trace_capability.schema.json",
+      "schema_sha256": "78e53d6c03fd6b07b99e47b3ab3c784420087d4d7e6d8f46076d9cd132c922de",
+      "schema_version": "eval-factory/trace-capability/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.TraceEnvelope",
+      "schema_path": "schemas/factory/trace_envelope.schema.json",
+      "schema_sha256": "b45293c8c2c8751f295d564a6c62cd2e9deabe61b8d6cbd7817e84b8fd4df087",
+      "schema_version": "eval-factory/trace-envelope/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.trace.TraceEvent",
+      "schema_path": "schemas/factory/trace_event.schema.json",
+      "schema_sha256": "c0581233e500c2199e3d2ff8c75bc8379223c72b9ad08c4c48b4d510589158f5",
+      "schema_version": "eval-factory/trace-event/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration.TraceSourceRef",
+      "schema_path": "schemas/factory/trace_source_ref.schema.json",
+      "schema_sha256": "eee52e32e14876d1c825b7c3d2e03f204e3882e07e1af02808b384829e9deddc",
+      "schema_version": "eval-factory/trace-source-ref/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.TypedAttribute",
+      "schema_path": "schemas/factory/typed_attribute.schema.json",
+      "schema_sha256": "d6b4994ac307d91b216ae215b48a74d5941537e6a93aace025ea59c1468e95d3",
+      "schema_version": "eval-factory/typed-attribute/v1"
+    },
+    {
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.core.VersionBinding",
+      "schema_path": "schemas/factory/version_binding.schema.json",
+      "schema_sha256": "9d4ddbfa53d0b62de3d2094d2ec59e6ffd5c5ca80a091b6f8e90a8c23d249df9",
+      "schema_version": "eval-factory/version-binding/v1"
+    }
+  ],
+  "generator": "scripts/export_eval_factory_contracts.py",
+  "generator_version": "1.0.0",
+  "pydantic_version": "2.13.4",
+  "schema_version": "eval-factory-contract-manifest/v1",
+  "source_files": [
+    {
+      "path": "src/env_mock_agent/facade/contracts.py",
+      "sha256": "68620d26410a5be21f1bd66c0560e9e2784ba8d6553d7f49cb6e93d46207ec4f"
+    },
+    {
+      "path": "src/eval_factory/contracts/attachment.py",
+      "sha256": "ea720e38f3a73554705e2cae71a4c846c4b03d23d2b7ebd25030155720d54ef7"
+    },
+    {
+      "path": "src/eval_factory/contracts/core.py",
+      "sha256": "ea2ab51a934d2467b2a252dbdf1140f313dd3c33c9ff44303842c800d53369de"
+    },
+    {
+      "path": "src/eval_factory/contracts/labeling.py",
+      "sha256": "929e1635d2d9cd74911c8611d664778d0a759c8473e8ef4bc1bbe8f033c4f1c9"
+    },
+    {
+      "path": "src/eval_factory/contracts/orchestration.py",
+      "sha256": "39ee93dcb4b8f934b3f3e98193923c8710e28d27f7d62703013c128bb186f739"
+    },
+    {
+      "path": "src/eval_factory/contracts/quality.py",
+      "sha256": "4b8b015ed8f2429b325a1b7657266b62fe3930b86e6be6d14c536799290358f3"
+    },
+    {
+      "path": "src/eval_factory/contracts/release.py",
+      "sha256": "aa78e4cb30db8b31461227d3ce1a8f6c747aadc84d822c81cb27613758f7c003"
+    },
+    {
+      "path": "src/eval_factory/contracts/safety.py",
+      "sha256": "32524070231920fdd6be16730e8f887e2195a959285727ae58f0d0612b1bc516"
+    },
+    {
+      "path": "src/eval_factory/contracts/task.py",
+      "sha256": "1df571e36a698ca40fb282e9d0d15b1595a8e47560fc9dd7c1766ddb98f91723"
+    },
+    {
+      "path": "src/eval_factory/contracts/trace.py",
+      "sha256": "01a494ce6f2fc6d86a7f3c664067cdd928437b075ba5001bba9ea0eca649b69c"
+    }
+  ]
+}

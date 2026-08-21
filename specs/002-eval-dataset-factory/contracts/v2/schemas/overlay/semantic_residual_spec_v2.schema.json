@@ -1,0 +1,71 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/semantic_residual_spec_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "abstain_conditions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Abstain Conditions",
+      "type": "array"
+    },
+    "allowed_evidence_types": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Allowed Evidence Types",
+      "type": "array"
+    },
+    "evidence_bundle_purpose": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Evidence Bundle Purpose",
+      "type": "string"
+    },
+    "model_profile": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Model Profile",
+      "type": "string"
+    },
+    "prompt_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "question": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Question",
+      "type": "string"
+    },
+    "residual_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Residual Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/semantic-residual-spec/v2",
+      "default": "eval-factory/semantic-residual-spec/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "residual_id",
+    "question",
+    "evidence_bundle_purpose",
+    "allowed_evidence_types",
+    "abstain_conditions",
+    "model_profile",
+    "prompt_version"
+  ],
+  "title": "SemanticResidualSpecV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.labeling_v2.SemanticResidualSpecV2",
+  "x-schema-version": "eval-factory/semantic-residual-spec/v2"
+}

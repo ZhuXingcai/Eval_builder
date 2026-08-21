@@ -1,0 +1,234 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "LabelTestSetAccessOutcomeV2": {
+      "enum": [
+        "GRANTED",
+        "DENIED"
+      ],
+      "title": "LabelTestSetAccessOutcomeV2",
+      "type": "string"
+    },
+    "LabelTestSetAccessPurposeV2": {
+      "enum": [
+        "R8_LABEL_STATISTICAL_EVALUATION",
+        "R8_LABEL_TEST_SET_INTEGRITY_AUDIT"
+      ],
+      "title": "LabelTestSetAccessPurposeV2",
+      "type": "string"
+    },
+    "LabelTestSetAccessReasonV2": {
+      "enum": [
+        "AUTHORIZED",
+        "PRINCIPAL_NOT_AUTHORIZED",
+        "PURPOSE_NOT_AUTHORIZED",
+        "DATASET_NOT_AUTHORIZED",
+        "ACCESS_POLICY_STALE",
+        "MEMBER_LIMIT_EXCEEDED",
+        "MATERIAL_INTEGRITY_FAILED"
+      ],
+      "title": "LabelTestSetAccessReasonV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/independent_label_test_set_access_receipt_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "access_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "dataset_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "material_verified": {
+      "title": "Material Verified",
+      "type": "boolean"
+    },
+    "outcome": {
+      "$ref": "#/$defs/LabelTestSetAccessOutcomeV2"
+    },
+    "policy_version": {
+      "const": "independent-label-test-set/r8-01-v1",
+      "default": "independent-label-test-set/r8-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "principal_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "purpose": {
+      "$ref": "#/$defs/LabelTestSetAccessPurposeV2"
+    },
+    "reason": {
+      "$ref": "#/$defs/LabelTestSetAccessReasonV2"
+    },
+    "receipt_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "receipt_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Receipt Sha256",
+      "type": "string"
+    },
+    "returned_member_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Returned Member Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/independent-label-test-set-access-receipt/v2",
+      "default": "eval-factory/independent-label-test-set-access-receipt/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "dataset_manifest_ref",
+    "principal_ref",
+    "purpose",
+    "access_policy_ref",
+    "outcome",
+    "reason",
+    "returned_member_count",
+    "material_verified",
+    "receipt_sha256",
+    "audit"
+  ],
+  "title": "IndependentLabelTestSetAccessReceiptV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetAccessReceiptV2",
+  "x-schema-version": "eval-factory/independent-label-test-set-access-receipt/v2"
+}

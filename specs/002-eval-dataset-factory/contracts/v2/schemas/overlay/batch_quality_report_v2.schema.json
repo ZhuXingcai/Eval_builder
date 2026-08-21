@@ -1,0 +1,1018 @@
+{
+  "$defs": {
+    "BatchFindingCategoryV2": {
+      "enum": [
+        "EXACT_TASK_DUPLICATE",
+        "NEAR_TASK_DUPLICATE",
+        "EXACT_ATTACHMENT_DUPLICATE",
+        "NEAR_ATTACHMENT_DUPLICATE",
+        "CROSS_ITEM_CONTAMINATION",
+        "CROSS_ITEM_LEAKAGE",
+        "ANSWER_REUSE",
+        "LINEAGE_INCOMPLETE",
+        "LINEAGE_INDETERMINATE",
+        "CROSS_ITEM_LINEAGE_ALIAS"
+      ],
+      "title": "BatchFindingCategoryV2",
+      "type": "string"
+    },
+    "BatchFindingScopeV2": {
+      "enum": [
+        "ITEM",
+        "BATCH"
+      ],
+      "title": "BatchFindingScopeV2",
+      "type": "string"
+    },
+    "BatchReviewerFindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_item_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Affected Item Ids",
+          "type": "array"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "batch_reviewer_finding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Batch Reviewer Finding Id",
+          "type": "string"
+        },
+        "blocked_item_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Blocked Item Ids",
+          "type": "array"
+        },
+        "category": {
+          "$ref": "#/$defs/BatchFindingCategoryV2"
+        },
+        "direct_evidence_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "finding_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Finding Sha256",
+          "type": "string"
+        },
+        "non_waivable": {
+          "title": "Non Waivable",
+          "type": "boolean"
+        },
+        "owner_item_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Owner Item Id"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "release_blocking": {
+          "title": "Release Blocking",
+          "type": "boolean"
+        },
+        "restricted_category": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PromptLeakageCategoryV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schema_version": {
+          "const": "eval-factory/batch-reviewer-finding/v2",
+          "default": "eval-factory/batch-reviewer-finding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/BatchFindingScopeV2"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "status": {
+          "const": "OPEN",
+          "default": "OPEN",
+          "title": "Status",
+          "type": "string"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "batch_reviewer_finding_id",
+        "scope",
+        "category",
+        "severity",
+        "affected_item_ids",
+        "subject_refs",
+        "direct_evidence_ref",
+        "non_waivable",
+        "release_blocking",
+        "policy_ref",
+        "finding_sha256",
+        "audit"
+      ],
+      "title": "BatchReviewerFindingV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ItemLineageAuditOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "INDETERMINATE"
+      ],
+      "title": "ItemLineageAuditOutcomeV2",
+      "type": "string"
+    },
+    "ItemLineageAuditResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "base_quality_report_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "check_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Check Refs",
+          "type": "array"
+        },
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/LineageAuditCheckV2"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "environment_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "failed_check_count": {
+          "minimum": 0,
+          "title": "Failed Check Count",
+          "type": "integer"
+        },
+        "final_package_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "indeterminate_check_count": {
+          "minimum": 0,
+          "title": "Indeterminate Check Count",
+          "type": "integer"
+        },
+        "item_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_lineage_audit_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Item Lineage Audit Result Id",
+          "type": "string"
+        },
+        "item_quality_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "label_decision_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Label Decision Refs",
+          "type": "array"
+        },
+        "outcome": {
+          "$ref": "#/$defs/ItemLineageAuditOutcomeV2"
+        },
+        "passed_check_count": {
+          "minimum": 0,
+          "title": "Passed Check Count",
+          "type": "integer"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provenance_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "r4_task_contract_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Result Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/item-lineage-audit-result/v2",
+          "default": "eval-factory/item-lineage-audit-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selection_context_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "skipped_check_count": {
+          "minimum": 0,
+          "title": "Skipped Check Count",
+          "type": "integer"
+        },
+        "source_trace_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "task_draft_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "trace_envelope_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "item_lineage_audit_result_id",
+        "item_id",
+        "source_trace_ref",
+        "trace_envelope_ref",
+        "label_decision_refs",
+        "selection_context_ref",
+        "task_draft_ref",
+        "r4_task_contract_set_ref",
+        "item_quality_result_ref",
+        "base_quality_report_ref",
+        "final_package_manifest_ref",
+        "provenance_manifest_ref",
+        "environment_spec_ref",
+        "checks",
+        "check_refs",
+        "outcome",
+        "passed_check_count",
+        "failed_check_count",
+        "skipped_check_count",
+        "indeterminate_check_count",
+        "policy_ref",
+        "result_sha256",
+        "audit"
+      ],
+      "title": "ItemLineageAuditResultV2",
+      "type": "object"
+    },
+    "ItemQualityReportRevisionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_artifact_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Accepted Artifact Refs",
+          "type": "array"
+        },
+        "approvable": {
+          "const": false,
+          "default": false,
+          "title": "Approvable",
+          "type": "boolean"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "base_item_quality_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "base_quality_report_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "environment_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "final_package_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "finding_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Finding Refs",
+          "type": "array"
+        },
+        "findings": {
+          "items": {
+            "$ref": "#/$defs/BatchReviewerFindingV2"
+          },
+          "minItems": 1,
+          "title": "Findings",
+          "type": "array"
+        },
+        "item_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_quality_report_revision_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Item Quality Report Revision Id",
+          "type": "string"
+        },
+        "open_p0_count": {
+          "minimum": 0,
+          "title": "Open P0 Count",
+          "type": "integer"
+        },
+        "open_p1_count": {
+          "minimum": 0,
+          "title": "Open P1 Count",
+          "type": "integer"
+        },
+        "package_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Package Sha256",
+          "type": "string"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provenance_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "release_revalidation_required": {
+          "const": true,
+          "default": true,
+          "title": "Release Revalidation Required",
+          "type": "boolean"
+        },
+        "revision": {
+          "const": 1,
+          "default": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "revision_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Revision Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/item-quality-report-revision/v2",
+          "default": "eval-factory/item-quality-report-revision/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "unresolved_non_waivable_count": {
+          "minimum": 0,
+          "title": "Unresolved Non Waivable Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item_quality_report_revision_id",
+        "item_id",
+        "base_item_quality_result_ref",
+        "base_quality_report_ref",
+        "final_package_manifest_ref",
+        "provenance_manifest_ref",
+        "environment_spec_ref",
+        "accepted_artifact_refs",
+        "package_sha256",
+        "findings",
+        "finding_refs",
+        "open_p0_count",
+        "open_p1_count",
+        "unresolved_non_waivable_count",
+        "policy_ref",
+        "revision_sha256",
+        "audit"
+      ],
+      "title": "ItemQualityReportRevisionV2",
+      "type": "object"
+    },
+    "LineageAuditCheckCodeV2": {
+      "enum": [
+        "SOURCE_TRACE_LABELS",
+        "LABEL_SELECTION",
+        "SELECTION_TASK",
+        "TASK_R4",
+        "R4_ITEM_QUALITY",
+        "PACKAGE_PROVENANCE_SET",
+        "PACKAGE_ENVIRONMENT_SET",
+        "PACKAGE_MEMBER_DERIVATION",
+        "CROSS_ITEM_LINEAGE_ALIAS"
+      ],
+      "title": "LineageAuditCheckCodeV2",
+      "type": "string"
+    },
+    "LineageAuditCheckOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "SKIPPED",
+        "INDETERMINATE"
+      ],
+      "title": "LineageAuditCheckOutcomeV2",
+      "type": "string"
+    },
+    "LineageAuditCheckV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "check_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Check Sha256",
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/$defs/LineageAuditCheckCodeV2"
+        },
+        "evaluated_count": {
+          "minimum": 0,
+          "title": "Evaluated Count",
+          "type": "integer"
+        },
+        "evidence_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "failed_count": {
+          "minimum": 0,
+          "title": "Failed Count",
+          "type": "integer"
+        },
+        "indeterminate_count": {
+          "minimum": 0,
+          "title": "Indeterminate Count",
+          "type": "integer"
+        },
+        "item_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Item Ids",
+          "type": "array"
+        },
+        "lineage_audit_check_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Lineage Audit Check Id",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/LineageAuditCheckOutcomeV2"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/lineage-audit-check/v2",
+          "default": "eval-factory/lineage-audit-check/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "lineage_audit_check_id",
+        "code",
+        "outcome",
+        "item_ids",
+        "subject_refs",
+        "evaluated_count",
+        "failed_count",
+        "indeterminate_count",
+        "policy_ref",
+        "check_sha256",
+        "audit"
+      ],
+      "title": "LineageAuditCheckV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PromptLeakageCategoryV2": {
+      "enum": [
+        "FINAL_ANSWER",
+        "COMPLETED_DELIVERABLE",
+        "PRIVATE_REFERENCE",
+        "GRADER_RULE",
+        "HIDDEN_PASS_CONDITION",
+        "HIDDEN_SELECTION_SIGNAL",
+        "TRAJECTORY_SPECIFIC_STEP"
+      ],
+      "title": "PromptLeakageCategoryV2",
+      "type": "string"
+    },
+    "Severity": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/batch_quality_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "affected_item_count": {
+      "minimum": 0,
+      "title": "Affected Item Count",
+      "type": "integer"
+    },
+    "affected_item_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Affected Item Ids",
+      "type": "array"
+    },
+    "answer_reuse_pair_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Answer Reuse Pair Refs",
+      "type": "array"
+    },
+    "approvable": {
+      "title": "Approvable",
+      "type": "boolean"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "base_item_quality_report_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 2,
+      "title": "Base Item Quality Report Refs",
+      "type": "array"
+    },
+    "batch_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Batch Id",
+      "type": "string"
+    },
+    "batch_lineage_check_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Batch Lineage Check Refs",
+      "type": "array"
+    },
+    "batch_lineage_checks": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LineageAuditCheckV2"
+      },
+      "title": "Batch Lineage Checks",
+      "type": "array"
+    },
+    "batch_quality_report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Batch Quality Report Id",
+      "type": "string"
+    },
+    "batch_scoped_finding_count": {
+      "minimum": 0,
+      "title": "Batch Scoped Finding Count",
+      "type": "integer"
+    },
+    "batch_scoped_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Batch Scoped Finding Refs",
+      "type": "array"
+    },
+    "blocked_item_count": {
+      "minimum": 0,
+      "title": "Blocked Item Count",
+      "type": "integer"
+    },
+    "blocked_item_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Blocked Item Ids",
+      "type": "array"
+    },
+    "cross_item_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "cross_item_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "current_item_quality_report_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 2,
+      "title": "Current Item Quality Report Refs",
+      "type": "array"
+    },
+    "duplicate_cluster_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Duplicate Cluster Refs",
+      "type": "array"
+    },
+    "duplicate_pair_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Duplicate Pair Refs",
+      "type": "array"
+    },
+    "duplicate_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "duplicate_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "finding_count": {
+      "minimum": 0,
+      "title": "Finding Count",
+      "type": "integer"
+    },
+    "finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Finding Refs",
+      "type": "array"
+    },
+    "findings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/BatchReviewerFindingV2"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "invalidated_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Invalidated Result Refs",
+      "type": "array"
+    },
+    "item_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Item Ids",
+      "type": "array"
+    },
+    "item_quality_report_revision_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Item Quality Report Revision Refs",
+      "type": "array"
+    },
+    "item_quality_report_revisions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ItemQualityReportRevisionV2"
+      },
+      "title": "Item Quality Report Revisions",
+      "type": "array"
+    },
+    "item_quality_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 2,
+      "title": "Item Quality Result Refs",
+      "type": "array"
+    },
+    "item_scoped_finding_count": {
+      "minimum": 0,
+      "title": "Item Scoped Finding Count",
+      "type": "integer"
+    },
+    "item_scoped_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Item Scoped Finding Refs",
+      "type": "array"
+    },
+    "lineage_audit_count": {
+      "minimum": 0,
+      "title": "Lineage Audit Count",
+      "type": "integer"
+    },
+    "lineage_audit_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Lineage Audit Refs",
+      "type": "array"
+    },
+    "lineage_audits": {
+      "items": {
+        "$ref": "#/$defs/ItemLineageAuditResultV2"
+      },
+      "title": "Lineage Audits",
+      "type": "array"
+    },
+    "lineage_check_count": {
+      "minimum": 0,
+      "title": "Lineage Check Count",
+      "type": "integer"
+    },
+    "open_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Open Finding Refs",
+      "type": "array"
+    },
+    "open_p0_count": {
+      "minimum": 0,
+      "title": "Open P0 Count",
+      "type": "integer"
+    },
+    "open_p1_count": {
+      "minimum": 0,
+      "title": "Open P1 Count",
+      "type": "integer"
+    },
+    "open_p2_count": {
+      "minimum": 0,
+      "title": "Open P2 Count",
+      "type": "integer"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "batch-quality/r7-03-v1",
+      "default": "batch-quality/r7-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "report_revision_count": {
+      "minimum": 0,
+      "title": "Report Revision Count",
+      "type": "integer"
+    },
+    "report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "resolved_job_work_graph_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "safety_cluster_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Safety Cluster Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/batch-quality-report/v2",
+      "default": "eval-factory/batch-quality-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "unresolved_non_waivable_count": {
+      "minimum": 0,
+      "title": "Unresolved Non Waivable Count",
+      "type": "integer"
+    },
+    "visible_match_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Visible Match Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "batch_quality_report_id",
+    "batch_id",
+    "resolved_job_work_graph_ref",
+    "policy_ref",
+    "duplicate_policy_ref",
+    "duplicate_result_ref",
+    "cross_item_policy_ref",
+    "cross_item_result_ref",
+    "item_ids",
+    "item_quality_result_refs",
+    "base_item_quality_report_refs",
+    "current_item_quality_report_refs",
+    "lineage_audits",
+    "lineage_audit_refs",
+    "lineage_audit_count",
+    "lineage_check_count",
+    "finding_count",
+    "item_scoped_finding_count",
+    "batch_scoped_finding_count",
+    "open_p0_count",
+    "open_p1_count",
+    "open_p2_count",
+    "unresolved_non_waivable_count",
+    "report_revision_count",
+    "affected_item_count",
+    "blocked_item_count",
+    "approvable",
+    "report_sha256",
+    "audit"
+  ],
+  "title": "BatchQualityReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.batch_quality_v2.BatchQualityReportV2",
+  "x-schema-version": "eval-factory/batch-quality-report/v2"
+}

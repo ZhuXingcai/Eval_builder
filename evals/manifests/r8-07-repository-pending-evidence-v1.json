@@ -1,0 +1,44 @@
+{
+  "schema_version": "eval-factory/repository-pending-readiness-review-evidence/v1",
+  "evidence_class": "REPOSITORY_PENDING_ONLY",
+  "predecessors": [
+    {
+      "stage": "R8_02",
+      "report_sha256": "f5b6f5f6cab238f9c7a34196a06769393bbd4da6db75424c5dc43d34a98a58a7",
+      "outcome": "STATISTICAL_GATE_PENDING",
+      "claim_scope": "REPOSITORY_PENDING_ONLY",
+      "satisfies_stage_gate": false
+    },
+    {
+      "stage": "R8_03",
+      "report_sha256": "375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f",
+      "outcome": "PASSED",
+      "claim_scope": "CANARY_REGRESSION_ONLY",
+      "satisfies_stage_gate": true
+    },
+    {
+      "stage": "R8_04",
+      "report_sha256": "730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f",
+      "outcome": "STATISTICAL_GATE_PENDING",
+      "claim_scope": "REAL_TRACE_STABILITY_ONLY",
+      "satisfies_stage_gate": false
+    },
+    {
+      "stage": "R8_06",
+      "report_sha256": "842c375004468b7258ef5750ca39e778ec9a0be363e3729c74044b35c24b74a7",
+      "outcome": "RECOMMENDATION_PENDING",
+      "claim_scope": "CANARY_WORKER_STORAGE_ONLY",
+      "satisfies_stage_gate": false
+    }
+  ],
+  "missing_approval_domains": [
+    "SECURITY",
+    "PRIVACY",
+    "RELEASE_PERMISSION",
+    "OPERATIONS_SLO"
+  ],
+  "organization_approval_authority_present": false,
+  "operations_slo_authority_present": false,
+  "authorizes_attestation": false,
+  "authorizes_production_release": false
+}

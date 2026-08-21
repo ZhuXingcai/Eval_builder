@@ -1,0 +1,409 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "CheckpointDecisionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint": {
+          "$ref": "#/$defs/ApprovalCheckpoint"
+        },
+        "decision_record_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/checkpoint-decision-binding/v2",
+          "default": "eval-factory/checkpoint-decision-binding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "checkpoint",
+        "request_ref",
+        "decision_record_ref"
+      ],
+      "title": "CheckpointDecisionBinding",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvaluationItemComponents": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "evaluator_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provenance_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "quality_report_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "query_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "reference_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "rubric_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/evaluation-item-components/v1",
+          "default": "eval-factory/evaluation-item-components/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "tool_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "query_spec_ref",
+        "environment_spec_ref",
+        "rubric_set_ref",
+        "evaluator_spec_ref",
+        "reference_policy_ref",
+        "tool_policy_ref",
+        "provenance_manifest_ref",
+        "quality_report_ref"
+      ],
+      "title": "EvaluationItemComponents",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReleaseChannel": {
+      "enum": [
+        "CANARY",
+        "INTERNAL_REVIEW",
+        "PRODUCTION"
+      ],
+      "title": "ReleaseChannel",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/evaluation_item_release_subject_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_reconstruction_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "batch_quality_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "channel": {
+      "$ref": "#/$defs/ReleaseChannel"
+    },
+    "components": {
+      "$ref": "#/$defs/EvaluationItemComponents"
+    },
+    "current_head_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Current Head Refs",
+      "type": "array"
+    },
+    "export_profile": {
+      "const": "LH",
+      "title": "Export Profile",
+      "type": "string"
+    },
+    "export_profile_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Export Profile Version",
+      "type": "string"
+    },
+    "item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Id",
+      "type": "string"
+    },
+    "item_quality_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "label_decision_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Label Decision Refs",
+      "type": "array"
+    },
+    "not_required_checkpoints": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ApprovalCheckpoint"
+      },
+      "title": "Not Required Checkpoints",
+      "type": "array"
+    },
+    "package_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "release-projection/r7-08-v1",
+      "default": "release-projection/r7-08-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "registry": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Registry",
+      "type": "string"
+    },
+    "release_subject_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Release Subject Id",
+      "type": "string"
+    },
+    "release_subject_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Release Subject Sha256",
+      "type": "string"
+    },
+    "relevant_revalidation_application_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Relevant Revalidation Application Refs",
+      "type": "array"
+    },
+    "required_checkpoints": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ApprovalCheckpoint"
+      },
+      "title": "Required Checkpoints",
+      "type": "array"
+    },
+    "revalidation_report_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Revalidation Report Refs",
+      "type": "array"
+    },
+    "satisfied_checkpoint_bindings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CheckpointDecisionBinding"
+      },
+      "title": "Satisfied Checkpoint Bindings",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/evaluation-item-release-subject/v2",
+      "default": "eval-factory/evaluation-item-release-subject/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_trace_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Source Trace Refs",
+      "type": "array"
+    },
+    "task_draft_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "user_approval_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "user_decision_record_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "User Decision Record Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "release_subject_id",
+    "job_id",
+    "item_id",
+    "source_trace_refs",
+    "label_decision_refs",
+    "task_draft_ref",
+    "attachment_reconstruction_result_ref",
+    "components",
+    "item_quality_result_ref",
+    "batch_quality_report_ref",
+    "package_manifest_ref",
+    "package_sha256",
+    "user_approval_policy_ref",
+    "channel",
+    "registry",
+    "export_profile",
+    "export_profile_version",
+    "policy_ref",
+    "release_subject_sha256",
+    "audit"
+  ],
+  "title": "EvaluationItemReleaseSubjectV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release_projection_v2.EvaluationItemReleaseSubjectV2",
+  "x-schema-version": "eval-factory/evaluation-item-release-subject/v2"
+}

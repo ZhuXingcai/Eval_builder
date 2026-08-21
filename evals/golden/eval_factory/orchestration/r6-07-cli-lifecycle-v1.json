@@ -1,0 +1,217 @@
+{
+  "cancel": {
+    "cancellation_ref": {
+      "object_id": "work-cancellation-record://sha256/b8d23047ffc7323c79fe1c85edd1a083e3602ff7075e7e09e6ea352cfc7f1c7e",
+      "object_sha256": "b8d23047ffc7323c79fe1c85edd1a083e3602ff7075e7e09e6ea352cfc7f1c7e",
+      "object_type": "work-cancellation-record",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "job_id": "job://r6-07/gold",
+    "mode": "WORK",
+    "model_cancellation_request_refs": [],
+    "pending_physical_acknowledgements": 0,
+    "preserved_result_refs": [],
+    "resource_termination_request_refs": [],
+    "schema_version": "eval-factory/pipeline-cancellation-result/v2"
+  },
+  "create": {
+    "item_count": 1,
+    "job_id": "job://r6-07/gold",
+    "job_status": "CREATED",
+    "job_version": 0,
+    "resolved_plan_ref": {
+      "object_id": "resolved-job-plan://sha256/5519441b1d9423370beea37f4af02215b7722da560e970f638595f5ab21e901d",
+      "object_sha256": "5519441b1d9423370beea37f4af02215b7722da560e970f638595f5ab21e901d",
+      "object_type": "resolved-dataset-job-plan",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "schema_version": "eval-factory/pipeline-create-result/v2",
+    "work_control_policy_ref": {
+      "object_id": "work-control-policy://sha256/ede7bf8f0d3a5e7e16b45624800b0ed29c108aae332ed00c539de0606e38358d",
+      "object_sha256": "ede7bf8f0d3a5e7e16b45624800b0ed29c108aae332ed00c539de0606e38358d",
+      "object_type": "work-control-policy",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "work_graph_ref": {
+      "object_id": "resolved-job-work-graph://sha256/ecf3a430830bc1bb2cfc4e9c3e7f90fbb9f02ef1d54858b21f2a143b2f186d4e",
+      "object_sha256": "ecf3a430830bc1bb2cfc4e9c3e7f90fbb9f02ef1d54858b21f2a143b2f186d4e",
+      "object_type": "resolved-job-work-graph",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "work_unit_count": 1
+  },
+  "events": {
+    "audit_outcome": "COMPLETE",
+    "event_kinds": [
+      "JOB_CREATED",
+      "ITEM_CREATED",
+      "WORK_GRAPH_CREATED",
+      "WORK_CONTROL_POLICY_BOUND",
+      "JOB_STATUS_CHANGED"
+    ],
+    "finding_codes": [],
+    "total_events": 5
+  },
+  "metrics": {
+    "attempt_metrics_refs": [],
+    "audit_outcome": "COMPLETE",
+    "finding_codes": [],
+    "metric_slices": [
+      {
+        "backpressure_events": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_hit_attempts": 0,
+        "cache_miss_attempts": 0,
+        "cache_read_input_tokens": 0,
+        "cache_unavailable_attempts": 0,
+        "cancelled_attempts": 0,
+        "charged_tokens": 0,
+        "conservative_usage_attempts": 0,
+        "error_events": 0,
+        "execution_sample_count": 0,
+        "input_tokens": 0,
+        "model_requests": 0,
+        "network_requests": 0,
+        "output_tokens": 0,
+        "process_starts": 0,
+        "queue_wait_sample_count": 0,
+        "renderer_operations": 0,
+        "reported_cost_microusd": 0,
+        "reported_usage_attempts": 0,
+        "resume_attempts": 0,
+        "retained_storage_bytes": 0,
+        "retry_attempts": 0,
+        "retryable_attempts": 0,
+        "schema_version": "eval-factory/pipeline-metric-slice-summary/v2",
+        "scope": "STAGE",
+        "scope_id": "trace_index",
+        "succeeded_attempts": 0,
+        "terminal_attempts": 0,
+        "terminal_non_success_attempts": 0,
+        "tool_calls": 0,
+        "total_sample_count": 0,
+        "unavailable_cost_attempts": 0,
+        "work_units": 1
+      }
+    ],
+    "total_attempts": 0
+  },
+  "plan": {
+    "job_id": "job://r6-07/gold",
+    "job_spec_ref": {
+      "object_id": "job://r6-07/gold",
+      "object_sha256": "5467fda07113f3d940792fb35173e0b61a59e2c558ab3e84f9061f994ed65ff7",
+      "object_type": "dataset-job-spec",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "resolved_plan_ref": {
+      "object_id": "resolved-job-plan://sha256/5519441b1d9423370beea37f4af02215b7722da560e970f638595f5ab21e901d",
+      "object_sha256": "5519441b1d9423370beea37f4af02215b7722da560e970f638595f5ab21e901d",
+      "object_type": "resolved-dataset-job-plan",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "resolved_stages": [
+      "trace_index"
+    ],
+    "work_graph_ref": {
+      "object_id": "resolved-job-work-graph://sha256/ecf3a430830bc1bb2cfc4e9c3e7f90fbb9f02ef1d54858b21f2a143b2f186d4e",
+      "object_sha256": "ecf3a430830bc1bb2cfc4e9c3e7f90fbb9f02ef1d54858b21f2a143b2f186d4e",
+      "object_type": "resolved-job-work-graph",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "work_unit_count": 1,
+    "work_units": [
+      {
+        "attempt_metrics_ref": null,
+        "item_id": "item://r6-02/sha256/53aa39f09d9d60531c68a5f3cb7e0f9b51ce476564eac606cbad63433cafbe2c",
+        "lease_ref": null,
+        "lease_state": null,
+        "lease_version": null,
+        "readiness": null,
+        "readiness_ref": null,
+        "retry_decision": null,
+        "retry_decision_ref": null,
+        "schema_version": "eval-factory/pipeline-work-unit-status/v2",
+        "scope": "ITEM",
+        "stage": "trace_index",
+        "work_unit_ref": {
+          "object_id": "resolved-work-unit://sha256/7ab18222af248f833117614eedf70025f47ce277bb4a77031b1cc18317ba655f",
+          "object_sha256": "7ab18222af248f833117614eedf70025f47ce277bb4a77031b1cc18317ba655f",
+          "object_type": "resolved-work-unit",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      }
+    ]
+  },
+  "resume": {
+    "action": "STARTED",
+    "job_status": "RUNNING",
+    "job_version": 1,
+    "work_unit_count": 1,
+    "work_units": [
+      {
+        "attempt_metrics_ref": null,
+        "item_id": "item://r6-02/sha256/53aa39f09d9d60531c68a5f3cb7e0f9b51ce476564eac606cbad63433cafbe2c",
+        "lease_ref": null,
+        "lease_state": null,
+        "lease_version": null,
+        "readiness": null,
+        "readiness_ref": null,
+        "retry_decision": null,
+        "retry_decision_ref": null,
+        "schema_version": "eval-factory/pipeline-work-unit-status/v2",
+        "scope": "ITEM",
+        "stage": "trace_index",
+        "work_unit_ref": {
+          "object_id": "resolved-work-unit://sha256/7ab18222af248f833117614eedf70025f47ce277bb4a77031b1cc18317ba655f",
+          "object_sha256": "7ab18222af248f833117614eedf70025f47ce277bb4a77031b1cc18317ba655f",
+          "object_type": "resolved-work-unit",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      }
+    ]
+  },
+  "schema_version": "eval-factory/r6-07-cli-gold/v1",
+  "status": {
+    "audit_outcome": null,
+    "item_count": 1,
+    "job_id": "job://r6-07/gold",
+    "job_status": "CREATED",
+    "job_version": 0,
+    "observability_availability": "REFRESH_REQUIRED",
+    "terminal_attempt_count": 0,
+    "work_unit_count": 1,
+    "work_units": [
+      {
+        "attempt_metrics_ref": null,
+        "item_id": "item://r6-02/sha256/53aa39f09d9d60531c68a5f3cb7e0f9b51ce476564eac606cbad63433cafbe2c",
+        "lease_ref": null,
+        "lease_state": null,
+        "lease_version": null,
+        "readiness": null,
+        "readiness_ref": null,
+        "retry_decision": null,
+        "retry_decision_ref": null,
+        "schema_version": "eval-factory/pipeline-work-unit-status/v2",
+        "scope": "ITEM",
+        "stage": "trace_index",
+        "work_unit_ref": {
+          "object_id": "resolved-work-unit://sha256/7ab18222af248f833117614eedf70025f47ce277bb4a77031b1cc18317ba655f",
+          "object_sha256": "7ab18222af248f833117614eedf70025f47ce277bb4a77031b1cc18317ba655f",
+          "object_type": "resolved-work-unit",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      }
+    ]
+  }
+}

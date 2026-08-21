@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/coverage_solvability_review_view_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_ref_inventory": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Allowed Ref Inventory",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "candidate_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "denied_data_families": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Denied Data Families",
+      "type": "array"
+    },
+    "deterministic_finding_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Deterministic Finding Refs",
+      "type": "array"
+    },
+    "deterministic_validation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "semantic-review/r5-09-v1",
+      "default": "semantic-review/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "projection_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "public_rubric_requirement_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Public Rubric Requirement Refs",
+      "type": "array"
+    },
+    "query_public_view_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "review_view_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Review View Id",
+      "type": "string"
+    },
+    "reviewer_role": {
+      "const": "COVERAGE_SOLVABILITY_REVIEWER",
+      "default": "COVERAGE_SOLVABILITY_REVIEWER",
+      "title": "Reviewer Role",
+      "type": "string"
+    },
+    "round": {
+      "const": "COVERAGE_SOLVABILITY",
+      "default": "COVERAGE_SOLVABILITY",
+      "title": "Round",
+      "type": "string"
+    },
+    "safe_evidence_bundle_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Safe Evidence Bundle Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/coverage-solvability-review-view/v2",
+      "default": "eval-factory/coverage-solvability-review-view/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "view_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "View Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "review_view_id",
+    "candidate_revision_ref",
+    "deterministic_validation_result_ref",
+    "projection_policy_ref",
+    "query_public_view_ref",
+    "candidate_manifest_ref",
+    "public_rubric_requirement_refs",
+    "safe_evidence_bundle_refs",
+    "deterministic_finding_refs",
+    "allowed_ref_inventory",
+    "denied_data_families",
+    "view_sha256",
+    "audit"
+  ],
+  "title": "CoverageSolvabilityReviewViewV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.review_v2.CoverageSolvabilityReviewViewV2",
+  "x-schema-version": "eval-factory/coverage-solvability-review-view/v2"
+}

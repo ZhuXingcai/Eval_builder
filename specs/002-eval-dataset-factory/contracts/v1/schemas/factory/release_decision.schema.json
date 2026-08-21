@@ -1,0 +1,391 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvaluationItemComponents": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "evaluator_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provenance_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "quality_report_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "query_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "reference_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "rubric_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/evaluation-item-components/v1",
+          "default": "eval-factory/evaluation-item-components/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "tool_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "query_spec_ref",
+        "environment_spec_ref",
+        "rubric_set_ref",
+        "evaluator_spec_ref",
+        "reference_policy_ref",
+        "tool_policy_ref",
+        "provenance_manifest_ref",
+        "quality_report_ref"
+      ],
+      "title": "EvaluationItemComponents",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReleaseAction": {
+      "enum": [
+        "SUBMIT_REVIEW",
+        "APPROVE",
+        "REJECT",
+        "PUBLISH",
+        "REVOKE"
+      ],
+      "title": "ReleaseAction",
+      "type": "string"
+    },
+    "ReleaseChannel": {
+      "enum": [
+        "CANARY",
+        "INTERNAL_REVIEW",
+        "PRODUCTION"
+      ],
+      "title": "ReleaseChannel",
+      "type": "string"
+    },
+    "ReleaseState": {
+      "enum": [
+        "CANDIDATE",
+        "NEEDS_REVIEW",
+        "REJECTED",
+        "APPROVED",
+        "RELEASED",
+        "REVOKED"
+      ],
+      "title": "ReleaseState",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/release_decision.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/ReleaseAction"
+    },
+    "actor": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Actor",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "batch_quality_report_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "chain_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Chain Id",
+      "type": "string"
+    },
+    "channel": {
+      "$ref": "#/$defs/ReleaseChannel"
+    },
+    "components": {
+      "$ref": "#/$defs/EvaluationItemComponents"
+    },
+    "decided_at": {
+      "format": "date-time",
+      "title": "Decided At",
+      "type": "string"
+    },
+    "decision_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Decision Sha256",
+      "type": "string"
+    },
+    "export_profile": {
+      "enum": [
+        "LH",
+        "GENERIC"
+      ],
+      "title": "Export Profile",
+      "type": "string"
+    },
+    "export_profile_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Export Profile Version",
+      "type": "string"
+    },
+    "human_review_record_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Human Review Record Refs",
+      "type": "array"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Id",
+      "type": "string"
+    },
+    "item_version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Item Version",
+      "type": "string"
+    },
+    "package_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "previous_decision_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "production_attestation_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "registry": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Registry",
+      "type": "string"
+    },
+    "release_decision_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Release Decision Id",
+      "type": "string"
+    },
+    "release_subject_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Release Subject Sha256",
+      "type": "string"
+    },
+    "review_policy_versions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Review Policy Versions",
+      "type": "array"
+    },
+    "review_quorum_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Review Quorum Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/release-decision/v1",
+      "default": "eval-factory/release-decision/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/ReleaseState"
+    }
+  },
+  "required": [
+    "release_decision_id",
+    "chain_id",
+    "previous_decision_ref",
+    "item_id",
+    "item_version",
+    "components",
+    "release_subject_sha256",
+    "package_manifest_ref",
+    "package_sha256",
+    "batch_quality_report_ref",
+    "human_review_record_refs",
+    "review_policy_versions",
+    "channel",
+    "registry",
+    "export_profile",
+    "export_profile_version",
+    "production_attestation_ref",
+    "action",
+    "state",
+    "idempotency_key",
+    "actor",
+    "decided_at",
+    "decision_sha256",
+    "audit"
+  ],
+  "title": "ReleaseDecision",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release.ReleaseDecision",
+  "x-schema-version": "eval-factory/release-decision/v1"
+}

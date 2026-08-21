@@ -1,0 +1,348 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "EnvironmentScopeDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/environment-scope-decision/v2",
+          "default": "eval-factory/environment-scope-decision/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "strategy": {
+          "$ref": "#/$defs/EnvironmentStrategyChoice"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "strategy"
+      ],
+      "title": "EnvironmentScopeDecision",
+      "type": "object"
+    },
+    "EnvironmentStrategyChoice": {
+      "enum": [
+        "TRACE_FAITHFUL_MOCK",
+        "REWRITE_STANDARD_ENV",
+        "EXCLUDE_TASK"
+      ],
+      "title": "EnvironmentStrategyChoice",
+      "type": "string"
+    },
+    "InvalidationScope": {
+      "additionalProperties": false,
+      "properties": {
+        "object_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Object Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/invalidation-scope/v2",
+          "default": "eval-factory/invalidation-scope/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stages": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Stages",
+          "type": "array"
+        }
+      },
+      "title": "InvalidationScope",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "QueryPackagingChoice": {
+      "enum": [
+        "INCLUDE_QUERY_YAML",
+        "OMIT_QUERY_YAML",
+        "ASK_PER_TASK"
+      ],
+      "title": "QueryPackagingChoice",
+      "type": "string"
+    },
+    "TypedAdjustment": {
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "SET",
+            "ADD",
+            "REMOVE",
+            "REPLACE"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/typed-adjustment/v2",
+          "default": "eval-factory/typed-adjustment/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "target_path": {
+          "pattern": "^[A-Za-z0-9_.\\[\\]-]{1,256}$",
+          "title": "Target Path",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "target_path",
+        "operation",
+        "value",
+        "reason"
+      ],
+      "title": "TypedAdjustment",
+      "type": "object"
+    },
+    "UserDecision": {
+      "enum": [
+        "ACCEPT",
+        "ADJUST",
+        "REJECT",
+        "REQUEST_MORE_EXAMPLES",
+        "DEFER"
+      ],
+      "title": "UserDecision",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/user_decision_record.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "adjustments": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TypedAdjustment"
+      },
+      "title": "Adjustments",
+      "type": "array"
+    },
+    "approval_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "authenticated_user": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Authenticated User",
+      "type": "string"
+    },
+    "checkpoint": {
+      "$ref": "#/$defs/ApprovalCheckpoint"
+    },
+    "decided_at": {
+      "format": "date-time",
+      "title": "Decided At",
+      "type": "string"
+    },
+    "decision": {
+      "$ref": "#/$defs/UserDecision"
+    },
+    "decision_record_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Decision Record Id",
+      "type": "string"
+    },
+    "environment_decisions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EnvironmentScopeDecision"
+      },
+      "title": "Environment Decisions",
+      "type": "array"
+    },
+    "hard_gate_override_requested": {
+      "const": false,
+      "default": false,
+      "title": "Hard Gate Override Requested",
+      "type": "boolean"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "invalidation_scope": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/InvalidationScope"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "plan_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "projection_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "query_packaging": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/QueryPackagingChoice"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "reason": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "record_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Record Sha256",
+      "type": "string"
+    },
+    "request_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "resulting_object_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "eval-factory/user-decision-record/v2",
+      "default": "eval-factory/user-decision-record/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "subject_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Subject Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "decision_record_id",
+    "request_ref",
+    "checkpoint",
+    "approval_policy_ref",
+    "subject_refs",
+    "plan_ref",
+    "projection_ref",
+    "authenticated_user",
+    "decision",
+    "reason",
+    "idempotency_key",
+    "decided_at",
+    "record_sha256"
+  ],
+  "title": "UserDecisionRecord",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.approval.UserDecisionRecord",
+  "x-schema-version": "eval-factory/user-decision-record/v2"
+}

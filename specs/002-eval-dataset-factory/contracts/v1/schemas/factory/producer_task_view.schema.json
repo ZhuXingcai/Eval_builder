@@ -1,0 +1,367 @@
+{
+  "$defs": {
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    },
+    "AttachmentDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "criticality": {
+          "$ref": "#/$defs/AttachmentCriticality"
+        },
+        "dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Dependency Id",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "evidence_priority": {
+          "$ref": "#/$defs/EvidencePriority"
+        },
+        "schema_version": {
+          "const": "eval-factory/attachment-dependency/v1",
+          "default": "eval-factory/attachment-dependency/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dependency_id",
+        "description",
+        "criticality",
+        "evidence_priority",
+        "evidence"
+      ],
+      "title": "AttachmentDependency",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvidencePolarity": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "UNCERTAINTY",
+        "CONTRADICTION"
+      ],
+      "title": "EvidencePolarity",
+      "type": "string"
+    },
+    "EvidencePriority": {
+      "enum": [
+        "DIRECT_OBSERVATION",
+        "EXPLICIT_REQUIREMENT",
+        "INFERRED_DEPENDENCY"
+      ],
+      "title": "EvidencePriority",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "capability_complete": {
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Ref Id",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/EvidencePolarity"
+        },
+        "schema_version": {
+          "const": "eval-factory/evidence-ref/v1",
+          "default": "eval-factory/evidence-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_spans": {
+          "items": {
+            "$ref": "#/$defs/SourceSpanRef"
+          },
+          "minItems": 1,
+          "title": "Source Spans",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "subject_ref",
+        "source_spans",
+        "polarity",
+        "capability",
+        "capability_complete"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "SourceSpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-span-ref/v1",
+          "default": "eval-factory/source-span-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "SourceSpanRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/producer_task_view.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tools": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Allowed Tools",
+      "type": "array"
+    },
+    "attachment_dependencies": {
+      "items": {
+        "$ref": "#/$defs/AttachmentDependency"
+      },
+      "title": "Attachment Dependencies",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "forbidden_outputs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Forbidden Outputs",
+      "type": "array"
+    },
+    "producer_task_view_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Producer Task View Id",
+      "type": "string"
+    },
+    "projection_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "query_instruction": {
+      "maxLength": 12000,
+      "minLength": 1,
+      "title": "Query Instruction",
+      "type": "string"
+    },
+    "safe_evidence_bundle_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Safe Evidence Bundle Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/producer-task-view/v1",
+      "default": "eval-factory/producer-task-view/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_task_draft_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Task Draft Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "producer_task_view_id",
+    "query_instruction",
+    "attachment_dependencies",
+    "allowed_tools",
+    "safe_evidence_bundle_refs",
+    "forbidden_outputs",
+    "projection_policy_ref",
+    "source_task_draft_sha256",
+    "audit"
+  ],
+  "title": "ProducerTaskView",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task.ProducerTaskView",
+  "x-schema-version": "eval-factory/producer-task-view/v1"
+}

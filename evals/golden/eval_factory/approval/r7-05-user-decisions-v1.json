@@ -1,0 +1,84 @@
+{
+  "decision_policy_version": "user-decision/r7-05-v1",
+  "effect_first_adjustment": true,
+  "pending_adjustment_intent_count": 0,
+  "scenarios": [
+    {
+      "checkpoint": "LABEL_PLAN",
+      "decision": "ACCEPT",
+      "expected_outcome": "ACCEPTED",
+      "scenario_id": "label-accept"
+    },
+    {
+      "checkpoint": "TASK_REWRITE_PLAN",
+      "decision": "ADJUST",
+      "expected_outcome": "ADJUSTMENT_ACCEPTED",
+      "hard_gate_revalidation_required": true,
+      "scenario_id": "task-rewrite-adjust"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "decision": "ACCEPT",
+      "environment_choice_count": 3,
+      "expected_outcome": "ACCEPTED",
+      "query_packaging_choice_count": 3,
+      "scenario_id": "environment-accept"
+    },
+    {
+      "checkpoint": "LABEL_PLAN",
+      "decision": "REQUEST_MORE_EXAMPLES",
+      "expected_outcome": "MORE_EXAMPLES_REQUESTED",
+      "required_example_kind_count": 4,
+      "scenario_id": "label-more-examples"
+    },
+    {
+      "checkpoint": "TASK_REWRITE_PLAN",
+      "decision": "REQUEST_MORE_EXAMPLES",
+      "expected_outcome": "MORE_EXAMPLES_REQUESTED",
+      "required_example_kind_count": 1,
+      "scenario_id": "task-rewrite-more-examples"
+    },
+    {
+      "decision": "REJECT",
+      "expected_outcome": "REJECTED",
+      "scenario_id": "reject"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "decision": "DEFER",
+      "expected_outcome": "DEFERRED",
+      "scenario_id": "final-defer"
+    },
+    {
+      "expected_outcome": "EXACT_REPLAY",
+      "outbox_event_count": 1,
+      "scenario_id": "idempotent-replay"
+    },
+    {
+      "expected_outcome": "IDEMPOTENCY_CONFLICT",
+      "scenario_id": "changed-same-key"
+    },
+    {
+      "expected_outcome": "REQUEST_ALREADY_DECIDED",
+      "scenario_id": "second-key-same-request"
+    },
+    {
+      "expected_outcome": "REJECTED_AUTHENTICATION",
+      "scenario_id": "authenticated-user-mismatch"
+    },
+    {
+      "expected_outcome": "REJECTED_STALE_REQUEST",
+      "scenario_id": "stale-request"
+    },
+    {
+      "expected_outcome": "REJECTED_HARD_GATE_OVERRIDE",
+      "scenario_id": "hard-gate-override"
+    }
+  ],
+  "schema_version": "eval-factory/user-decision-gold/r7-05-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ],
+  "synthetic_decision_count": 0
+}

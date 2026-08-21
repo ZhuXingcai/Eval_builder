@@ -1,0 +1,47 @@
+{
+  "schema_version": "eval-factory-annotation-contract-manifest/v1",
+  "contract_version": "eval-factory-annotation/v1",
+  "guide_version": "eval-factory-annotation-guide/v1",
+  "files": [
+    {
+      "path": "evals/annotation/v1/annotation-guide.md",
+      "sha256": "c5595c8f48675bee033e04b7e2423bc0ddbe7058a3f0ac83c0749e188c39c8a1"
+    },
+    {
+      "path": "scripts/validate_eval_factory_annotations.py",
+      "sha256": "99f42f8b8521e590aa42cc400e5547deaadb784b2d33c5477eb02064efa873ee"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/attachment-annotation.schema.json",
+      "sha256": "5797b7615f0d8a9a42b6cc8c61661b98c128e0e16da9a2181e678a248467a793"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/common.schema.json",
+      "sha256": "1a0dd36bb0183feffefb8b03a36033f72487a84061e2c84c8e24dd3459c61185"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/label-annotation.schema.json",
+      "sha256": "6245043bf5fcaef95c2d0d6950bd21b22a947ea7ed05b1879cdee67288363278"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/parser-annotation.schema.json",
+      "sha256": "59684fb9c38d99fdf60cf83d241f32e66d2a225ca5704ef3e47b61a8622716ac"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/release-annotation.schema.json",
+      "sha256": "7ba6142f3641d99ff4bddc15eab476d3b3b7ae983265946abfd5d7f31bd3eb21"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/safety-annotation.schema.json",
+      "sha256": "f19f64779414fc7a0a363fb4db9a96c53cef36f87e32908625c6f5f8c13d79f4"
+    },
+    {
+      "path": "evals/annotation/v1/schemas/task-annotation.schema.json",
+      "sha256": "5cbcf2c3c5e95190e926aa5c7f7452ba5df855991e11cb3eea72ad2fa56cf5be"
+    }
+  ],
+  "frozen_canary_manifest": {
+    "path": "evals/golden/eval_factory/canary_manifest.v4.json",
+    "sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+  }
+}

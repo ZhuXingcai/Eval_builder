@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "R6CanaryObjectCodecV2": {
+      "enum": [
+        "STRUCTURED_FACT_SET",
+        "LABEL_SPEC",
+        "SEMANTIC_RESIDUAL_FIXTURE",
+        "TASK_EPISODE_FIXTURE",
+        "TASK_DRAFT_FIXTURE",
+        "TASK_PROMPT_SAFETY_FIXTURE",
+        "RUBRIC_GENERATION_FIXTURE",
+        "PROMPT_ONLY_DEPENDENCY_FIXTURE",
+        "SEMANTIC_REVIEW_POLICY",
+        "CANARY_ATTACHMENT_FIXTURE",
+        "CANARY_REVIEW_FIXTURE",
+        "TRACE_INDEX_OUTPUT",
+        "SAFETY_OUTPUT",
+        "LABEL_OUTPUT",
+        "TASK_AUTHORING_OUTPUT",
+        "ATTACHMENT_PREPARATION_OUTPUT",
+        "PROVIDER_OPERATION_OUTPUT",
+        "ARTIFACT_GROUP_OUTPUT",
+        "ATTACHMENT_OUTPUT",
+        "SEMANTIC_REVIEW_ROUND_OUTPUT",
+        "ITEM_QUALITY_OUTPUT"
+      ],
+      "title": "R6CanaryObjectCodecV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/r6_canary_seed_object_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "codec": {
+      "$ref": "#/$defs/R6CanaryObjectCodecV2"
+    },
+    "object_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "payload_json": {
+      "maxLength": 1048576,
+      "minLength": 2,
+      "title": "Payload Json",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/r6-canary-seed-object/v2",
+      "default": "eval-factory/r6-canary-seed-object/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "object_ref",
+    "codec",
+    "payload_json"
+  ],
+  "title": "R6CanarySeedObjectV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_execution_v2.R6CanarySeedObjectV2",
+  "x-schema-version": "eval-factory/r6-canary-seed-object/v2"
+}

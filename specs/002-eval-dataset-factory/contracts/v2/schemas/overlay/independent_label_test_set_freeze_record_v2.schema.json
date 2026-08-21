@@ -1,0 +1,431 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelTestSetBalanceStatusV2": {
+      "enum": [
+        "ACHIEVED",
+        "SOURCE_POPULATION_LIMITED",
+        "INSUFFICIENT"
+      ],
+      "title": "LabelTestSetBalanceStatusV2",
+      "type": "string"
+    },
+    "LabelTestSetClassCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "$ref": "#/$defs/LabelDecisionValueV2"
+        },
+        "eligible_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Eligible Count",
+          "type": "integer"
+        },
+        "required_minimum": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Required Minimum",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-test-set-class-count/v2",
+          "default": "eval-factory/label-test-set-class-count/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Selected Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "decision",
+        "eligible_count",
+        "selected_count",
+        "required_minimum"
+      ],
+      "title": "LabelTestSetClassCountV2",
+      "type": "object"
+    },
+    "LabelTestSetEvaluationKindV2": {
+      "enum": [
+        "STRUCTURED",
+        "SEMANTIC"
+      ],
+      "title": "LabelTestSetEvaluationKindV2",
+      "type": "string"
+    },
+    "LabelTestSetFreezeOutcomeV2": {
+      "enum": [
+        "FROZEN",
+        "STATISTICAL_GATE_PENDING"
+      ],
+      "title": "LabelTestSetFreezeOutcomeV2",
+      "type": "string"
+    },
+    "LabelTestSetLabelSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "balance_status": {
+          "$ref": "#/$defs/LabelTestSetBalanceStatusV2"
+        },
+        "class_counts": {
+          "items": {
+            "$ref": "#/$defs/LabelTestSetClassCountV2"
+          },
+          "title": "Class Counts",
+          "type": "array"
+        },
+        "eligible_total": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Eligible Total",
+          "type": "integer"
+        },
+        "evaluation_kind": {
+          "$ref": "#/$defs/LabelTestSetEvaluationKindV2"
+        },
+        "label_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "required_total": {
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Required Total",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-test-set-label-summary/v2",
+          "default": "eval-factory/label-test-set-label-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_total": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Selected Total",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "label_spec_ref",
+        "evaluation_kind",
+        "class_counts",
+        "required_total",
+        "eligible_total",
+        "selected_total",
+        "balance_status"
+      ],
+      "title": "LabelTestSetLabelSummaryV2",
+      "type": "object"
+    },
+    "LabelTestSetShortageReasonV2": {
+      "enum": [
+        "CLASS_SHORTAGE",
+        "TOTAL_SHORTAGE"
+      ],
+      "title": "LabelTestSetShortageReasonV2",
+      "type": "string"
+    },
+    "LabelTestSetShortageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "available_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Available Count",
+          "type": "integer"
+        },
+        "decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LabelDecisionValueV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "label_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "reason": {
+          "$ref": "#/$defs/LabelTestSetShortageReasonV2"
+        },
+        "required_count": {
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Required Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-test-set-shortage/v2",
+          "default": "eval-factory/label-test-set-shortage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label_spec_ref",
+        "reason",
+        "required_count",
+        "available_count"
+      ],
+      "title": "LabelTestSetShortageV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/independent_label_test_set_freeze_record_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "access_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "candidate_pool_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "dataset_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "dataset_series_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Dataset Series Id",
+      "type": "string"
+    },
+    "development_partition_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "freeze_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Freeze Id",
+      "type": "string"
+    },
+    "freeze_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Freeze Sha256",
+      "type": "string"
+    },
+    "label_summaries": {
+      "items": {
+        "$ref": "#/$defs/LabelTestSetLabelSummaryV2"
+      },
+      "minItems": 1,
+      "title": "Label Summaries",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/LabelTestSetFreezeOutcomeV2"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "independent-label-test-set/r8-01-v1",
+      "default": "independent-label-test-set/r8-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "requested_dataset_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Requested Dataset Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/independent-label-test-set-freeze-record/v2",
+      "default": "eval-factory/independent-label-test-set-freeze-record/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shortages": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LabelTestSetShortageV2"
+      },
+      "title": "Shortages",
+      "type": "array"
+    },
+    "supersedes_freeze_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "train_partition_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "freeze_id",
+    "dataset_series_id",
+    "requested_dataset_version",
+    "outcome",
+    "candidate_pool_ref",
+    "policy_ref",
+    "access_policy_ref",
+    "train_partition_ref",
+    "development_partition_ref",
+    "label_summaries",
+    "freeze_sha256",
+    "audit"
+  ],
+  "title": "IndependentLabelTestSetFreezeRecordV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetFreezeRecordV2",
+  "x-schema-version": "eval-factory/independent-label-test-set-freeze-record/v2"
+}

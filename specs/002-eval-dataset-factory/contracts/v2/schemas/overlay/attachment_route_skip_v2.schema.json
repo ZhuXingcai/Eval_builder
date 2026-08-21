@@ -1,0 +1,72 @@
+{
+  "$defs": {
+    "AttachmentRouteCandidateKind": {
+      "enum": [
+        "PROVIDER",
+        "RUNTIME"
+      ],
+      "title": "AttachmentRouteCandidateKind",
+      "type": "string"
+    },
+    "AttachmentRouteSkipCode": {
+      "enum": [
+        "PROVIDER_PAYLOAD_MISSING",
+        "PROVIDER_UNSUPPORTED_ASSET_TYPE",
+        "PROVIDER_NOT_APPROVED",
+        "PROVIDER_UNAVAILABLE",
+        "PROVIDER_CAPABILITY_MISSING",
+        "PROVIDER_PROBE_FAILED",
+        "RUNTIME_NOT_REGISTERED",
+        "RUNTIME_UNAVAILABLE",
+        "RUNTIME_TOOL_MISSING",
+        "RUNTIME_RESUME_UNSUPPORTED",
+        "RUNTIME_PROBE_FAILED"
+      ],
+      "title": "AttachmentRouteSkipCode",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_route_skip_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "candidate_kind": {
+      "$ref": "#/$defs/AttachmentRouteCandidateKind"
+    },
+    "code": {
+      "$ref": "#/$defs/AttachmentRouteSkipCode"
+    },
+    "missing_capability_ids": {
+      "default": [],
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Missing Capability Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-route-skip/v2",
+      "default": "env-mock-agent/attachment-route-skip/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "candidate_kind",
+    "candidate_id",
+    "code"
+  ],
+  "title": "AttachmentRouteSkipV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.routing_v2.AttachmentRouteSkipV2",
+  "x-schema-version": "env-mock-agent/attachment-route-skip/v2"
+}

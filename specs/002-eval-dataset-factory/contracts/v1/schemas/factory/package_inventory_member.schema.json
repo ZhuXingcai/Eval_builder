@@ -1,0 +1,80 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/package_inventory_member.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "container_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Container Ref"
+    },
+    "content_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Content Sha256"
+    },
+    "media_type": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Media Type"
+    },
+    "member_type": {
+      "enum": [
+        "DIRECTORY",
+        "FILE",
+        "NESTED_MEMBER"
+      ],
+      "title": "Member Type",
+      "type": "string"
+    },
+    "normalized_path": {
+      "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+      "title": "Normalized Path",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/package-inventory-member/v1",
+      "default": "eval-factory/package-inventory-member/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 0,
+      "title": "Size Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "normalized_path",
+    "member_type",
+    "size_bytes"
+  ],
+  "title": "PackageInventoryMember",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.safety.PackageInventoryMember",
+  "x-schema-version": "eval-factory/package-inventory-member/v1"
+}

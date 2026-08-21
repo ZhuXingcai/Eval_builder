@@ -1,0 +1,82 @@
+{
+  "schema_version": "eval-factory/artifact-execution-gold/r5-06-v1",
+  "cases": [
+    {
+      "case_id": "independent-groups",
+      "artifacts": [
+        {
+          "artifact_id": "artifact://a",
+          "logical_path": "inputs/a.txt",
+          "dependencies": [],
+          "locked_fact_keys": []
+        },
+        {
+          "artifact_id": "artifact://b",
+          "logical_path": "inputs/b.txt",
+          "dependencies": [],
+          "locked_fact_keys": []
+        }
+      ],
+      "expected_groups": [
+        [
+          "artifact://a"
+        ],
+        [
+          "artifact://b"
+        ]
+      ]
+    },
+    {
+      "case_id": "shared-fact-serial-group",
+      "artifacts": [
+        {
+          "artifact_id": "artifact://a",
+          "logical_path": "inputs/a.txt",
+          "dependencies": [],
+          "locked_fact_keys": [
+            "organization"
+          ]
+        },
+        {
+          "artifact_id": "artifact://b",
+          "logical_path": "inputs/b.txt",
+          "dependencies": [],
+          "locked_fact_keys": [
+            "organization"
+          ]
+        }
+      ],
+      "expected_groups": [
+        [
+          "artifact://a",
+          "artifact://b"
+        ]
+      ]
+    },
+    {
+      "case_id": "dependency-join",
+      "artifacts": [
+        {
+          "artifact_id": "artifact://a",
+          "logical_path": "inputs/z-base.txt",
+          "dependencies": [],
+          "locked_fact_keys": []
+        },
+        {
+          "artifact_id": "artifact://b",
+          "logical_path": "inputs/a-dependent.txt",
+          "dependencies": [
+            "artifact://a"
+          ],
+          "locked_fact_keys": []
+        }
+      ],
+      "expected_groups": [
+        [
+          "artifact://a",
+          "artifact://b"
+        ]
+      ]
+    }
+  ]
+}

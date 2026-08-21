@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.eval-factory.local/annotation/v1/label-annotation.schema.json",
+  "title": "Eval Factory Label Annotation v1",
+  "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/annotationRecord",
+  "properties": {
+    "annotation_type": {
+      "const": "LABEL"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label_spec_ref",
+        "label_spec_version",
+        "expected_decision",
+        "positive_evidence_ref_ids",
+        "negative_evidence_ref_ids",
+        "semantic_evidence_ref_ids",
+        "structured_capability_complete",
+        "semantic_residual",
+        "confidence",
+        "rule_version",
+        "model_profile",
+        "prompt_version",
+        "review_status"
+      ],
+      "properties": {
+        "label_spec_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "label_spec_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "expected_decision": {
+          "enum": [
+            "MATCH",
+            "NO_MATCH",
+            "ABSTAIN"
+          ]
+        },
+        "positive_evidence_ref_ids": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+        },
+        "negative_evidence_ref_ids": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+        },
+        "semantic_evidence_ref_ids": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+        },
+        "structured_capability_complete": {
+          "type": "boolean"
+        },
+        "semantic_residual": {
+          "enum": [
+            "NOT_REQUIRED",
+            "REQUIRED",
+            "BLOCKED"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rule_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "model_profile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "prompt_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "review_status": {
+          "enum": [
+            "NOT_REVIEWED",
+            "REVIEW_REQUIRED",
+            "APPROVED",
+            "REJECTED"
+          ]
+        }
+      }
+    }
+  }
+}

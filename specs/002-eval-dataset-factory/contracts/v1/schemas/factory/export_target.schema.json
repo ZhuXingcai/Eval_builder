@@ -1,0 +1,51 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/export_target.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "channel": {
+      "enum": [
+        "CANARY",
+        "INTERNAL_REVIEW",
+        "PRODUCTION"
+      ],
+      "title": "Channel",
+      "type": "string"
+    },
+    "profile": {
+      "enum": [
+        "LH",
+        "GENERIC"
+      ],
+      "title": "Profile",
+      "type": "string"
+    },
+    "profile_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "registry": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Registry",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/export-target/v1",
+      "default": "eval-factory/export-target/v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "profile",
+    "profile_version",
+    "channel",
+    "registry"
+  ],
+  "title": "ExportTarget",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration.ExportTarget",
+  "x-schema-version": "eval-factory/export-target/v1"
+}

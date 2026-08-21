@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.eval-factory.local/annotation/v1/attachment-annotation.schema.json",
+  "title": "Eval Factory Attachment Annotation v1",
+  "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/annotationRecord",
+  "properties": {
+    "annotation_type": {
+      "const": "ATTACHMENT"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_mode",
+        "artifacts",
+        "required_artifact_set_complete",
+        "input_state_only",
+        "silent_degradation_allowed",
+        "expected_package_disposition"
+      ],
+      "properties": {
+        "task_mode": {
+          "enum": [
+            "TRACE_RICH",
+            "SKELETON_GUIDED",
+            "PROMPT_ONLY",
+            "MIXED",
+            "BLOCKED"
+          ]
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "artifact_ref",
+              "logical_path",
+              "media_type",
+              "criticality",
+              "expected_mode",
+              "path_evidence",
+              "type_evidence",
+              "structure_evidence",
+              "untainted_content_coverage",
+              "pre_mutation_evidence",
+              "provenance_confidence",
+              "truncation",
+              "blocking_uncertainties",
+              "expected_structure",
+              "expected_outcome",
+              "evidence_ref_ids"
+            ],
+            "properties": {
+              "artifact_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 255
+              },
+              "logical_path": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9._-][A-Za-z0-9._/ -]{0,511}$"
+              },
+              "media_type": {
+                "type": "string",
+                "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$"
+              },
+              "criticality": {
+                "enum": [
+                  "CRITICAL",
+                  "REQUIRED",
+                  "OPTIONAL"
+                ]
+              },
+              "expected_mode": {
+                "enum": [
+                  "TRACE_RICH",
+                  "SKELETON_GUIDED",
+                  "PROMPT_ONLY",
+                  "BLOCKED"
+                ]
+              },
+              "path_evidence": {
+                "enum": [
+                  "DIRECT",
+                  "INFERRED",
+                  "MISSING"
+                ]
+              },
+              "type_evidence": {
+                "enum": [
+                  "DIRECT",
+                  "INFERRED",
+                  "MISSING"
+                ]
+              },
+              "structure_evidence": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL",
+                  "MISSING"
+                ]
+              },
+              "untainted_content_coverage": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL",
+                  "NONE",
+                  "UNKNOWN"
+                ]
+              },
+              "pre_mutation_evidence": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL",
+                  "NONE",
+                  "UNKNOWN"
+                ]
+              },
+              "provenance_confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "truncation": {
+                "enum": [
+                  "NONE",
+                  "PRESENT",
+                  "UNKNOWN"
+                ]
+              },
+              "blocking_uncertainties": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              },
+              "expected_structure": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "uniqueItems": true
+              },
+              "expected_outcome": {
+                "enum": [
+                  "BUILD",
+                  "NEEDS_REVIEW",
+                  "BLOCKED",
+                  "OMIT_OPTIONAL"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              }
+            }
+          }
+        },
+        "required_artifact_set_complete": {
+          "type": "boolean"
+        },
+        "input_state_only": {
+          "type": "boolean"
+        },
+        "silent_degradation_allowed": {
+          "const": false
+        },
+        "expected_package_disposition": {
+          "enum": [
+            "BUILD",
+            "NEEDS_REVIEW",
+            "BLOCKED",
+            "REJECT"
+          ]
+        }
+      }
+    }
+  }
+}

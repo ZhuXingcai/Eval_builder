@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReviewConclusion": {
+      "enum": [
+        "APPROVE",
+        "REJECT",
+        "REQUEST_CHANGES",
+        "ABSTAIN",
+        "CONFIRM_EXCEPTION",
+        "DENY_EXCEPTION"
+      ],
+      "title": "ReviewConclusion",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/human_review_record.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "conclusion": {
+      "$ref": "#/$defs/ReviewConclusion"
+    },
+    "decided_at": {
+      "format": "date-time",
+      "title": "Decided At",
+      "type": "string"
+    },
+    "diff_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Finding Refs",
+      "type": "array"
+    },
+    "projection_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reason": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "record_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Record Sha256",
+      "type": "string"
+    },
+    "review_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Review Policy Id",
+      "type": "string"
+    },
+    "review_policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Review Policy Version",
+      "type": "string"
+    },
+    "review_record_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Review Record Id",
+      "type": "string"
+    },
+    "reviewer_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "reviewer_role": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Reviewer Role",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/human-review-record/v1",
+      "default": "eval-factory/human-review-record/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "supersedes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Supersedes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "review_record_id",
+    "case_id",
+    "subject_ref",
+    "reviewer_id",
+    "reviewer_role",
+    "review_policy_id",
+    "review_policy_version",
+    "projection_ref",
+    "conclusion",
+    "reason",
+    "decided_at",
+    "record_sha256"
+  ],
+  "title": "HumanReviewRecord",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.quality.HumanReviewRecord",
+  "x-schema-version": "eval-factory/human-review-record/v1"
+}

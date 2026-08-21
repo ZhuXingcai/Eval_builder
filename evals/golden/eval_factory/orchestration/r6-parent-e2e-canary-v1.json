@@ -1,0 +1,19 @@
+{
+  "claim_scope": "DEVELOPMENT_CANARY_ONLY",
+  "expected": {
+    "artifact_group_units": 1,
+    "failed_items": 0,
+    "item_quality_results": 1,
+    "job_status": "SUCCEEDED",
+    "package_manifests": 1,
+    "provider_invocations": 1,
+    "semantic_review_units": 3,
+    "stage_runs": 9,
+    "succeeded_items": 1,
+    "work_attempt_metrics": 10,
+    "work_leases": 10,
+    "work_units": 10
+  },
+  "policy_version": "r6-canary-execution/r6-parent-v1",
+  "schema_version": "eval-factory/r6-parent-e2e-canary-gold/v1"
+}

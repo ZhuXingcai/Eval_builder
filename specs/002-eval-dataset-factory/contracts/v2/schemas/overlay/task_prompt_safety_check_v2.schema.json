@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "PromptLeakageCategoryV2": {
+      "enum": [
+        "FINAL_ANSWER",
+        "COMPLETED_DELIVERABLE",
+        "PRIVATE_REFERENCE",
+        "GRADER_RULE",
+        "HIDDEN_PASS_CONDITION",
+        "HIDDEN_SELECTION_SIGNAL",
+        "TRAJECTORY_SPECIFIC_STEP"
+      ],
+      "title": "PromptLeakageCategoryV2",
+      "type": "string"
+    },
+    "TaskPromptSafetyCheckOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "NOT_EVALUATED"
+      ],
+      "title": "TaskPromptSafetyCheckOutcomeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/task_prompt_safety_check_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "category": {
+      "$ref": "#/$defs/PromptLeakageCategoryV2"
+    },
+    "detector_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Detector Ids",
+      "type": "array"
+    },
+    "finding_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Finding Ids",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/TaskPromptSafetyCheckOutcomeV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/task-prompt-safety-check/v2",
+      "default": "eval-factory/task-prompt-safety-check/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "category",
+    "outcome"
+  ],
+  "title": "TaskPromptSafetyCheckV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.TaskPromptSafetyCheckV2",
+  "x-schema-version": "eval-factory/task-prompt-safety-check/v2"
+}

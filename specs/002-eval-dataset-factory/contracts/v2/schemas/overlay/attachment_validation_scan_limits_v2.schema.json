@@ -1,0 +1,55 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_validation_scan_limits_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "max_compression_ratio": {
+      "default": 1000.0,
+      "exclusiveMinimum": 0,
+      "title": "Max Compression Ratio",
+      "type": "number"
+    },
+    "max_expanded_bytes": {
+      "default": 500000000,
+      "minimum": 1,
+      "title": "Max Expanded Bytes",
+      "type": "integer"
+    },
+    "max_extracted_characters": {
+      "default": 2000000,
+      "minimum": 1,
+      "title": "Max Extracted Characters",
+      "type": "integer"
+    },
+    "max_file_bytes": {
+      "default": 100000000,
+      "minimum": 1,
+      "title": "Max File Bytes",
+      "type": "integer"
+    },
+    "max_inventory_members": {
+      "default": 20000,
+      "minimum": 1,
+      "title": "Max Inventory Members",
+      "type": "integer"
+    },
+    "max_nested_depth": {
+      "default": 4,
+      "maximum": 16,
+      "minimum": 1,
+      "title": "Max Nested Depth",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-validation-scan-limits/v2",
+      "default": "env-mock-agent/attachment-validation-scan-limits/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "title": "AttachmentValidationScanLimitsV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.validation_v2.AttachmentValidationScanLimitsV2",
+  "x-schema-version": "env-mock-agent/attachment-validation-scan-limits/v2"
+}

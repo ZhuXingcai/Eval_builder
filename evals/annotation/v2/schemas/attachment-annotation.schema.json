@@ -1,0 +1,184 @@
+{
+  "$defs": {
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "artifacts": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_ref": {
+                "maxLength": 255,
+                "minLength": 3,
+                "type": "string"
+              },
+              "blocking_uncertainties": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "criticality": {
+                "enum": [
+                  "CRITICAL",
+                  "REQUIRED",
+                  "OPTIONAL"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "expected_mode": {
+                "enum": [
+                  "TRACE_RICH",
+                  "SKELETON_GUIDED",
+                  "PROMPT_ONLY",
+                  "BLOCKED"
+                ]
+              },
+              "expected_outcome": {
+                "enum": [
+                  "BUILD",
+                  "NEEDS_REVIEW",
+                  "BLOCKED",
+                  "OMIT_OPTIONAL"
+                ]
+              },
+              "expected_structure": {
+                "items": {
+                  "maxLength": 1000,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "logical_path": {
+                "pattern": "^[A-Za-z0-9._-][A-Za-z0-9._/ -]{0,511}$",
+                "type": "string"
+              },
+              "media_type": {
+                "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+                "type": "string"
+              },
+              "path_evidence": {
+                "enum": [
+                  "DIRECT",
+                  "INFERRED",
+                  "MISSING"
+                ]
+              },
+              "pre_mutation_evidence": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL",
+                  "NONE",
+                  "UNKNOWN"
+                ]
+              },
+              "provenance_confidence": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              "structure_evidence": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL",
+                  "MISSING"
+                ]
+              },
+              "truncation": {
+                "enum": [
+                  "NONE",
+                  "PRESENT",
+                  "UNKNOWN"
+                ]
+              },
+              "type_evidence": {
+                "enum": [
+                  "DIRECT",
+                  "INFERRED",
+                  "MISSING"
+                ]
+              },
+              "untainted_content_coverage": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL",
+                  "NONE",
+                  "UNKNOWN"
+                ]
+              }
+            },
+            "required": [
+              "artifact_ref",
+              "logical_path",
+              "media_type",
+              "criticality",
+              "expected_mode",
+              "path_evidence",
+              "type_evidence",
+              "structure_evidence",
+              "untainted_content_coverage",
+              "pre_mutation_evidence",
+              "provenance_confidence",
+              "truncation",
+              "blocking_uncertainties",
+              "expected_structure",
+              "expected_outcome",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "expected_package_disposition": {
+          "enum": [
+            "BUILD",
+            "NEEDS_REVIEW",
+            "BLOCKED",
+            "REJECT"
+          ]
+        },
+        "input_state_only": {
+          "type": "boolean"
+        },
+        "required_artifact_set_complete": {
+          "type": "boolean"
+        },
+        "silent_degradation_allowed": {
+          "const": false
+        },
+        "task_mode": {
+          "enum": [
+            "TRACE_RICH",
+            "SKELETON_GUIDED",
+            "PROMPT_ONLY",
+            "MIXED",
+            "BLOCKED"
+          ]
+        }
+      },
+      "required": [
+        "task_mode",
+        "artifacts",
+        "required_artifact_set_complete",
+        "input_state_only",
+        "silent_degradation_allowed",
+        "expected_package_disposition"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/attachment-annotation.schema.json",
+  "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/annotationRecord",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "annotation_type": {
+      "const": "ATTACHMENT"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "title": "Eval Factory Attachment Annotation v2"
+}

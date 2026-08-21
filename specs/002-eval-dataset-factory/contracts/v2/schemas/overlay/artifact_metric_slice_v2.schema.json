@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "CostObservationV2": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_microusd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Microusd"
+        },
+        "availability": {
+          "$ref": "#/$defs/MetricAvailabilityV2"
+        },
+        "currency": {
+          "const": "USD",
+          "default": "USD",
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "const": "HALF_EVEN_MICRO_USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding"
+        },
+        "source_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "availability"
+      ],
+      "title": "CostObservationV2",
+      "type": "object"
+    },
+    "MetricAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "UNAVAILABLE"
+      ],
+      "title": "MetricAvailabilityV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ToolMetricV2": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "minimum": 1,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "tool_family": {
+          "enum": [
+            "FILE",
+            "SHELL",
+            "SEARCH",
+            "FETCH",
+            "RENDERER",
+            "OTHER"
+          ],
+          "title": "Tool Family",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool_family",
+        "calls"
+      ],
+      "title": "ToolMetricV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/artifact_metric_slice_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "cost": {
+      "$ref": "#/$defs/CostObservationV2"
+    },
+    "output_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "selected_route_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Route Id"
+    },
+    "selected_route_kind": {
+      "anyOf": [
+        {
+          "enum": [
+            "PROVIDER",
+            "RUNTIME"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Route Kind"
+    },
+    "selected_route_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Route Version"
+    },
+    "status": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Status",
+      "type": "string"
+    },
+    "telemetry_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "tool_metrics": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ToolMetricV2"
+      },
+      "title": "Tool Metrics",
+      "type": "array"
+    },
+    "worker_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Worker Version"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "status",
+    "cost"
+  ],
+  "title": "ArtifactMetricSliceV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.observability_v2.ArtifactMetricSliceV2"
+}

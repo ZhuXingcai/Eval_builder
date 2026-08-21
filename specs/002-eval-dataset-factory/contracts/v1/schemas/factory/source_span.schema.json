@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/source_span.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approximate": {
+      "title": "Approximate",
+      "type": "boolean"
+    },
+    "decoded_char_end": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Decoded Char End"
+    },
+    "decoded_char_start": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Decoded Char Start"
+    },
+    "field": {
+      "enum": [
+        "request",
+        "response",
+        "extra",
+        "outer"
+      ],
+      "title": "Field",
+      "type": "string"
+    },
+    "outer_record_index": {
+      "minimum": 0,
+      "title": "Outer Record Index",
+      "type": "integer"
+    },
+    "raw_byte_end": {
+      "minimum": 0,
+      "title": "Raw Byte End",
+      "type": "integer"
+    },
+    "raw_byte_start": {
+      "minimum": 0,
+      "title": "Raw Byte Start",
+      "type": "integer"
+    },
+    "raw_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "repair_map_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "eval-factory/source-span/v1",
+      "default": "eval-factory/source-span/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_trace_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Trace Id",
+      "type": "string"
+    },
+    "source_uri": {
+      "maxLength": 1024,
+      "minLength": 3,
+      "title": "Source Uri",
+      "type": "string"
+    },
+    "span_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Span Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "span_id",
+    "source_uri",
+    "source_trace_id",
+    "outer_record_index",
+    "field",
+    "raw_byte_start",
+    "raw_byte_end",
+    "approximate",
+    "raw_sha256"
+  ],
+  "title": "SourceSpan",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.SourceSpan",
+  "x-schema-version": "eval-factory/source-span/v1"
+}

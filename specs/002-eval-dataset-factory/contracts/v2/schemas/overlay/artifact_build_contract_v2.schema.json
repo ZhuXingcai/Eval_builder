@@ -1,0 +1,322 @@
+{
+  "$defs": {
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReconstructionMode": {
+      "enum": [
+        "TRACE_RICH",
+        "SKELETON_GUIDED",
+        "PROMPT_ONLY",
+        "BLOCKED"
+      ],
+      "title": "ReconstructionMode",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/artifact_build_contract_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_build_contract_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Build Contract Id",
+      "type": "string"
+    },
+    "artifact_build_contract_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Artifact Build Contract Sha256",
+      "type": "string"
+    },
+    "artifact_evidence_matrix_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "artifact_evidence_row_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "artifact_evidence_target_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "asset_type": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+      "title": "Asset Type",
+      "type": "string"
+    },
+    "attachment_dependency_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Attachment Dependency Id",
+      "type": "string"
+    },
+    "attachment_planning_context_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "content_contract_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "criticality": {
+      "$ref": "#/$defs/AttachmentCriticality"
+    },
+    "logical_path": {
+      "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+      "title": "Logical Path",
+      "type": "string"
+    },
+    "media_type": {
+      "maxLength": 255,
+      "minLength": 3,
+      "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+      "title": "Media Type",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ReconstructionMode"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "producer_task_view_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "provider_payload_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "render_contract_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "required_provider_capability_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Required Provider Capability Ids",
+      "type": "array"
+    },
+    "required_runtime_tools": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Required Runtime Tools",
+      "type": "array"
+    },
+    "runtime_resume_required": {
+      "title": "Runtime Resume Required",
+      "type": "boolean"
+    },
+    "runtime_role": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Runtime Role",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/artifact-build-contract/v2",
+      "default": "eval-factory/artifact-build-contract/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_evidence_set_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "validator_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Validator Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "artifact_build_contract_id",
+    "attachment_planning_context_ref",
+    "producer_task_view_ref",
+    "artifact_evidence_matrix_ref",
+    "artifact_evidence_row_ref",
+    "artifact_evidence_target_ref",
+    "attachment_dependency_id",
+    "artifact_id",
+    "logical_path",
+    "media_type",
+    "asset_type",
+    "mode",
+    "criticality",
+    "content_contract_ref",
+    "render_contract_ref",
+    "required_provider_capability_ids",
+    "required_runtime_tools",
+    "runtime_role",
+    "runtime_resume_required",
+    "validator_ids",
+    "policy_version",
+    "artifact_build_contract_sha256",
+    "audit"
+  ],
+  "title": "ArtifactBuildContractV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.attachment_v2.ArtifactBuildContractV2",
+  "x-schema-version": "eval-factory/artifact-build-contract/v2"
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": "eval-factory/r5-three-mode-package-canaries-gold/v1",
+  "claim_scope": "DIRECT_CROSS_CHILD_EXECUTION_AND_FINAL_PACKAGE",
+  "success_cases": [
+    {
+      "case_id": "trace-rich-package-pass",
+      "mode": "TRACE_RICH",
+      "routing_outcome": "ROUTED",
+      "route_entry_outcome": "ROUTED_PROVIDER",
+      "execution_status": "SUCCEEDED",
+      "validation_outcome": "PASSED",
+      "semantic_round_count": 3,
+      "quality_outcome": "PASSED",
+      "package_member_count": 1,
+      "provenance_binding_count": 1,
+      "environment_artifact_count": 1,
+      "approvable": true,
+      "input_state_only": true,
+      "identity_sha256": {
+        "build_spec": "59dd3d936fe94a7574546bc45dec8fb5c6bb2a3f3bd127709ff73db8f2ee9bec",
+        "execution_request": "b5fc6cf045caca1207b06fc4dc7d8e0effca9adf0fb3b79fe3de9692b94228d1",
+        "reconstruction": "3628a8b5c5173093cf8db17179c73c159a8e2f76d5c53fed709a8a0635d565cb",
+        "source_validation": "957daffa1fcd9f571868eb4175d308bcb978b6626c3628e96871e607009e7285",
+        "candidate_revision": "84ee16fdd074f914af5a4f8e790baf1ae223550b0da7b5117a22637f28969ecf",
+        "revision_validation": "41d74b60ed26cff3794e525522b8f031bca6d21a7b72ac1b30db9d42319e835c",
+        "stage_results": [
+          "7fe3450d942f2c1d3182981c1ba31aeca0ab0068d1861081d7a35905308a5327",
+          "27910ef2408c596f4692cb0715b074ede7d154476a4a6a61b82fe6030039b64b",
+          "cec41469a1037176eda94ca1817c13a85ca55a6b4cbe4903dbdce8ee2330d5ae"
+        ],
+        "workflow": "bb223ea0c1e9cf2319fd26c3982e2146f263ad79388fb2a5024d345c5aa908a3",
+        "package": "062e5262d7c1b1441490b666a43a07a0e5d582692c7697847c2eccef53073668",
+        "package_entry": "d593f7ee0c53281007e60c8e554c3af54839f660d47686e6429ee571a35ae689",
+        "provenance_entry": "1d99c57c77e2cbfd138885c6758b6efd4c3afbcde465a86105dd2be50171c981",
+        "environment_artifact": "25540766bd2432a0498e8c6e0327f739f33522379a1cf73db0efd1565bab2987",
+        "quality_report": "0ef7db2ea5922ed70309d17530dd1482fe5ccd50f719e952beb3ebd5eeb95a6b"
+      }
+    },
+    {
+      "case_id": "skeleton-guided-package-pass",
+      "mode": "SKELETON_GUIDED",
+      "routing_outcome": "ROUTED",
+      "route_entry_outcome": "ROUTED_PROVIDER",
+      "execution_status": "SUCCEEDED",
+      "validation_outcome": "PASSED",
+      "semantic_round_count": 3,
+      "quality_outcome": "PASSED",
+      "package_member_count": 1,
+      "provenance_binding_count": 1,
+      "environment_artifact_count": 1,
+      "approvable": true,
+      "input_state_only": true,
+      "identity_sha256": {
+        "build_spec": "7434cc54799827821f23487baf5795a6f6e6a581f433bfdc4ba67135f82b0e07",
+        "execution_request": "a8f780cc93ed8a57bd8332ffd43f51a188808e6806ef9f00f5e86d01404b29fd",
+        "reconstruction": "a52b4d3f8198a404b304c3a7eb309ba665235783196b4cc6a8d8c9625e4be26b",
+        "source_validation": "ce0bc34caa649dec1b57fe312a59b1a230e72695dfd256b3c6b9e704d53fc6ef",
+        "candidate_revision": "29c2d3ac744db7e62070710a5ee7ffb9eb0463d451217203918d14977e6e05a5",
+        "revision_validation": "efdcebe400a49f5752bd4986a08b036002a262ce1c6bac3ca84f03641c7f69c7",
+        "stage_results": [
+          "9916adf1a2e6ec5d4e73aaed446a01ce34de778629a15f1df2a6a8397d63554b",
+          "1e7f04971a270e69812a68655451639843821e1ce73b58941d79d48863d38002",
+          "fca802b25d20908ec9c3c449039f520222a4937d564f0a4cb57949e45554c2a8"
+        ],
+        "workflow": "fda1354733f2ff5f2f4cc58b2ce4e90c253409b5ab59c59d95d0f37045038c99",
+        "package": "e391d6cf480a87a76040da0598f3dc4ab63df0bc3b61a8a7062df3501620add7",
+        "package_entry": "567fb5846dd7caa48b9b4186273576488630cd813378fd09c8394fb1bfcdf347",
+        "provenance_entry": "8fb3724740921d61757c1acd310f51359761280cbce827025c8d4890b2484e05",
+        "environment_artifact": "9e1711cf054548cdee241d4ec7d682a5307b6ea3db1e09eb7cffb1c0f471694a",
+        "quality_report": "eb4ca2a06488cee9ff1c54630890042b1be42548cecc0d5f036f940ffe5d6bb0"
+      }
+    },
+    {
+      "case_id": "prompt-only-package-pass",
+      "mode": "PROMPT_ONLY",
+      "routing_outcome": "ROUTED",
+      "route_entry_outcome": "ROUTED_PROVIDER",
+      "execution_status": "SUCCEEDED",
+      "validation_outcome": "PASSED",
+      "semantic_round_count": 3,
+      "quality_outcome": "PASSED",
+      "package_member_count": 1,
+      "provenance_binding_count": 1,
+      "environment_artifact_count": 1,
+      "approvable": true,
+      "input_state_only": true,
+      "identity_sha256": {
+        "build_spec": "460351de38535c1310cec0e2ac3625f031a1e8216d9ac3a4270827eb9cac5d98",
+        "execution_request": "1863dda443e04c5b2a3a03797051b5ea17a322561545b0521eab5a2866991cb5",
+        "reconstruction": "79625e6a0349aaa716ce77ecd79cd425b8b24c852a22e5f04e608e92f7d56a6a",
+        "source_validation": "fe985040025d6ae4411a8d515401cf72daf9186607363e3b002eb5cf54dabea2",
+        "candidate_revision": "43ecda388d6d9e22d2890239470d47a40599dbfbab92913e860b6c6ff2cde023",
+        "revision_validation": "f11823b26ff7fa95ad0865ddd8ed1b6b5c70fe68c1cda2ce9228fd5967b832dc",
+        "stage_results": [
+          "28ba53fffd7549129ec3754f49c70c56800f06c3a91375678d9fb766e967bb35",
+          "23bd0f34912c5e673d52e50fb4b26210e87b62cede8b93c64e04506391f53f78",
+          "df79101de5ce64d435c0328f44abcb04e50d4cd2169e4f5ee73f5fbd3d6bee70"
+        ],
+        "workflow": "ef3eb57959d5d93ec9932d3447d7639942b3f82a9a095ab2e046f52cb8a1d990",
+        "package": "fe91d02c0f786e74d805c498e5cdb6299294229f3e74cef3fb2b8c56dd3ddee9",
+        "package_entry": "a4329e9ed9da4da1ef3e4114fb3218eb88dcf71e7c77e627aa7a5efba5c6396e",
+        "provenance_entry": "b8d6bb56b17b4d3f448a13f139c94ed07788967987569c2b5a2f94126a870240",
+        "environment_artifact": "b79311d778f84f7c1910b93cda98663d3469220d8023e60dfdff2f57374ca403",
+        "quality_report": "5f770c675dfbff1f1e67a5da490f70bc2af294c84e10ace7af8a6a786c97b7e8"
+      }
+    }
+  ],
+  "blocked_cases": [
+    {
+      "case_id": "critical-first-write-policy-block",
+      "setup": "BLOCKED_FIRST_WRITE",
+      "mode": "BLOCKED",
+      "routing_outcome": "BLOCKED_POLICY",
+      "route_entry_outcome": "BLOCKED_POLICY",
+      "build_spec_count": 0,
+      "execution_plan": false,
+      "execution_batch": false,
+      "quality_outcome": "UPSTREAM_INCOMPLETE",
+      "approvable": false,
+      "final_package": false
+    },
+    {
+      "case_id": "provider-and-runtime-capability-block",
+      "setup": "PROMPT_ONLY",
+      "mode": "PROMPT_ONLY",
+      "routing_outcome": "BLOCKED_CAPABILITY",
+      "route_entry_outcome": "BLOCKED_CAPABILITY",
+      "build_spec_count": 0,
+      "execution_plan": false,
+      "execution_batch": false,
+      "quality_outcome": "UPSTREAM_INCOMPLETE",
+      "approvable": false,
+      "final_package": false
+    }
+  ]
+}

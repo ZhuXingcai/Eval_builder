@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "AttachmentSemanticReviewRoundV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY",
+        "LEAKAGE_EXECUTABILITY"
+      ],
+      "title": "AttachmentSemanticReviewRoundV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewerRoleV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY_REVIEWER",
+        "REALISM_CONSISTENCY_REVIEWER",
+        "LEAKAGE_EXECUTABILITY_REVIEWER"
+      ],
+      "title": "AttachmentSemanticReviewerRoleV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_semantic_review_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "context_view_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "current_artifact_version_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Current Artifact Version Refs",
+      "type": "array"
+    },
+    "current_output_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Current Output Refs",
+      "type": "array"
+    },
+    "deterministic_validation_result_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "model_profile_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "policy_version": {
+      "const": "semantic-review/r5-09-v1",
+      "default": "semantic-review/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "prior_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Prior Finding Refs",
+      "type": "array"
+    },
+    "prior_repair_plan_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Prior Repair Plan Refs",
+      "type": "array"
+    },
+    "prior_repair_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Prior Repair Result Refs",
+      "type": "array"
+    },
+    "prior_resolution_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Prior Resolution Refs",
+      "type": "array"
+    },
+    "prior_round_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "prompt_version": {
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "required_resolution_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Required Resolution Finding Refs",
+      "type": "array"
+    },
+    "reviewer_role": {
+      "$ref": "#/$defs/AttachmentSemanticReviewerRoleV2"
+    },
+    "round": {
+      "$ref": "#/$defs/AttachmentSemanticReviewRoundV2"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-semantic-review-request/v2",
+      "default": "env-mock-agent/attachment-semantic-review-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_review_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Semantic Review Request Id",
+      "type": "string"
+    },
+    "semantic_review_request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Semantic Review Request Sha256",
+      "type": "string"
+    },
+    "stage_run_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    }
+  },
+  "required": [
+    "semantic_review_request_id",
+    "round",
+    "reviewer_role",
+    "stage_run_ref",
+    "candidate_revision_ref",
+    "deterministic_validation_result_ref",
+    "context_view_ref",
+    "current_artifact_version_refs",
+    "current_output_refs",
+    "model_profile_ref",
+    "prompt_version",
+    "idempotency_key",
+    "semantic_review_request_sha256"
+  ],
+  "title": "AttachmentSemanticReviewRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticReviewRequestV2",
+  "x-schema-version": "env-mock-agent/attachment-semantic-review-request/v2"
+}

@@ -1,0 +1,172 @@
+{
+  "$defs": {
+    "ArtifactResultStatus": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED_CAPABILITY",
+        "BLOCKED_POLICY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE"
+      ],
+      "title": "ArtifactResultStatus",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/facade/attachment_artifact_result.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "build_spec_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Build Spec Sha256",
+      "type": "string"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure Code"
+    },
+    "failure_message": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure Message"
+    },
+    "finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Finding Refs",
+      "type": "array"
+    },
+    "output_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "output_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Sha256"
+    },
+    "provider": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider"
+    },
+    "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+    },
+    "runtime": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Runtime"
+    },
+    "status": {
+      "$ref": "#/$defs/ArtifactResultStatus"
+    },
+    "validation_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Validation Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "build_spec_sha256",
+    "status"
+  ],
+  "title": "AttachmentArtifactResult",
+  "type": "object",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.contracts.AttachmentArtifactResult"
+}

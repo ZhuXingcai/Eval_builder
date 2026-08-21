@@ -1,0 +1,29 @@
+{
+  "schema_version": "eval-factory-r0-decision-manifest/v1",
+  "decision_id": "env_mock_agent-ujc.1.11",
+  "status": "APPROVED",
+  "canary_manifest_sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6",
+  "contract_manifest_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9",
+  "files": [
+    {
+      "path": "specs/002-eval-dataset-factory/labels/v1/contextual-recovery-after-tool-error.json",
+      "sha256": "7600ca49c2b535c00f61d5fce8f4c48b206d2cfd60a3e3fcd83a0706590deb58"
+    },
+    {
+      "path": "specs/002-eval-dataset-factory/labels/v1/powershell-error-signature.json",
+      "sha256": "7c7b175379c9a494d311cd6289463237e6696a4692741a989dd9a18c9c09af1d"
+    },
+    {
+      "path": "specs/002-eval-dataset-factory/labels/v1/search-tool-usage.json",
+      "sha256": "9e4ca96d40c29dbd125f6d874a341100e9b68d5dfae006b4623bb1aa3bc22ce6"
+    },
+    {
+      "path": "specs/002-eval-dataset-factory/release-profiles/v1/decision.json",
+      "sha256": "6b4c0f86d76757c2ea7a6331022e2d6926cfb79f1424dfc664929ff6357d5ace"
+    },
+    {
+      "path": "docs/decisions/eval-factory-first-labels-and-release-profiles-v1.md",
+      "sha256": "736ab2d7a29e21ffd88af302d86f464226a21a111f33653ed4a0f414cf9ac948"
+    }
+  ]
+}

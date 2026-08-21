@@ -1,0 +1,34 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/real_trace_stability_category_count_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "category": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Category",
+      "type": "string"
+    },
+    "count": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/real-trace-stability-category-count/v2",
+      "default": "eval-factory/real-trace-stability-category-count/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "category",
+    "count"
+  ],
+  "title": "RealTraceStabilityCategoryCountV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityCategoryCountV2",
+  "x-schema-version": "eval-factory/real-trace-stability-category-count/v2"
+}

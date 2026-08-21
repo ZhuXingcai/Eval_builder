@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "AttachmentSemanticReviewRoundV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY",
+        "REALISM_CONSISTENCY",
+        "LEAKAGE_EXECUTABILITY"
+      ],
+      "title": "AttachmentSemanticReviewRoundV2",
+      "type": "string"
+    },
+    "AttachmentSemanticReviewerRoleV2": {
+      "enum": [
+        "COVERAGE_SOLVABILITY_REVIEWER",
+        "REALISM_CONSISTENCY_REVIEWER",
+        "LEAKAGE_EXECUTABILITY_REVIEWER"
+      ],
+      "title": "AttachmentSemanticReviewerRoleV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/semantic_clean_context_attestation_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attestation_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Attestation Id",
+      "type": "string"
+    },
+    "attestation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Attestation Sha256",
+      "type": "string"
+    },
+    "build_transcript_included": {
+      "const": false,
+      "default": false,
+      "title": "Build Transcript Included",
+      "type": "boolean"
+    },
+    "context_view_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "denied_data_families": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Denied Data Families",
+      "type": "array"
+    },
+    "fresh_context": {
+      "const": true,
+      "default": true,
+      "title": "Fresh Context",
+      "type": "boolean"
+    },
+    "hidden_reasoning_included": {
+      "const": false,
+      "default": false,
+      "title": "Hidden Reasoning Included",
+      "type": "boolean"
+    },
+    "included_ref_inventory": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Included Ref Inventory",
+      "type": "array"
+    },
+    "policy_version": {
+      "const": "semantic-review/r5-09-v1",
+      "default": "semantic-review/r5-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "raw_private_reference_included": {
+      "const": false,
+      "default": false,
+      "title": "Raw Private Reference Included",
+      "type": "boolean"
+    },
+    "reviewer_role": {
+      "$ref": "#/$defs/AttachmentSemanticReviewerRoleV2"
+    },
+    "round": {
+      "$ref": "#/$defs/AttachmentSemanticReviewRoundV2"
+    },
+    "runtime_resume_used": {
+      "const": false,
+      "default": false,
+      "title": "Runtime Resume Used",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/semantic-clean-context-attestation/v2",
+      "default": "env-mock-agent/semantic-clean-context-attestation/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_review_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "stage_run_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    }
+  },
+  "required": [
+    "attestation_id",
+    "semantic_review_request_ref",
+    "stage_run_ref",
+    "round",
+    "reviewer_role",
+    "context_view_ref",
+    "included_ref_inventory",
+    "denied_data_families",
+    "attestation_sha256"
+  ],
+  "title": "SemanticCleanContextAttestationV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.semantic_review_v2.SemanticCleanContextAttestationV2",
+  "x-schema-version": "env-mock-agent/semantic-clean-context-attestation/v2"
+}

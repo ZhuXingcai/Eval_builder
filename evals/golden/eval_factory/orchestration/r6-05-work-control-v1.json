@@ -1,0 +1,62 @@
+{
+  "artifact_group": {
+    "fencing_token": 1,
+    "lease_ref": {
+      "object_id": "work-lease://sha256/665bb542d766ae5de6cee2ee804cee08ad46e3076bdd62c83e88fc84b236023a",
+      "object_sha256": "665bb542d766ae5de6cee2ee804cee08ad46e3076bdd62c83e88fc84b236023a",
+      "object_type": "work-lease",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "stage_run_ref": null
+  },
+  "claim_scope": "CONTENT_FREE_LEASE_FENCING_AND_RETRY_ONLY",
+  "policy_version": "work-control/r6-05-v1",
+  "schema_version": "eval-factory/r6-05-work-control-gold/v1",
+  "stage": {
+    "cancellation_ref": {
+      "object_id": "work-cancellation-record://sha256/78a99b5e51aa655f93e68a81775e97028644ebc117599ca6ecab05031aa9d40f",
+      "object_sha256": "78a99b5e51aa655f93e68a81775e97028644ebc117599ca6ecab05031aa9d40f",
+      "object_type": "work-cancellation-record",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "exhausted_decision_ref": {
+      "object_id": "work-retry-decision://sha256/0ff491f6337ac297a2a472a97b639a4e3d2578effccea26fa9c269123c80135d",
+      "object_sha256": "0ff491f6337ac297a2a472a97b639a4e3d2578effccea26fa9c269123c80135d",
+      "object_type": "work-retry-decision",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "fencing_token": 1,
+    "heartbeat_ref": {
+      "object_id": "work-lease-event://sha256/062ace9d4fca3f747eb1b33e4dfe16be9964bd04a1ce504d7cc0fa39553860d4",
+      "object_sha256": "062ace9d4fca3f747eb1b33e4dfe16be9964bd04a1ce504d7cc0fa39553860d4",
+      "object_type": "work-lease-event",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "lease_ref": {
+      "object_id": "work-lease://sha256/19c85d4e839242fa7886b8c4568ad6639b89a656982bf969561d4171fe2155db",
+      "object_sha256": "19c85d4e839242fa7886b8c4568ad6639b89a656982bf969561d4171fe2155db",
+      "object_type": "work-lease",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "policy_ref": {
+      "object_id": "work-control-policy://sha256/b2bb55b013606bb7f448ebd9d77bcc0f39179507e5c74cc49300fbed4711c69a",
+      "object_sha256": "b2bb55b013606bb7f448ebd9d77bcc0f39179507e5c74cc49300fbed4711c69a",
+      "object_type": "work-control-policy",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "retryable_event_ref": {
+      "object_id": "work-lease-event://sha256/35704f3d06334e9a55ef387cca3b197754a0af371f1e90c002db207949df1d8e",
+      "object_sha256": "35704f3d06334e9a55ef387cca3b197754a0af371f1e90c002db207949df1d8e",
+      "object_type": "work-lease-event",
+      "object_version": "v2",
+      "schema_version": "eval-factory/object-ref/v1"
+    },
+    "stage_run_id": "stage-run://r6-05/sha256/06c3bd2b7f238e2d6a423231e537391af995ef250bcaf037302a7aaa68885833"
+  }
+}

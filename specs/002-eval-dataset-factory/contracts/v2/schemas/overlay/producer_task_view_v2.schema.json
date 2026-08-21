@@ -1,0 +1,300 @@
+{
+  "$defs": {
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ProducerAttachmentRequirementV2": {
+      "additionalProperties": false,
+      "properties": {
+        "criticality": {
+          "$ref": "#/$defs/AttachmentCriticality"
+        },
+        "dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Dependency Id",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/producer-attachment-requirement/v2",
+          "default": "eval-factory/producer-attachment-requirement/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dependency_id",
+        "description",
+        "criticality"
+      ],
+      "title": "ProducerAttachmentRequirementV2",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/producer_task_view_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tools": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Allowed Tools",
+      "type": "array"
+    },
+    "attachment_requirements": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProducerAttachmentRequirementV2"
+      },
+      "title": "Attachment Requirements",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "forbidden_outputs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Forbidden Outputs",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "producer_task_view_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Producer Task View Id",
+      "type": "string"
+    },
+    "producer_task_view_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Producer Task View Sha256",
+      "type": "string"
+    },
+    "producer_task_view_version": {
+      "minimum": 1,
+      "title": "Producer Task View Version",
+      "type": "integer"
+    },
+    "projection_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "prompt_boundary_enforcement_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "query_instruction": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Query Instruction",
+      "type": "string"
+    },
+    "safe_evidence_bundle_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Safe Evidence Bundle Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/producer-task-view/v2",
+      "default": "eval-factory/producer-task-view/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_contestant_tool_policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Contestant Tool Policy Sha256",
+      "type": "string"
+    },
+    "source_contract_chain_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Contract Chain Sha256",
+      "type": "string"
+    },
+    "source_task_draft_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Task Draft Sha256",
+      "type": "string"
+    },
+    "storage_authorization_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "supersedes_producer_task_view_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "producer_task_view_id",
+    "producer_task_view_version",
+    "query_instruction",
+    "safe_evidence_bundle_refs",
+    "forbidden_outputs",
+    "projection_policy_ref",
+    "storage_authorization_ref",
+    "prompt_boundary_enforcement_ref",
+    "source_task_draft_sha256",
+    "source_contestant_tool_policy_sha256",
+    "source_contract_chain_sha256",
+    "policy_version",
+    "producer_task_view_sha256",
+    "audit"
+  ],
+  "title": "ProducerTaskViewV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.ProducerTaskViewV2",
+  "x-schema-version": "eval-factory/producer-task-view/v2"
+}

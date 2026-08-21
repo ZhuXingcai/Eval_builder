@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "IndependentLabelTestSetLabelPolicyV2": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_kind": {
+          "$ref": "#/$defs/LabelTestSetEvaluationKindV2"
+        },
+        "label_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/independent-label-test-set-label-policy/v2",
+          "default": "eval-factory/independent-label-test-set-label-policy/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_classes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LabelDecisionValueV2"
+          },
+          "title": "Semantic Classes",
+          "type": "array"
+        },
+        "semantic_total_minimum": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Semantic Total Minimum",
+          "type": "integer"
+        },
+        "structured_negative_minimum": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Structured Negative Minimum",
+          "type": "integer"
+        },
+        "structured_positive_minimum": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Structured Positive Minimum",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "label_spec_ref",
+        "evaluation_kind",
+        "structured_positive_minimum",
+        "structured_negative_minimum",
+        "semantic_total_minimum"
+      ],
+      "title": "IndependentLabelTestSetLabelPolicyV2",
+      "type": "object"
+    },
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelTestSetEvaluationKindV2": {
+      "enum": [
+        "STRUCTURED",
+        "SEMANTIC"
+      ],
+      "title": "LabelTestSetEvaluationKindV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/independent_label_test_set_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "label_policies": {
+      "items": {
+        "$ref": "#/$defs/IndependentLabelTestSetLabelPolicyV2"
+      },
+      "minItems": 1,
+      "title": "Label Policies",
+      "type": "array"
+    },
+    "max_candidates": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Candidates",
+      "type": "integer"
+    },
+    "max_private_bytes": {
+      "maximum": 5000000000,
+      "minimum": 2,
+      "title": "Max Private Bytes",
+      "type": "integer"
+    },
+    "max_selected_members": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Selected Members",
+      "type": "integer"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "independent-label-test-set/r8-01-v1",
+      "default": "independent-label-test-set/r8-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "raw_hash_isolation": {
+      "const": true,
+      "default": true,
+      "title": "Raw Hash Isolation",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/independent-label-test-set-policy/v2",
+      "default": "eval-factory/independent-label-test-set-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selection_algorithm": {
+      "const": "SHA256_CLASS_BALANCED_V1",
+      "default": "SHA256_CLASS_BALANCED_V1",
+      "title": "Selection Algorithm",
+      "type": "string"
+    },
+    "selection_seed": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Selection Seed",
+      "type": "string"
+    },
+    "trace_id_isolation": {
+      "const": true,
+      "default": true,
+      "title": "Trace Id Isolation",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "policy_id",
+    "label_policies",
+    "selection_seed",
+    "max_candidates",
+    "max_selected_members",
+    "max_private_bytes",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "IndependentLabelTestSetPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetPolicyV2",
+  "x-schema-version": "eval-factory/independent-label-test-set-policy/v2"
+}

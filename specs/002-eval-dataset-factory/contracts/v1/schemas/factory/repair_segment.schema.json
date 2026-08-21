@@ -1,0 +1,60 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/repair_segment.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "decoded_char_end": {
+      "minimum": 0,
+      "title": "Decoded Char End",
+      "type": "integer"
+    },
+    "decoded_char_start": {
+      "minimum": 0,
+      "title": "Decoded Char Start",
+      "type": "integer"
+    },
+    "exact": {
+      "title": "Exact",
+      "type": "boolean"
+    },
+    "raw_byte_end": {
+      "minimum": 0,
+      "title": "Raw Byte End",
+      "type": "integer"
+    },
+    "raw_byte_start": {
+      "minimum": 0,
+      "title": "Raw Byte Start",
+      "type": "integer"
+    },
+    "rule_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/repair-segment/v1",
+      "default": "eval-factory/repair-segment/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "transform": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Transform",
+      "type": "string"
+    }
+  },
+  "required": [
+    "raw_byte_start",
+    "raw_byte_end",
+    "decoded_char_start",
+    "decoded_char_end",
+    "transform",
+    "rule_id",
+    "exact"
+  ],
+  "title": "RepairSegment",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.RepairSegment",
+  "x-schema-version": "eval-factory/repair-segment/v1"
+}

@@ -1,0 +1,856 @@
+{
+  "$defs": {
+    "ArtifactMetricSliceV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "cost": {
+          "$ref": "#/$defs/CostObservationV2"
+        },
+        "output_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selected_route_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route Id"
+        },
+        "selected_route_kind": {
+          "anyOf": [
+            {
+              "enum": [
+                "PROVIDER",
+                "RUNTIME"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route Kind"
+        },
+        "selected_route_version": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Route Version"
+        },
+        "status": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Status",
+          "type": "string"
+        },
+        "telemetry_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tool_metrics": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ToolMetricV2"
+          },
+          "title": "Tool Metrics",
+          "type": "array"
+        },
+        "worker_version": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Worker Version"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "status",
+        "cost"
+      ],
+      "title": "ArtifactMetricSliceV2",
+      "type": "object"
+    },
+    "CacheUseV2": {
+      "enum": [
+        "HIT",
+        "MISS",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "CacheUseV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "CostObservationV2": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_microusd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Microusd"
+        },
+        "availability": {
+          "$ref": "#/$defs/MetricAvailabilityV2"
+        },
+        "currency": {
+          "const": "USD",
+          "default": "USD",
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "const": "HALF_EVEN_MICRO_USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding"
+        },
+        "source_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "availability"
+      ],
+      "title": "CostObservationV2",
+      "type": "object"
+    },
+    "MetricAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "UNAVAILABLE"
+      ],
+      "title": "MetricAvailabilityV2",
+      "type": "string"
+    },
+    "ModelUsageSourceV2": {
+      "enum": [
+        "REPORTED",
+        "CONSERVATIVE_ALLOWANCE"
+      ],
+      "title": "ModelUsageSourceV2",
+      "type": "string"
+    },
+    "ModelUsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_creation_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Creation Input Tokens",
+          "type": "integer"
+        },
+        "cache_read_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Input Tokens",
+          "type": "integer"
+        },
+        "charged_tokens": {
+          "minimum": 0,
+          "title": "Charged Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "policy_version": {
+          "const": "model-control/r6-03-v1",
+          "default": "model-control/r6-03-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "requests": {
+          "minimum": 0,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/model-usage/v2",
+          "default": "eval-factory/model-usage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ModelUsageSourceV2"
+        }
+      },
+      "required": [
+        "requests",
+        "input_tokens",
+        "output_tokens",
+        "cache_creation_input_tokens",
+        "cache_read_input_tokens",
+        "charged_tokens",
+        "source"
+      ],
+      "title": "ModelUsageV2",
+      "type": "object"
+    },
+    "NonModelResourceVectorV2": {
+      "additionalProperties": false,
+      "properties": {
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 0,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 0,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/non-model-resource-vector/v2",
+          "default": "eval-factory/non-model-resource-vector/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "storage_bytes": {
+          "minimum": 0,
+          "title": "Storage Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "processes",
+        "renderers",
+        "network_requests",
+        "storage_bytes"
+      ],
+      "title": "NonModelResourceVectorV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ResourceUsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "observed": {
+          "$ref": "#/$defs/NonModelResourceVectorV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/resource-usage/v2",
+          "default": "eval-factory/resource-usage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "usage_policy_version": {
+          "const": "resource-control/r6-04-v1",
+          "default": "resource-control/r6-04-v1",
+          "title": "Usage Policy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observed"
+      ],
+      "title": "ResourceUsageV2",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "StageRunStatus": {
+      "enum": [
+        "PENDING",
+        "RUNNING",
+        "BLOCKED_POLICY",
+        "BLOCKED_CAPABILITY",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE",
+        "SUCCEEDED",
+        "CANCELLED"
+      ],
+      "title": "StageRunStatus",
+      "type": "string"
+    },
+    "ToolMetricV2": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "minimum": 1,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "tool_family": {
+          "enum": [
+            "FILE",
+            "SHELL",
+            "SEARCH",
+            "FETCH",
+            "RENDERER",
+            "OTHER"
+          ],
+          "title": "Tool Family",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool_family",
+        "calls"
+      ],
+      "title": "ToolMetricV2",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    },
+    "WorkLeaseEventKindV2": {
+      "enum": [
+        "HEARTBEAT",
+        "SUCCEEDED",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE",
+        "EXPIRED",
+        "CANCELLED"
+      ],
+      "title": "WorkLeaseEventKindV2",
+      "type": "string"
+    },
+    "WorkUnitScopeV2": {
+      "enum": [
+        "JOB",
+        "ITEM",
+        "ARTIFACT_GROUP"
+      ],
+      "title": "WorkUnitScopeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/work_attempt_metrics_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "acquired_at": {
+      "format": "date-time",
+      "title": "Acquired At",
+      "type": "string"
+    },
+    "artifact_execution_group_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "artifact_slices": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ArtifactMetricSliceV2"
+      },
+      "title": "Artifact Slices",
+      "type": "array"
+    },
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "cache_use": {
+      "$ref": "#/$defs/CacheUseV2"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "cost": {
+      "$ref": "#/$defs/CostObservationV2"
+    },
+    "eligible_at": {
+      "format": "date-time",
+      "title": "Eligible At",
+      "type": "string"
+    },
+    "execution_duration_us": {
+      "minimum": 0,
+      "title": "Execution Duration Us",
+      "type": "integer"
+    },
+    "fencing_token": {
+      "minimum": 1,
+      "title": "Fencing Token",
+      "type": "integer"
+    },
+    "item_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Item Id"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "model_profile_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "model_usage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ModelUsageV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "output_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "policy_version": {
+      "const": "batch-observability/r6-06-v1",
+      "default": "batch-observability/r6-06-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "queue_wait_us": {
+      "minimum": 0,
+      "title": "Queue Wait Us",
+      "type": "integer"
+    },
+    "ready_at": {
+      "format": "date-time",
+      "title": "Ready At",
+      "type": "string"
+    },
+    "reason_code": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason Code"
+    },
+    "resolved_job_work_graph_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "resource_usage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ResourceUsageV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Result Refs",
+      "type": "array"
+    },
+    "retry_of_attempt_metrics_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "eval-factory/work-attempt-metrics/v2",
+      "default": "eval-factory/work-attempt-metrics/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/WorkUnitScopeV2"
+    },
+    "selected_route_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Route Id"
+    },
+    "selected_route_kind": {
+      "anyOf": [
+        {
+          "enum": [
+            "PROVIDER",
+            "RUNTIME"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Route Kind"
+    },
+    "selected_route_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Route Version"
+    },
+    "stage": {
+      "$ref": "#/$defs/StageNameV2"
+    },
+    "stage_run_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "telemetry_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "terminal_event_kind": {
+      "$ref": "#/$defs/WorkLeaseEventKindV2"
+    },
+    "terminal_lease_version": {
+      "minimum": 1,
+      "title": "Terminal Lease Version",
+      "type": "integer"
+    },
+    "terminal_status": {
+      "$ref": "#/$defs/StageRunStatus"
+    },
+    "tool_metrics": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ToolMetricV2"
+      },
+      "title": "Tool Metrics",
+      "type": "array"
+    },
+    "total_duration_us": {
+      "minimum": 0,
+      "title": "Total Duration Us",
+      "type": "integer"
+    },
+    "work_attempt_metrics_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Work Attempt Metrics Id",
+      "type": "string"
+    },
+    "work_attempt_metrics_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Attempt Metrics Sha256",
+      "type": "string"
+    },
+    "work_lease_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "work_unit_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "worker_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Worker Version"
+    }
+  },
+  "required": [
+    "work_attempt_metrics_id",
+    "resolved_job_work_graph_ref",
+    "work_unit_ref",
+    "work_lease_ref",
+    "job_id",
+    "scope",
+    "stage",
+    "attempt",
+    "fencing_token",
+    "terminal_lease_version",
+    "terminal_event_kind",
+    "terminal_status",
+    "ready_at",
+    "eligible_at",
+    "acquired_at",
+    "completed_at",
+    "queue_wait_us",
+    "execution_duration_us",
+    "total_duration_us",
+    "telemetry_ref",
+    "cache_use",
+    "cost",
+    "work_attempt_metrics_sha256",
+    "audit"
+  ],
+  "title": "WorkAttemptMetricsV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.observability_v2.WorkAttemptMetricsV2",
+  "x-schema-version": "eval-factory/work-attempt-metrics/v2"
+}

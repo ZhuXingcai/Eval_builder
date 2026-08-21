@@ -1,0 +1,28 @@
+{
+  "schema_version": "eval-factory/r6-04-resource-pools-gold/v1",
+  "policy_version": "resource-control/r6-04-v1",
+  "claim_scope": "CONTENT_FREE_NON_MODEL_RESOURCE_ADMISSION_ONLY",
+  "cases": [
+    {
+      "case_id": "admitted",
+      "process_capacity": 1,
+      "process_budget": 1,
+      "storage_bytes": 1024,
+      "expected_outcome": "ADMITTED"
+    },
+    {
+      "case_id": "budget-exhausted",
+      "process_capacity": 1,
+      "process_budget": 3,
+      "storage_bytes": 1024,
+      "expected_outcome": "BUDGET_EXHAUSTED"
+    },
+    {
+      "case_id": "unsatisfiable-demand",
+      "process_capacity": 2,
+      "process_budget": 2,
+      "storage_bytes": 1024,
+      "expected_outcome": "UNSATISFIABLE_DEMAND"
+    }
+  ]
+}

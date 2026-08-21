@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "PredicateOperatorV2": {
+      "enum": [
+        "EXISTS",
+        "NOT_EXISTS",
+        "EQUALS",
+        "CONTAINS",
+        "REGEX",
+        "SEQUENCE",
+        "WITHIN_WINDOW",
+        "ERROR_SIGNATURE",
+        "NOT_ERROR_SIGNATURE"
+      ],
+      "title": "PredicateOperatorV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/structured_predicate_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "expected_value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Value"
+    },
+    "fact_type": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Fact Type",
+      "type": "string"
+    },
+    "field_path": {
+      "maxLength": 512,
+      "minLength": 1,
+      "title": "Field Path",
+      "type": "string"
+    },
+    "operator": {
+      "$ref": "#/$defs/PredicateOperatorV2"
+    },
+    "predicate_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Predicate Id",
+      "type": "string"
+    },
+    "required_capability": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Required Capability",
+      "type": "string"
+    },
+    "rule_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Rule Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/structured-predicate/v2",
+      "default": "eval-factory/structured-predicate/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "window_events": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window Events"
+    }
+  },
+  "required": [
+    "predicate_id",
+    "fact_type",
+    "field_path",
+    "operator",
+    "required_capability",
+    "rule_version"
+  ],
+  "title": "StructuredPredicateV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.labeling_v2.StructuredPredicateV2",
+  "x-schema-version": "eval-factory/structured-predicate/v2"
+}

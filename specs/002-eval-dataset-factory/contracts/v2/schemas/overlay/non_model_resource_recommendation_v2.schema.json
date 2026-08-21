@@ -1,0 +1,309 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/non_model_resource_recommendation_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "baseline_p95_case_latency_nanoseconds": {
+      "minimum": 1,
+      "title": "Baseline P95 Case Latency Nanoseconds",
+      "type": "integer"
+    },
+    "claim_scope": {
+      "const": "CANARY_WORKER_STORAGE_ONLY",
+      "default": "CANARY_WORKER_STORAGE_ONLY",
+      "title": "Claim Scope",
+      "type": "string"
+    },
+    "maximum_median_throughput_millijobs_per_second": {
+      "minimum": 1,
+      "title": "Maximum Median Throughput Millijobs Per Second",
+      "type": "integer"
+    },
+    "model_concurrency": {
+      "default": null,
+      "title": "Model Concurrency",
+      "type": "null"
+    },
+    "model_request_budget": {
+      "default": null,
+      "title": "Model Request Budget",
+      "type": "null"
+    },
+    "model_token_budget": {
+      "default": null,
+      "title": "Model Token Budget",
+      "type": "null"
+    },
+    "network_capacity": {
+      "default": null,
+      "title": "Network Capacity",
+      "type": "null"
+    },
+    "p95_baseline_ratio_basis_points": {
+      "minimum": 0,
+      "title": "P95 Baseline Ratio Basis Points",
+      "type": "integer"
+    },
+    "p95_limit_basis_points": {
+      "const": 15000,
+      "default": 15000,
+      "title": "P95 Limit Basis Points",
+      "type": "integer"
+    },
+    "pending_dimensions": {
+      "default": [
+        "MODEL",
+        "PROCESS",
+        "RENDERER",
+        "NETWORK"
+      ],
+      "items": {
+        "enum": [
+          "MODEL",
+          "PROCESS",
+          "RENDERER",
+          "NETWORK"
+        ],
+        "type": "string"
+      },
+      "title": "Pending Dimensions",
+      "type": "array"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "concurrency-experiment/r8-06-v1",
+      "default": "concurrency-experiment/r8-06-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "process_capacity": {
+      "default": null,
+      "title": "Process Capacity",
+      "type": "null"
+    },
+    "reason": {
+      "const": "BALANCED_KNEE",
+      "default": "BALANCED_KNEE",
+      "title": "Reason",
+      "type": "string"
+    },
+    "recommendation_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Recommendation Id",
+      "type": "string"
+    },
+    "recommendation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recommendation Sha256",
+      "type": "string"
+    },
+    "recommended_storage_bytes_per_cohort": {
+      "maximum": 1000000000000000,
+      "minimum": 1,
+      "title": "Recommended Storage Bytes Per Cohort",
+      "type": "integer"
+    },
+    "recommended_storage_bytes_per_job": {
+      "maximum": 1000000000000000,
+      "minimum": 1,
+      "title": "Recommended Storage Bytes Per Job",
+      "type": "integer"
+    },
+    "recommended_worker_count": {
+      "enum": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "title": "Recommended Worker Count",
+      "type": "integer"
+    },
+    "renderer_capacity": {
+      "default": null,
+      "title": "Renderer Capacity",
+      "type": "null"
+    },
+    "schema_version": {
+      "const": "eval-factory/non-model-resource-recommendation/v2",
+      "default": "eval-factory/non-model-resource-recommendation/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_median_throughput_millijobs_per_second": {
+      "minimum": 1,
+      "title": "Selected Median Throughput Millijobs Per Second",
+      "type": "integer"
+    },
+    "selected_p95_case_latency_nanoseconds": {
+      "minimum": 0,
+      "title": "Selected P95 Case Latency Nanoseconds",
+      "type": "integer"
+    },
+    "throughput_efficiency_basis_points": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Throughput Efficiency Basis Points",
+      "type": "integer"
+    },
+    "throughput_threshold_basis_points": {
+      "const": 9000,
+      "default": 9000,
+      "title": "Throughput Threshold Basis Points",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "recommendation_id",
+    "policy_ref",
+    "recommended_worker_count",
+    "recommended_storage_bytes_per_job",
+    "recommended_storage_bytes_per_cohort",
+    "selected_median_throughput_millijobs_per_second",
+    "maximum_median_throughput_millijobs_per_second",
+    "throughput_efficiency_basis_points",
+    "selected_p95_case_latency_nanoseconds",
+    "baseline_p95_case_latency_nanoseconds",
+    "p95_baseline_ratio_basis_points",
+    "recommendation_sha256",
+    "audit"
+  ],
+  "title": "NonModelResourceRecommendationV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.concurrency_experiment_v2.NonModelResourceRecommendationV2",
+  "x-schema-version": "eval-factory/non-model-resource-recommendation/v2"
+}

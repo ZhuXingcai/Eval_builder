@@ -1,0 +1,180 @@
+{
+  "schema_version": "eval-factory-gold/r8-08-production-readiness-attestation-v1",
+  "policy_version": "production-readiness-attestation/r8-08-v1",
+  "evidence_classes": [
+    "PRODUCTION_VERIFIED",
+    "MECHANISM_VALIDATION_ONLY",
+    "REPOSITORY_PENDING_ONLY"
+  ],
+  "required_gates": [
+    "SC_010_LABEL_QUALITY",
+    "SC_011_REAL_TRACE_STABILITY",
+    "SC_012_RESOURCE_POLICY",
+    "SC_013_ORGANIZATION_APPROVALS",
+    "SC_014_ZERO_OPEN_GATES"
+  ],
+  "accepted_predecessors": {
+    "r8_02_report_sha256": "f5b6f5f6cab238f9c7a34196a06769393bbd4da6db75424c5dc43d34a98a58a7",
+    "r8_04_report_sha256": "730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f",
+    "r8_06_report_sha256": "842c375004468b7258ef5750ca39e778ec9a0be363e3729c74044b35c24b74a7",
+    "r8_07_report_sha256": "659eed1f5157d18b8ffce7b3624eba01ee2f7f93fddb7d873073726cb96f4fa5"
+  },
+  "version_authority": {
+    "base_contract_manifest_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9",
+    "overlay_contract_manifest_sha256": "c64800adf02872128951b64b529d52f91bf5472b942c997fce5794be94c7362e",
+    "policy_sha256": "e8f4d6e9506859edd301756ad3c35d87c94da95b0643c58f56c7587c4f4515d3",
+    "invalidation_policy_sha256": "60ad193f049a5cad2357d93410ffe5d0fe3706502a9652cb23fd491f62b9a6fb"
+  },
+  "repository_pending": {
+    "repository_evidence_sha256": "4627db5d82f3da0cf52f53ae1a3df9580e36fbe140223dffd3bfb80f0d02d068",
+    "accepted_result_sha256": "af5025277bf0404ea1253299538292a68406fc7bab08e2bdcb9990d94e611418",
+    "expected_outcome": "ATTESTATION_PENDING",
+    "passed_gate_count": 0,
+    "failed_gate_count": 0,
+    "pending_gate_count": 5,
+    "attestation_projection": null,
+    "private_request_closure": null,
+    "private_issuer_closure": null,
+    "private_attestation_closure": null,
+    "satisfies_sc_010": false,
+    "satisfies_sc_011": false,
+    "satisfies_sc_012": false,
+    "satisfies_sc_013": false,
+    "satisfies_sc_014": false,
+    "satisfies_sc_015": false,
+    "active_attestation": false,
+    "authorizes_production_release": false,
+    "private_and_public_store_file_count": 13,
+    "private_and_public_store_bytes": 42348,
+    "exact_replays": 2,
+    "exact_replay": "UNCHANGED",
+    "external_verification_count": 0,
+    "model_or_provider_execution_count": 0
+  },
+  "gate_cases": [
+    {
+      "gate": "SC_010_LABEL_QUALITY",
+      "pending_reason": "SC_010_PENDING",
+      "failed_outcome": "REJECTED"
+    },
+    {
+      "gate": "SC_011_REAL_TRACE_STABILITY",
+      "pending_reason": "SC_011_PENDING",
+      "failed_outcome": "REJECTED"
+    },
+    {
+      "gate": "SC_012_RESOURCE_POLICY",
+      "pending_reason": "SC_012_PENDING",
+      "failed_outcome": "REJECTED"
+    },
+    {
+      "gate": "SC_013_ORGANIZATION_APPROVALS",
+      "pending_reason": "SC_013_PENDING",
+      "failed_outcome": "REJECTED"
+    },
+    {
+      "gate": "SC_014_ZERO_OPEN_GATES",
+      "pending_reason": "SC_014_UNVERIFIED",
+      "failed_outcome": "REJECTED"
+    }
+  ],
+  "issuance_cases": [
+    {
+      "case_id": "synthetic-production-authority-issued",
+      "evidence_class": "PRODUCTION_VERIFIED",
+      "expected_outcome": "ISSUED",
+      "active_attestation": true,
+      "satisfies_sc_010_through_sc_014": true,
+      "satisfies_sc_015": false,
+      "authorizes_production_release": false
+    },
+    {
+      "case_id": "synthetic-mechanism-all-pass",
+      "evidence_class": "MECHANISM_VALIDATION_ONLY",
+      "expected_outcome": "ATTESTATION_PENDING",
+      "expected_reason": "MECHANISM_ONLY",
+      "active_attestation": false
+    },
+    {
+      "case_id": "missing-lifecycle-approval",
+      "expected_outcome": "ATTESTATION_PENDING",
+      "expected_reason": "LIFECYCLE_APPROVAL_MISSING"
+    },
+    {
+      "case_id": "missing-incident-route",
+      "expected_outcome": "ATTESTATION_PENDING",
+      "expected_reason": "INCIDENT_ROUTE_MISSING"
+    },
+    {
+      "case_id": "one-issuer",
+      "expected_error": "AUTHORIZATION_ERROR"
+    },
+    {
+      "case_id": "duplicate-issuer",
+      "expected_error": "AUTHORIZATION_ERROR"
+    },
+    {
+      "case_id": "project-owner-self-sign",
+      "expected_error": "AUTHORIZATION_ERROR"
+    },
+    {
+      "case_id": "changed-registry-pinned-proof",
+      "expected_error": "AUTHORIZATION_ERROR"
+    },
+    {
+      "case_id": "expired-issuer-authority",
+      "expected_outcome": "ATTESTATION_PENDING",
+      "expected_reason": "ISSUER_AUTHORITY_EXPIRED"
+    },
+    {
+      "case_id": "cross-scope-issuance-proof",
+      "expected_error": "AUTHORIZATION_ERROR"
+    },
+    {
+      "case_id": "exact-accepted-replay",
+      "expected_result": "ORIGINAL_RESULT",
+      "expected_additional_files": 0,
+      "expected_additional_external_verifications": 0
+    }
+  ],
+  "invalidation_triggers": [
+    "SYSTEM_VERSION_CHANGED",
+    "BASE_CONTRACT_MANIFEST_CHANGED",
+    "OVERLAY_CONTRACT_MANIFEST_CHANGED",
+    "SCHEMA_SET_CHANGED",
+    "POLICY_SET_CHANGED",
+    "EVIDENCE_SUPERSEDED",
+    "ISSUER_REGISTRY_CHANGED",
+    "ISSUER_REVOKED_OR_EXPIRED",
+    "ATTESTATION_EXPIRED",
+    "EXPLICIT_INCIDENT_REVOCATION",
+    "EXPLICIT_RELEASE_REVOCATION"
+  ],
+  "invalidation_invariants": {
+    "frozen_v1_mutated": false,
+    "successor_reuses_frozen_attestation_ref": true,
+    "invalidated_or_expired_reactivation_allowed": false,
+    "version_drift_requires_new_attestation_version": true
+  },
+  "forbidden_surface": [
+    "issuer principal",
+    "approved-by identity",
+    "issuer organization or role",
+    "signature or proof value",
+    "organization contact",
+    "approval or revocation reason text",
+    "lifecycle approval body",
+    "incident route body or contact",
+    "SC-014 private inventory",
+    "private object reference",
+    "physical path",
+    "credential",
+    "raw trace or member identity",
+    "private reference",
+    "model payload",
+    "original final output",
+    "grader rule",
+    "hidden condition",
+    "caught exception text"
+  ]
+}

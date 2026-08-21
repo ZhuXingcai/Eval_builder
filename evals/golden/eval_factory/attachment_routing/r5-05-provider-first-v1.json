@@ -1,0 +1,62 @@
+{
+  "schema_version": "eval-factory/r5-05-provider-first-gold/v1",
+  "claim_scope": "CAPABILITY_PREFLIGHT_AND_BUILD_SPEC_ONLY",
+  "cases": [
+    {
+      "case_id": "deterministic-text-provider",
+      "scenario": "PROVIDER",
+      "criticality": "REQUIRED",
+      "expected_outcome": "ROUTED",
+      "expected_entry_outcome": "ROUTED_PROVIDER",
+      "expected_build_spec_count": 1
+    },
+    {
+      "case_id": "provider-payload-missing-sdk",
+      "scenario": "SDK_FALLBACK",
+      "criticality": "REQUIRED",
+      "expected_outcome": "ROUTED",
+      "expected_entry_outcome": "ROUTED_RUNTIME",
+      "expected_build_spec_count": 1
+    },
+    {
+      "case_id": "all-routes-missing-required",
+      "scenario": "ALL_UNAVAILABLE",
+      "criticality": "REQUIRED",
+      "expected_outcome": "BLOCKED_CAPABILITY",
+      "expected_entry_outcome": "BLOCKED_CAPABILITY",
+      "expected_build_spec_count": 0
+    },
+    {
+      "case_id": "all-routes-missing-optional",
+      "scenario": "ALL_UNAVAILABLE",
+      "criticality": "OPTIONAL",
+      "expected_outcome": "PARTIALLY_ROUTED",
+      "expected_entry_outcome": "BLOCKED_CAPABILITY",
+      "expected_build_spec_count": 0
+    },
+    {
+      "case_id": "build-contract-missing",
+      "scenario": "MISSING_CONTRACT",
+      "criticality": "REQUIRED",
+      "expected_outcome": "BLOCKED_CAPABILITY",
+      "expected_entry_outcome": "BLOCKED_CAPABILITY",
+      "expected_build_spec_count": 0
+    },
+    {
+      "case_id": "blocked-evidence-critical",
+      "scenario": "BLOCKED_EVIDENCE",
+      "criticality": "CRITICAL",
+      "expected_outcome": "BLOCKED_POLICY",
+      "expected_entry_outcome": "BLOCKED_POLICY",
+      "expected_build_spec_count": 0
+    },
+    {
+      "case_id": "no-attachment-requirements",
+      "scenario": "NOT_REQUIRED",
+      "criticality": null,
+      "expected_outcome": "NOT_REQUIRED",
+      "expected_entry_outcome": null,
+      "expected_build_spec_count": 0
+    }
+  ]
+}

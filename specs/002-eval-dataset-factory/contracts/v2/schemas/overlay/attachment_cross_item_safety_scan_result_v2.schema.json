@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "AttachmentCrossItemSafetyScanFailureCodeV2": {
+      "enum": [
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "OUTPUT_HASH_MISMATCH",
+        "OUTPUT_PATH_VIOLATION",
+        "SYMLINK_UNSUPPORTED",
+        "CONTAINER_ENCRYPTED",
+        "CONTAINER_TRUNCATED",
+        "CONTAINER_UNSUPPORTED",
+        "CONTENT_UNSCANNABLE",
+        "SCAN_LIMIT_EXCEEDED",
+        "UNKNOWN_FINGERPRINT_NORMALIZATION",
+        "IDEMPOTENCY_CONFLICT"
+      ],
+      "title": "AttachmentCrossItemSafetyScanFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentCrossItemSafetyScanStatusV2": {
+      "enum": [
+        "PASSED",
+        "BLOCKED"
+      ],
+      "title": "AttachmentCrossItemSafetyScanStatusV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_cross_item_safety_scan_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "environment_artifact_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "extractor_version": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extractor Version"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AttachmentCrossItemSafetyScanFailureCodeV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "matched_fingerprint_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 1000000,
+      "title": "Matched Fingerprint Ids",
+      "type": "array"
+    },
+    "normalization_version": {
+      "const": "task-prompt-leakage-normalization/r4-04-v1",
+      "default": "task-prompt-leakage-normalization/r4-04-v1",
+      "title": "Normalization Version",
+      "type": "string"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "output_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "attachment-cross-item-safety/r7-02-v1",
+      "default": "attachment-cross-item-safety/r7-02-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Sha256",
+      "type": "string"
+    },
+    "scan_complete": {
+      "title": "Scan Complete",
+      "type": "boolean"
+    },
+    "scan_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "scan_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Scan Result Id",
+      "type": "string"
+    },
+    "scanned_member_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Scanned Member Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-cross-item-safety-scan-result/v2",
+      "default": "env-mock-agent/attachment-cross-item-safety-scan-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/AttachmentCrossItemSafetyScanStatusV2"
+    }
+  },
+  "required": [
+    "scan_result_id",
+    "scan_request_ref",
+    "environment_artifact_ref",
+    "output_ref",
+    "output_sha256",
+    "status",
+    "matched_fingerprint_ids",
+    "scanned_member_count",
+    "scan_complete",
+    "result_sha256"
+  ],
+  "title": "AttachmentCrossItemSafetyScanResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.cross_item_safety_v2.AttachmentCrossItemSafetyScanResultV2",
+  "x-schema-version": "env-mock-agent/attachment-cross-item-safety-scan-result/v2"
+}

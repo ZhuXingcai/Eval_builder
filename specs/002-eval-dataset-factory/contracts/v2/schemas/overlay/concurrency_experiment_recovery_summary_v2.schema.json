@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "ConcurrencyExperimentFaultCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "const": 6,
+          "default": 6,
+          "title": "Count",
+          "type": "integer"
+        },
+        "fault_point": {
+          "$ref": "#/$defs/ConcurrencyExperimentFaultPointV2"
+        }
+      },
+      "required": [
+        "fault_point"
+      ],
+      "title": "ConcurrencyExperimentFaultCountV2",
+      "type": "object"
+    },
+    "ConcurrencyExperimentFaultPointV2": {
+      "enum": [
+        "BEFORE_HANDLER",
+        "AFTER_OBJECT_PERSISTENCE",
+        "BEFORE_LEASE_COMPLETION",
+        "AFTER_LEASE_COMPLETION"
+      ],
+      "title": "ConcurrencyExperimentFaultPointV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/concurrency_experiment_recovery_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "duplicate_provider_fact_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Duplicate Provider Fact Count",
+      "type": "integer"
+    },
+    "exact_replay_stable": {
+      "title": "Exact Replay Stable",
+      "type": "boolean"
+    },
+    "fault_counts": {
+      "items": {
+        "$ref": "#/$defs/ConcurrencyExperimentFaultCountV2"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Fault Counts",
+      "type": "array"
+    },
+    "fault_observed_count": {
+      "maximum": 24,
+      "minimum": 0,
+      "title": "Fault Observed Count",
+      "type": "integer"
+    },
+    "physical_bytes_after_replay": {
+      "default": 0,
+      "maximum": 1000000000000000000,
+      "minimum": 0,
+      "title": "Physical Bytes After Replay",
+      "type": "integer"
+    },
+    "physical_bytes_before_replay": {
+      "default": 0,
+      "maximum": 1000000000000000000,
+      "minimum": 0,
+      "title": "Physical Bytes Before Replay",
+      "type": "integer"
+    },
+    "physical_file_count_after_replay": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Physical File Count After Replay",
+      "type": "integer"
+    },
+    "physical_file_count_before_replay": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Physical File Count Before Replay",
+      "type": "integer"
+    },
+    "probe_count": {
+      "const": 24,
+      "default": 24,
+      "title": "Probe Count",
+      "type": "integer"
+    },
+    "provider_invocation_count": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Provider Invocation Count",
+      "type": "integer"
+    },
+    "recovery_stable": {
+      "title": "Recovery Stable",
+      "type": "boolean"
+    },
+    "resume_failure_count": {
+      "maximum": 24,
+      "minimum": 0,
+      "title": "Resume Failure Count",
+      "type": "integer"
+    },
+    "resume_success_count": {
+      "maximum": 24,
+      "minimum": 0,
+      "title": "Resume Success Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/concurrency-experiment-recovery-summary/v2",
+      "default": "eval-factory/concurrency-experiment-recovery-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_worker_count": {
+      "enum": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ],
+      "title": "Selected Worker Count",
+      "type": "integer"
+    },
+    "typed_side_effect_count_after_replay": {
+      "maximum": 1000000000000,
+      "minimum": 0,
+      "title": "Typed Side Effect Count After Replay",
+      "type": "integer"
+    },
+    "typed_side_effect_count_before_replay": {
+      "maximum": 1000000000000,
+      "minimum": 0,
+      "title": "Typed Side Effect Count Before Replay",
+      "type": "integer"
+    },
+    "unexpected_retry_count": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Unexpected Retry Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "selected_worker_count",
+    "fault_counts",
+    "fault_observed_count",
+    "resume_success_count",
+    "resume_failure_count",
+    "unexpected_retry_count",
+    "duplicate_provider_fact_count",
+    "provider_invocation_count",
+    "typed_side_effect_count_before_replay",
+    "typed_side_effect_count_after_replay",
+    "physical_file_count_before_replay",
+    "physical_file_count_after_replay",
+    "exact_replay_stable",
+    "recovery_stable"
+  ],
+  "title": "ConcurrencyExperimentRecoverySummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentRecoverySummaryV2",
+  "x-schema-version": "eval-factory/concurrency-experiment-recovery-summary/v2"
+}

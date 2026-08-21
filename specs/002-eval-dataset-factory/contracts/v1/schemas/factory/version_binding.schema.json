@@ -1,0 +1,45 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/version_binding.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "component": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Component",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/version-binding/v1",
+      "default": "eval-factory/version-binding/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sha256"
+    },
+    "version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "component",
+    "version"
+  ],
+  "title": "VersionBinding",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.core.VersionBinding",
+  "x-schema-version": "eval-factory/version-binding/v1"
+}

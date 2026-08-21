@@ -1,0 +1,458 @@
+{
+  "$defs": {
+    "BatchAuditEventKindV2": {
+      "enum": [
+        "JOB_CREATED",
+        "JOB_STATUS_CHANGED",
+        "ITEM_CREATED",
+        "ITEM_STATUS_CHANGED",
+        "WORK_GRAPH_CREATED",
+        "WORK_CONTROL_POLICY_BOUND",
+        "WORK_READINESS_RECORDED",
+        "WORK_DISPATCHED",
+        "WORK_LEASE_ACQUIRED",
+        "WORK_LEASE_HEARTBEAT",
+        "WORK_LEASE_TERMINAL",
+        "WORK_RETRY_DECIDED",
+        "WORK_CANCELLED",
+        "MODEL_POLICY_BOUND",
+        "MODEL_ADMISSION_DECIDED",
+        "MODEL_USAGE_RECORDED",
+        "MODEL_BACKPRESSURE_RECORDED",
+        "MODEL_CANCELLATION_RECORDED",
+        "RESOURCE_POLICY_BOUND",
+        "RESOURCE_ADMISSION_DECIDED",
+        "RESOURCE_USAGE_RECORDED",
+        "RESOURCE_TERMINATION_RECORDED",
+        "STAGE_RUN_CREATED",
+        "STAGE_RUN_COMPLETED",
+        "ARTIFACT_RESULT_RECORDED",
+        "ATTEMPT_METRICS_RECORDED"
+      ],
+      "title": "BatchAuditEventKindV2",
+      "type": "string"
+    },
+    "BatchAuditEventV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Artifact Id"
+        },
+        "attempt": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attempt"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "batch_audit_event_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Batch Audit Event Id",
+          "type": "string"
+        },
+        "batch_audit_event_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Batch Audit Event Sha256",
+          "type": "string"
+        },
+        "event_kind": {
+          "$ref": "#/$defs/BatchAuditEventKindV2"
+        },
+        "item_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Item Id"
+        },
+        "job_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Job Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "outbox_event_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Outbox Event Id"
+        },
+        "policy_version": {
+          "const": "batch-observability/r6-06-v1",
+          "default": "batch-observability/r6-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "reason_code": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason Code"
+        },
+        "related_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Related Refs",
+          "type": "array"
+        },
+        "result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Result Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/batch-audit-event/v2",
+          "default": "eval-factory/batch-audit-event/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_family": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Family",
+          "type": "string"
+        },
+        "source_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "source_version": {
+          "minimum": 0,
+          "title": "Source Version",
+          "type": "integer"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StageNameV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "status": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "work_unit_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "batch_audit_event_id",
+        "job_id",
+        "event_kind",
+        "occurred_at",
+        "source_family",
+        "source_version",
+        "source_ref",
+        "batch_audit_event_sha256",
+        "audit"
+      ],
+      "title": "BatchAuditEventV2",
+      "type": "object"
+    },
+    "BatchAuditFindingCodeV2": {
+      "enum": [
+        "MISSING_OUTBOX_WITNESS",
+        "DUPLICATE_OUTBOX_WITNESS",
+        "MISSING_TERMINAL_METRICS",
+        "METRICS_BINDING_MISMATCH",
+        "MISSING_MODEL_EVENT",
+        "MISSING_RESOURCE_EVENT",
+        "LEASE_EVENT_GAP",
+        "RESERVATION_EVENT_GAP",
+        "RETRY_CHAIN_MISMATCH",
+        "CROSS_SCOPE_REFERENCE",
+        "CLOCK_REGRESSION",
+        "PROJECTION_DRIFT",
+        "UNEXPECTED_SOURCE_RECORD"
+      ],
+      "title": "BatchAuditFindingCodeV2",
+      "type": "string"
+    },
+    "BatchAuditOutcomeV2": {
+      "enum": [
+        "COMPLETE",
+        "INCOMPLETE"
+      ],
+      "title": "BatchAuditOutcomeV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/pipeline_events_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit_outcome": {
+      "$ref": "#/$defs/BatchAuditOutcomeV2"
+    },
+    "event_limit": {
+      "maximum": 500,
+      "minimum": 1,
+      "title": "Event Limit",
+      "type": "integer"
+    },
+    "event_offset": {
+      "minimum": 0,
+      "title": "Event Offset",
+      "type": "integer"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/BatchAuditEventV2"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "finding_codes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/BatchAuditFindingCodeV2"
+      },
+      "title": "Finding Codes",
+      "type": "array"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/pipeline-events-result/v2",
+      "default": "eval-factory/pipeline-events-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "total_events": {
+      "minimum": 0,
+      "title": "Total Events",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "job_id",
+    "report_ref",
+    "audit_outcome",
+    "total_events",
+    "event_offset",
+    "event_limit",
+    "events"
+  ],
+  "title": "PipelineEventsResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cli_v2.PipelineEventsResultV2",
+  "x-schema-version": "eval-factory/pipeline-events-result/v2"
+}

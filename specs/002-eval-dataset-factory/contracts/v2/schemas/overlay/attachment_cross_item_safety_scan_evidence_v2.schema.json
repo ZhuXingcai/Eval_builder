@@ -1,0 +1,376 @@
+{
+  "$defs": {
+    "AttachmentCrossItemSafetyScanFailureCodeV2": {
+      "enum": [
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "OUTPUT_HASH_MISMATCH",
+        "OUTPUT_PATH_VIOLATION",
+        "SYMLINK_UNSUPPORTED",
+        "CONTAINER_ENCRYPTED",
+        "CONTAINER_TRUNCATED",
+        "CONTAINER_UNSUPPORTED",
+        "CONTENT_UNSCANNABLE",
+        "SCAN_LIMIT_EXCEEDED",
+        "UNKNOWN_FINGERPRINT_NORMALIZATION",
+        "IDEMPOTENCY_CONFLICT"
+      ],
+      "title": "AttachmentCrossItemSafetyScanFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentCrossItemSafetyScanResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_artifact_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "extractor_version": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extractor Version"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentCrossItemSafetyScanFailureCodeV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "matched_fingerprint_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "maxItems": 1000000,
+          "title": "Matched Fingerprint Ids",
+          "type": "array"
+        },
+        "normalization_version": {
+          "const": "task-prompt-leakage-normalization/r4-04-v1",
+          "default": "task-prompt-leakage-normalization/r4-04-v1",
+          "title": "Normalization Version",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "output_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Output Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "attachment-cross-item-safety/r7-02-v1",
+          "default": "attachment-cross-item-safety/r7-02-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Result Sha256",
+          "type": "string"
+        },
+        "scan_complete": {
+          "title": "Scan Complete",
+          "type": "boolean"
+        },
+        "scan_request_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "scan_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Scan Result Id",
+          "type": "string"
+        },
+        "scanned_member_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Scanned Member Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-cross-item-safety-scan-result/v2",
+          "default": "env-mock-agent/attachment-cross-item-safety-scan-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/AttachmentCrossItemSafetyScanStatusV2"
+        }
+      },
+      "required": [
+        "scan_result_id",
+        "scan_request_ref",
+        "environment_artifact_ref",
+        "output_ref",
+        "output_sha256",
+        "status",
+        "matched_fingerprint_ids",
+        "scanned_member_count",
+        "scan_complete",
+        "result_sha256"
+      ],
+      "title": "AttachmentCrossItemSafetyScanResultV2",
+      "type": "object"
+    },
+    "AttachmentCrossItemSafetyScanStatusV2": {
+      "enum": [
+        "PASSED",
+        "BLOCKED"
+      ],
+      "title": "AttachmentCrossItemSafetyScanStatusV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_cross_item_safety_scan_evidence_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_validation_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "candidate_artifact_version_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "environment_artifact_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "evidence_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evidence Sha256",
+      "type": "string"
+    },
+    "facade_request_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "facade_result": {
+      "$ref": "#/$defs/AttachmentCrossItemSafetyScanResultV2"
+    },
+    "facade_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "foreign_reference_set_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Foreign Reference Set Refs",
+      "type": "array"
+    },
+    "item_quality_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/attachment-cross-item-safety-scan-evidence/v2",
+      "default": "eval-factory/attachment-cross-item-safety-scan-evidence/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "target_item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Target Item Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "target_item_id",
+    "item_quality_result_ref",
+    "environment_artifact_ref",
+    "candidate_artifact_version_ref",
+    "output_ref",
+    "artifact_validation_result_ref",
+    "facade_request_ref",
+    "facade_result",
+    "facade_result_ref",
+    "foreign_reference_set_refs",
+    "policy_ref",
+    "evidence_sha256",
+    "audit"
+  ],
+  "title": "AttachmentCrossItemSafetyScanEvidenceV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cross_item_safety_v2.AttachmentCrossItemSafetyScanEvidenceV2",
+  "x-schema-version": "eval-factory/attachment-cross-item-safety-scan-evidence/v2"
+}

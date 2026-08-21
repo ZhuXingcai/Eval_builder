@@ -1,0 +1,127 @@
+{
+  "schema_version": "eval-factory-gold/r8-09-production-release-v1",
+  "policy_version": "production-release/r8-09-v1",
+  "generated_baseline": {
+    "frozen_v1_contracts": 73,
+    "v2_overlays": 337,
+    "facade_overlays": 56,
+    "factory_overlays": 281,
+    "annotation_v2_schemas": 7,
+    "reference_fixtures": 5
+  },
+  "version_authority": {
+    "base_contract_manifest_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9",
+    "overlay_contract_manifest_sha256": "4fae942bc5176dd63f7ada5ab287d50785b0edaeeedcbb3473cb78ffa2324c41",
+    "release_profile_decision_sha256": "6b4c0f86d76757c2ea7a6331022e2d6926cfb79f1424dfc664929ff6357d5ace",
+    "production_policy_sha256": "f73189bf7f628203675ef113fd017cfdd01ac715f52b0f0376eb79bb23defdc4",
+    "production_policy_file_sha256": "9a0950e0249a9062da08986c9481aa777f7bd2873d56dc4ae6bcfec37e40779e"
+  },
+  "repository_pending": {
+    "evidence_class": "REPOSITORY_PENDING_ONLY",
+    "repository_evidence_sha256": "e49bc01db999804cb094f50d886c7fafb8ddb8af4761ff23fb2cca7ef2eecbf6",
+    "accepted_r8_08_result_sha256": "af5025277bf0404ea1253299538292a68406fc7bab08e2bdcb9990d94e611418",
+    "production_release_result_sha256": "99623921a7e09c3f3c8e096c6488fb1e90da75abd6a47a8b0d7c71cc7d070b1b",
+    "expected_outcome": "PRODUCTION_RELEASE_BLOCKED",
+    "expected_reason": "ATTESTATION_PENDING",
+    "attestation_authority": null,
+    "release_manifest": null,
+    "production_decision_count": 0,
+    "published_item_count": 0,
+    "export_receipt_count": 0,
+    "item_projection_count": 0,
+    "production_registry_entry": null,
+    "satisfies_sc_015": false,
+    "public_report_store_file_count": 7,
+    "public_report_store_bytes": 14456,
+    "exact_replays": 2,
+    "exact_replay_output_sha256": "547028bfa4cc3f6fa5b0eee3af789fed7897551cbd8eefc9bdf9b62ec4707039",
+    "exact_replay": "UNCHANGED",
+    "private_attestation_read_count": 0,
+    "workspace_export_count": 0,
+    "model_or_provider_execution_count": 0
+  },
+  "mechanism_cases": [
+    {
+      "case_id": "synthetic-direct-approved-production-publication",
+      "evidence_class": "PRODUCTION_VERIFIED",
+      "predecessor": "APPROVE/APPROVED",
+      "expected_outcome": "PUBLISHED",
+      "decision_channel": "PRODUCTION",
+      "decision_action": "PUBLISH",
+      "decision_state": "RELEASED",
+      "satisfies_sc_015": true,
+      "claim_scope": "MECHANISM_VALIDATION_ONLY"
+    },
+    {
+      "case_id": "synthetic-nonproduction-promotion",
+      "evidence_class": "PRODUCTION_VERIFIED",
+      "predecessor": "PUBLISH/RELEASED",
+      "expected_outcome": "PUBLISHED",
+      "linear_decision_chain": true,
+      "duplicate_item_projection": false,
+      "claim_scope": "MECHANISM_VALIDATION_ONLY"
+    },
+    {
+      "case_id": "exact-idempotent-replay",
+      "expected_result": "ORIGINAL_RESULT",
+      "duplicate_decision": false,
+      "duplicate_item": false,
+      "duplicate_outbox": false,
+      "duplicate_registry_authority": false
+    },
+    {
+      "case_id": "changed-same-key",
+      "expected_error": "IDEMPOTENCY_CONFLICT"
+    },
+    {
+      "case_id": "concurrent-different-key",
+      "expected_winner_count": 1,
+      "expected_loser_error": "PRODUCTION_RELEASE_CONFLICT"
+    },
+    {
+      "case_id": "transaction-fault-after-current-pointer",
+      "expected_job_store_effects": 0,
+      "orphan_bundle_or_registry_authority": false,
+      "exact_retry_reuses_cas": true
+    },
+    {
+      "case_id": "historical-replay-after-invalidation",
+      "same_key_expected_result": "ORIGINAL_RESULT",
+      "new_key_expected_outcome": "PRODUCTION_RELEASE_BLOCKED",
+      "new_key_expected_reason": "ATTESTATION_NOT_CURRENT"
+    },
+    {
+      "case_id": "production-bundle-corruption",
+      "expected_error": "PRODUCTION_RELEASE_INTEGRITY_ERROR"
+    },
+    {
+      "case_id": "production-registry-corruption",
+      "expected_error": "PRODUCTION_RELEASE_INTEGRITY_ERROR"
+    }
+  ],
+  "policy_boundaries": {
+    "allowed_profile": "LH",
+    "allowed_profile_version": "v1",
+    "allowed_production_registry": "registry://production/lh-v1",
+    "generic_enabled": false,
+    "r7_canary_internal_behavior_changed": false,
+    "production_and_nonproduction_roots_overlap": false,
+    "future_attestation_result_bound_into_policy": false,
+    "attestation_version_set_requires_current_policy_ref": true
+  },
+  "forbidden_surface": [
+    "issuer principal or organization",
+    "approved-by identity",
+    "signature or proof value",
+    "private attestation object reference",
+    "physical store path",
+    "credential",
+    "raw trace or exact member identity",
+    "private reference",
+    "model payload",
+    "original final output",
+    "grader rule",
+    "hidden condition",
+    "caught exception text"
+  ]
+}

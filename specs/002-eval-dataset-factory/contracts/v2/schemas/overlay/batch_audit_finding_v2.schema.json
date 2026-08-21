@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "BatchAuditFindingCodeV2": {
+      "enum": [
+        "MISSING_OUTBOX_WITNESS",
+        "DUPLICATE_OUTBOX_WITNESS",
+        "MISSING_TERMINAL_METRICS",
+        "METRICS_BINDING_MISMATCH",
+        "MISSING_MODEL_EVENT",
+        "MISSING_RESOURCE_EVENT",
+        "LEASE_EVENT_GAP",
+        "RESERVATION_EVENT_GAP",
+        "RETRY_CHAIN_MISMATCH",
+        "CROSS_SCOPE_REFERENCE",
+        "CLOCK_REGRESSION",
+        "PROJECTION_DRIFT",
+        "UNEXPECTED_SOURCE_RECORD"
+      ],
+      "title": "BatchAuditFindingCodeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/batch_audit_finding_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "$ref": "#/$defs/BatchAuditFindingCodeV2"
+    },
+    "subject_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Subject Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "code",
+    "subject_refs"
+  ],
+  "title": "BatchAuditFindingV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.observability_v2.BatchAuditFindingV2"
+}

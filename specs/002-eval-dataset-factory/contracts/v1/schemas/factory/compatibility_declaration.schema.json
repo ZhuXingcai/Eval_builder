@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "CompatibilityImpact": {
+      "enum": [
+        "NO_EFFECT",
+        "REVALIDATE",
+        "INVALIDATE"
+      ],
+      "title": "CompatibilityImpact",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/compatibility_declaration.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "affected_object_types": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Affected Object Types",
+      "type": "array"
+    },
+    "approved_review_record_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Approved Review Record Refs",
+      "type": "array"
+    },
+    "changed_contract": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Changed Contract",
+      "type": "string"
+    },
+    "declaration_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Declaration Id",
+      "type": "string"
+    },
+    "declaration_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Declaration Sha256",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "impact": {
+      "$ref": "#/$defs/CompatibilityImpact"
+    },
+    "migration_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "new_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "New Version",
+      "type": "string"
+    },
+    "prior_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Prior Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/compatibility-declaration/v1",
+      "default": "eval-factory/compatibility-declaration/v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "declaration_id",
+    "changed_contract",
+    "prior_version",
+    "new_version",
+    "affected_object_types",
+    "impact",
+    "migration_ref",
+    "approved_review_record_refs",
+    "declaration_sha256"
+  ],
+  "title": "CompatibilityDeclaration",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release.CompatibilityDeclaration",
+  "x-schema-version": "eval-factory/compatibility-declaration/v1"
+}

@@ -1,0 +1,377 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelQualityClassMetricV2": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "$ref": "#/$defs/LabelQualityMetricAvailabilityV2"
+        },
+        "decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LabelDecisionValueV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "denominator": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Denominator",
+          "type": "integer"
+        },
+        "metric": {
+          "$ref": "#/$defs/LabelQualityMetricNameV2"
+        },
+        "numerator": {
+          "anyOf": [
+            {
+              "maximum": 10000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Numerator"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-quality-class-metric/v2",
+          "default": "eval-factory/label-quality-class-metric/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "value_basis_points": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Basis Points"
+        }
+      },
+      "required": [
+        "metric",
+        "denominator",
+        "availability"
+      ],
+      "title": "LabelQualityClassMetricV2",
+      "type": "object"
+    },
+    "LabelQualityConfidenceIntervalV2": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Algorithm Version",
+          "type": "string"
+        },
+        "availability": {
+          "$ref": "#/$defs/LabelQualityMetricAvailabilityV2"
+        },
+        "confidence_basis_points": {
+          "const": 9500,
+          "default": 9500,
+          "title": "Confidence Basis Points",
+          "type": "integer"
+        },
+        "lower_basis_points": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lower Basis Points"
+        },
+        "method": {
+          "$ref": "#/$defs/LabelQualityIntervalMethodV2"
+        },
+        "resample_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Resample Count",
+          "type": "integer"
+        },
+        "sample_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-quality-confidence-interval/v2",
+          "default": "eval-factory/label-quality-confidence-interval/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "upper_basis_points": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Basis Points"
+        }
+      },
+      "required": [
+        "method",
+        "sample_count",
+        "resample_count",
+        "algorithm_version",
+        "availability"
+      ],
+      "title": "LabelQualityConfidenceIntervalV2",
+      "type": "object"
+    },
+    "LabelQualityIntervalMethodV2": {
+      "enum": [
+        "WILSON_SCORE_95_V1",
+        "STRATIFIED_SHA256_BOOTSTRAP_95_V1"
+      ],
+      "title": "LabelQualityIntervalMethodV2",
+      "type": "string"
+    },
+    "LabelQualityLabelOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "STATISTICAL_GATE_PENDING"
+      ],
+      "title": "LabelQualityLabelOutcomeV2",
+      "type": "string"
+    },
+    "LabelQualityMetricAvailabilityV2": {
+      "enum": [
+        "MEASURED",
+        "UNDEFINED",
+        "NOT_COMPUTED"
+      ],
+      "title": "LabelQualityMetricAvailabilityV2",
+      "type": "string"
+    },
+    "LabelQualityMetricNameV2": {
+      "enum": [
+        "PRECISION",
+        "RECALL",
+        "F1",
+        "MACRO_F1"
+      ],
+      "title": "LabelQualityMetricNameV2",
+      "type": "string"
+    },
+    "LabelQualityReasonCodeV2": {
+      "enum": [
+        "NONE",
+        "FROZEN_DATASET_UNAVAILABLE",
+        "SAMPLE_SHORTAGE",
+        "OBSERVATION_MISSING",
+        "OBSERVATION_INCOMPLETE",
+        "SEMANTIC_EXECUTION_UNAVAILABLE",
+        "METRIC_UNDEFINED",
+        "STRUCTURED_THRESHOLD_NOT_MET",
+        "SEMANTIC_THRESHOLD_NOT_MET"
+      ],
+      "title": "LabelQualityReasonCodeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/structured_label_quality_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "false_negative_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "False Negative Count",
+      "type": "integer"
+    },
+    "false_positive_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "False Positive Count",
+      "type": "integer"
+    },
+    "incomplete_observation_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Incomplete Observation Count",
+      "type": "integer"
+    },
+    "label_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "missing_observation_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Missing Observation Count",
+      "type": "integer"
+    },
+    "observed_abstain_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Observed Abstain Count",
+      "type": "integer"
+    },
+    "outcome": {
+      "$ref": "#/$defs/LabelQualityLabelOutcomeV2"
+    },
+    "precision": {
+      "$ref": "#/$defs/LabelQualityClassMetricV2"
+    },
+    "precision_interval": {
+      "$ref": "#/$defs/LabelQualityConfidenceIntervalV2"
+    },
+    "precision_threshold_basis_points": {
+      "const": 9900,
+      "default": 9900,
+      "title": "Precision Threshold Basis Points",
+      "type": "integer"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "#/$defs/LabelQualityReasonCodeV2"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "recall": {
+      "$ref": "#/$defs/LabelQualityClassMetricV2"
+    },
+    "recall_interval": {
+      "$ref": "#/$defs/LabelQualityConfidenceIntervalV2"
+    },
+    "recall_threshold_basis_points": {
+      "const": 9900,
+      "default": 9900,
+      "title": "Recall Threshold Basis Points",
+      "type": "integer"
+    },
+    "reference_match_count": {
+      "maximum": 10000000,
+      "minimum": 50,
+      "title": "Reference Match Count",
+      "type": "integer"
+    },
+    "reference_no_match_count": {
+      "maximum": 10000000,
+      "minimum": 50,
+      "title": "Reference No Match Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/structured-label-quality-summary/v2",
+      "default": "eval-factory/structured-label-quality-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "true_negative_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "True Negative Count",
+      "type": "integer"
+    },
+    "true_positive_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "True Positive Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "label_spec_ref",
+    "reference_match_count",
+    "reference_no_match_count",
+    "true_positive_count",
+    "false_positive_count",
+    "true_negative_count",
+    "false_negative_count",
+    "observed_abstain_count",
+    "incomplete_observation_count",
+    "missing_observation_count",
+    "precision",
+    "precision_interval",
+    "recall",
+    "recall_interval",
+    "outcome",
+    "reason_codes"
+  ],
+  "title": "StructuredLabelQualitySummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.label_quality_v2.StructuredLabelQualitySummaryV2",
+  "x-schema-version": "eval-factory/structured-label-quality-summary/v2"
+}

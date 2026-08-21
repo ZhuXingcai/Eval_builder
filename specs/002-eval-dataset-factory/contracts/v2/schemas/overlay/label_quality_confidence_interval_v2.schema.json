@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "LabelQualityIntervalMethodV2": {
+      "enum": [
+        "WILSON_SCORE_95_V1",
+        "STRATIFIED_SHA256_BOOTSTRAP_95_V1"
+      ],
+      "title": "LabelQualityIntervalMethodV2",
+      "type": "string"
+    },
+    "LabelQualityMetricAvailabilityV2": {
+      "enum": [
+        "MEASURED",
+        "UNDEFINED",
+        "NOT_COMPUTED"
+      ],
+      "title": "LabelQualityMetricAvailabilityV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_quality_confidence_interval_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Algorithm Version",
+      "type": "string"
+    },
+    "availability": {
+      "$ref": "#/$defs/LabelQualityMetricAvailabilityV2"
+    },
+    "confidence_basis_points": {
+      "const": 9500,
+      "default": 9500,
+      "title": "Confidence Basis Points",
+      "type": "integer"
+    },
+    "lower_basis_points": {
+      "anyOf": [
+        {
+          "maximum": 10000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lower Basis Points"
+    },
+    "method": {
+      "$ref": "#/$defs/LabelQualityIntervalMethodV2"
+    },
+    "resample_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Resample Count",
+      "type": "integer"
+    },
+    "sample_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Sample Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-quality-confidence-interval/v2",
+      "default": "eval-factory/label-quality-confidence-interval/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "upper_basis_points": {
+      "anyOf": [
+        {
+          "maximum": 10000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Upper Basis Points"
+    }
+  },
+  "required": [
+    "method",
+    "sample_count",
+    "resample_count",
+    "algorithm_version",
+    "availability"
+  ],
+  "title": "LabelQualityConfidenceIntervalV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.label_quality_v2.LabelQualityConfidenceIntervalV2",
+  "x-schema-version": "eval-factory/label-quality-confidence-interval/v2"
+}

@@ -1,0 +1,49 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/selection_firewall.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "completed_deliverable_excluded": {
+      "title": "Completed Deliverable Excluded",
+      "type": "boolean"
+    },
+    "final_answer_excluded": {
+      "title": "Final Answer Excluded",
+      "type": "boolean"
+    },
+    "grader_rules_excluded": {
+      "title": "Grader Rules Excluded",
+      "type": "boolean"
+    },
+    "hidden_selection_signals_excluded": {
+      "title": "Hidden Selection Signals Excluded",
+      "type": "boolean"
+    },
+    "private_reference_excluded": {
+      "title": "Private Reference Excluded",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/selection-firewall/v1",
+      "default": "eval-factory/selection-firewall/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "trajectory_specific_steps_excluded": {
+      "title": "Trajectory Specific Steps Excluded",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "final_answer_excluded",
+    "completed_deliverable_excluded",
+    "private_reference_excluded",
+    "grader_rules_excluded",
+    "hidden_selection_signals_excluded",
+    "trajectory_specific_steps_excluded"
+  ],
+  "title": "SelectionFirewall",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task.SelectionFirewall",
+  "x-schema-version": "eval-factory/selection-firewall/v1"
+}

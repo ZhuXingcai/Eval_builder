@@ -1,0 +1,44 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/non_model_resource_vector_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "network_requests": {
+      "minimum": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "processes": {
+      "minimum": 0,
+      "title": "Processes",
+      "type": "integer"
+    },
+    "renderers": {
+      "minimum": 0,
+      "title": "Renderers",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/non-model-resource-vector/v2",
+      "default": "eval-factory/non-model-resource-vector/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "storage_bytes": {
+      "minimum": 0,
+      "title": "Storage Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "processes",
+    "renderers",
+    "network_requests",
+    "storage_bytes"
+  ],
+  "title": "NonModelResourceVectorV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.resource_v2.NonModelResourceVectorV2",
+  "x-schema-version": "eval-factory/non-model-resource-vector/v2"
+}

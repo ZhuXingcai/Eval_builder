@@ -1,0 +1,37 @@
+{
+  "schema_version": "eval-factory/streaming-parser-gold/v1",
+  "cases": [
+    {
+      "case_id": "truncated-request",
+      "request": "{\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":\"first\"}]},{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"second\"},{\"type\":\"tool_use\",\"id\":\"call-1\",\"name\":\"tool\",\"input\":{}},{\"type\":\"text\",\"text\":\"broken\"",
+      "response": "{\"content\":[],\"role\":\"assistant\"}",
+      "extra": "{\"req_lost_number\":0,\"resp_lost_number\":0}",
+      "expected_quality": "PARTIAL",
+      "expected_units": 3
+    },
+    {
+      "case_id": "truncated-response",
+      "request": "{\"messages\":[]}",
+      "response": "{\"content\":[{\"type\":\"text\",\"text\":\"complete\"},{\"type\":\"text\",\"text\":\"broken\"",
+      "extra": "{\"req_lost_number\":0,\"resp_lost_number\":0}",
+      "expected_quality": "PARTIAL",
+      "expected_units": 1
+    },
+    {
+      "case_id": "repaired-recovered-message",
+      "request": "{\"messages\":[{\"role\":\"user\",\"content\":\"C:\\qa\"}]",
+      "response": "{\"content\":[],\"role\":\"assistant\"}",
+      "extra": "{\"req_lost_number\":0,\"resp_lost_number\":0}",
+      "expected_quality": "PARTIAL",
+      "expected_units": 1
+    },
+    {
+      "case_id": "unparseable",
+      "request": "{\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":\"broken",
+      "response": "{\"content\":[{\"type\":\"text\",\"text\":\"broken",
+      "extra": "{\"req_lost_number\":0,\"resp_lost_number\":0}",
+      "expected_quality": "UNPARSEABLE",
+      "expected_units": 0
+    }
+  ]
+}

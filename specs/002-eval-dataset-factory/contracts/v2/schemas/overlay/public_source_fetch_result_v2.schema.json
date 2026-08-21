@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/public_source_fetch_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "bytes_count": {
+      "minimum": 0,
+      "title": "Bytes Count",
+      "type": "integer"
+    },
+    "canonical_source_uri": {
+      "maxLength": 2048,
+      "minLength": 3,
+      "title": "Canonical Source Uri",
+      "type": "string"
+    },
+    "content_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "fetch_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "fetch_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Fetch Result Id",
+      "type": "string"
+    },
+    "fetch_result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Fetch Result Sha256",
+      "type": "string"
+    },
+    "media_type": {
+      "anyOf": [
+        {
+          "maxLength": 255,
+          "minLength": 3,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Media Type"
+    },
+    "provider_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "requested_source_uri": {
+      "maxLength": 2048,
+      "minLength": 3,
+      "title": "Requested Source Uri",
+      "type": "string"
+    },
+    "response_metadata_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Response Metadata Sha256",
+      "type": "string"
+    },
+    "retrieved_at": {
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/public-source-fetch-result/v2",
+      "default": "env-mock-agent/public-source-fetch-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status_code": {
+      "maximum": 599,
+      "minimum": 100,
+      "title": "Status Code",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "fetch_result_id",
+    "fetch_request_ref",
+    "requested_source_uri",
+    "canonical_source_uri",
+    "retrieved_at",
+    "status_code",
+    "bytes_count",
+    "content_ref",
+    "content_sha256",
+    "provider_id",
+    "response_metadata_sha256",
+    "fetch_result_sha256"
+  ],
+  "title": "PublicSourceFetchResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.retrieval_v2.PublicSourceFetchResultV2",
+  "x-schema-version": "env-mock-agent/public-source-fetch-result/v2"
+}

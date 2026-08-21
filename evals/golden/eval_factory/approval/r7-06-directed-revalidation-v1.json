@@ -1,0 +1,102 @@
+{
+  "application_policy_version": "user-plan-application/r7-06-v1",
+  "direct_release_authority_count": 0,
+  "scenarios": [
+    {
+      "checkpoint": "LABEL_PLAN",
+      "expected_restart_stages": [
+        "label",
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality"
+      ],
+      "scenario_id": "label-directed-closure"
+    },
+    {
+      "checkpoint": "TASK_REWRITE_PLAN",
+      "expected_restart_stages": [
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality"
+      ],
+      "reuses_r4_application": true,
+      "scenario_id": "task-rewrite-r4-application"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "environment_strategy": "TRACE_FAITHFUL_MOCK",
+      "expected_restart_stage": "attachment",
+      "scenario_id": "environment-trace-faithful"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "environment_strategy": "REWRITE_STANDARD_ENV",
+      "expected_restart_stage": "task_authoring",
+      "scenario_id": "environment-standard-rewrite"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "environment_strategy": "EXCLUDE_TASK",
+      "excluded_item_count": 1,
+      "scenario_id": "environment-exclude"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "direct_content_patch_allowed": false,
+      "expected_restart_stage": "task_authoring",
+      "restart_directive": "REBUILD_FROM_TASK_AUTHORING",
+      "scenario_id": "final-rebuild-task"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "direct_content_patch_allowed": false,
+      "expected_restart_stage": "attachment",
+      "restart_directive": "REBUILD_FROM_ATTACHMENT",
+      "scenario_id": "final-rebuild-attachment"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "direct_content_patch_allowed": false,
+      "expected_restart_stage": "item_quality",
+      "restart_directive": "REBUILD_FROM_ITEM_QUALITY",
+      "scenario_id": "final-rebuild-quality"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "direct_content_patch_allowed": false,
+      "excluded_item_count": 1,
+      "restart_directive": "EXCLUDE_ITEM",
+      "scenario_id": "final-exclude"
+    },
+    {
+      "expected_outcome": "PRESERVED",
+      "preserved_item_count": 1,
+      "scenario_id": "unaffected-item"
+    },
+    {
+      "expected_outcome": "EXACT_REPLAY",
+      "outbox_event_count": 1,
+      "scenario_id": "idempotent-application"
+    },
+    {
+      "expected_outcome": "APPLICATION_CONFLICT",
+      "scenario_id": "divergent-application"
+    },
+    {
+      "expected_outcome": "BLOCKED",
+      "published_current_head_count": 0,
+      "scenario_id": "blocked-hard-gate"
+    },
+    {
+      "expected_outcome": "REJECTED_STALE_SOURCE",
+      "scenario_id": "stale-source"
+    }
+  ],
+  "schema_version": "eval-factory/directed-revalidation-gold/r7-06-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ]
+}

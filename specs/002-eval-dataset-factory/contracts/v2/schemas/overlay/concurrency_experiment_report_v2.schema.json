@@ -1,0 +1,1061 @@
+{
+  "$defs": {
+    "ConcurrencyExperimentFaultCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "const": 6,
+          "default": 6,
+          "title": "Count",
+          "type": "integer"
+        },
+        "fault_point": {
+          "$ref": "#/$defs/ConcurrencyExperimentFaultPointV2"
+        }
+      },
+      "required": [
+        "fault_point"
+      ],
+      "title": "ConcurrencyExperimentFaultCountV2",
+      "type": "object"
+    },
+    "ConcurrencyExperimentFaultPointV2": {
+      "enum": [
+        "BEFORE_HANDLER",
+        "AFTER_OBJECT_PERSISTENCE",
+        "BEFORE_LEASE_COMPLETION",
+        "AFTER_LEASE_COMPLETION"
+      ],
+      "title": "ConcurrencyExperimentFaultPointV2",
+      "type": "string"
+    },
+    "ConcurrencyExperimentHostSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "architecture": {
+          "const": "ARM64",
+          "title": "Architecture",
+          "type": "string"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "host_summary_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Host Summary Sha256",
+          "type": "string"
+        },
+        "logical_cpu_count": {
+          "maximum": 4096,
+          "minimum": 1,
+          "title": "Logical Cpu Count",
+          "type": "integer"
+        },
+        "memory_bytes": {
+          "maximum": 10000000000000000,
+          "minimum": 1,
+          "title": "Memory Bytes",
+          "type": "integer"
+        },
+        "physical_cpu_count": {
+          "maximum": 4096,
+          "minimum": 1,
+          "title": "Physical Cpu Count",
+          "type": "integer"
+        },
+        "platform_family": {
+          "const": "DARWIN",
+          "title": "Platform Family",
+          "type": "string"
+        },
+        "python_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Python Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/concurrency-experiment-host-summary/v2",
+          "default": "eval-factory/concurrency-experiment-host-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "platform_family",
+        "architecture",
+        "logical_cpu_count",
+        "physical_cpu_count",
+        "memory_bytes",
+        "python_version",
+        "host_summary_sha256",
+        "audit"
+      ],
+      "title": "ConcurrencyExperimentHostSummaryV2",
+      "type": "object"
+    },
+    "ConcurrencyExperimentLevelOutcomeV2": {
+      "enum": [
+        "ELIGIBLE",
+        "INELIGIBLE_ERROR",
+        "INELIGIBLE_INTEGRITY",
+        "INCOMPLETE"
+      ],
+      "title": "ConcurrencyExperimentLevelOutcomeV2",
+      "type": "string"
+    },
+    "ConcurrencyExperimentLevelSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt_active_total_microseconds": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "attempt_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Attempt Count",
+          "type": "integer"
+        },
+        "attempt_metric_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Attempt Metric Count",
+          "type": "integer"
+        },
+        "cache_availability": {
+          "const": "NOT_APPLICABLE",
+          "default": "NOT_APPLICABLE",
+          "title": "Cache Availability",
+          "type": "string"
+        },
+        "case_dispatch_wait_nanoseconds": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "case_wall_latency_nanoseconds": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "cost_availability": {
+          "const": "UNAVAILABLE",
+          "default": "UNAVAILABLE",
+          "title": "Cost Availability",
+          "type": "string"
+        },
+        "elapsed_nanoseconds": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "error_rate_basis_points": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Error Rate Basis Points",
+          "type": "integer"
+        },
+        "executed_case_count": {
+          "const": 72,
+          "title": "Executed Case Count",
+          "type": "integer"
+        },
+        "execution_microseconds": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "incomplete_case_count": {
+          "maximum": 72,
+          "minimum": 0,
+          "title": "Incomplete Case Count",
+          "type": "integer"
+        },
+        "infrastructure_error_count": {
+          "maximum": 72,
+          "minimum": 0,
+          "title": "Infrastructure Error Count",
+          "type": "integer"
+        },
+        "input_token_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Input Token Count",
+          "type": "integer"
+        },
+        "model_availability": {
+          "const": "NOT_APPLICABLE",
+          "default": "NOT_APPLICABLE",
+          "title": "Model Availability",
+          "type": "string"
+        },
+        "model_request_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Model Request Count",
+          "type": "integer"
+        },
+        "network_request_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Network Request Count",
+          "type": "integer"
+        },
+        "outcome": {
+          "$ref": "#/$defs/ConcurrencyExperimentLevelOutcomeV2"
+        },
+        "output_token_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Output Token Count",
+          "type": "integer"
+        },
+        "process_start_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Process Start Count",
+          "type": "integer"
+        },
+        "product_error_count": {
+          "maximum": 72,
+          "minimum": 0,
+          "title": "Product Error Count",
+          "type": "integer"
+        },
+        "provider_invocation_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Provider Invocation Count",
+          "type": "integer"
+        },
+        "queue_wait_microseconds": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/ConcurrencyExperimentReasonCodeV2"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "renderer_operation_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Renderer Operation Count",
+          "type": "integer"
+        },
+        "resume_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Resume Count",
+          "type": "integer"
+        },
+        "retained_storage_bytes": {
+          "maximum": 1000000000000000,
+          "minimum": 0,
+          "title": "Retained Storage Bytes",
+          "type": "integer"
+        },
+        "retry_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Retry Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/concurrency-experiment-level-summary/v2",
+          "default": "eval-factory/concurrency-experiment-level-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stage_result_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Stage Result Count",
+          "type": "integer"
+        },
+        "stage_run_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Stage Run Count",
+          "type": "integer"
+        },
+        "succeeded_case_count": {
+          "maximum": 72,
+          "minimum": 0,
+          "title": "Succeeded Case Count",
+          "type": "integer"
+        },
+        "throughput_millijobs_per_second": {
+          "$ref": "#/$defs/ConcurrencyExperimentPercentileSummaryV2"
+        },
+        "tool_call_count": {
+          "maximum": 1000000000000,
+          "minimum": 0,
+          "title": "Tool Call Count",
+          "type": "integer"
+        },
+        "trial_count": {
+          "const": 3,
+          "title": "Trial Count",
+          "type": "integer"
+        },
+        "unavailable_cost_attempt_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Unavailable Cost Attempt Count",
+          "type": "integer"
+        },
+        "unique_case_count": {
+          "const": 24,
+          "title": "Unique Case Count",
+          "type": "integer"
+        },
+        "worker_count": {
+          "enum": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "title": "Worker Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "worker_count",
+        "trial_count",
+        "unique_case_count",
+        "executed_case_count",
+        "succeeded_case_count",
+        "product_error_count",
+        "infrastructure_error_count",
+        "incomplete_case_count",
+        "error_rate_basis_points",
+        "attempt_count",
+        "attempt_metric_count",
+        "stage_run_count",
+        "stage_result_count",
+        "provider_invocation_count",
+        "retry_count",
+        "resume_count",
+        "retained_storage_bytes",
+        "tool_call_count",
+        "unavailable_cost_attempt_count",
+        "elapsed_nanoseconds",
+        "throughput_millijobs_per_second",
+        "case_dispatch_wait_nanoseconds",
+        "case_wall_latency_nanoseconds",
+        "queue_wait_microseconds",
+        "execution_microseconds",
+        "attempt_active_total_microseconds",
+        "outcome",
+        "reason_codes"
+      ],
+      "title": "ConcurrencyExperimentLevelSummaryV2",
+      "type": "object"
+    },
+    "ConcurrencyExperimentOutcomeV2": {
+      "enum": [
+        "NON_MODEL_RECOMMENDED",
+        "RECOMMENDATION_PENDING",
+        "INCOMPLETE"
+      ],
+      "title": "ConcurrencyExperimentOutcomeV2",
+      "type": "string"
+    },
+    "ConcurrencyExperimentPercentileSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum": {
+          "maximum": 1000000000000000000,
+          "minimum": 0,
+          "title": "Maximum",
+          "type": "integer"
+        },
+        "minimum": {
+          "maximum": 1000000000000000000,
+          "minimum": 0,
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "p50": {
+          "maximum": 1000000000000000000,
+          "minimum": 0,
+          "title": "P50",
+          "type": "integer"
+        },
+        "p95": {
+          "maximum": 1000000000000000000,
+          "minimum": 0,
+          "title": "P95",
+          "type": "integer"
+        },
+        "sample_count": {
+          "maximum": 1000000000,
+          "minimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/concurrency-experiment-percentile-summary/v2",
+          "default": "eval-factory/concurrency-experiment-percentile-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "unit": {
+          "$ref": "#/$defs/ConcurrencyExperimentUnitV2"
+        }
+      },
+      "required": [
+        "sample_count",
+        "minimum",
+        "p50",
+        "p95",
+        "maximum",
+        "unit"
+      ],
+      "title": "ConcurrencyExperimentPercentileSummaryV2",
+      "type": "object"
+    },
+    "ConcurrencyExperimentReasonCodeV2": {
+      "enum": [
+        "NONE",
+        "CASE_FAILED",
+        "CASE_INFRASTRUCTURE_ERROR",
+        "CASE_INCOMPLETE",
+        "UNEXPECTED_RETRY",
+        "METRICS_INCOMPLETE",
+        "SAMPLE_COUNT_MISMATCH",
+        "CAPACITY_WAIT_EXHAUSTED",
+        "RECOVERY_FAILED",
+        "REPLAY_MISMATCH",
+        "MATERIAL_INTEGRITY_ERROR",
+        "INTERNAL_ERROR"
+      ],
+      "title": "ConcurrencyExperimentReasonCodeV2",
+      "type": "string"
+    },
+    "ConcurrencyExperimentRecommendationReasonV2": {
+      "enum": [
+        "BALANCED_KNEE",
+        "NO_ELIGIBLE_LEVEL",
+        "THROUGHPUT_THRESHOLD_NOT_MET",
+        "LATENCY_THRESHOLD_NOT_MET",
+        "RECOVERY_VALIDATION_FAILED",
+        "MODEL_EVIDENCE_PENDING"
+      ],
+      "title": "ConcurrencyExperimentRecommendationReasonV2",
+      "type": "string"
+    },
+    "ConcurrencyExperimentRecoverySummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "duplicate_provider_fact_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Duplicate Provider Fact Count",
+          "type": "integer"
+        },
+        "exact_replay_stable": {
+          "title": "Exact Replay Stable",
+          "type": "boolean"
+        },
+        "fault_counts": {
+          "items": {
+            "$ref": "#/$defs/ConcurrencyExperimentFaultCountV2"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Fault Counts",
+          "type": "array"
+        },
+        "fault_observed_count": {
+          "maximum": 24,
+          "minimum": 0,
+          "title": "Fault Observed Count",
+          "type": "integer"
+        },
+        "physical_bytes_after_replay": {
+          "default": 0,
+          "maximum": 1000000000000000000,
+          "minimum": 0,
+          "title": "Physical Bytes After Replay",
+          "type": "integer"
+        },
+        "physical_bytes_before_replay": {
+          "default": 0,
+          "maximum": 1000000000000000000,
+          "minimum": 0,
+          "title": "Physical Bytes Before Replay",
+          "type": "integer"
+        },
+        "physical_file_count_after_replay": {
+          "maximum": 1000000000,
+          "minimum": 0,
+          "title": "Physical File Count After Replay",
+          "type": "integer"
+        },
+        "physical_file_count_before_replay": {
+          "maximum": 1000000000,
+          "minimum": 0,
+          "title": "Physical File Count Before Replay",
+          "type": "integer"
+        },
+        "probe_count": {
+          "const": 24,
+          "default": 24,
+          "title": "Probe Count",
+          "type": "integer"
+        },
+        "provider_invocation_count": {
+          "maximum": 100000,
+          "minimum": 0,
+          "title": "Provider Invocation Count",
+          "type": "integer"
+        },
+        "recovery_stable": {
+          "title": "Recovery Stable",
+          "type": "boolean"
+        },
+        "resume_failure_count": {
+          "maximum": 24,
+          "minimum": 0,
+          "title": "Resume Failure Count",
+          "type": "integer"
+        },
+        "resume_success_count": {
+          "maximum": 24,
+          "minimum": 0,
+          "title": "Resume Success Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/concurrency-experiment-recovery-summary/v2",
+          "default": "eval-factory/concurrency-experiment-recovery-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_worker_count": {
+          "enum": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "title": "Selected Worker Count",
+          "type": "integer"
+        },
+        "typed_side_effect_count_after_replay": {
+          "maximum": 1000000000000,
+          "minimum": 0,
+          "title": "Typed Side Effect Count After Replay",
+          "type": "integer"
+        },
+        "typed_side_effect_count_before_replay": {
+          "maximum": 1000000000000,
+          "minimum": 0,
+          "title": "Typed Side Effect Count Before Replay",
+          "type": "integer"
+        },
+        "unexpected_retry_count": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Unexpected Retry Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "selected_worker_count",
+        "fault_counts",
+        "fault_observed_count",
+        "resume_success_count",
+        "resume_failure_count",
+        "unexpected_retry_count",
+        "duplicate_provider_fact_count",
+        "provider_invocation_count",
+        "typed_side_effect_count_before_replay",
+        "typed_side_effect_count_after_replay",
+        "physical_file_count_before_replay",
+        "physical_file_count_after_replay",
+        "exact_replay_stable",
+        "recovery_stable"
+      ],
+      "title": "ConcurrencyExperimentRecoverySummaryV2",
+      "type": "object"
+    },
+    "ConcurrencyExperimentUnitV2": {
+      "enum": [
+        "NANOSECONDS",
+        "MICROSECONDS",
+        "MILLIJOBS_PER_SECOND"
+      ],
+      "title": "ConcurrencyExperimentUnitV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "NonModelResourceRecommendationV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "baseline_p95_case_latency_nanoseconds": {
+          "minimum": 1,
+          "title": "Baseline P95 Case Latency Nanoseconds",
+          "type": "integer"
+        },
+        "claim_scope": {
+          "const": "CANARY_WORKER_STORAGE_ONLY",
+          "default": "CANARY_WORKER_STORAGE_ONLY",
+          "title": "Claim Scope",
+          "type": "string"
+        },
+        "maximum_median_throughput_millijobs_per_second": {
+          "minimum": 1,
+          "title": "Maximum Median Throughput Millijobs Per Second",
+          "type": "integer"
+        },
+        "model_concurrency": {
+          "default": null,
+          "title": "Model Concurrency",
+          "type": "null"
+        },
+        "model_request_budget": {
+          "default": null,
+          "title": "Model Request Budget",
+          "type": "null"
+        },
+        "model_token_budget": {
+          "default": null,
+          "title": "Model Token Budget",
+          "type": "null"
+        },
+        "network_capacity": {
+          "default": null,
+          "title": "Network Capacity",
+          "type": "null"
+        },
+        "p95_baseline_ratio_basis_points": {
+          "minimum": 0,
+          "title": "P95 Baseline Ratio Basis Points",
+          "type": "integer"
+        },
+        "p95_limit_basis_points": {
+          "const": 15000,
+          "default": 15000,
+          "title": "P95 Limit Basis Points",
+          "type": "integer"
+        },
+        "pending_dimensions": {
+          "default": [
+            "MODEL",
+            "PROCESS",
+            "RENDERER",
+            "NETWORK"
+          ],
+          "items": {
+            "enum": [
+              "MODEL",
+              "PROCESS",
+              "RENDERER",
+              "NETWORK"
+            ],
+            "type": "string"
+          },
+          "title": "Pending Dimensions",
+          "type": "array"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "policy_version": {
+          "const": "concurrency-experiment/r8-06-v1",
+          "default": "concurrency-experiment/r8-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "process_capacity": {
+          "default": null,
+          "title": "Process Capacity",
+          "type": "null"
+        },
+        "reason": {
+          "const": "BALANCED_KNEE",
+          "default": "BALANCED_KNEE",
+          "title": "Reason",
+          "type": "string"
+        },
+        "recommendation_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Recommendation Id",
+          "type": "string"
+        },
+        "recommendation_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Recommendation Sha256",
+          "type": "string"
+        },
+        "recommended_storage_bytes_per_cohort": {
+          "maximum": 1000000000000000,
+          "minimum": 1,
+          "title": "Recommended Storage Bytes Per Cohort",
+          "type": "integer"
+        },
+        "recommended_storage_bytes_per_job": {
+          "maximum": 1000000000000000,
+          "minimum": 1,
+          "title": "Recommended Storage Bytes Per Job",
+          "type": "integer"
+        },
+        "recommended_worker_count": {
+          "enum": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "title": "Recommended Worker Count",
+          "type": "integer"
+        },
+        "renderer_capacity": {
+          "default": null,
+          "title": "Renderer Capacity",
+          "type": "null"
+        },
+        "schema_version": {
+          "const": "eval-factory/non-model-resource-recommendation/v2",
+          "default": "eval-factory/non-model-resource-recommendation/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selected_median_throughput_millijobs_per_second": {
+          "minimum": 1,
+          "title": "Selected Median Throughput Millijobs Per Second",
+          "type": "integer"
+        },
+        "selected_p95_case_latency_nanoseconds": {
+          "minimum": 0,
+          "title": "Selected P95 Case Latency Nanoseconds",
+          "type": "integer"
+        },
+        "throughput_efficiency_basis_points": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Throughput Efficiency Basis Points",
+          "type": "integer"
+        },
+        "throughput_threshold_basis_points": {
+          "const": 9000,
+          "default": 9000,
+          "title": "Throughput Threshold Basis Points",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "recommendation_id",
+        "policy_ref",
+        "recommended_worker_count",
+        "recommended_storage_bytes_per_job",
+        "recommended_storage_bytes_per_cohort",
+        "selected_median_throughput_millijobs_per_second",
+        "maximum_median_throughput_millijobs_per_second",
+        "throughput_efficiency_basis_points",
+        "selected_p95_case_latency_nanoseconds",
+        "baseline_p95_case_latency_nanoseconds",
+        "p95_baseline_ratio_basis_points",
+        "recommendation_sha256",
+        "audit"
+      ],
+      "title": "NonModelResourceRecommendationV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/concurrency_experiment_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "authorizes_attestation": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Attestation",
+      "type": "boolean"
+    },
+    "authorizes_production_release": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Production Release",
+      "type": "boolean"
+    },
+    "authorizes_safety_or_privacy_approval": {
+      "const": false,
+      "default": false,
+      "title": "Authorizes Safety Or Privacy Approval",
+      "type": "boolean"
+    },
+    "cache_availability": {
+      "const": "NOT_APPLICABLE",
+      "default": "NOT_APPLICABLE",
+      "title": "Cache Availability",
+      "type": "string"
+    },
+    "claim_scope": {
+      "const": "CANARY_WORKER_STORAGE_ONLY",
+      "default": "CANARY_WORKER_STORAGE_ONLY",
+      "title": "Claim Scope",
+      "type": "string"
+    },
+    "cohort_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "cost_availability": {
+      "const": "UNAVAILABLE",
+      "default": "UNAVAILABLE",
+      "title": "Cost Availability",
+      "type": "string"
+    },
+    "host_summary": {
+      "$ref": "#/$defs/ConcurrencyExperimentHostSummaryV2"
+    },
+    "level_summaries": {
+      "items": {
+        "$ref": "#/$defs/ConcurrencyExperimentLevelSummaryV2"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Level Summaries",
+      "type": "array"
+    },
+    "model_availability": {
+      "const": "NOT_APPLICABLE",
+      "default": "NOT_APPLICABLE",
+      "title": "Model Availability",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/ConcurrencyExperimentOutcomeV2"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "concurrency-experiment/r8-06-v1",
+      "default": "concurrency-experiment/r8-06-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "private_result_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "private_workload_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "#/$defs/ConcurrencyExperimentRecommendationReasonV2"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "recommendation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/NonModelResourceRecommendationV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "recovery_summary": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ConcurrencyExperimentRecoverySummaryV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "satisfies_model_resource_policy": {
+      "const": false,
+      "default": false,
+      "title": "Satisfies Model Resource Policy",
+      "type": "boolean"
+    },
+    "satisfies_operations_slo": {
+      "const": false,
+      "default": false,
+      "title": "Satisfies Operations Slo",
+      "type": "boolean"
+    },
+    "satisfies_sc_012": {
+      "const": false,
+      "default": false,
+      "title": "Satisfies Sc 012",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/concurrency-experiment-report/v2",
+      "default": "eval-factory/concurrency-experiment-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "template_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "report_id",
+    "policy_ref",
+    "host_summary",
+    "cohort_manifest_ref",
+    "template_ref",
+    "private_workload_ref",
+    "private_result_set_ref",
+    "level_summaries",
+    "outcome",
+    "reason_codes",
+    "report_sha256",
+    "audit"
+  ],
+  "title": "ConcurrencyExperimentReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentReportV2",
+  "x-schema-version": "eval-factory/concurrency-experiment-report/v2"
+}

@@ -1,0 +1,61 @@
+{
+  "canary_manifest": {
+    "path": "evals/golden/eval_factory/canary_manifest.v4.json",
+    "sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+  },
+  "cross_stage_contract": {
+    "path": "specs/002-eval-dataset-factory/contracts/v2/manifest.json",
+    "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc"
+  },
+  "fixture_count": 5,
+  "fixtures": [
+    {
+      "instance_id": "LH_005",
+      "path": "LH_005.reference-fixture.json",
+      "sha256": "b3e8a142967ccd26f079db3aa3a8ee9bbda7f84f3699d0da3988a78c21978f21",
+      "status": "REVIEW_READY_NOT_GOLD"
+    },
+    {
+      "instance_id": "LH_011",
+      "path": "LH_011.reference-fixture.json",
+      "sha256": "53f69a9ea6104166dc54c9c65a5ce02d0b242cc57d644934ca768d1e9f4ce99d",
+      "status": "REVIEW_READY_NOT_GOLD"
+    },
+    {
+      "instance_id": "LH_015",
+      "path": "LH_015.reference-fixture.json",
+      "sha256": "a6b28172f88b12e6ac67ff590622dae5eb4d378c34ec6146cb851857056513d1",
+      "status": "REVIEW_READY_NOT_GOLD"
+    },
+    {
+      "instance_id": "LH_058",
+      "path": "LH_058.reference-fixture.json",
+      "sha256": "f143df7964b009af17a370f293b07b5ac1da3c499fc5b4364a33dff9cdc8fc06",
+      "status": "REVIEW_READY_NOT_GOLD"
+    },
+    {
+      "instance_id": "LH_067",
+      "path": "LH_067.reference-fixture.json",
+      "sha256": "d36712d9dac97b000261eacfec5bf6263708814937c7fa1c7a4827d2318c29f4",
+      "status": "REVIEW_READY_NOT_GOLD"
+    }
+  ],
+  "legacy_v1_review_workflow": {
+    "review_queue": {
+      "path": "evals/golden/eval_factory/evaluation_items/v1/review-queue.json",
+      "sha256": "eefa2428437bcd8ea7cd81978c4085e804fadc2ea9e115dd8d0adf1f86bd7700"
+    },
+    "status": "SUPERSEDED_NOT_SCHEDULED",
+    "superseded_by": "env_mock_agent-ujc.1.13",
+    "worklist": {
+      "path": "evals/golden/eval_factory/evaluation_items/v1/gold-worklist.json",
+      "sha256": "57e1731796a722d87249a376392c0b4626ebd0bc87311b1d021bab6eb33edad7"
+    }
+  },
+  "schema_version": "eval-factory-reference-fixture-manifest/v2",
+  "status": "REVIEW_READY_NOT_GOLD",
+  "user_approval_policy": {
+    "path": "docs/policies/eval-factory-user-approval-v2.md",
+    "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f"
+  }
+}

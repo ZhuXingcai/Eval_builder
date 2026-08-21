@@ -1,0 +1,83 @@
+{
+  "cases": [
+    {
+      "case_id": "trace-rich-common",
+      "expected_outcome": "COMPILED",
+      "expected_row_modes": [
+        "TRACE_RICH"
+      ],
+      "expected_task_mode": "TRACE_RICH",
+      "setups": [
+        "TRACE_RICH"
+      ]
+    },
+    {
+      "case_id": "skeleton-guided-common",
+      "expected_outcome": "COMPILED",
+      "expected_row_modes": [
+        "SKELETON_GUIDED"
+      ],
+      "expected_task_mode": "SKELETON_GUIDED",
+      "setups": [
+        "SKELETON_GUIDED"
+      ]
+    },
+    {
+      "case_id": "prompt-only-common",
+      "expected_outcome": "COMPILED",
+      "expected_row_modes": [
+        "PROMPT_ONLY"
+      ],
+      "expected_task_mode": "PROMPT_ONLY",
+      "setups": [
+        "PROMPT_ONLY"
+      ]
+    },
+    {
+      "case_id": "heterogeneous-nonblocked-mixed",
+      "expected_outcome": "COMPILED",
+      "expected_row_modes": [
+        "PROMPT_ONLY",
+        "SKELETON_GUIDED",
+        "TRACE_RICH"
+      ],
+      "expected_task_mode": "MIXED",
+      "setups": [
+        "TRACE_RICH",
+        "SKELETON_GUIDED",
+        "PROMPT_ONLY"
+      ]
+    },
+    {
+      "case_id": "critical-first-write-blocked",
+      "expected_outcome": "COMPILED",
+      "expected_row_modes": [
+        "BLOCKED"
+      ],
+      "expected_task_mode": "BLOCKED",
+      "setups": [
+        "BLOCKED_FIRST_WRITE"
+      ]
+    },
+    {
+      "case_id": "missing-target-capability",
+      "expected_outcome": "BLOCKED_CAPABILITY",
+      "expected_row_modes": [],
+      "expected_task_mode": null,
+      "setups": [
+        "MISSING_TARGET"
+      ]
+    },
+    {
+      "case_id": "no-attachments-required",
+      "expected_outcome": "NOT_REQUIRED",
+      "expected_row_modes": [],
+      "expected_task_mode": null,
+      "setups": []
+    }
+  ],
+  "claim_scope": "DETERMINISTIC_MODE_POLICY_ONLY",
+  "description": "Content-free R5-02 mode facts. These cases are not package-success or production-readiness evidence.",
+  "policy_version": "artifact-evidence-mode/r5-02-v1",
+  "schema_version": "eval-factory/r5-02-mode-matrix-gold/v1"
+}

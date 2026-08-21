@@ -1,0 +1,316 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "LineageAuditCheckCodeV2": {
+      "enum": [
+        "SOURCE_TRACE_LABELS",
+        "LABEL_SELECTION",
+        "SELECTION_TASK",
+        "TASK_R4",
+        "R4_ITEM_QUALITY",
+        "PACKAGE_PROVENANCE_SET",
+        "PACKAGE_ENVIRONMENT_SET",
+        "PACKAGE_MEMBER_DERIVATION",
+        "CROSS_ITEM_LINEAGE_ALIAS"
+      ],
+      "title": "LineageAuditCheckCodeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/batch_quality_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "answer_bearing_safety_severity": {
+      "const": "P0",
+      "default": "P0",
+      "title": "Answer Bearing Safety Severity",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "batch_quality_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Batch Quality Policy Id",
+      "type": "string"
+    },
+    "exact_task_duplicate_severity": {
+      "const": "P1",
+      "default": "P1",
+      "title": "Exact Task Duplicate Severity",
+      "type": "string"
+    },
+    "finding_mode": {
+      "const": "DIRECT_EVIDENCE_ONLY",
+      "default": "DIRECT_EVIDENCE_ONLY",
+      "title": "Finding Mode",
+      "type": "string"
+    },
+    "lineage_severity": {
+      "const": "P1",
+      "default": "P1",
+      "title": "Lineage Severity",
+      "type": "string"
+    },
+    "max_blocked_items": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Max Blocked Items",
+      "type": "integer"
+    },
+    "max_direct_evidence_refs": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Direct Evidence Refs",
+      "type": "integer"
+    },
+    "max_finding_subject_refs": {
+      "maximum": 100000000,
+      "minimum": 0,
+      "title": "Max Finding Subject Refs",
+      "type": "integer"
+    },
+    "max_findings": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Findings",
+      "type": "integer"
+    },
+    "max_items": {
+      "maximum": 100000,
+      "minimum": 2,
+      "title": "Max Items",
+      "type": "integer"
+    },
+    "max_label_decisions": {
+      "maximum": 10000000,
+      "minimum": 2,
+      "title": "Max Label Decisions",
+      "type": "integer"
+    },
+    "max_lineage_checks": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Lineage Checks",
+      "type": "integer"
+    },
+    "max_package_members": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Package Members",
+      "type": "integer"
+    },
+    "max_report_revisions": {
+      "maximum": 100000,
+      "minimum": 0,
+      "title": "Max Report Revisions",
+      "type": "integer"
+    },
+    "other_duplicate_severity": {
+      "const": "P2",
+      "default": "P2",
+      "title": "Other Duplicate Severity",
+      "type": "string"
+    },
+    "other_safety_severity": {
+      "const": "P1",
+      "default": "P1",
+      "title": "Other Safety Severity",
+      "type": "string"
+    },
+    "ownership_mode": {
+      "const": "TARGET_ITEM_RELATION_BATCH",
+      "default": "TARGET_ITEM_RELATION_BATCH",
+      "title": "Ownership Mode",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "batch-quality/r7-03-v1",
+      "default": "batch-quality/r7-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "required_batch_lineage_checks": {
+      "default": [
+        "CROSS_ITEM_LINEAGE_ALIAS"
+      ],
+      "items": {
+        "$ref": "#/$defs/LineageAuditCheckCodeV2"
+      },
+      "title": "Required Batch Lineage Checks",
+      "type": "array"
+    },
+    "required_item_lineage_checks": {
+      "default": [
+        "SOURCE_TRACE_LABELS",
+        "LABEL_SELECTION",
+        "SELECTION_TASK",
+        "TASK_R4",
+        "R4_ITEM_QUALITY",
+        "PACKAGE_PROVENANCE_SET",
+        "PACKAGE_ENVIRONMENT_SET",
+        "PACKAGE_MEMBER_DERIVATION"
+      ],
+      "items": {
+        "$ref": "#/$defs/LineageAuditCheckCodeV2"
+      },
+      "title": "Required Item Lineage Checks",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/batch-quality-policy/v2",
+      "default": "eval-factory/batch-quality-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "batch_quality_policy_id",
+    "max_items",
+    "max_label_decisions",
+    "max_package_members",
+    "max_lineage_checks",
+    "max_direct_evidence_refs",
+    "max_findings",
+    "max_finding_subject_refs",
+    "max_report_revisions",
+    "max_blocked_items",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "BatchQualityPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.batch_quality_v2.BatchQualityPolicyV2",
+  "x-schema-version": "eval-factory/batch-quality-policy/v2"
+}

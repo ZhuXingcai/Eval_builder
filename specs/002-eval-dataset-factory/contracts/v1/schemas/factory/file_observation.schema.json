@@ -1,0 +1,197 @@
+{
+  "$defs": {
+    "Completeness": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "UNKNOWN"
+      ],
+      "title": "Completeness",
+      "type": "string"
+    },
+    "FileOperation": {
+      "enum": [
+        "READ",
+        "WRITE",
+        "EDIT",
+        "COPY",
+        "MOVE",
+        "DELETE",
+        "LIST",
+        "UNKNOWN_MUTATION"
+      ],
+      "title": "FileOperation",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/file_observation.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "completeness": {
+      "$ref": "#/$defs/Completeness"
+    },
+    "content_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "content_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Content Sha256"
+    },
+    "file_version_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "File Version Id",
+      "type": "string"
+    },
+    "logical_path": {
+      "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+      "title": "Logical Path",
+      "type": "string"
+    },
+    "observation_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "observed_end": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed End"
+    },
+    "observed_start": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed Start"
+    },
+    "operation": {
+      "$ref": "#/$defs/FileOperation"
+    },
+    "raw_path_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/file-observation/v1",
+      "default": "eval-factory/file-observation/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "source_event_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Source Event Refs",
+      "type": "array"
+    },
+    "trace_ir_version_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Trace Ir Version Id",
+      "type": "string"
+    },
+    "truncated": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Truncated"
+    }
+  },
+  "required": [
+    "observation_id",
+    "trace_ir_version_id",
+    "logical_path",
+    "raw_path_ref",
+    "operation",
+    "sequence",
+    "completeness",
+    "truncated",
+    "content_ref",
+    "content_sha256",
+    "file_version_id",
+    "source_event_refs"
+  ],
+  "title": "FileObservation",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.FileObservation",
+  "x-schema-version": "eval-factory/file-observation/v1"
+}

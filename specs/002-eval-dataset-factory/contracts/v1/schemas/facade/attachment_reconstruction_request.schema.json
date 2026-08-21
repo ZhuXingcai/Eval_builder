@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "AttachmentArtifactRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "build_spec_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Build Spec Sha256",
+          "type": "string"
+        },
+        "content_contract_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "critical": {
+          "title": "Critical",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "$ref": "#/$defs/FacadeObjectRef"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "media_type": {
+          "maxLength": 255,
+          "minLength": 3,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/ReconstructionMode"
+        },
+        "provider_preference": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Provider Preference",
+          "type": "array"
+        },
+        "relative_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "render_contract_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "runtime_preference": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Runtime Preference",
+          "type": "array"
+        },
+        "validator_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Validator Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "build_spec_sha256",
+        "relative_path",
+        "media_type",
+        "mode",
+        "critical",
+        "content_contract_ref",
+        "render_contract_ref",
+        "evidence_refs",
+        "provider_preference",
+        "runtime_preference",
+        "validator_ids"
+      ],
+      "title": "AttachmentArtifactRequest",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ReconstructionMode": {
+      "enum": [
+        "TRACE_RICH",
+        "SKELETON_GUIDED",
+        "PROMPT_ONLY",
+        "BLOCKED"
+      ],
+      "title": "ReconstructionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/facade/attachment_reconstruction_request.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/AttachmentArtifactRequest"
+      },
+      "minItems": 1,
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "producer_task_view_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "profile": {
+      "enum": [
+        "LH",
+        "GENERIC",
+        "CC"
+      ],
+      "title": "Profile",
+      "type": "string"
+    },
+    "profile_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-reconstruction-request/v1",
+      "default": "env-mock-agent/attachment-reconstruction-request/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Task Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "task_id",
+    "producer_task_view_ref",
+    "artifacts",
+    "profile",
+    "profile_version",
+    "idempotency_key"
+  ],
+  "title": "AttachmentReconstructionRequest",
+  "type": "object",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.contracts.AttachmentReconstructionRequest",
+  "x-schema-version": "env-mock-agent/attachment-reconstruction-request/v1"
+}

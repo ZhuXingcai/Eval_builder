@@ -1,0 +1,738 @@
+{
+  "$defs": {
+    "AttachmentDuplicateFingerprintFailureCodeV2": {
+      "enum": [
+        "MEDIA_UNSUPPORTED",
+        "CONTENT_INSUFFICIENT",
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "OUTPUT_HASH_MISMATCH",
+        "OUTPUT_PATH_VIOLATION",
+        "SYMLINK_UNSUPPORTED",
+        "CONTENT_UNSCANNABLE",
+        "SCAN_LIMIT_EXCEEDED",
+        "CONTAINER_UNSUPPORTED"
+      ],
+      "title": "AttachmentDuplicateFingerprintFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentDuplicateFingerprintOutcomeV2": {
+      "enum": [
+        "SUPPORTED",
+        "UNSUPPORTED",
+        "BLOCKED"
+      ],
+      "title": "AttachmentDuplicateFingerprintOutcomeV2",
+      "type": "string"
+    },
+    "AttachmentDuplicateFingerprintResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_artifact_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "exact_content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Exact Content Sha256",
+          "type": "string"
+        },
+        "extractor_version": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extractor Version"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentDuplicateFingerprintFailureCodeV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fingerprint_request_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "fingerprint_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Fingerprint Result Id",
+          "type": "string"
+        },
+        "normalization_version": {
+          "const": "attachment-duplicate-normalization/r7-01-v1",
+          "default": "attachment-duplicate-normalization/r7-01-v1",
+          "title": "Normalization Version",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/AttachmentDuplicateFingerprintOutcomeV2"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "policy_version": {
+          "const": "attachment-duplicate-fingerprint/r7-01-v1",
+          "default": "attachment-duplicate-fingerprint/r7-01-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Result Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-duplicate-fingerprint-result/v2",
+          "default": "env-mock-agent/attachment-duplicate-fingerprint-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "shingle_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Shingle Count",
+          "type": "integer"
+        },
+        "similarity_fingerprint": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Similarity Fingerprint"
+        },
+        "token_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Token Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fingerprint_result_id",
+        "fingerprint_request_ref",
+        "environment_artifact_ref",
+        "output_ref",
+        "exact_content_sha256",
+        "outcome",
+        "token_count",
+        "shingle_count",
+        "result_sha256"
+      ],
+      "title": "AttachmentDuplicateFingerprintResultV2",
+      "type": "object"
+    },
+    "AttachmentDuplicateFingerprintV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_validation_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "candidate_artifact_version_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "environment_artifact_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_result": {
+          "$ref": "#/$defs/AttachmentDuplicateFingerprintResultV2"
+        },
+        "facade_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "fingerprint_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fingerprint Sha256",
+          "type": "string"
+        },
+        "item_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_quality_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/attachment-duplicate-fingerprint/v2",
+          "default": "eval-factory/attachment-duplicate-fingerprint/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "item_quality_result_ref",
+        "environment_artifact_ref",
+        "candidate_artifact_version_ref",
+        "output_ref",
+        "artifact_validation_result_ref",
+        "facade_request_ref",
+        "facade_result",
+        "facade_result_ref",
+        "policy_ref",
+        "fingerprint_sha256",
+        "audit"
+      ],
+      "title": "AttachmentDuplicateFingerprintV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "DuplicateClusterV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "cluster_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Cluster Sha256",
+          "type": "string"
+        },
+        "clustering_mode": {
+          "const": "CONNECTED_COMPONENTS",
+          "default": "CONNECTED_COMPONENTS",
+          "title": "Clustering Mode",
+          "type": "string"
+        },
+        "direct_pair_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Direct Pair Refs",
+          "type": "array"
+        },
+        "duplicate_cluster_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Duplicate Cluster Id",
+          "type": "string"
+        },
+        "exact_pair_count": {
+          "minimum": 0,
+          "title": "Exact Pair Count",
+          "type": "integer"
+        },
+        "member_item_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Member Item Ids",
+          "type": "array"
+        },
+        "member_subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 2,
+          "title": "Member Subject Refs",
+          "type": "array"
+        },
+        "near_pair_count": {
+          "minimum": 0,
+          "title": "Near Pair Count",
+          "type": "integer"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/duplicate-cluster/v2",
+          "default": "eval-factory/duplicate-cluster/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "subject_kind": {
+          "$ref": "#/$defs/DuplicateSubjectKindV2"
+        }
+      },
+      "required": [
+        "duplicate_cluster_id",
+        "subject_kind",
+        "member_item_ids",
+        "member_subject_refs",
+        "direct_pair_refs",
+        "exact_pair_count",
+        "near_pair_count",
+        "policy_ref",
+        "cluster_sha256",
+        "audit"
+      ],
+      "title": "DuplicateClusterV2",
+      "type": "object"
+    },
+    "DuplicateMatchKindV2": {
+      "enum": [
+        "EXACT",
+        "NEAR"
+      ],
+      "title": "DuplicateMatchKindV2",
+      "type": "string"
+    },
+    "DuplicatePairEvidenceV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "duplicate_pair_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Duplicate Pair Id",
+          "type": "string"
+        },
+        "left_fingerprint_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "left_item_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Left Item Id",
+          "type": "string"
+        },
+        "left_subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "match_kind": {
+          "$ref": "#/$defs/DuplicateMatchKindV2"
+        },
+        "pair_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Pair Sha256",
+          "type": "string"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "right_fingerprint_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "right_item_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Right Item Id",
+          "type": "string"
+        },
+        "right_subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/duplicate-pair-evidence/v2",
+          "default": "eval-factory/duplicate-pair-evidence/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "similarity_bps": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Similarity Bps",
+          "type": "integer"
+        },
+        "subject_kind": {
+          "$ref": "#/$defs/DuplicateSubjectKindV2"
+        }
+      },
+      "required": [
+        "duplicate_pair_id",
+        "subject_kind",
+        "left_item_id",
+        "right_item_id",
+        "left_subject_ref",
+        "right_subject_ref",
+        "left_fingerprint_ref",
+        "right_fingerprint_ref",
+        "match_kind",
+        "similarity_bps",
+        "policy_ref",
+        "pair_sha256",
+        "audit"
+      ],
+      "title": "DuplicatePairEvidenceV2",
+      "type": "object"
+    },
+    "DuplicateSubjectKindV2": {
+      "enum": [
+        "TASK",
+        "ATTACHMENT"
+      ],
+      "title": "DuplicateSubjectKindV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "TaskDuplicateFingerprintV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "exact_task_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Exact Task Sha256",
+          "type": "string"
+        },
+        "fingerprint_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fingerprint Sha256",
+          "type": "string"
+        },
+        "item_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "normalization_version": {
+          "const": "task-duplicate-normalization/r7-01-v1",
+          "default": "task-duplicate-normalization/r7-01-v1",
+          "title": "Normalization Version",
+          "type": "string"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "r4_task_contract_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/task-duplicate-fingerprint/v2",
+          "default": "eval-factory/task-duplicate-fingerprint/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "shingle_count": {
+          "maximum": 10000000,
+          "minimum": 1,
+          "title": "Shingle Count",
+          "type": "integer"
+        },
+        "similarity_fingerprint": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Similarity Fingerprint",
+          "type": "string"
+        },
+        "task_draft_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "token_count": {
+          "maximum": 10000000,
+          "minimum": 1,
+          "title": "Token Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item_id",
+        "task_draft_ref",
+        "r4_task_contract_set_ref",
+        "exact_task_sha256",
+        "similarity_fingerprint",
+        "token_count",
+        "shingle_count",
+        "policy_ref",
+        "fingerprint_sha256",
+        "audit"
+      ],
+      "title": "TaskDuplicateFingerprintV2",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/duplicate_detection_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_fingerprints": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AttachmentDuplicateFingerprintV2"
+      },
+      "title": "Attachment Fingerprints",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "duplicate_clusters": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DuplicateClusterV2"
+      },
+      "title": "Duplicate Clusters",
+      "type": "array"
+    },
+    "duplicate_detection_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Duplicate Detection Result Id",
+      "type": "string"
+    },
+    "duplicate_pairs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DuplicatePairEvidenceV2"
+      },
+      "title": "Duplicate Pairs",
+      "type": "array"
+    },
+    "evaluated_attachment_pair_count": {
+      "minimum": 0,
+      "title": "Evaluated Attachment Pair Count",
+      "type": "integer"
+    },
+    "evaluated_task_pair_count": {
+      "minimum": 0,
+      "title": "Evaluated Task Pair Count",
+      "type": "integer"
+    },
+    "item_quality_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Item Quality Result Refs",
+      "type": "array"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "duplicate-detection/r7-01-v1",
+      "default": "duplicate-detection/r7-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "resolved_job_work_graph_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/duplicate-detection-result/v2",
+      "default": "eval-factory/duplicate-detection-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_fingerprints": {
+      "items": {
+        "$ref": "#/$defs/TaskDuplicateFingerprintV2"
+      },
+      "minItems": 1,
+      "title": "Task Fingerprints",
+      "type": "array"
+    },
+    "unsupported_attachment_count": {
+      "minimum": 0,
+      "title": "Unsupported Attachment Count",
+      "type": "integer"
+    },
+    "unsupported_attachment_subject_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Unsupported Attachment Subject Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "duplicate_detection_result_id",
+    "resolved_job_work_graph_ref",
+    "policy_ref",
+    "item_quality_result_refs",
+    "task_fingerprints",
+    "evaluated_task_pair_count",
+    "evaluated_attachment_pair_count",
+    "unsupported_attachment_count",
+    "result_sha256",
+    "audit"
+  ],
+  "title": "DuplicateDetectionResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.duplicate_v2.DuplicateDetectionResultV2",
+  "x-schema-version": "eval-factory/duplicate-detection-result/v2"
+}

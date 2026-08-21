@@ -1,0 +1,42 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/source_span_ref.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approximate": {
+      "default": false,
+      "title": "Approximate",
+      "type": "boolean"
+    },
+    "raw_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/source-span-ref/v1",
+      "default": "eval-factory/source-span-ref/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_trace_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Trace Id",
+      "type": "string"
+    },
+    "span_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Span Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "span_id",
+    "source_trace_id",
+    "raw_sha256"
+  ],
+  "title": "SourceSpanRef",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.core.SourceSpanRef",
+  "x-schema-version": "eval-factory/source-span-ref/v1"
+}

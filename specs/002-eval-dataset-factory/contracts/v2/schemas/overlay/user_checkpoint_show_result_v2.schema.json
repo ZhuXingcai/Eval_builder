@@ -1,0 +1,1261 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EnvironmentAlternative": {
+      "additionalProperties": false,
+      "properties": {
+        "blocking_reason": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Blocking Reason"
+        },
+        "capability_impact": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Capability Impact",
+          "type": "string"
+        },
+        "feasible": {
+          "title": "Feasible",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "eval-factory/environment-alternative/v2",
+          "default": "eval-factory/environment-alternative/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "strategy": {
+          "$ref": "#/$defs/EnvironmentStrategyChoice"
+        }
+      },
+      "required": [
+        "strategy",
+        "feasible",
+        "capability_impact"
+      ],
+      "title": "EnvironmentAlternative",
+      "type": "object"
+    },
+    "EnvironmentRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Affected Subject Refs",
+          "type": "array"
+        },
+        "alternatives": {
+          "items": {
+            "$ref": "#/$defs/EnvironmentAlternative"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Alternatives",
+          "type": "array"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "requirement_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "requires_nonstandard_environment": {
+          "title": "Requires Nonstandard Environment",
+          "type": "boolean"
+        },
+        "requires_special_account": {
+          "title": "Requires Special Account",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "eval-factory/environment-requirement/v2",
+          "default": "eval-factory/environment-requirement/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "affected_subject_refs",
+        "description",
+        "requires_special_account",
+        "requires_nonstandard_environment",
+        "evidence_refs",
+        "alternatives"
+      ],
+      "title": "EnvironmentRequirement",
+      "type": "object"
+    },
+    "EnvironmentStrategy": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "credential_fabrication_forbidden": {
+          "const": true,
+          "default": true,
+          "title": "Credential Fabrication Forbidden",
+          "type": "boolean"
+        },
+        "environment_strategy_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Environment Strategy Id",
+          "type": "string"
+        },
+        "query_packaging_options": {
+          "items": {
+            "$ref": "#/$defs/QueryPackagingChoice"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Query Packaging Options",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "recommendation_reason": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recommendation Reason"
+        },
+        "recommended_strategy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EnvironmentStrategyChoice"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "requirements": {
+          "items": {
+            "$ref": "#/$defs/EnvironmentRequirement"
+          },
+          "minItems": 1,
+          "title": "Requirements",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/environment-strategy/v2",
+          "default": "eval-factory/environment-strategy/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "environment_strategy_id",
+        "requirements",
+        "query_packaging_options",
+        "audit"
+      ],
+      "title": "EnvironmentStrategy",
+      "type": "object"
+    },
+    "EnvironmentStrategyChoice": {
+      "enum": [
+        "TRACE_FAITHFUL_MOCK",
+        "REWRITE_STANDARD_ENV",
+        "EXCLUDE_TASK"
+      ],
+      "title": "EnvironmentStrategyChoice",
+      "type": "string"
+    },
+    "EvidencePolarity": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "UNCERTAINTY",
+        "CONTRADICTION"
+      ],
+      "title": "EvidencePolarity",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "capability_complete": {
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Ref Id",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/EvidencePolarity"
+        },
+        "schema_version": {
+          "const": "eval-factory/evidence-ref/v1",
+          "default": "eval-factory/evidence-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_spans": {
+          "items": {
+            "$ref": "#/$defs/SourceSpanRef"
+          },
+          "minItems": 1,
+          "title": "Source Spans",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "subject_ref",
+        "source_spans",
+        "polarity",
+        "capability",
+        "capability_complete"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ExampleKind": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "AMBIGUOUS",
+        "ABSTAIN",
+        "REWRITE"
+      ],
+      "title": "ExampleKind",
+      "type": "string"
+    },
+    "FinalDatasetReviewPreviewV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "automated_hard_gates_passed": {
+          "const": true,
+          "default": true,
+          "title": "Automated Hard Gates Passed",
+          "type": "boolean"
+        },
+        "dataset_projection_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "open_low_severity_finding_count": {
+          "minimum": 0,
+          "title": "Open Low Severity Finding Count",
+          "type": "integer"
+        },
+        "open_low_severity_finding_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Open Low Severity Finding Refs",
+          "type": "array"
+        },
+        "preview_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Preview Id",
+          "type": "string"
+        },
+        "preview_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Preview Sha256",
+          "type": "string"
+        },
+        "projection_policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Projection Policy Version",
+          "type": "string"
+        },
+        "prompt_count": {
+          "minimum": 0,
+          "title": "Prompt Count",
+          "type": "integer"
+        },
+        "prompt_projection_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Prompt Projection Refs",
+          "type": "array"
+        },
+        "quality_summary_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Quality Summary Refs",
+          "type": "array"
+        },
+        "sample_navigation_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Sample Navigation Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/final-dataset-review-preview/v2",
+          "default": "eval-factory/final-dataset-review-preview/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/FinalReviewScope"
+        },
+        "selected_item_count": {
+          "minimum": 0,
+          "title": "Selected Item Count",
+          "type": "integer"
+        },
+        "selected_item_projection_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Selected Item Projection Refs",
+          "type": "array"
+        },
+        "subject_count": {
+          "minimum": 1,
+          "title": "Subject Count",
+          "type": "integer"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "preview_id",
+        "scope",
+        "subject_refs",
+        "quality_summary_refs",
+        "subject_count",
+        "prompt_count",
+        "selected_item_count",
+        "open_low_severity_finding_count",
+        "projection_policy_version",
+        "preview_sha256",
+        "audit"
+      ],
+      "title": "FinalDatasetReviewPreviewV2",
+      "type": "object"
+    },
+    "FinalReviewScope": {
+      "enum": [
+        "NONE",
+        "PROMPTS",
+        "SELECTED_ITEMS",
+        "FULL_DATASET"
+      ],
+      "title": "FinalReviewScope",
+      "type": "string"
+    },
+    "JobStatus": {
+      "enum": [
+        "CREATED",
+        "RUNNING",
+        "BLOCKED",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "title": "JobStatus",
+      "type": "string"
+    },
+    "LabelPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_rules": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Abstain Rules",
+          "type": "array"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "blind_spots": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Blind Spots",
+          "type": "array"
+        },
+        "boundary": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Boundary",
+          "type": "string"
+        },
+        "deterministic_clause_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Deterministic Clause Refs",
+          "type": "array"
+        },
+        "estimated_model_requests_per_trace": {
+          "minimum": 0,
+          "title": "Estimated Model Requests Per Trace",
+          "type": "integer"
+        },
+        "examples": {
+          "items": {
+            "$ref": "#/$defs/PlanExample"
+          },
+          "minItems": 4,
+          "title": "Examples",
+          "type": "array"
+        },
+        "expected_model_path": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Expected Model Path",
+          "type": "array"
+        },
+        "intent": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Intent",
+          "type": "string"
+        },
+        "label_plan_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Label Plan Id",
+          "type": "string"
+        },
+        "label_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-plan/v2",
+          "default": "eval-factory/label-plan/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_clause_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Semantic Clause Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "label_plan_id",
+        "label_spec_ref",
+        "intent",
+        "boundary",
+        "deterministic_clause_refs",
+        "semantic_clause_refs",
+        "examples",
+        "abstain_rules",
+        "expected_model_path",
+        "estimated_model_requests_per_trace",
+        "blind_spots",
+        "audit"
+      ],
+      "title": "LabelPlan",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PlanExample": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "example_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Example Id",
+          "type": "string"
+        },
+        "expected_treatment": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Expected Treatment",
+          "type": "string"
+        },
+        "input_summary": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Input Summary",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ExampleKind"
+        },
+        "schema_version": {
+          "const": "eval-factory/plan-example/v2",
+          "default": "eval-factory/plan-example/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "example_id",
+        "kind",
+        "input_summary",
+        "expected_treatment"
+      ],
+      "title": "PlanExample",
+      "type": "object"
+    },
+    "QueryPackagingChoice": {
+      "enum": [
+        "INCLUDE_QUERY_YAML",
+        "OMIT_QUERY_YAML",
+        "ASK_PER_TASK"
+      ],
+      "title": "QueryPackagingChoice",
+      "type": "string"
+    },
+    "RewriteFidelity": {
+      "enum": [
+        "TRACE_FAITHFUL",
+        "CAPABILITY_PRESERVING",
+        "STANDARD_ENVIRONMENT"
+      ],
+      "title": "RewriteFidelity",
+      "type": "string"
+    },
+    "SourceSpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-span-ref/v1",
+          "default": "eval-factory/source-span-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "SourceSpanRef",
+      "type": "object"
+    },
+    "TaskRewriteExamplePreviewV2": {
+      "additionalProperties": false,
+      "properties": {
+        "example_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Example Id",
+          "type": "string"
+        },
+        "expected_treatment": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Expected Treatment",
+          "type": "string"
+        },
+        "input_summary": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Input Summary",
+          "type": "string"
+        },
+        "kind": {
+          "const": "REWRITE",
+          "default": "REWRITE",
+          "title": "Kind",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/task-rewrite-example-preview/v2",
+          "default": "eval-factory/task-rewrite-example-preview/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "example_id",
+        "input_summary",
+        "expected_treatment"
+      ],
+      "title": "TaskRewriteExamplePreviewV2",
+      "type": "object"
+    },
+    "TaskRewritePlanPreviewV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "examples": {
+          "items": {
+            "$ref": "#/$defs/TaskRewriteExamplePreviewV2"
+          },
+          "minItems": 1,
+          "title": "Examples",
+          "type": "array"
+        },
+        "expected_capability_impact": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Expected Capability Impact",
+          "type": "string"
+        },
+        "fidelity": {
+          "$ref": "#/$defs/RewriteFidelity"
+        },
+        "forbidden_content_rules": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Forbidden Content Rules",
+          "type": "array"
+        },
+        "operational_noise_policy": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Operational Noise Policy",
+          "type": "string"
+        },
+        "preview_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Preview Id",
+          "type": "string"
+        },
+        "preview_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Preview Sha256",
+          "type": "string"
+        },
+        "projection_policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Projection Policy Version",
+          "type": "string"
+        },
+        "rewrite_style": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Rewrite Style",
+          "type": "string"
+        },
+        "safety_gate_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/task-rewrite-plan-preview/v2",
+          "default": "eval-factory/task-rewrite-plan-preview/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_plan_version_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "target_capability": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Target Capability",
+          "type": "string"
+        }
+      },
+      "required": [
+        "preview_id",
+        "source_plan_version_ref",
+        "target_capability",
+        "rewrite_style",
+        "fidelity",
+        "operational_noise_policy",
+        "examples",
+        "forbidden_content_rules",
+        "expected_capability_impact",
+        "safety_gate_ref",
+        "projection_policy_version",
+        "preview_sha256",
+        "audit"
+      ],
+      "title": "TaskRewritePlanPreviewV2",
+      "type": "object"
+    },
+    "UserApprovalRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_stages": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Affected Stages",
+          "type": "array"
+        },
+        "approval_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "available_decisions": {
+          "items": {
+            "$ref": "#/$defs/UserDecision"
+          },
+          "title": "Available Decisions",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "checkpoint": {
+          "$ref": "#/$defs/ApprovalCheckpoint"
+        },
+        "idempotency_key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "plan_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "preview_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Preview Refs",
+          "type": "array"
+        },
+        "projection_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "request_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "requested_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Requested By",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/user-approval-request/v2",
+          "default": "eval-factory/user-approval-request/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "subject_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Subject Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "request_id",
+        "checkpoint",
+        "requested_by",
+        "approval_policy_ref",
+        "subject_refs",
+        "plan_ref",
+        "projection_ref",
+        "preview_refs",
+        "available_decisions",
+        "affected_stages",
+        "idempotency_key",
+        "audit"
+      ],
+      "title": "UserApprovalRequest",
+      "type": "object"
+    },
+    "UserCheckpointInteractionStateV2": {
+      "enum": [
+        "PENDING_DECISION",
+        "RESUMABLE",
+        "WAITING_REVISION",
+        "WAITING_REVALIDATION",
+        "DEFERRED",
+        "RESUMED",
+        "TERMINATED",
+        "SUPERSEDED"
+      ],
+      "title": "UserCheckpointInteractionStateV2",
+      "type": "string"
+    },
+    "UserCheckpointInteractionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "application_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "chain_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Chain Id",
+          "type": "string"
+        },
+        "checkpoint": {
+          "$ref": "#/$defs/ApprovalCheckpoint"
+        },
+        "decision_commit_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "interaction_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Interaction Id",
+          "type": "string"
+        },
+        "interaction_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Interaction Sha256",
+          "type": "string"
+        },
+        "interaction_version": {
+          "minimum": 1,
+          "title": "Interaction Version",
+          "type": "integer"
+        },
+        "job_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Job Id",
+          "type": "string"
+        },
+        "job_status": {
+          "$ref": "#/$defs/JobStatus"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "predecessor_interaction_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "presentation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "request_compilation_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/user-checkpoint-interaction/v2",
+          "default": "eval-factory/user-checkpoint-interaction/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_context_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "state": {
+          "$ref": "#/$defs/UserCheckpointInteractionStateV2"
+        }
+      },
+      "required": [
+        "interaction_id",
+        "job_id",
+        "chain_id",
+        "interaction_version",
+        "checkpoint",
+        "request_compilation_ref",
+        "request_ref",
+        "presentation_ref",
+        "source_context_ref",
+        "state",
+        "job_status",
+        "occurred_at",
+        "policy_ref",
+        "interaction_sha256",
+        "audit"
+      ],
+      "title": "UserCheckpointInteractionV2",
+      "type": "object"
+    },
+    "UserCheckpointPresentationV2": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "checkpoint": {
+          "$ref": "#/$defs/ApprovalCheckpoint"
+        },
+        "environment_strategy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EnvironmentStrategy"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "final_dataset_review_preview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FinalDatasetReviewPreviewV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "job_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Job Id",
+          "type": "string"
+        },
+        "label_plan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LabelPlan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "presentation_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Presentation Id",
+          "type": "string"
+        },
+        "presentation_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Presentation Sha256",
+          "type": "string"
+        },
+        "request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/user-checkpoint-presentation/v2",
+          "default": "eval-factory/user-checkpoint-presentation/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "task_rewrite_preview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TaskRewritePlanPreviewV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "presentation_id",
+        "job_id",
+        "request_ref",
+        "checkpoint",
+        "presentation_sha256",
+        "audit"
+      ],
+      "title": "UserCheckpointPresentationV2",
+      "type": "object"
+    },
+    "UserDecision": {
+      "enum": [
+        "ACCEPT",
+        "ADJUST",
+        "REJECT",
+        "REQUEST_MORE_EXAMPLES",
+        "DEFER"
+      ],
+      "title": "UserDecision",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/user_checkpoint_show_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "interaction": {
+      "$ref": "#/$defs/UserCheckpointInteractionV2"
+    },
+    "presentation": {
+      "$ref": "#/$defs/UserCheckpointPresentationV2"
+    },
+    "request": {
+      "$ref": "#/$defs/UserApprovalRequest"
+    },
+    "schema_version": {
+      "const": "eval-factory/user-checkpoint-show-result/v2",
+      "default": "eval-factory/user-checkpoint-show-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "interaction",
+    "request",
+    "presentation"
+  ],
+  "title": "UserCheckpointShowResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointShowResultV2",
+  "x-schema-version": "eval-factory/user-checkpoint-show-result/v2"
+}

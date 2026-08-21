@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "NonModelResourceVectorV2": {
+      "additionalProperties": false,
+      "properties": {
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 0,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 0,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/non-model-resource-vector/v2",
+          "default": "eval-factory/non-model-resource-vector/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "storage_bytes": {
+          "minimum": 0,
+          "title": "Storage Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "processes",
+        "renderers",
+        "network_requests",
+        "storage_bytes"
+      ],
+      "title": "NonModelResourceVectorV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/r6_canary_control_plane_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "policy_version": {
+      "const": "r6-canary-execution/r6-parent-v1",
+      "default": "r6-canary-execution/r6-parent-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "resource_capacity": {
+      "$ref": "#/$defs/NonModelResourceVectorV2"
+    },
+    "resource_domain_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/r6-canary-control-plane/v2",
+      "default": "eval-factory/r6-canary-control-plane/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "worker_principal_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "worker_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Worker Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "resource_domain_ref",
+    "resource_capacity",
+    "worker_principal_ref",
+    "worker_version"
+  ],
+  "title": "R6CanaryControlPlaneV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_execution_v2.R6CanaryControlPlaneV2",
+  "x-schema-version": "eval-factory/r6-canary-control-plane/v2"
+}

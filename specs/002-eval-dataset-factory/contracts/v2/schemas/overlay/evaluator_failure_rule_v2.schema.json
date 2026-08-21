@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "EvaluationFailureClass": {
+      "enum": [
+        "CONTESTANT_FAILURE",
+        "EVALUATOR_FAILURE",
+        "ENVIRONMENT_FAILURE",
+        "INDETERMINATE"
+      ],
+      "title": "EvaluationFailureClass",
+      "type": "string"
+    },
+    "EvaluatorFailureSignalV2": {
+      "enum": [
+        "CONTESTANT_OUTPUT_MISSING",
+        "CONTESTANT_OUTPUT_CONTRACT_VIOLATION",
+        "EVALUATOR_TIMEOUT",
+        "EVALUATOR_RUNTIME_FAILURE",
+        "EVALUATOR_OUTPUT_CONTRACT_VIOLATION",
+        "ENVIRONMENT_STARTUP_FAILURE",
+        "ENVIRONMENT_RUNTIME_FAILURE",
+        "REQUIRED_ENVIRONMENT_CAPABILITY_MISSING",
+        "INSUFFICIENT_OBSERVATION",
+        "CONFLICTING_FAILURE_SIGNALS"
+      ],
+      "title": "EvaluatorFailureSignalV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/evaluator_failure_rule_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "failure_class": {
+      "$ref": "#/$defs/EvaluationFailureClass"
+    },
+    "rule_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "rule_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Rule Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/evaluator-failure-rule/v2",
+      "default": "eval-factory/evaluator-failure-rule/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "signal": {
+      "$ref": "#/$defs/EvaluatorFailureSignalV2"
+    }
+  },
+  "required": [
+    "rule_id",
+    "signal",
+    "failure_class",
+    "rule_sha256"
+  ],
+  "title": "EvaluatorFailureRuleV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.EvaluatorFailureRuleV2",
+  "x-schema-version": "eval-factory/evaluator-failure-rule/v2"
+}

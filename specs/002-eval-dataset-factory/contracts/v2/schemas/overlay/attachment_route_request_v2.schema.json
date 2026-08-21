@@ -1,0 +1,184 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ReconstructionMode": {
+      "enum": [
+        "TRACE_RICH",
+        "SKELETON_GUIDED",
+        "PROMPT_ONLY",
+        "BLOCKED"
+      ],
+      "title": "ReconstructionMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_route_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approved_provider_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Approved Provider Ids",
+      "type": "array"
+    },
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "asset_type": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+      "title": "Asset Type",
+      "type": "string"
+    },
+    "build_contract_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "criticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "Criticality",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "media_type": {
+      "maxLength": 255,
+      "minLength": 3,
+      "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+      "title": "Media Type",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ReconstructionMode"
+    },
+    "provider_payload_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "require_runtime_resume": {
+      "title": "Require Runtime Resume",
+      "type": "boolean"
+    },
+    "required_provider_capability_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Required Provider Capability Ids",
+      "type": "array"
+    },
+    "required_runtime_tools": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Required Runtime Tools",
+      "type": "array"
+    },
+    "route_request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Route Request Id",
+      "type": "string"
+    },
+    "route_request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Route Request Sha256",
+      "type": "string"
+    },
+    "routing_policy_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "runtime_order": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Runtime Order",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-route-request/v2",
+      "default": "env-mock-agent/attachment-route-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "route_request_id",
+    "artifact_id",
+    "build_contract_ref",
+    "routing_policy_ref",
+    "asset_type",
+    "media_type",
+    "mode",
+    "criticality",
+    "approved_provider_ids",
+    "required_provider_capability_ids",
+    "runtime_order",
+    "required_runtime_tools",
+    "require_runtime_resume",
+    "idempotency_key",
+    "route_request_sha256"
+  ],
+  "title": "AttachmentRouteRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.routing_v2.AttachmentRouteRequestV2",
+  "x-schema-version": "env-mock-agent/attachment-route-request/v2"
+}

@@ -1,0 +1,291 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "NonModelResourceVectorV2": {
+      "additionalProperties": false,
+      "properties": {
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 0,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 0,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/non-model-resource-vector/v2",
+          "default": "eval-factory/non-model-resource-vector/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "storage_bytes": {
+          "minimum": 0,
+          "title": "Storage Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "processes",
+        "renderers",
+        "network_requests",
+        "storage_bytes"
+      ],
+      "title": "NonModelResourceVectorV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ResourceUsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "observed": {
+          "$ref": "#/$defs/NonModelResourceVectorV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/resource-usage/v2",
+          "default": "eval-factory/resource-usage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "usage_policy_version": {
+          "const": "resource-control/r6-04-v1",
+          "default": "resource-control/r6-04-v1",
+          "title": "Usage Policy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observed"
+      ],
+      "title": "ResourceUsageV2",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    },
+    "WorkResourceEventKindV2": {
+      "enum": [
+        "COMPLETED_RELEASED",
+        "RELEASE_PENDING_TERMINATION",
+        "TERMINATED_RELEASED",
+        "QUARANTINED"
+      ],
+      "title": "WorkResourceEventKindV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/work_resource_event_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "charged_usage": {
+      "$ref": "#/$defs/ResourceUsageV2"
+    },
+    "event_kind": {
+      "$ref": "#/$defs/WorkResourceEventKindV2"
+    },
+    "policy_version": {
+      "const": "resource-control/r6-04-v1",
+      "default": "resource-control/r6-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "released_capacity": {
+      "$ref": "#/$defs/NonModelResourceVectorV2"
+    },
+    "reservation_version": {
+      "minimum": 1,
+      "title": "Reservation Version",
+      "type": "integer"
+    },
+    "resource_termination_request_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "resource_termination_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "eval-factory/work-resource-event/v2",
+      "default": "eval-factory/work-resource-event/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "work_lease_event_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "work_resource_event_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Work Resource Event Id",
+      "type": "string"
+    },
+    "work_resource_event_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Resource Event Sha256",
+      "type": "string"
+    },
+    "work_resource_reservation_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "work_resource_event_id",
+    "work_resource_reservation_ref",
+    "work_lease_event_ref",
+    "event_kind",
+    "reservation_version",
+    "charged_usage",
+    "released_capacity",
+    "work_resource_event_sha256",
+    "audit"
+  ],
+  "title": "WorkResourceEventV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.resource_v2.WorkResourceEventV2",
+  "x-schema-version": "eval-factory/work-resource-event/v2"
+}

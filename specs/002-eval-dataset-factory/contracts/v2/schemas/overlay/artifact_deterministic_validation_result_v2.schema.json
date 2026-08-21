@@ -1,0 +1,809 @@
+{
+  "$defs": {
+    "ArtifactDeterministicValidationOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "REQUIRES_REPAIR",
+        "REJECTED",
+        "BLOCKED"
+      ],
+      "title": "ArtifactDeterministicValidationOutcomeV2",
+      "type": "string"
+    },
+    "AttachmentInventoryMemberTypeV2": {
+      "enum": [
+        "DIRECTORY",
+        "FILE",
+        "NESTED_MEMBER"
+      ],
+      "title": "AttachmentInventoryMemberTypeV2",
+      "type": "string"
+    },
+    "AttachmentInventoryMemberV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "container_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "inventory_member_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Inventory Member Id",
+          "type": "string"
+        },
+        "inventory_member_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Inventory Member Sha256",
+          "type": "string"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "member_type": {
+          "$ref": "#/$defs/AttachmentInventoryMemberTypeV2"
+        },
+        "normalized_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Normalized Path",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-inventory-member/v2",
+          "default": "env-mock-agent/attachment-inventory-member/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "inventory_member_id",
+        "artifact_id",
+        "output_ref",
+        "normalized_path",
+        "member_type",
+        "size_bytes",
+        "inventory_member_sha256"
+      ],
+      "title": "AttachmentInventoryMemberV2",
+      "type": "object"
+    },
+    "AttachmentValidationFailureCodeV2": {
+      "enum": [
+        "MATERIAL_NOT_FOUND",
+        "MATERIAL_MISMATCH",
+        "OUTPUT_MISSING",
+        "OUTPUT_HASH_MISMATCH",
+        "OUTPUT_PATH_VIOLATION",
+        "SYMLINK_UNSUPPORTED",
+        "PACKAGE_PATH_INVALID",
+        "PACKAGE_PATH_COLLISION",
+        "CONTAINER_ENCRYPTED",
+        "CONTAINER_TRUNCATED",
+        "CONTAINER_UNSUPPORTED",
+        "CONTENT_UNSCANNABLE",
+        "SCAN_LIMIT_EXCEEDED",
+        "INVALID_CONFIGURED_PII_RULE",
+        "UNKNOWN_FINGERPRINT_NORMALIZATION",
+        "VALIDATOR_UNAVAILABLE",
+        "VALIDATOR_FAILED",
+        "LEGACY_FINDING_UNMAPPED",
+        "IDEMPOTENCY_CONFLICT"
+      ],
+      "title": "AttachmentValidationFailureCodeV2",
+      "type": "string"
+    },
+    "AttachmentValidationFindingCategoryV2": {
+      "enum": [
+        "STRUCTURE",
+        "COVERAGE",
+        "EXECUTABILITY",
+        "SECURITY",
+        "PRIVACY",
+        "ANSWER_LEAKAGE",
+        "METADATA",
+        "PACKAGE",
+        "TRACEABILITY"
+      ],
+      "title": "AttachmentValidationFindingCategoryV2",
+      "type": "string"
+    },
+    "AttachmentValidationFindingCodeV2": {
+      "enum": [
+        "OUTPUT_EMPTY",
+        "FORMAT_INVALID",
+        "CONTENT_CONTRACT_VIOLATION",
+        "RENDER_CONTRACT_VIOLATION",
+        "SECRET_DETECTED",
+        "CONFIGURED_PII_DETECTED",
+        "RESTRICTED_FINGERPRINT_MATCH",
+        "FORBIDDEN_OUTPUT_MATCH",
+        "METADATA_POLICY_VIOLATION",
+        "LINEAGE_INCOMPLETE"
+      ],
+      "title": "AttachmentValidationFindingCodeV2",
+      "type": "string"
+    },
+    "AttachmentValidationFindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/$defs/AttachmentValidationFindingCategoryV2"
+        },
+        "code": {
+          "$ref": "#/$defs/AttachmentValidationFindingCodeV2"
+        },
+        "finding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "finding_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Finding Sha256",
+          "type": "string"
+        },
+        "inventory_member_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inventory Member Id"
+        },
+        "matched_fingerprint_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Matched Fingerprint Ids",
+          "type": "array"
+        },
+        "non_waivable": {
+          "title": "Non Waivable",
+          "type": "boolean"
+        },
+        "rule_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-validation-finding/v2",
+          "default": "env-mock-agent/attachment-validation-finding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/AttachmentValidationSeverityV2"
+        },
+        "subject_output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        }
+      },
+      "required": [
+        "finding_id",
+        "artifact_id",
+        "subject_output_ref",
+        "severity",
+        "category",
+        "code",
+        "non_waivable",
+        "finding_sha256"
+      ],
+      "title": "AttachmentValidationFindingV2",
+      "type": "object"
+    },
+    "AttachmentValidationFingerprintCategoryV2": {
+      "enum": [
+        "FINAL_ANSWER",
+        "COMPLETED_DELIVERABLE",
+        "PRIVATE_REFERENCE",
+        "GRADER_RULE",
+        "HIDDEN_PASS_CONDITION",
+        "HIDDEN_SELECTION_SIGNAL",
+        "TRAJECTORY_SPECIFIC_STEP"
+      ],
+      "title": "AttachmentValidationFingerprintCategoryV2",
+      "type": "string"
+    },
+    "AttachmentValidationResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "complete_leakage_categories": {
+          "items": {
+            "$ref": "#/$defs/AttachmentValidationFingerprintCategoryV2"
+          },
+          "title": "Complete Leakage Categories",
+          "type": "array"
+        },
+        "executed_validator_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Executed Validator Ids",
+          "type": "array"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttachmentValidationFailureCodeV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "findings": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AttachmentValidationFindingV2"
+          },
+          "title": "Findings",
+          "type": "array"
+        },
+        "inventory_complete": {
+          "title": "Inventory Complete",
+          "type": "boolean"
+        },
+        "inventory_members": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AttachmentInventoryMemberV2"
+          },
+          "title": "Inventory Members",
+          "type": "array"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "output_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Output Sha256",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "attachment-validation/r5-08-v1",
+          "default": "attachment-validation/r5-08-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "required_validator_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Required Validator Ids",
+          "type": "array"
+        },
+        "scan_complete": {
+          "title": "Scan Complete",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-validation-result/v2",
+          "default": "env-mock-agent/attachment-validation-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/AttachmentValidationStatusV2"
+        },
+        "validation_request_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "validation_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Validation Result Id",
+          "type": "string"
+        },
+        "validation_result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Validation Result Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "validation_result_id",
+        "validation_request_ref",
+        "artifact_id",
+        "output_ref",
+        "output_sha256",
+        "status",
+        "executed_validator_ids",
+        "required_validator_ids",
+        "complete_leakage_categories",
+        "inventory_complete",
+        "scan_complete",
+        "validation_result_sha256"
+      ],
+      "title": "AttachmentValidationResultV2",
+      "type": "object"
+    },
+    "AttachmentValidationSeverityV2": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "AttachmentValidationSeverityV2",
+      "type": "string"
+    },
+    "AttachmentValidationStatusV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "BLOCKED"
+      ],
+      "title": "AttachmentValidationStatusV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "DeterministicValidationFindingCategoryV2": {
+      "enum": [
+        "STRUCTURE",
+        "COVERAGE",
+        "EXECUTABILITY",
+        "SECURITY",
+        "PRIVACY",
+        "ANSWER_LEAKAGE",
+        "METADATA",
+        "PACKAGE",
+        "TRACEABILITY"
+      ],
+      "title": "DeterministicValidationFindingCategoryV2",
+      "type": "string"
+    },
+    "DeterministicValidationFindingCodeV2": {
+      "enum": [
+        "OUTPUT_EMPTY",
+        "FORMAT_INVALID",
+        "CONTENT_CONTRACT_VIOLATION",
+        "RENDER_CONTRACT_VIOLATION",
+        "SECRET_DETECTED",
+        "CONFIGURED_PII_DETECTED",
+        "RESTRICTED_FINGERPRINT_MATCH",
+        "FORBIDDEN_OUTPUT_MATCH",
+        "METADATA_POLICY_VIOLATION",
+        "LINEAGE_INCOMPLETE"
+      ],
+      "title": "DeterministicValidationFindingCodeV2",
+      "type": "string"
+    },
+    "DeterministicValidationFindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_build_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "category": {
+          "$ref": "#/$defs/DeterministicValidationFindingCategoryV2"
+        },
+        "code": {
+          "$ref": "#/$defs/DeterministicValidationFindingCodeV2"
+        },
+        "facade_finding_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "facade_validation_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "finding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "finding_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Finding Sha256",
+          "type": "string"
+        },
+        "inventory_member_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "matched_fingerprint_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Matched Fingerprint Ids",
+          "type": "array"
+        },
+        "non_waivable": {
+          "title": "Non Waivable",
+          "type": "boolean"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "policy_version": {
+          "const": "deterministic-validation/r5-08-v1",
+          "default": "deterministic-validation/r5-08-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "rule_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/deterministic-validation-finding/v2",
+          "default": "eval-factory/deterministic-validation-finding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "status": {
+          "const": "OPEN",
+          "default": "OPEN",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "artifact_build_result_ref",
+        "output_ref",
+        "facade_validation_result_ref",
+        "facade_finding_ref",
+        "severity",
+        "category",
+        "code",
+        "non_waivable",
+        "finding_sha256",
+        "audit"
+      ],
+      "title": "DeterministicValidationFindingV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "Severity": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/artifact_deterministic_validation_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_build_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "artifact_validation_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Validation Result Id",
+      "type": "string"
+    },
+    "artifact_validation_result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Artifact Validation Result Sha256",
+      "type": "string"
+    },
+    "attachment_reconstruction_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "build_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "facade_validation_request_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "facade_validation_result": {
+      "$ref": "#/$defs/AttachmentValidationResultV2"
+    },
+    "finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Finding Refs",
+      "type": "array"
+    },
+    "findings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/DeterministicValidationFindingV2"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "inventory_members": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AttachmentInventoryMemberV2"
+      },
+      "title": "Inventory Members",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/ArtifactDeterministicValidationOutcomeV2"
+    },
+    "output_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "output_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "deterministic-validation/r5-08-v1",
+      "default": "deterministic-validation/r5-08-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/artifact-deterministic-validation-result/v2",
+      "default": "eval-factory/artifact-deterministic-validation-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_validation_result_id",
+    "attachment_reconstruction_result_ref",
+    "artifact_build_result_ref",
+    "build_spec_ref",
+    "output_ref",
+    "output_sha256",
+    "facade_validation_request_ref",
+    "facade_validation_result",
+    "outcome",
+    "artifact_validation_result_sha256",
+    "audit"
+  ],
+  "title": "ArtifactDeterministicValidationResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.validation_v2.ArtifactDeterministicValidationResultV2",
+  "x-schema-version": "eval-factory/artifact-deterministic-validation-result/v2"
+}

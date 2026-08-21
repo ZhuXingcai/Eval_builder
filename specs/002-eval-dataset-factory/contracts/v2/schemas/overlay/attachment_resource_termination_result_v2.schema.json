@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "AttachmentResourceTerminationOutcomeV2": {
+      "enum": [
+        "TERMINATED",
+        "ALREADY_STOPPED",
+        "UNSUPPORTED_CAPABILITY",
+        "FAILED"
+      ],
+      "title": "AttachmentResourceTerminationOutcomeV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_resource_termination_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/AttachmentResourceTerminationOutcomeV2"
+    },
+    "policy_version": {
+      "const": "attachment-resource/r6-04-v1",
+      "default": "attachment-resource/r6-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-resource-termination-result/v2",
+      "default": "env-mock-agent/attachment-resource-termination-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "termination_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "termination_result_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Termination Result Id",
+      "type": "string"
+    },
+    "termination_result_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Termination Result Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "termination_result_id",
+    "termination_request_ref",
+    "outcome",
+    "completed_at",
+    "termination_result_sha256"
+  ],
+  "title": "AttachmentResourceTerminationResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.resource_v2.AttachmentResourceTerminationResultV2",
+  "x-schema-version": "env-mock-agent/attachment-resource-termination-result/v2"
+}

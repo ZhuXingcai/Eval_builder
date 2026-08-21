@@ -1,0 +1,57 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/trace_source_ref.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_name": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Adapter Name",
+      "type": "string"
+    },
+    "adapter_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Adapter Version",
+      "type": "string"
+    },
+    "processing_class": {
+      "const": "RESTRICTED_TRACE_RAW",
+      "title": "Processing Class",
+      "type": "string"
+    },
+    "raw_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/trace-source-ref/v1",
+      "default": "eval-factory/trace-source-ref/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_trace_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Trace Id",
+      "type": "string"
+    },
+    "source_uri": {
+      "maxLength": 1024,
+      "minLength": 3,
+      "title": "Source Uri",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_trace_id",
+    "source_uri",
+    "raw_sha256",
+    "adapter_name",
+    "adapter_version",
+    "processing_class"
+  ],
+  "title": "TraceSourceRef",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration.TraceSourceRef",
+  "x-schema-version": "eval-factory/trace-source-ref/v1"
+}

@@ -1,0 +1,46 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/typed_attribute.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Key",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/typed-attribute/v1",
+      "default": "eval-factory/typed-attribute/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Value"
+    }
+  },
+  "required": [
+    "key",
+    "value"
+  ],
+  "title": "TypedAttribute",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.core.TypedAttribute",
+  "x-schema-version": "eval-factory/typed-attribute/v1"
+}

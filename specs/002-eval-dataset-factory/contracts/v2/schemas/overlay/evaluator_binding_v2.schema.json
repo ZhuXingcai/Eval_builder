@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "EvaluatorExecutionModeV2": {
+      "enum": [
+        "DETERMINISTIC",
+        "MODEL",
+        "HUMAN_ONLY"
+      ],
+      "title": "EvaluatorExecutionModeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/evaluator_binding_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "binding_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Binding Sha256",
+      "type": "string"
+    },
+    "criterion_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Criterion Ids",
+      "type": "array"
+    },
+    "evaluator_binding_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Evaluator Binding Id",
+      "type": "string"
+    },
+    "evaluator_principal_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evaluator Principal Id"
+    },
+    "evaluator_type": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Evaluator Type",
+      "type": "string"
+    },
+    "evaluator_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Evaluator Version",
+      "type": "string"
+    },
+    "execution_mode": {
+      "$ref": "#/$defs/EvaluatorExecutionModeV2"
+    },
+    "input_contract_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "model_profile_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "output_contract_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reference_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Reference Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/evaluator-binding/v2",
+      "default": "eval-factory/evaluator-binding/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "timeout_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Timeout Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "evaluator_binding_id",
+    "criterion_ids",
+    "evaluator_type",
+    "execution_mode",
+    "evaluator_version",
+    "input_contract_ref",
+    "output_contract_ref",
+    "timeout_seconds",
+    "binding_sha256"
+  ],
+  "title": "EvaluatorBindingV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.EvaluatorBindingV2",
+  "x-schema-version": "eval-factory/evaluator-binding/v2"
+}

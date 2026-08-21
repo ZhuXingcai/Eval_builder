@@ -1,0 +1,1377 @@
+{
+  "coverage": {
+    "flow.completion_claim_signal": 24,
+    "flow.continuation_signal": 11,
+    "flow.pre_mutation_read": 15,
+    "parse.invalid_escape": 6,
+    "parse.invalid_response": 1,
+    "parse.invalid_unicode_escape": 3,
+    "parse.request_invalid_escape": 6,
+    "parse.request_invalid_unicode_escape": 3,
+    "parse.request_strict": 15,
+    "parse.strict_request": 15,
+    "size.large": 8,
+    "size.small": 6,
+    "tool.error_result": 23,
+    "tool.fetch": 9,
+    "tool.file_edit": 24,
+    "tool.file_read": 24,
+    "tool.file_write": 24,
+    "tool.powershell": 4,
+    "tool.search": 11,
+    "tool.truncation_signal": 14
+  },
+  "items": [
+    {
+      "instance_id": "LH_003",
+      "metadata": {
+        "business": "AgentPlan",
+        "category": "软件开发",
+        "pool_category": "软件开发",
+        "pool_id": "19"
+      },
+      "metrics": {
+        "completion_claim_signals": 94,
+        "continuation_signals": 10,
+        "error_results": 37,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "fetch": 2,
+          "file_edit": 233,
+          "file_read": 179,
+          "file_write": 123,
+          "powershell": 184,
+          "search": 9
+        },
+        "truncation_signals": 24
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\escape",
+          "position": 52923,
+          "status": "invalid_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "f0267f1d42dcbc579f24ef7ed3ce13dc4891cf450a0633dac78a9ea64939a4c7",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 3431039,
+      "source_ref": "raw_traj://LH_003",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_escape",
+        "parse.request_invalid_escape",
+        "size.large",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.powershell",
+        "tool.search",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_006",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "教育",
+        "pool_category": "教育",
+        "pool_id": "49"
+      },
+      "metrics": {
+        "completion_claim_signals": 6,
+        "continuation_signals": 0,
+        "error_results": 0,
+        "messages": 719,
+        "pre_mutation_reads": 53,
+        "tool_counts": {
+          "file_edit": 50,
+          "file_read": 73,
+          "file_write": 15
+        },
+        "truncation_signals": 13
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "7412c5a2a00c8c8f7a2c53958ea53a2cfd4e97164e3f04246496274118ca9f3f",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 1611632,
+      "source_ref": "raw_traj://LH_006",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "size.small",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_011",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "数据处理与分析",
+        "pool_category": "数据处理与分析",
+        "pool_id": "59"
+      },
+      "metrics": {
+        "completion_claim_signals": 4,
+        "continuation_signals": 8,
+        "error_results": 38,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "file_edit": 103,
+          "file_read": 100,
+          "file_write": 76
+        },
+        "truncation_signals": 4
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\escape",
+          "position": 28901,
+          "status": "invalid_escape"
+        },
+        "response": {
+          "message": "Invalid \\escape",
+          "position": 422,
+          "status": "invalid_escape"
+        }
+      },
+      "raw_sha256": "e8e8f9b5c159769ca8f037797587803ac987565888df0338e6edd6d3c02f1b55",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 2066007,
+      "source_ref": "raw_traj://LH_011",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_escape",
+        "parse.invalid_response",
+        "parse.request_invalid_escape",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_015",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "日常办公",
+        "pool_category": "日常办公",
+        "pool_id": "64"
+      },
+      "metrics": {
+        "completion_claim_signals": 2,
+        "continuation_signals": 0,
+        "error_results": 14,
+        "messages": 721,
+        "pre_mutation_reads": 37,
+        "tool_counts": {
+          "fetch": 1,
+          "file_edit": 27,
+          "file_read": 35,
+          "file_write": 51,
+          "search": 2
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "e8d3274b1a3779e4046f457c6b65b6139d947880ddc2eff4d50d9a0ff7aa25a1",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 1630365,
+      "source_ref": "raw_traj://LH_015",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "size.small",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search"
+      ]
+    },
+    {
+      "instance_id": "LH_019",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "内容创作与创意设计",
+        "pool_category": "内容创作与创意设计",
+        "pool_id": "81"
+      },
+      "metrics": {
+        "completion_claim_signals": 14,
+        "continuation_signals": 2,
+        "error_results": 8,
+        "messages": 1023,
+        "pre_mutation_reads": 41,
+        "tool_counts": {
+          "file_edit": 41,
+          "file_read": 51,
+          "file_write": 227
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "ef37d56ee4393397a61c3f64078a41baf094eb3854dc3af63beb205cb39eeace",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2762768,
+      "source_ref": "raw_traj://LH_019",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "size.large",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write"
+      ]
+    },
+    {
+      "instance_id": "LH_030",
+      "metadata": {
+        "business": "AgentPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "230"
+      },
+      "metrics": {
+        "completion_claim_signals": 1,
+        "continuation_signals": 0,
+        "error_results": 5,
+        "messages": 549,
+        "pre_mutation_reads": 89,
+        "tool_counts": {
+          "file_edit": 90,
+          "file_read": 31,
+          "file_write": 4
+        },
+        "truncation_signals": 3
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "f5c6fba8f4343e2c4854fc05d97eb940434b475a0dc14240b543dd398ec9e7aa",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 1312674,
+      "source_ref": "raw_traj://LH_030",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "size.small",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_032",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "医疗",
+        "pool_category": "医疗",
+        "pool_id": "233"
+      },
+      "metrics": {
+        "completion_claim_signals": 26,
+        "continuation_signals": 2,
+        "error_results": 49,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "fetch": 9,
+          "file_edit": 34,
+          "file_read": 32,
+          "file_write": 17,
+          "search": 9
+        },
+        "truncation_signals": 19
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\escape",
+          "position": 728324,
+          "status": "invalid_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "324eeee6a4116c2fdb0ace9bae010b45772c49185948ecb206ebd1b4efa910d1",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 2809114,
+      "source_ref": "raw_traj://LH_032",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_escape",
+        "parse.request_invalid_escape",
+        "size.large",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_035",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "数据处理与分析",
+        "pool_category": "数据处理与分析",
+        "pool_id": "239"
+      },
+      "metrics": {
+        "completion_claim_signals": 12,
+        "continuation_signals": 0,
+        "error_results": 8,
+        "messages": 1160,
+        "pre_mutation_reads": 135,
+        "tool_counts": {
+          "file_edit": 130,
+          "file_read": 86,
+          "file_write": 15
+        },
+        "truncation_signals": 2
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "33fb04ac8a7057e375488b40950c801ba0aa429bedc45f1308f66a009231f832",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2076335,
+      "source_ref": "raw_traj://LH_035",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_040",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "日常生活",
+        "pool_category": "日常生活",
+        "pool_id": "259"
+      },
+      "metrics": {
+        "completion_claim_signals": 6,
+        "continuation_signals": 0,
+        "error_results": 9,
+        "messages": 594,
+        "pre_mutation_reads": 79,
+        "tool_counts": {
+          "file_edit": 60,
+          "file_read": 71,
+          "file_write": 22,
+          "search": 4
+        },
+        "truncation_signals": 1
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "5d2325ad032ab0bad86deb0905964927ee1590ef7a504c5a5e65464accd92e1a",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2542188,
+      "source_ref": "raw_traj://LH_040",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_041",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "科学研究",
+        "pool_category": "科学研究",
+        "pool_id": "278"
+      },
+      "metrics": {
+        "completion_claim_signals": 7,
+        "continuation_signals": 0,
+        "error_results": 77,
+        "messages": 1571,
+        "pre_mutation_reads": 11,
+        "tool_counts": {
+          "file_edit": 29,
+          "file_read": 35,
+          "file_write": 54
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "b599b1223624f7f4f6cc924bcda5168819c09ecd96dd584b318c925ab23a942b",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 4063436,
+      "source_ref": "raw_traj://LH_041",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "size.large",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write"
+      ]
+    },
+    {
+      "instance_id": "LH_046",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "329"
+      },
+      "metrics": {
+        "completion_claim_signals": 6,
+        "continuation_signals": 0,
+        "error_results": 8,
+        "messages": 667,
+        "pre_mutation_reads": 86,
+        "tool_counts": {
+          "file_edit": 86,
+          "file_read": 24,
+          "file_write": 4
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "f5ab4f0c7ecd706d2d56cf8e43fb51d57f0692fcb8b693ab3a25181a2d9edd93",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 1663590,
+      "source_ref": "raw_traj://LH_046",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "size.small",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write"
+      ]
+    },
+    {
+      "instance_id": "LH_057",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "日常办公",
+        "pool_category": "日常办公",
+        "pool_id": "469"
+      },
+      "metrics": {
+        "completion_claim_signals": 51,
+        "continuation_signals": 1,
+        "error_results": 1,
+        "messages": 838,
+        "pre_mutation_reads": 1,
+        "tool_counts": {
+          "file_edit": 18,
+          "file_read": 15,
+          "file_write": 72
+        },
+        "truncation_signals": 2
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "fe6a04511c8250190ac2f0c290a1dd9f95c3fd805e6a1c15aa8fe77f8b52da32",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2672980,
+      "source_ref": "raw_traj://LH_057",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_058",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "内容创作与创意设计",
+        "pool_category": "内容创作与创意设计",
+        "pool_id": "473"
+      },
+      "metrics": {
+        "completion_claim_signals": 28,
+        "continuation_signals": 0,
+        "error_results": 17,
+        "messages": 622,
+        "pre_mutation_reads": 110,
+        "tool_counts": {
+          "file_edit": 102,
+          "file_read": 159,
+          "file_write": 27,
+          "powershell": 38
+        },
+        "truncation_signals": 2
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "4773b57b838ea9fe150fa753897f29b5e850f8ab8f9ade7faca5d5627a3359c8",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2446118,
+      "source_ref": "raw_traj://LH_058",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.powershell",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_065",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "科学研究",
+        "pool_category": "科学研究",
+        "pool_id": "507"
+      },
+      "metrics": {
+        "completion_claim_signals": 10,
+        "continuation_signals": 0,
+        "error_results": 8,
+        "messages": 1215,
+        "pre_mutation_reads": 37,
+        "tool_counts": {
+          "fetch": 2,
+          "file_edit": 88,
+          "file_read": 37,
+          "file_write": 58,
+          "search": 2
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "034fdd34c898c1dda52337ed45d00319f2dcdae430285fd0795ff9fbbef9f70d",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2599300,
+      "source_ref": "raw_traj://LH_065",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search"
+      ]
+    },
+    {
+      "instance_id": "LH_066",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "561"
+      },
+      "metrics": {
+        "completion_claim_signals": 3,
+        "continuation_signals": 0,
+        "error_results": 11,
+        "messages": 615,
+        "pre_mutation_reads": 19,
+        "tool_counts": {
+          "file_edit": 24,
+          "file_read": 49,
+          "file_write": 25
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "0f5fbf0b5a8cff8e7cdac548a60cba9c8082cc7ec8fe298a87a1cea517c62d27",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2105077,
+      "source_ref": "raw_traj://LH_066",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write"
+      ]
+    },
+    {
+      "instance_id": "LH_067",
+      "metadata": {
+        "business": "AgentPlan",
+        "category": "人力资源",
+        "pool_category": "人力资源",
+        "pool_id": "565"
+      },
+      "metrics": {
+        "completion_claim_signals": 36,
+        "continuation_signals": 1,
+        "error_results": 9,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "fetch": 2,
+          "file_edit": 23,
+          "file_read": 17,
+          "file_write": 12,
+          "search": 2
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\uXXXX escape",
+          "position": 264204,
+          "status": "invalid_unicode_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "9bea1c5400b5a65d3b7aa82113461241da78000fdae062d546c15ebb060c124d",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 1052660,
+      "source_ref": "raw_traj://LH_067",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_unicode_escape",
+        "parse.request_invalid_unicode_escape",
+        "size.small",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search"
+      ]
+    },
+    {
+      "instance_id": "LH_075",
+      "metadata": {
+        "business": "AgentPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "626"
+      },
+      "metrics": {
+        "completion_claim_signals": 5,
+        "continuation_signals": 1,
+        "error_results": 43,
+        "messages": 608,
+        "pre_mutation_reads": 63,
+        "tool_counts": {
+          "fetch": 3,
+          "file_edit": 65,
+          "file_read": 46,
+          "file_write": 19,
+          "search": 17
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "5ab0243ef26726619158c01411e49a25925eaac667262446f6e543440314c936",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2442752,
+      "source_ref": "raw_traj://LH_075",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search"
+      ]
+    },
+    {
+      "instance_id": "LH_077",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "日常办公",
+        "pool_category": "日常办公",
+        "pool_id": "638"
+      },
+      "metrics": {
+        "completion_claim_signals": 11,
+        "continuation_signals": 0,
+        "error_results": 9,
+        "messages": 479,
+        "pre_mutation_reads": 51,
+        "tool_counts": {
+          "fetch": 3,
+          "file_edit": 48,
+          "file_read": 24,
+          "file_write": 23,
+          "search": 4
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "4742f9d473eaa232dd49d3faa4c1b4935d51e6e16975b34f8c2f7f808d26200f",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2489648,
+      "source_ref": "raw_traj://LH_077",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search"
+      ]
+    },
+    {
+      "instance_id": "LH_079",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "客服与销售",
+        "pool_category": "客服与销售",
+        "pool_id": "642"
+      },
+      "metrics": {
+        "completion_claim_signals": 184,
+        "continuation_signals": 1,
+        "error_results": 21,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "file_edit": 56,
+          "file_read": 44,
+          "file_write": 8
+        },
+        "truncation_signals": 27
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\escape",
+          "position": 7631,
+          "status": "invalid_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "cf624dc99ff7a85be630176e58b5b30c43f5a995958ebed94b2de9a221c13ec4",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 3421381,
+      "source_ref": "raw_traj://LH_079",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_escape",
+        "parse.request_invalid_escape",
+        "size.large",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_093",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "软件开发",
+        "pool_category": "软件开发",
+        "pool_id": "686"
+      },
+      "metrics": {
+        "completion_claim_signals": 23,
+        "continuation_signals": 1,
+        "error_results": 59,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "file_edit": 142,
+          "file_read": 65,
+          "file_write": 129,
+          "powershell": 2
+        },
+        "truncation_signals": 27
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\uXXXX escape",
+          "position": 138368,
+          "status": "invalid_unicode_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "df63d632525133bd434826cf783e3f380064ae16dc72154a82cc87e445585b00",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 3033308,
+      "source_ref": "raw_traj://LH_093",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_unicode_escape",
+        "parse.request_invalid_unicode_escape",
+        "size.large",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.powershell",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_098",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "软件开发",
+        "pool_category": "软件开发",
+        "pool_id": "701"
+      },
+      "metrics": {
+        "completion_claim_signals": 9,
+        "continuation_signals": 0,
+        "error_results": 27,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "fetch": 5,
+          "file_edit": 137,
+          "file_read": 129,
+          "file_write": 98,
+          "powershell": 2,
+          "search": 3
+        },
+        "truncation_signals": 2
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\escape",
+          "position": 305014,
+          "status": "invalid_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "d54ea86af7858ee0787d3fc47e21638a5e5333a83ac3e1081cb501f633c3d83a",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 861548,
+      "source_ref": "raw_traj://LH_098",
+      "traits": [
+        "flow.completion_claim_signal",
+        "parse.invalid_escape",
+        "parse.request_invalid_escape",
+        "size.small",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.powershell",
+        "tool.search",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_100",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "710"
+      },
+      "metrics": {
+        "completion_claim_signals": 7,
+        "continuation_signals": 3,
+        "error_results": 64,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "fetch": 1,
+          "file_edit": 117,
+          "file_read": 65,
+          "file_write": 36,
+          "search": 1
+        },
+        "truncation_signals": 11
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\escape",
+          "position": 107055,
+          "status": "invalid_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "8e0c7a471ee61fff77ebd73202275e0d47d00685444fced66f8bce2434981085",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 3274577,
+      "source_ref": "raw_traj://LH_100",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_escape",
+        "parse.request_invalid_escape",
+        "size.large",
+        "tool.error_result",
+        "tool.fetch",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_101",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "715"
+      },
+      "metrics": {
+        "completion_claim_signals": 31,
+        "continuation_signals": 1,
+        "error_results": 28,
+        "messages": 0,
+        "pre_mutation_reads": 0,
+        "tool_counts": {
+          "file_edit": 73,
+          "file_read": 56,
+          "file_write": 62,
+          "search": 3
+        },
+        "truncation_signals": 29
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "message": "Invalid \\uXXXX escape",
+          "position": 6952,
+          "status": "invalid_unicode_escape"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "3e8835696864e95481b82f4aa50ac8aa33f8f8dfe45daa634fef4324e21dc62a",
+      "requires_annotation": true,
+      "signal_quality": "heuristic_requires_annotation",
+      "size_bytes": 2891730,
+      "source_ref": "raw_traj://LH_101",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.continuation_signal",
+        "parse.invalid_unicode_escape",
+        "parse.request_invalid_unicode_escape",
+        "size.large",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write",
+        "tool.search",
+        "tool.truncation_signal"
+      ]
+    },
+    {
+      "instance_id": "LH_102",
+      "metadata": {
+        "business": "CodingPlan",
+        "category": "金融与财务",
+        "pool_category": "金融与财务",
+        "pool_id": "722"
+      },
+      "metrics": {
+        "completion_claim_signals": 3,
+        "continuation_signals": 0,
+        "error_results": 11,
+        "messages": 733,
+        "pre_mutation_reads": 21,
+        "tool_counts": {
+          "file_edit": 27,
+          "file_read": 55,
+          "file_write": 26
+        },
+        "truncation_signals": 0
+      },
+      "parse": {
+        "extra": {
+          "status": "strict"
+        },
+        "outer": {
+          "status": "strict"
+        },
+        "request": {
+          "status": "strict"
+        },
+        "response": {
+          "status": "strict"
+        }
+      },
+      "raw_sha256": "c812269b9e6ef1f6568a76bf42d15ecf520ab3a5c24efe189397aa503817915d",
+      "requires_annotation": false,
+      "signal_quality": "strict_events",
+      "size_bytes": 2595228,
+      "source_ref": "raw_traj://LH_102",
+      "traits": [
+        "flow.completion_claim_signal",
+        "flow.pre_mutation_read",
+        "parse.request_strict",
+        "parse.strict_request",
+        "tool.error_result",
+        "tool.file_edit",
+        "tool.file_read",
+        "tool.file_write"
+      ]
+    }
+  ],
+  "lifecycle_profile": "R0_MANIFEST_ONLY_V1",
+  "processing_class": "RESTRICTED_TRACE_RAW",
+  "schema_version": "eval-factory-canary-manifest/v1",
+  "selection_policy": {
+    "behavioral_signal_rule": "strict_events is deterministic; heuristic_requires_annotation is selection-only and cannot be used as label or safety truth",
+    "targets": {
+      "flow.completion_claim_signal": 3,
+      "flow.continuation_signal": 3,
+      "flow.pre_mutation_read": 3,
+      "parse.invalid_escape": 6,
+      "parse.invalid_response": 1,
+      "parse.invalid_unicode_escape": 3,
+      "parse.strict_request": 10,
+      "size.large": 3,
+      "size.small": 2,
+      "tool.error_result": 5,
+      "tool.fetch": 2,
+      "tool.file_edit": 6,
+      "tool.file_read": 6,
+      "tool.file_write": 6,
+      "tool.powershell": 1,
+      "tool.search": 3,
+      "tool.truncation_signal": 3
+    }
+  },
+  "selector_version": "1.0.0",
+  "source_count": 91,
+  "source_reference": "raw_traj://approved-local-manifest",
+  "target_count": 24
+}

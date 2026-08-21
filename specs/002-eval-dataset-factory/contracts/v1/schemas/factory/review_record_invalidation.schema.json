@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/review_record_invalidation.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "invalidated_at": {
+      "format": "date-time",
+      "title": "Invalidated At",
+      "type": "string"
+    },
+    "invalidation_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Invalidation Id",
+      "type": "string"
+    },
+    "invalidation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Invalidation Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reason_code": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "review_record_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/review-record-invalidation/v1",
+      "default": "eval-factory/review-record-invalidation/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "invalidation_id",
+    "review_record_ref",
+    "reason_code",
+    "source_ref",
+    "policy_version",
+    "invalidated_at",
+    "invalidation_sha256"
+  ],
+  "title": "ReviewRecordInvalidation",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.quality.ReviewRecordInvalidation",
+  "x-schema-version": "eval-factory/review-record-invalidation/v1"
+}

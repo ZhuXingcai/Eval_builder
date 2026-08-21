@@ -1,0 +1,29 @@
+{
+  "schema_version": "eval-factory/parser-gold/v1",
+  "cases": [
+    {
+      "case_id": "strict-object",
+      "request": "{\"messages\":[]}",
+      "response": "{\"choices\":[]}",
+      "extra": "{}",
+      "expected_outcome": "STRICT",
+      "expected_request_repairs": 0
+    },
+    {
+      "case_id": "invalid-backslash-multibyte",
+      "request": "{\"messages\":[{\"content\":\"prefix 前缀 C:\\qa D:\\work\"}]}",
+      "response": "{\"choices\":[]}",
+      "extra": "{}",
+      "expected_outcome": "REPAIRED",
+      "expected_request_repairs": 2
+    },
+    {
+      "case_id": "truncated-after-repair",
+      "request": "{\"messages\":[{\"content\":\"C:\\qa\"}]",
+      "response": "{\"choices\":[]}",
+      "extra": "{}",
+      "expected_outcome": "NEEDS_STREAMING",
+      "expected_request_repairs": 0
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvaluationFailureClass": {
+      "enum": [
+        "CONTESTANT_FAILURE",
+        "EVALUATOR_FAILURE",
+        "ENVIRONMENT_FAILURE",
+        "INDETERMINATE"
+      ],
+      "title": "EvaluationFailureClass",
+      "type": "string"
+    },
+    "EvaluatorBindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Binding Sha256",
+          "type": "string"
+        },
+        "criterion_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Criterion Ids",
+          "type": "array"
+        },
+        "evaluator_binding_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evaluator Binding Id",
+          "type": "string"
+        },
+        "evaluator_principal_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evaluator Principal Id"
+        },
+        "evaluator_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evaluator Type",
+          "type": "string"
+        },
+        "evaluator_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Evaluator Version",
+          "type": "string"
+        },
+        "execution_mode": {
+          "$ref": "#/$defs/EvaluatorExecutionModeV2"
+        },
+        "input_contract_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "model_profile_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "output_contract_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "reference_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Reference Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/evaluator-binding/v2",
+          "default": "eval-factory/evaluator-binding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "timeout_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "evaluator_binding_id",
+        "criterion_ids",
+        "evaluator_type",
+        "execution_mode",
+        "evaluator_version",
+        "input_contract_ref",
+        "output_contract_ref",
+        "timeout_seconds",
+        "binding_sha256"
+      ],
+      "title": "EvaluatorBindingV2",
+      "type": "object"
+    },
+    "EvaluatorExecutionModeV2": {
+      "enum": [
+        "DETERMINISTIC",
+        "MODEL",
+        "HUMAN_ONLY"
+      ],
+      "title": "EvaluatorExecutionModeV2",
+      "type": "string"
+    },
+    "EvaluatorFailureRuleV2": {
+      "additionalProperties": false,
+      "properties": {
+        "failure_class": {
+          "$ref": "#/$defs/EvaluationFailureClass"
+        },
+        "rule_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "rule_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Rule Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/evaluator-failure-rule/v2",
+          "default": "eval-factory/evaluator-failure-rule/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "signal": {
+          "$ref": "#/$defs/EvaluatorFailureSignalV2"
+        }
+      },
+      "required": [
+        "rule_id",
+        "signal",
+        "failure_class",
+        "rule_sha256"
+      ],
+      "title": "EvaluatorFailureRuleV2",
+      "type": "object"
+    },
+    "EvaluatorFailureSignalV2": {
+      "enum": [
+        "CONTESTANT_OUTPUT_MISSING",
+        "CONTESTANT_OUTPUT_CONTRACT_VIOLATION",
+        "EVALUATOR_TIMEOUT",
+        "EVALUATOR_RUNTIME_FAILURE",
+        "EVALUATOR_OUTPUT_CONTRACT_VIOLATION",
+        "ENVIRONMENT_STARTUP_FAILURE",
+        "ENVIRONMENT_RUNTIME_FAILURE",
+        "REQUIRED_ENVIRONMENT_CAPABILITY_MISSING",
+        "INSUFFICIENT_OBSERVATION",
+        "CONFLICTING_FAILURE_SIGNALS"
+      ],
+      "title": "EvaluatorFailureSignalV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/evaluator_spec_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/EvaluatorBindingV2"
+      },
+      "minItems": 1,
+      "title": "Bindings",
+      "type": "array"
+    },
+    "evaluator_spec_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Evaluator Spec Id",
+      "type": "string"
+    },
+    "evaluator_spec_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evaluator Spec Sha256",
+      "type": "string"
+    },
+    "evaluator_spec_version": {
+      "minimum": 1,
+      "title": "Evaluator Spec Version",
+      "type": "integer"
+    },
+    "failure_rules": {
+      "items": {
+        "$ref": "#/$defs/EvaluatorFailureRuleV2"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "title": "Failure Rules",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "rubric_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/evaluator-spec/v2",
+      "default": "eval-factory/evaluator-spec/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "supersedes_evaluator_spec_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "evaluator_spec_id",
+    "evaluator_spec_version",
+    "rubric_set_ref",
+    "bindings",
+    "failure_rules",
+    "policy_version",
+    "evaluator_spec_sha256",
+    "audit"
+  ],
+  "title": "EvaluatorSpecV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.EvaluatorSpecV2",
+  "x-schema-version": "eval-factory/evaluator-spec/v2"
+}

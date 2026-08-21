@@ -1,0 +1,165 @@
+{
+  "$defs": {
+    "ReportedCostV2": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_microusd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Microusd"
+        },
+        "availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "currency": {
+          "const": "USD",
+          "default": "USD",
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "const": "HALF_EVEN_MICRO_USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding"
+        }
+      },
+      "required": [
+        "availability"
+      ],
+      "title": "ReportedCostV2",
+      "type": "object"
+    },
+    "TelemetryAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "DERIVED",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "TelemetryAvailabilityV2",
+      "type": "string"
+    },
+    "ToolFamilyCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "minimum": 1,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "tool_family": {
+          "$ref": "#/$defs/ToolFamilyV2"
+        }
+      },
+      "required": [
+        "tool_family",
+        "calls"
+      ],
+      "title": "ToolFamilyCountV2",
+      "type": "object"
+    },
+    "ToolFamilyV2": {
+      "enum": [
+        "FILE",
+        "SHELL",
+        "SEARCH",
+        "FETCH",
+        "RENDERER",
+        "OTHER"
+      ],
+      "title": "ToolFamilyV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/execution_telemetry_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "duration_availability": {
+      "$ref": "#/$defs/TelemetryAvailabilityV2"
+    },
+    "duration_us": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duration Us"
+    },
+    "execution_telemetry_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Execution Telemetry Id",
+      "type": "string"
+    },
+    "execution_telemetry_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Execution Telemetry Sha256",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "execution-telemetry/r6-06-v1",
+      "default": "execution-telemetry/r6-06-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "reported_cost": {
+      "$ref": "#/$defs/ReportedCostV2"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/execution-telemetry/v2",
+      "default": "env-mock-agent/execution-telemetry/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_availability": {
+      "$ref": "#/$defs/TelemetryAvailabilityV2"
+    },
+    "tool_family_counts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ToolFamilyCountV2"
+      },
+      "title": "Tool Family Counts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "execution_telemetry_id",
+    "duration_availability",
+    "tool_availability",
+    "reported_cost",
+    "observed_at",
+    "execution_telemetry_sha256"
+  ],
+  "title": "ExecutionTelemetryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.telemetry_v2.ExecutionTelemetryV2",
+  "x-schema-version": "env-mock-agent/execution-telemetry/v2"
+}

@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "ModelRouteRejectionCodeV2": {
+      "enum": [
+        "GOVERNANCE_AGENT_NOT_ALLOWED",
+        "GOVERNANCE_MODEL_NOT_ALLOWED",
+        "GOVERNANCE_DATA_CLASSIFICATION",
+        "GOVERNANCE_RESIDENCY",
+        "CAPABILITY_MISMATCH",
+        "CONTEXT_LIMIT",
+        "OUTPUT_LIMIT",
+        "PROVIDER_UNAVAILABLE",
+        "QUALITY_BASELINE_MISSING",
+        "QUALITY_BELOW_MINIMUM",
+        "HEALTH_SNAPSHOT_MISSING",
+        "PRICE_SCHEDULE_MISSING",
+        "BUDGET_EXCEEDED",
+        "GENERATOR_JUDGE_COLLISION",
+        "PREDECESSOR_MODEL_EXCLUDED"
+      ],
+      "title": "ModelRouteRejectionCodeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/model_route_candidate_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "eligible": {
+      "title": "Eligible",
+      "type": "boolean"
+    },
+    "estimated_cost_micro_usd": {
+      "anyOf": [
+        {
+          "maximum": 10000000000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Cost Micro Usd"
+    },
+    "health_basis_points": {
+      "anyOf": [
+        {
+          "maximum": 10000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Health Basis Points"
+    },
+    "latency_milliseconds": {
+      "anyOf": [
+        {
+          "maximum": 86400000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Latency Milliseconds"
+    },
+    "model_profile_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "quality_basis_points": {
+      "anyOf": [
+        {
+          "maximum": 10000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quality Basis Points"
+    },
+    "rejection_codes": {
+      "items": {
+        "$ref": "#/$defs/ModelRouteRejectionCodeV2"
+      },
+      "title": "Rejection Codes",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/model-route-candidate/v2",
+      "default": "eval-factory/model-route-candidate/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "score": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Score"
+    }
+  },
+  "required": [
+    "model_profile_ref",
+    "eligible",
+    "rejection_codes",
+    "score"
+  ],
+  "title": "ModelRouteCandidateV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.ai_gateway_v2.ModelRouteCandidateV2",
+  "x-schema-version": "eval-factory/model-route-candidate/v2"
+}

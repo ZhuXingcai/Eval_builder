@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/environment_artifact.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "criticality": {
+      "$ref": "#/$defs/AttachmentCriticality"
+    },
+    "media_type": {
+      "maxLength": 255,
+      "minLength": 3,
+      "title": "Media Type",
+      "type": "string"
+    },
+    "relative_path": {
+      "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+      "title": "Relative Path",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/environment-artifact/v1",
+      "default": "eval-factory/environment-artifact/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 0,
+      "title": "Size Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "relative_path",
+    "media_type",
+    "content_sha256",
+    "size_bytes",
+    "criticality"
+  ],
+  "title": "EnvironmentArtifact",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task.EnvironmentArtifact",
+  "x-schema-version": "eval-factory/environment-artifact/v1"
+}

@@ -1,0 +1,295 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "SchedulerLoadCaseOutcomeV2": {
+      "enum": [
+        "RECOVERED",
+        "FAILED",
+        "INFRASTRUCTURE_ERROR",
+        "INCOMPLETE"
+      ],
+      "title": "SchedulerLoadCaseOutcomeV2",
+      "type": "string"
+    },
+    "SchedulerLoadFaultPointV2": {
+      "enum": [
+        "AFTER_JOB_CREATE",
+        "AFTER_WORK_GRAPH_CREATE",
+        "AFTER_JOB_START",
+        "AFTER_READINESS_RECORD",
+        "AFTER_CONTROL_POLICY_BIND",
+        "AFTER_LEASE_ACQUIRE",
+        "AFTER_STAGE_COMPLETION",
+        "AFTER_OBSERVABILITY_REFRESH"
+      ],
+      "title": "SchedulerLoadFaultPointV2",
+      "type": "string"
+    },
+    "SchedulerLoadReasonCodeV2": {
+      "enum": [
+        "NONE",
+        "EXPECTED_FAULT_NOT_OBSERVED",
+        "RESUME_FAILED",
+        "TERMINAL_EVIDENCE_MISMATCH",
+        "UNEXPECTED_RETRY",
+        "DUPLICATE_IMMUTABLE_FACT",
+        "REPLAY_MISMATCH",
+        "OBSERVABILITY_INCOMPLETE",
+        "MATERIAL_INTEGRITY_ERROR",
+        "CHILD_STATE_INCOMPLETE",
+        "INTERNAL_ERROR"
+      ],
+      "title": "SchedulerLoadReasonCodeV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/scheduler_load_case_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "assigned_fault_point": {
+      "$ref": "#/$defs/SchedulerLoadFaultPointV2"
+    },
+    "attempt_count": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Attempt Count",
+      "type": "integer"
+    },
+    "attempt_metrics_count": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Attempt Metrics Count",
+      "type": "integer"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "case_summary_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Case Summary Id",
+      "type": "string"
+    },
+    "case_summary_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Case Summary Sha256",
+      "type": "string"
+    },
+    "completion_witness_count": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Completion Witness Count",
+      "type": "integer"
+    },
+    "duplicate_immutable_fact_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Duplicate Immutable Fact Count",
+      "type": "integer"
+    },
+    "fault_observed": {
+      "title": "Fault Observed",
+      "type": "boolean"
+    },
+    "observability_complete": {
+      "title": "Observability Complete",
+      "type": "boolean"
+    },
+    "outcome": {
+      "$ref": "#/$defs/SchedulerLoadCaseOutcomeV2"
+    },
+    "policy_version": {
+      "const": "scheduler-load/r8-05-v1",
+      "default": "scheduler-load/r8-05-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "private_case_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reason_code": {
+      "$ref": "#/$defs/SchedulerLoadReasonCodeV2"
+    },
+    "replay_stable": {
+      "title": "Replay Stable",
+      "type": "boolean"
+    },
+    "resume_succeeded": {
+      "title": "Resume Succeeded",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/scheduler-load-case-summary/v2",
+      "default": "eval-factory/scheduler-load-case-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage_result_count": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Stage Result Count",
+      "type": "integer"
+    },
+    "stage_run_count": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Stage Run Count",
+      "type": "integer"
+    },
+    "unexpected_retry_count": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Unexpected Retry Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "case_summary_id",
+    "private_case_result_ref",
+    "outcome",
+    "reason_code",
+    "assigned_fault_point",
+    "fault_observed",
+    "resume_succeeded",
+    "replay_stable",
+    "attempt_count",
+    "unexpected_retry_count",
+    "duplicate_immutable_fact_count",
+    "stage_run_count",
+    "stage_result_count",
+    "attempt_metrics_count",
+    "completion_witness_count",
+    "observability_complete",
+    "case_summary_sha256",
+    "audit"
+  ],
+  "title": "SchedulerLoadCaseSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadCaseSummaryV2",
+  "x-schema-version": "eval-factory/scheduler-load-case-summary/v2"
+}

@@ -1,0 +1,427 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelQualityClassMetricV2": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "$ref": "#/$defs/LabelQualityMetricAvailabilityV2"
+        },
+        "decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LabelDecisionValueV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "denominator": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Denominator",
+          "type": "integer"
+        },
+        "metric": {
+          "$ref": "#/$defs/LabelQualityMetricNameV2"
+        },
+        "numerator": {
+          "anyOf": [
+            {
+              "maximum": 10000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Numerator"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-quality-class-metric/v2",
+          "default": "eval-factory/label-quality-class-metric/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "value_basis_points": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Basis Points"
+        }
+      },
+      "required": [
+        "metric",
+        "denominator",
+        "availability"
+      ],
+      "title": "LabelQualityClassMetricV2",
+      "type": "object"
+    },
+    "LabelQualityConfidenceIntervalV2": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Algorithm Version",
+          "type": "string"
+        },
+        "availability": {
+          "$ref": "#/$defs/LabelQualityMetricAvailabilityV2"
+        },
+        "confidence_basis_points": {
+          "const": 9500,
+          "default": 9500,
+          "title": "Confidence Basis Points",
+          "type": "integer"
+        },
+        "lower_basis_points": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lower Basis Points"
+        },
+        "method": {
+          "$ref": "#/$defs/LabelQualityIntervalMethodV2"
+        },
+        "resample_count": {
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Resample Count",
+          "type": "integer"
+        },
+        "sample_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-quality-confidence-interval/v2",
+          "default": "eval-factory/label-quality-confidence-interval/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "upper_basis_points": {
+          "anyOf": [
+            {
+              "maximum": 10000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Basis Points"
+        }
+      },
+      "required": [
+        "method",
+        "sample_count",
+        "resample_count",
+        "algorithm_version",
+        "availability"
+      ],
+      "title": "LabelQualityConfidenceIntervalV2",
+      "type": "object"
+    },
+    "LabelQualityConfusionRowV2": {
+      "additionalProperties": false,
+      "properties": {
+        "predicted_abstain_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Predicted Abstain Count",
+          "type": "integer"
+        },
+        "predicted_match_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Predicted Match Count",
+          "type": "integer"
+        },
+        "predicted_no_match_count": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Predicted No Match Count",
+          "type": "integer"
+        },
+        "reference_class": {
+          "$ref": "#/$defs/LabelDecisionValueV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/label-quality-confusion-row/v2",
+          "default": "eval-factory/label-quality-confusion-row/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reference_class",
+        "predicted_match_count",
+        "predicted_no_match_count",
+        "predicted_abstain_count"
+      ],
+      "title": "LabelQualityConfusionRowV2",
+      "type": "object"
+    },
+    "LabelQualityIntervalMethodV2": {
+      "enum": [
+        "WILSON_SCORE_95_V1",
+        "STRATIFIED_SHA256_BOOTSTRAP_95_V1"
+      ],
+      "title": "LabelQualityIntervalMethodV2",
+      "type": "string"
+    },
+    "LabelQualityLabelOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "STATISTICAL_GATE_PENDING"
+      ],
+      "title": "LabelQualityLabelOutcomeV2",
+      "type": "string"
+    },
+    "LabelQualityMetricAvailabilityV2": {
+      "enum": [
+        "MEASURED",
+        "UNDEFINED",
+        "NOT_COMPUTED"
+      ],
+      "title": "LabelQualityMetricAvailabilityV2",
+      "type": "string"
+    },
+    "LabelQualityMetricNameV2": {
+      "enum": [
+        "PRECISION",
+        "RECALL",
+        "F1",
+        "MACRO_F1"
+      ],
+      "title": "LabelQualityMetricNameV2",
+      "type": "string"
+    },
+    "LabelQualityReasonCodeV2": {
+      "enum": [
+        "NONE",
+        "FROZEN_DATASET_UNAVAILABLE",
+        "SAMPLE_SHORTAGE",
+        "OBSERVATION_MISSING",
+        "OBSERVATION_INCOMPLETE",
+        "SEMANTIC_EXECUTION_UNAVAILABLE",
+        "METRIC_UNDEFINED",
+        "STRUCTURED_THRESHOLD_NOT_MET",
+        "SEMANTIC_THRESHOLD_NOT_MET"
+      ],
+      "title": "LabelQualityReasonCodeV2",
+      "type": "string"
+    },
+    "LabelTestSetBalanceStatusV2": {
+      "enum": [
+        "ACHIEVED",
+        "SOURCE_POPULATION_LIMITED",
+        "INSUFFICIENT"
+      ],
+      "title": "LabelTestSetBalanceStatusV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/semantic_label_quality_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "balance_status": {
+      "$ref": "#/$defs/LabelTestSetBalanceStatusV2"
+    },
+    "class_metrics": {
+      "items": {
+        "$ref": "#/$defs/LabelQualityClassMetricV2"
+      },
+      "title": "Class Metrics",
+      "type": "array"
+    },
+    "confusion_rows": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/LabelQualityConfusionRowV2"
+        },
+        {
+          "$ref": "#/$defs/LabelQualityConfusionRowV2"
+        },
+        {
+          "$ref": "#/$defs/LabelQualityConfusionRowV2"
+        }
+      ],
+      "title": "Confusion Rows",
+      "type": "array"
+    },
+    "incomplete_observation_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Incomplete Observation Count",
+      "type": "integer"
+    },
+    "label_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "macro_f1": {
+      "$ref": "#/$defs/LabelQualityClassMetricV2"
+    },
+    "macro_f1_interval": {
+      "$ref": "#/$defs/LabelQualityConfidenceIntervalV2"
+    },
+    "macro_f1_threshold_basis_points": {
+      "const": 8500,
+      "default": 8500,
+      "title": "Macro F1 Threshold Basis Points",
+      "type": "integer"
+    },
+    "missing_observation_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Missing Observation Count",
+      "type": "integer"
+    },
+    "model_profile": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Model Profile",
+      "type": "string"
+    },
+    "model_unavailable_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Model Unavailable Count",
+      "type": "integer"
+    },
+    "outcome": {
+      "$ref": "#/$defs/LabelQualityLabelOutcomeV2"
+    },
+    "prompt_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "#/$defs/LabelQualityReasonCodeV2"
+      },
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/semantic-label-quality-summary/v2",
+      "default": "eval-factory/semantic-label-quality-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "supported_class_count": {
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Supported Class Count",
+      "type": "integer"
+    },
+    "valid_prediction_abstain_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Valid Prediction Abstain Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "label_spec_ref",
+    "model_profile",
+    "prompt_version",
+    "confusion_rows",
+    "class_metrics",
+    "supported_class_count",
+    "balance_status",
+    "valid_prediction_abstain_count",
+    "incomplete_observation_count",
+    "model_unavailable_count",
+    "missing_observation_count",
+    "macro_f1",
+    "macro_f1_interval",
+    "outcome",
+    "reason_codes"
+  ],
+  "title": "SemanticLabelQualitySummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.label_quality_v2.SemanticLabelQualitySummaryV2",
+  "x-schema-version": "eval-factory/semantic-label-quality-summary/v2"
+}

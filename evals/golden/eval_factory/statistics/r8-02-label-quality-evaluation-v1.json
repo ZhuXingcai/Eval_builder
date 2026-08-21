@@ -1,0 +1,118 @@
+{
+  "schema_version": "eval-factory-gold/r8-02-label-quality-evaluation-v1",
+  "policy_version": "label-quality-evaluation/r8-02-v1",
+  "thresholds": {
+    "structured_precision_basis_points": 9900,
+    "structured_recall_basis_points": 9900,
+    "semantic_macro_f1_basis_points": 8500
+  },
+  "intervals": {
+    "structured": "WILSON_SCORE_95_V1",
+    "semantic": "STRATIFIED_SHA256_BOOTSTRAP_95_V1",
+    "confidence_basis_points": 9500,
+    "bootstrap_replicate_count": 10000
+  },
+  "repository_pending": {
+    "r8_01_evidence_sha256": "428d9d3b16eec3a31014df9e9cf17fea8a84d3ebb81c5050cd9da67f243a1a17",
+    "available_semantic_count": 91,
+    "required_semantic_count": 100,
+    "accepted_report_sha256": "f5b6f5f6cab238f9c7a34196a06769393bbd4da6db75424c5dc43d34a98a58a7",
+    "expected_outcome": "STATISTICAL_GATE_PENDING",
+    "satisfies_nfr_008": false,
+    "satisfies_sc_010": false
+  },
+  "cases": [
+    {
+      "case_id": "synthetic-perfect-structured",
+      "reference_match_count": 50,
+      "reference_no_match_count": 50,
+      "true_positive_count": 50,
+      "false_positive_count": 0,
+      "true_negative_count": 50,
+      "false_negative_count": 0,
+      "precision_basis_points": 10000,
+      "recall_basis_points": 10000,
+      "expected_outcome": "PASSED",
+      "evidence_class": "MECHANISM_VALIDATION_ONLY"
+    },
+    {
+      "case_id": "synthetic-one-structured-false-positive",
+      "true_positive_count": 50,
+      "false_positive_count": 1,
+      "precision_numerator": 50,
+      "precision_denominator": 51,
+      "precision_basis_points": 9804,
+      "expected_outcome": "FAILED"
+    },
+    {
+      "case_id": "synthetic-perfect-semantic",
+      "reference_counts": {
+        "MATCH": 34,
+        "NO_MATCH": 33,
+        "ABSTAIN": 33
+      },
+      "macro_f1_basis_points": 10000,
+      "interval_lower_basis_points": 10000,
+      "interval_upper_basis_points": 10000,
+      "expected_outcome": "PASSED",
+      "evidence_class": "MECHANISM_VALIDATION_ONLY"
+    },
+    {
+      "case_id": "synthetic-source-limited-semantic",
+      "reference_counts": {
+        "MATCH": 50,
+        "NO_MATCH": 50,
+        "ABSTAIN": 0
+      },
+      "balance_status": "SOURCE_POPULATION_LIMITED",
+      "supported_class_count": 2
+    },
+    {
+      "case_id": "missing-observation",
+      "expected_outcome": "STATISTICAL_GATE_PENDING",
+      "expected_reason": "OBSERVATION_MISSING"
+    },
+    {
+      "case_id": "model-unavailable",
+      "expected_outcome": "STATISTICAL_GATE_PENDING",
+      "expected_reason": "SEMANTIC_EXECUTION_UNAVAILABLE"
+    },
+    {
+      "case_id": "undefined-denominator",
+      "availability": "UNDEFINED",
+      "numerator": null,
+      "denominator": 0,
+      "value_basis_points": null
+    },
+    {
+      "case_id": "exact-accepted-replay",
+      "expected_report": "ORIGINAL_REPORT",
+      "expected_additional_files": 0,
+      "expected_additional_model_calls": 0
+    }
+  ],
+  "all_reports_authorize": {
+    "sc_011": false,
+    "sc_012": false,
+    "sc_013": false,
+    "approval": false,
+    "attestation": false,
+    "production_release": false
+  },
+  "forbidden_surface": [
+    "test membership",
+    "per-member expected decision",
+    "source trace identity",
+    "raw trace hash",
+    "annotation identity",
+    "private object reference",
+    "semantic model payload",
+    "bootstrap sample",
+    "physical path",
+    "credential",
+    "original final output",
+    "grader rule",
+    "hidden condition",
+    "caught exception text"
+  ]
+}

@@ -1,0 +1,539 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvidencePolarity": {
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "UNCERTAINTY",
+        "CONTRADICTION"
+      ],
+      "title": "EvidencePolarity",
+      "type": "string"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Capability",
+          "type": "string"
+        },
+        "capability_complete": {
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence_ref_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Ref Id",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/EvidencePolarity"
+        },
+        "schema_version": {
+          "const": "eval-factory/evidence-ref/v1",
+          "default": "eval-factory/evidence-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_spans": {
+          "items": {
+            "$ref": "#/$defs/SourceSpanRef"
+          },
+          "minItems": 1,
+          "title": "Source Spans",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "evidence_ref_id",
+        "subject_ref",
+        "source_spans",
+        "polarity",
+        "capability",
+        "capability_complete"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "RubricCriterionV2": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_status": {
+          "const": "CANDIDATE",
+          "default": "CANDIDATE",
+          "title": "Approval Status",
+          "type": "string"
+        },
+        "criterion_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Criterion Id",
+          "type": "string"
+        },
+        "criterion_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Criterion Sha256",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evaluator_binding": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evaluator Binding",
+          "type": "string"
+        },
+        "judged_object": {
+          "$ref": "#/$defs/RubricJudgedObjectV2"
+        },
+        "reachability": {
+          "$ref": "#/$defs/RubricReachabilityV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/rubric-criterion/v2",
+          "default": "eval-factory/rubric-criterion/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "visibility": {
+          "$ref": "#/$defs/RubricVisibility"
+        },
+        "weight": {
+          "exclusiveMinimum": 0,
+          "title": "Weight",
+          "type": "number"
+        }
+      },
+      "required": [
+        "criterion_id",
+        "judged_object",
+        "description",
+        "weight",
+        "reachability",
+        "visibility",
+        "evaluator_binding",
+        "criterion_sha256"
+      ],
+      "title": "RubricCriterionV2",
+      "type": "object"
+    },
+    "RubricJudgedObjectKindV2": {
+      "enum": [
+        "CONTESTANT_RESPONSE",
+        "OUTPUT_ARTIFACT",
+        "WORKSPACE_STATE",
+        "TOOL_BEHAVIOR",
+        "STRUCTURED_VALUE"
+      ],
+      "title": "RubricJudgedObjectKindV2",
+      "type": "string"
+    },
+    "RubricJudgedObjectV2": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "judged_object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Judged Object Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/RubricJudgedObjectKindV2"
+        },
+        "schema_version": {
+          "const": "eval-factory/rubric-judged-object/v2",
+          "default": "eval-factory/rubric-judged-object/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "judged_object_id",
+        "kind",
+        "description"
+      ],
+      "title": "RubricJudgedObjectV2",
+      "type": "object"
+    },
+    "RubricReachabilityV2": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_tool_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Allowed Tool Ids",
+          "type": "array"
+        },
+        "attachment_dependency_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Attachment Dependency Ids",
+          "type": "array"
+        },
+        "capability_complete": {
+          "const": true,
+          "default": true,
+          "title": "Capability Complete",
+          "type": "boolean"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "prompt_requirement_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Prompt Requirement Ids",
+          "type": "array"
+        },
+        "reachability_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Reachability Id",
+          "type": "string"
+        },
+        "reachability_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Reachability Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/rubric-reachability/v2",
+          "default": "eval-factory/rubric-reachability/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reachability_id",
+        "prompt_requirement_ids",
+        "evidence",
+        "reachability_sha256"
+      ],
+      "title": "RubricReachabilityV2",
+      "type": "object"
+    },
+    "RubricSourceModeV2": {
+      "enum": [
+        "IMPORTED",
+        "GENERATED"
+      ],
+      "title": "RubricSourceModeV2",
+      "type": "string"
+    },
+    "RubricVisibility": {
+      "enum": [
+        "PUBLIC",
+        "EVALUATOR_ONLY",
+        "HUMAN_ONLY"
+      ],
+      "title": "RubricVisibility",
+      "type": "string"
+    },
+    "SourceSpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "approximate": {
+          "default": false,
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-span-ref/v1",
+          "default": "eval-factory/source-span-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "span_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Span Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "source_trace_id",
+        "raw_sha256"
+      ],
+      "title": "SourceSpanRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/rubric_set_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "criteria": {
+      "items": {
+        "$ref": "#/$defs/RubricCriterionV2"
+      },
+      "minItems": 1,
+      "title": "Criteria",
+      "type": "array"
+    },
+    "imported_from_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "model_profile": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Profile"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "prompt_version": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prompt Version"
+    },
+    "rubric_set_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Rubric Set Id",
+      "type": "string"
+    },
+    "rubric_set_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Rubric Set Sha256",
+      "type": "string"
+    },
+    "rubric_version": {
+      "minimum": 1,
+      "title": "Rubric Version",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/rubric-set/v2",
+      "default": "eval-factory/rubric-set/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_mode": {
+      "$ref": "#/$defs/RubricSourceModeV2"
+    },
+    "supersedes_rubric_set_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "task_draft_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "total_weight": {
+      "exclusiveMinimum": 0,
+      "title": "Total Weight",
+      "type": "number"
+    }
+  },
+  "required": [
+    "rubric_set_id",
+    "rubric_version",
+    "task_draft_ref",
+    "source_mode",
+    "criteria",
+    "total_weight",
+    "policy_version",
+    "rubric_set_sha256",
+    "audit"
+  ],
+  "title": "RubricSetV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.RubricSetV2",
+  "x-schema-version": "eval-factory/rubric-set/v2"
+}

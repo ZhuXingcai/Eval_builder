@@ -1,0 +1,234 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/factory_run_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_task_kinds": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Allowed Task Kinds",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "max_agent_attempts": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Max Agent Attempts",
+      "type": "integer"
+    },
+    "max_cost_micro_usd": {
+      "maximum": 10000000000000,
+      "minimum": 0,
+      "title": "Max Cost Micro Usd",
+      "type": "integer"
+    },
+    "max_model_requests": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Max Model Requests",
+      "type": "integer"
+    },
+    "max_model_tokens": {
+      "maximum": 10000000000,
+      "minimum": 0,
+      "title": "Max Model Tokens",
+      "type": "integer"
+    },
+    "max_plan_revisions": {
+      "maximum": 1000,
+      "minimum": 0,
+      "title": "Max Plan Revisions",
+      "type": "integer"
+    },
+    "max_transitions": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Transitions",
+      "type": "integer"
+    },
+    "object_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Object Id",
+      "type": "string"
+    },
+    "object_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Object Sha256",
+      "type": "string"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "factory-control/phase-a-v1",
+      "default": "factory-control/phase-a-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "production_release_allowed": {
+      "const": false,
+      "default": false,
+      "title": "Production Release Allowed",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "eval-factory/factory-run-policy/v2",
+      "default": "eval-factory/factory-run-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "object_id",
+    "object_sha256",
+    "audit",
+    "policy_id",
+    "allowed_task_kinds",
+    "max_transitions",
+    "max_plan_revisions",
+    "max_agent_attempts",
+    "max_model_requests",
+    "max_model_tokens",
+    "max_cost_micro_usd"
+  ],
+  "title": "FactoryRunPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.agent_system_v2.FactoryRunPolicyV2",
+  "x-schema-version": "eval-factory/factory-run-policy/v2"
+}

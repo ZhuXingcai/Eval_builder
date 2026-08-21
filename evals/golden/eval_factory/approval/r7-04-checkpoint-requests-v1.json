@@ -1,0 +1,98 @@
+{
+  "direct_request_authority": true,
+  "generation_policy_version": "user-approval-request/r7-04-v1",
+  "projection_policy_version": "user-approval-projection/r7-04-v1",
+  "scenarios": [
+    {
+      "enabled_checkpoint_count": 3,
+      "expected_mode": "PLAN_GATES",
+      "scenario_id": "interactive-default"
+    },
+    {
+      "enabled_checkpoint_count": 0,
+      "expected_mode": "NONE",
+      "explicit_choice_required": true,
+      "scenario_id": "explicit-none"
+    },
+    {
+      "enabled_checkpoint_count": 4,
+      "expected_mode": "PLAN_AND_FINAL",
+      "scenario_id": "named-all"
+    },
+    {
+      "enabled_checkpoint_count": 2,
+      "expected_mode": "CUSTOM",
+      "scenario_id": "custom-subset"
+    },
+    {
+      "checkpoint": "LABEL_PLAN",
+      "expected_outcome": "REQUESTED",
+      "request_count": 1,
+      "scenario_id": "label-plan"
+    },
+    {
+      "checkpoint": "TASK_REWRITE_PLAN",
+      "expected_outcome": "REQUESTED",
+      "request_count": 1,
+      "safe_preview_only": true,
+      "scenario_id": "task-rewrite-plan"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "environment_choice_count": 3,
+      "expected_outcome": "REQUESTED",
+      "query_packaging_choice_count": 3,
+      "request_count": 1,
+      "scenario_id": "environment-relevant"
+    },
+    {
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "expected_outcome": "NOT_REQUIRED",
+      "request_count": 0,
+      "scenario_id": "environment-not-required"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "expected_outcome": "REQUESTED",
+      "request_count": 1,
+      "scenario_id": "final-prompts",
+      "scope": "PROMPTS"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "expected_outcome": "REQUESTED",
+      "request_count": 1,
+      "scenario_id": "final-selected-items",
+      "scope": "SELECTED_ITEMS"
+    },
+    {
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "expected_outcome": "REQUESTED",
+      "request_count": 1,
+      "scenario_id": "final-full-dataset",
+      "scope": "FULL_DATASET"
+    },
+    {
+      "checkpoint": "LABEL_PLAN",
+      "expected_outcome": "DISABLED",
+      "request_count": 0,
+      "scenario_id": "disabled"
+    },
+    {
+      "expected_outcome": "REJECTED_SOURCE",
+      "request_count": 0,
+      "scenario_id": "stale-source"
+    },
+    {
+      "expected_outcome": "REJECTED_BUDGET",
+      "request_count": 0,
+      "scenario_id": "preflight-budget"
+    }
+  ],
+  "schema_version": "eval-factory/checkpoint-request-gold/r7-04-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ],
+  "synthetic_decision_count": 0
+}

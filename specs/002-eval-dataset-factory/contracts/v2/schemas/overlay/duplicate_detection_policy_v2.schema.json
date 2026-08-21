@@ -1,0 +1,351 @@
+{
+  "$defs": {
+    "AttachmentDuplicateFingerprintLimitsV2": {
+      "additionalProperties": false,
+      "properties": {
+        "fingerprint_bits": {
+          "const": 256,
+          "title": "Fingerprint Bits",
+          "type": "integer"
+        },
+        "max_compression_ratio_milli": {
+          "maximum": 10000000,
+          "minimum": 1000,
+          "title": "Max Compression Ratio Milli",
+          "type": "integer"
+        },
+        "max_expanded_bytes": {
+          "maximum": 5000000000,
+          "minimum": 1,
+          "title": "Max Expanded Bytes",
+          "type": "integer"
+        },
+        "max_extracted_characters": {
+          "maximum": 10000000,
+          "minimum": 1,
+          "title": "Max Extracted Characters",
+          "type": "integer"
+        },
+        "max_file_bytes": {
+          "maximum": 1000000000,
+          "minimum": 1,
+          "title": "Max File Bytes",
+          "type": "integer"
+        },
+        "max_inventory_members": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Max Inventory Members",
+          "type": "integer"
+        },
+        "max_nested_depth": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Max Nested Depth",
+          "type": "integer"
+        },
+        "min_token_count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Min Token Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2",
+          "default": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "shingle_size": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Shingle Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_file_bytes",
+        "max_extracted_characters",
+        "max_inventory_members",
+        "max_nested_depth",
+        "max_expanded_bytes",
+        "max_compression_ratio_milli",
+        "min_token_count",
+        "shingle_size",
+        "fingerprint_bits"
+      ],
+      "title": "AttachmentDuplicateFingerprintLimitsV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/duplicate_detection_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_fingerprint_limits": {
+      "$ref": "#/$defs/AttachmentDuplicateFingerprintLimitsV2"
+    },
+    "attachment_near_threshold_bps": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Attachment Near Threshold Bps",
+      "type": "integer"
+    },
+    "attachment_normalization_version": {
+      "const": "attachment-duplicate-normalization/r7-01-v1",
+      "default": "attachment-duplicate-normalization/r7-01-v1",
+      "title": "Attachment Normalization Version",
+      "type": "string"
+    },
+    "attachment_shingle_size": {
+      "maximum": 16,
+      "minimum": 1,
+      "title": "Attachment Shingle Size",
+      "type": "integer"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "clustering_mode": {
+      "const": "CONNECTED_COMPONENTS",
+      "default": "CONNECTED_COMPONENTS",
+      "title": "Clustering Mode",
+      "type": "string"
+    },
+    "duplicate_detection_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Duplicate Detection Policy Id",
+      "type": "string"
+    },
+    "fingerprint_bits": {
+      "const": 256,
+      "title": "Fingerprint Bits",
+      "type": "integer"
+    },
+    "max_attachment_characters": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Attachment Characters",
+      "type": "integer"
+    },
+    "max_attachments": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Max Attachments",
+      "type": "integer"
+    },
+    "max_items": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Items",
+      "type": "integer"
+    },
+    "max_pair_comparisons": {
+      "maximum": 100000000,
+      "minimum": 0,
+      "title": "Max Pair Comparisons",
+      "type": "integer"
+    },
+    "max_task_characters": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Task Characters",
+      "type": "integer"
+    },
+    "min_attachment_tokens": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Min Attachment Tokens",
+      "type": "integer"
+    },
+    "min_task_tokens": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Min Task Tokens",
+      "type": "integer"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "duplicate-detection/r7-01-v1",
+      "default": "duplicate-detection/r7-01-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/duplicate-detection-policy/v2",
+      "default": "eval-factory/duplicate-detection-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "task_near_threshold_bps": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Task Near Threshold Bps",
+      "type": "integer"
+    },
+    "task_normalization_version": {
+      "const": "task-duplicate-normalization/r7-01-v1",
+      "default": "task-duplicate-normalization/r7-01-v1",
+      "title": "Task Normalization Version",
+      "type": "string"
+    },
+    "task_shingle_size": {
+      "maximum": 16,
+      "minimum": 1,
+      "title": "Task Shingle Size",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "duplicate_detection_policy_id",
+    "task_near_threshold_bps",
+    "attachment_near_threshold_bps",
+    "task_shingle_size",
+    "attachment_shingle_size",
+    "fingerprint_bits",
+    "min_task_tokens",
+    "min_attachment_tokens",
+    "max_task_characters",
+    "max_attachment_characters",
+    "max_items",
+    "max_attachments",
+    "max_pair_comparisons",
+    "attachment_fingerprint_limits",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "DuplicateDetectionPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.duplicate_v2.DuplicateDetectionPolicyV2",
+  "x-schema-version": "eval-factory/duplicate-detection-policy/v2"
+}

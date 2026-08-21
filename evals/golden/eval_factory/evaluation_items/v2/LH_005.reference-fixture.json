@@ -1,0 +1,2023 @@
+{
+  "checkpoint_order": [
+    "LABEL_PLAN",
+    "TASK_REWRITE_PLAN",
+    "ENVIRONMENT_STRATEGY",
+    "FINAL_DATASET_REVIEW"
+  ],
+  "contracts": {
+    "path": "specs/002-eval-dataset-factory/contracts/v2/manifest.json",
+    "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc"
+  },
+  "object_sha256": {
+    "approval_request_environment_strategy": "afe91fcc60941d5955110a802bcd93351dd9037081e15297885f4faf75d3b891",
+    "approval_request_final_dataset_review": "2965d155fa67cf5649dcf11e5f1611db1d0e78fae5cc331baf30e7c6dde42881",
+    "approval_request_label_plan": "dca11f99ceb45bd97c51e423114a602f0703e9ccf82a4b1cb473e9e9f2eff7f6",
+    "approval_request_task_rewrite_plan": "adbeba6973910115d8008278472e9ff35b15e7322f8c6b4813ff1aa7085d4eb4",
+    "attachment_reconstruction_result": "1d06e5e9a95678b681e56bbc084598bda83a51c9b5a6409b6722784bf54151af",
+    "environment_spec": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+    "environment_strategy": "7effcd9389df2e9f83b027e9573c014678d8922fd869ef2649589c269d477116",
+    "evaluation_item": "f9f84929307ca0aa4144116b0dab197cd9d7582b7edf9d901b2bd51858e063cb",
+    "evaluator_spec": "2708aa26d8bf0af89f45fe700db46534125edacff75976d052cb3c6d0e705353",
+    "label_plan": "66f68672727ad3952ea0b953a28497434c155f4cf4ad4a88bf4ce4ffac8b07d2",
+    "producer_task_view": "cbdeff586a1a2d86617072f0e445e01dd4f01c500011904d7dfbb050dfb0e590",
+    "provenance_manifest": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+    "quality_report": "0c0392a9f977fd294870acf974b57dcac2001b48ed98175d93a1e1caa6681c5d",
+    "query_spec": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+    "reference_policy": "ece6475b4b84a489684f5334bc61ec795ec81dc61965a06e03743fa6d52b10db",
+    "release_decision": "8352a22fe917f6c2056a43b4b321fb0ca21deb9272e001d8c717d0419f6c165c",
+    "rubric_set": "08cc561ab5c8a488d2a9a496cf1d710272fb3d914359567528a7b49f56b45119",
+    "task_draft": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+    "task_rewrite_plan": "d7c6d1968ed93034442ece8837f77cab4a7cb24331558289e7b8307d45d0cf88",
+    "tool_policy": "f83db854bbceb49aeec89eef1a1e5c9c833afa6815c2a64d45792abf7129c8c2",
+    "user_approval_policy": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147"
+  },
+  "objects": {
+    "approval_request_environment_strategy": {
+      "affected_stages": [
+        "task-authoring",
+        "attachment"
+      ],
+      "approval_policy_ref": {
+        "object_id": "user-approval-policy://LH_005/v2",
+        "object_sha256": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147",
+        "object_type": "user-approval-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "task-draft://LH_005/v2",
+            "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+            "object_type": "task-draft",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "available_decisions": [
+        "ACCEPT",
+        "ADJUST",
+        "REJECT"
+      ],
+      "checkpoint": "ENVIRONMENT_STRATEGY",
+      "idempotency_key": "LH_005-environment_strategy-v2",
+      "plan_ref": {
+        "object_id": "environment-strategy://LH_005/v2",
+        "object_sha256": "7effcd9389df2e9f83b027e9573c014678d8922fd869ef2649589c269d477116",
+        "object_type": "environment-strategy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "preview_refs": [
+        {
+          "object_id": "environment-strategy://LH_005/v2",
+          "object_sha256": "7effcd9389df2e9f83b027e9573c014678d8922fd869ef2649589c269d477116",
+          "object_type": "environment-strategy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "projection_ref": {
+        "object_id": "user-approval-projection://LH_005/environment_strategy",
+        "object_sha256": "8e27b2b13d209e340060b5fde9303ae1f49ad8a9eaee7d51e5997ad0772504c4",
+        "object_type": "user-approval-projection",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "request_id": "user-approval-request://LH_005/environment_strategy/v2",
+      "requested_by": "requesting-user",
+      "schema_version": "eval-factory/user-approval-request/v2",
+      "subject_refs": [
+        {
+          "object_id": "task-draft://LH_005/v2",
+          "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+          "object_type": "task-draft",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ]
+    },
+    "approval_request_final_dataset_review": {
+      "affected_stages": [
+        "release"
+      ],
+      "approval_policy_ref": {
+        "object_id": "user-approval-policy://LH_005/v2",
+        "object_sha256": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147",
+        "object_type": "user-approval-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "evaluation-item://LH_005/v2",
+            "object_sha256": "f9f84929307ca0aa4144116b0dab197cd9d7582b7edf9d901b2bd51858e063cb",
+            "object_type": "evaluation-item",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "available_decisions": [
+        "ACCEPT",
+        "ADJUST",
+        "DEFER",
+        "REJECT"
+      ],
+      "checkpoint": "FINAL_DATASET_REVIEW",
+      "idempotency_key": "LH_005-final_dataset_review-v2",
+      "plan_ref": null,
+      "preview_refs": [
+        {
+          "object_id": "query-spec://LH_005/v2",
+          "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+          "object_type": "query-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "quality-report://LH_005/v2",
+          "object_sha256": "0c0392a9f977fd294870acf974b57dcac2001b48ed98175d93a1e1caa6681c5d",
+          "object_type": "quality-report",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "evaluation-item://LH_005/v2",
+          "object_sha256": "f9f84929307ca0aa4144116b0dab197cd9d7582b7edf9d901b2bd51858e063cb",
+          "object_type": "evaluation-item",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "projection_ref": {
+        "object_id": "user-approval-projection://LH_005/final_dataset_review",
+        "object_sha256": "6bc5e9bdd7e3f2b4edfb1f7de85a8e2a774366ca8170aa9411d673da117b1077",
+        "object_type": "user-approval-projection",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "request_id": "user-approval-request://LH_005/final_dataset_review/v2",
+      "requested_by": "requesting-user",
+      "schema_version": "eval-factory/user-approval-request/v2",
+      "subject_refs": [
+        {
+          "object_id": "evaluation-item://LH_005/v2",
+          "object_sha256": "f9f84929307ca0aa4144116b0dab197cd9d7582b7edf9d901b2bd51858e063cb",
+          "object_type": "evaluation-item",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ]
+    },
+    "approval_request_label_plan": {
+      "affected_stages": [
+        "label"
+      ],
+      "approval_policy_ref": {
+        "object_id": "user-approval-policy://LH_005/v2",
+        "object_sha256": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147",
+        "object_type": "user-approval-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "label-spec://contextual-recovery-after-tool-error/v1",
+            "object_sha256": "1f195bad430b0fe36a58f48927a7722282b3e2c12b74743cceb6402659e86b29",
+            "object_type": "label-spec",
+            "object_version": "v1",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "available_decisions": [
+        "ACCEPT",
+        "ADJUST",
+        "REJECT",
+        "REQUEST_MORE_EXAMPLES"
+      ],
+      "checkpoint": "LABEL_PLAN",
+      "idempotency_key": "LH_005-label_plan-v2",
+      "plan_ref": {
+        "object_id": "label-plan://LH_005/v2",
+        "object_sha256": "66f68672727ad3952ea0b953a28497434c155f4cf4ad4a88bf4ce4ffac8b07d2",
+        "object_type": "label-plan",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "preview_refs": [
+        {
+          "object_id": "label-plan://LH_005/v2",
+          "object_sha256": "66f68672727ad3952ea0b953a28497434c155f4cf4ad4a88bf4ce4ffac8b07d2",
+          "object_type": "label-plan",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "projection_ref": {
+        "object_id": "user-approval-projection://LH_005/label_plan",
+        "object_sha256": "697fcbcefbf63f247d7f8ab33779b3d90115362c9fc1a14590606954d2089546",
+        "object_type": "user-approval-projection",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "request_id": "user-approval-request://LH_005/label_plan/v2",
+      "requested_by": "requesting-user",
+      "schema_version": "eval-factory/user-approval-request/v2",
+      "subject_refs": [
+        {
+          "object_id": "label-spec://contextual-recovery-after-tool-error/v1",
+          "object_sha256": "1f195bad430b0fe36a58f48927a7722282b3e2c12b74743cceb6402659e86b29",
+          "object_type": "label-spec",
+          "object_version": "v1",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ]
+    },
+    "approval_request_task_rewrite_plan": {
+      "affected_stages": [
+        "task-authoring"
+      ],
+      "approval_policy_ref": {
+        "object_id": "user-approval-policy://LH_005/v2",
+        "object_sha256": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147",
+        "object_type": "user-approval-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "selection-context://LH_005/reference-candidate",
+            "object_sha256": "bf14ad1af56074f1cfe3b2a4bd461c1b1216ebe92656382058e2c24dde2dff56",
+            "object_type": "selection-context",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "available_decisions": [
+        "ACCEPT",
+        "ADJUST",
+        "REJECT",
+        "REQUEST_MORE_EXAMPLES"
+      ],
+      "checkpoint": "TASK_REWRITE_PLAN",
+      "idempotency_key": "LH_005-task_rewrite_plan-v2",
+      "plan_ref": {
+        "object_id": "task-rewrite-plan://LH_005/v2",
+        "object_sha256": "d7c6d1968ed93034442ece8837f77cab4a7cb24331558289e7b8307d45d0cf88",
+        "object_type": "task-rewrite-plan",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "preview_refs": [
+        {
+          "object_id": "task-rewrite-plan://LH_005/v2",
+          "object_sha256": "d7c6d1968ed93034442ece8837f77cab4a7cb24331558289e7b8307d45d0cf88",
+          "object_type": "task-rewrite-plan",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "projection_ref": {
+        "object_id": "user-approval-projection://LH_005/task_rewrite_plan",
+        "object_sha256": "cd3f3534bd361db0c1967757743a1b926bfb16a7b5f8a32bffd6ebff728d2c74",
+        "object_type": "user-approval-projection",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "request_id": "user-approval-request://LH_005/task_rewrite_plan/v2",
+      "requested_by": "requesting-user",
+      "schema_version": "eval-factory/user-approval-request/v2",
+      "subject_refs": [
+        {
+          "object_id": "selection-context://LH_005/reference-candidate",
+          "object_sha256": "bf14ad1af56074f1cfe3b2a4bd461c1b1216ebe92656382058e2c24dde2dff56",
+          "object_type": "selection-context",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ]
+    },
+    "attachment_reconstruction_result": {
+      "accepted_artifact_refs": [],
+      "artifact_result_refs": [
+        {
+          "object_id": "artifact-build-result://LH_005/pending",
+          "object_sha256": "5f49ea39b142623ab3ee9d0b4c73e832b59d2288e910643a5e80134a27c3ff91",
+          "object_type": "artifact-build-result",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "attachment_reconstruction_result_id": "attachment-result://LH_005/v2",
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "producer-task-view://LH_005/v2",
+            "object_sha256": "cbdeff586a1a2d86617072f0e445e01dd4f01c500011904d7dfbb050dfb0e590",
+            "object_type": "producer-task-view",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "environment-spec://LH_005/v2",
+            "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+            "object_type": "environment-spec",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "environment_spec_ref": {
+        "object_id": "environment-spec://LH_005/v2",
+        "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+        "object_type": "environment-spec",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "evidence_matrix_ref": {
+        "object_id": "artifact-evidence-matrix://LH_005/candidate",
+        "object_sha256": "e93a8387f5395aa4536c3aa7c7ef7c42c474735afad764cc23b159a9119e608d",
+        "object_type": "artifact-evidence-matrix",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "failed_artifact_ids": [],
+      "input_state_only": true,
+      "package_sha256": "c5b644a3d63d3d7ad6e6501f7d948e40a4f69fb9c4677d7e8e6a86cad1155541",
+      "producer_task_view_ref": {
+        "object_id": "producer-task-view://LH_005/v2",
+        "object_sha256": "cbdeff586a1a2d86617072f0e445e01dd4f01c500011904d7dfbb050dfb0e590",
+        "object_type": "producer-task-view",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "provenance_manifest_ref": {
+        "object_id": "provenance-manifest://LH_005/v2",
+        "object_sha256": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+        "object_type": "provenance-manifest",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "quality_report_ref": {
+        "object_id": "quality-report://LH_005/v2",
+        "object_sha256": "0c0392a9f977fd294870acf974b57dcac2001b48ed98175d93a1e1caa6681c5d",
+        "object_type": "quality-report",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "resumable_artifact_ids": [],
+      "schema_version": "eval-factory/attachment-reconstruction-result/v1"
+    },
+    "environment_spec": {
+      "artifacts": [],
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "task-draft://LH_005/v2",
+            "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+            "object_type": "task-draft",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "environment_spec_id": "environment-spec://LH_005/v2",
+      "input_state_only": true,
+      "package_manifest_ref": {
+        "object_id": "package-inventory://LH_005/empty-candidate",
+        "object_sha256": "112bc0798aa375ab4368fb8d1d424603fa5b2caba91b1b4f67955fb2ceab680c",
+        "object_type": "package-inventory",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "package_sha256": "c5b644a3d63d3d7ad6e6501f7d948e40a4f69fb9c4677d7e8e6a86cad1155541",
+      "schema_version": "eval-factory/environment-spec/v1"
+    },
+    "environment_strategy": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "task-draft://LH_005/v2",
+            "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+            "object_type": "task-draft",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "credential_fabrication_forbidden": true,
+      "environment_strategy_id": "environment-strategy://LH_005/v2",
+      "query_packaging_options": [
+        "ASK_PER_TASK",
+        "INCLUDE_QUERY_YAML",
+        "OMIT_QUERY_YAML"
+      ],
+      "recommendation_reason": "R0 reference fixtures should remain executable without private credentials or host-specific paths.",
+      "recommended_strategy": "REWRITE_STANDARD_ENV",
+      "requirements": [
+        {
+          "affected_subject_refs": [
+            {
+              "object_id": "task-draft://LH_005/v2",
+              "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+              "object_type": "task-draft",
+              "object_version": "v2",
+              "schema_version": "eval-factory/object-ref/v1"
+            }
+          ],
+          "alternatives": [
+            {
+              "blocking_reason": null,
+              "capability_impact": "Highest fidelity; requires safe reconstruction of local dependencies.",
+              "feasible": true,
+              "schema_version": "eval-factory/environment-alternative/v2",
+              "strategy": "TRACE_FAITHFUL_MOCK"
+            },
+            {
+              "blocking_reason": null,
+              "capability_impact": "Removes local paths or services while preserving the target capability.",
+              "feasible": true,
+              "schema_version": "eval-factory/environment-alternative/v2",
+              "strategy": "REWRITE_STANDARD_ENV"
+            },
+            {
+              "blocking_reason": null,
+              "capability_impact": "Removes this candidate from the dataset.",
+              "feasible": true,
+              "schema_version": "eval-factory/environment-alternative/v2",
+              "strategy": "EXCLUDE_TASK"
+            }
+          ],
+          "description": "The task depends on an application-managed design workspace and active design system.",
+          "evidence_refs": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "requirement_id": "environment-requirement://LH_005/workspace",
+          "requires_nonstandard_environment": true,
+          "requires_special_account": false,
+          "schema_version": "eval-factory/environment-requirement/v2"
+        }
+      ],
+      "schema_version": "eval-factory/environment-strategy/v2"
+    },
+    "evaluation_item": {
+      "attachment_reconstruction_result_ref": {
+        "object_id": "attachment-result://LH_005/v2",
+        "object_sha256": "1d06e5e9a95678b681e56bbc084598bda83a51c9b5a6409b6722784bf54151af",
+        "object_type": "attachment-reconstruction-result",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "raw-traj://LH_005",
+            "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+            "object_type": "raw-trace",
+            "object_version": "raw",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "release-decision://LH_005/v2",
+            "object_sha256": "8352a22fe917f6c2056a43b4b321fb0ca21deb9272e001d8c717d0419f6c165c",
+            "object_type": "release-decision",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "components": {
+        "environment_spec_ref": {
+          "object_id": "environment-spec://LH_005/v2",
+          "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+          "object_type": "environment-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "evaluator_spec_ref": {
+          "object_id": "evaluator-spec://LH_005/v2",
+          "object_sha256": "2708aa26d8bf0af89f45fe700db46534125edacff75976d052cb3c6d0e705353",
+          "object_type": "evaluator-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "provenance_manifest_ref": {
+          "object_id": "provenance-manifest://LH_005/v2",
+          "object_sha256": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+          "object_type": "provenance-manifest",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "quality_report_ref": {
+          "object_id": "quality-report://LH_005/v2",
+          "object_sha256": "0c0392a9f977fd294870acf974b57dcac2001b48ed98175d93a1e1caa6681c5d",
+          "object_type": "quality-report",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "query_spec_ref": {
+          "object_id": "query-spec://LH_005/v2",
+          "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+          "object_type": "query-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "reference_policy_ref": {
+          "object_id": "reference-policy://LH_005/v2",
+          "object_sha256": "ece6475b4b84a489684f5334bc61ec795ec81dc61965a06e03743fa6d52b10db",
+          "object_type": "reference-policy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "rubric_set_ref": {
+          "object_id": "rubric-set://LH_005/v2",
+          "object_sha256": "08cc561ab5c8a488d2a9a496cf1d710272fb3d914359567528a7b49f56b45119",
+          "object_type": "rubric-set",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "schema_version": "eval-factory/evaluation-item-components/v1",
+        "tool_policy_ref": {
+          "object_id": "tool-policy://LH_005/v2",
+          "object_sha256": "f83db854bbceb49aeec89eef1a1e5c9c833afa6815c2a64d45792abf7129c8c2",
+          "object_type": "tool-policy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      },
+      "evaluation_item_id": "evaluation-item://LH_005/v2",
+      "item_sha256": "36b926d53b44f32c9cd47ad9102a76a3eeca4078b88b49792b8038851707ae99",
+      "item_version": "v2",
+      "label_decision_refs": [
+        {
+          "object_id": "label-decision://LH_005/reference-candidate",
+          "object_sha256": "f22657a16de4300a7334c21804e22b37d198d8f0cbcd49532595e80f222543be",
+          "object_type": "label-decision",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "release_decision_ref": {
+        "object_id": "release-decision://LH_005/v2",
+        "object_sha256": "8352a22fe917f6c2056a43b4b321fb0ca21deb9272e001d8c717d0419f6c165c",
+        "object_type": "release-decision",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "schema_version": "eval-factory/evaluation-item/v2",
+      "source_trace_refs": [
+        {
+          "object_id": "raw-traj://LH_005",
+          "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+          "object_type": "raw-trace",
+          "object_version": "raw",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "task_draft_ref": {
+        "object_id": "task-draft://LH_005/v2",
+        "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+        "object_type": "task-draft",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "user_approval_policy_ref": {
+        "object_id": "user-approval-policy://LH_005/v2",
+        "object_sha256": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147",
+        "object_type": "user-approval-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "user_decision_record_refs": []
+    },
+    "evaluator_spec": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "rubric-set://LH_005/v2",
+            "object_sha256": "08cc561ab5c8a488d2a9a496cf1d710272fb3d914359567528a7b49f56b45119",
+            "object_type": "rubric-set",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "evaluator_spec_id": "evaluator-spec://LH_005/v2",
+      "evaluator_type": "contract-evaluator",
+      "evaluator_version": "candidate-v2",
+      "failure_classes": [
+        "CONTESTANT_FAILURE",
+        "ENVIRONMENT_FAILURE",
+        "EVALUATOR_FAILURE",
+        "INDETERMINATE"
+      ],
+      "input_contract_ref": {
+        "object_id": "evaluator-input-contract://LH_005/candidate",
+        "object_sha256": "6ab9823b65530bdbc90b4b8295a337bf0869b493df7ef3a33ace528a32af0288",
+        "object_type": "evaluator-input-contract",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "output_contract_ref": {
+        "object_id": "evaluator-output-contract://LH_005/candidate",
+        "object_sha256": "8e72c0477a87db56bc3f0c50cbc2d04406d1bfbdc1b4ca5401eab392baff187e",
+        "object_type": "evaluator-output-contract",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "rubric_set_ref": {
+        "object_id": "rubric-set://LH_005/v2",
+        "object_sha256": "08cc561ab5c8a488d2a9a496cf1d710272fb3d914359567528a7b49f56b45119",
+        "object_type": "rubric-set",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "schema_version": "eval-factory/evaluator-spec/v1",
+      "timeout_seconds": 300
+    },
+    "label_plan": {
+      "abstain_rules": [
+        "abstain when required capability is incomplete",
+        "abstain when evidence identity or task continuity is ambiguous"
+      ],
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "raw-traj://LH_005",
+            "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+            "object_type": "raw-trace",
+            "object_version": "raw",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "label-spec://contextual-recovery-after-tool-error/v1",
+            "object_sha256": "1f195bad430b0fe36a58f48927a7722282b3e2c12b74743cceb6402659e86b29",
+            "object_type": "label-spec",
+            "object_version": "v1",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "blind_spots": [
+        "Canary traits route examples but are not annotation truth.",
+        "Partial parsing cannot prove absence outside recovered ranges."
+      ],
+      "boundary": "Use normalized executed facts; never promote prompt mentions or incomplete negatives.",
+      "deterministic_clause_refs": [
+        {
+          "object_id": "predicate://contextual-recovery/prerequisite/v1",
+          "object_sha256": "c8ba5abc09a6af7bc18bea2357d25849f3be0c3b0f7f25533f5a291b564d4dab",
+          "object_type": "structured-predicate",
+          "object_version": "v1",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "predicate://contextual-recovery/no-prerequisite/v1",
+          "object_sha256": "52ff2bc67f9e2e86570860202f688fdafb77b4a986cf7dded2fde72d32a96190",
+          "object_type": "structured-predicate",
+          "object_version": "v1",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "estimated_model_requests_per_trace": 1,
+      "examples": [
+        {
+          "evidence_refs": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "example_id": "plan-example://LH_005/positive",
+          "expected_treatment": "Accept only with exact evidence references.",
+          "input_summary": "The required structured event and capability are directly observed.",
+          "kind": "POSITIVE",
+          "schema_version": "eval-factory/plan-example/v2"
+        },
+        {
+          "evidence_refs": [],
+          "example_id": "plan-example://LH_005/negative",
+          "expected_treatment": "Record NO_MATCH with complete negative evidence.",
+          "input_summary": "The relevant capability is complete and the required event is absent.",
+          "kind": "NEGATIVE",
+          "schema_version": "eval-factory/plan-example/v2"
+        },
+        {
+          "evidence_refs": [],
+          "example_id": "plan-example://LH_005/ambiguous",
+          "expected_treatment": "Do not treat the mention as an executed event.",
+          "input_summary": "A text mention exists but execution identity is not proven.",
+          "kind": "AMBIGUOUS",
+          "schema_version": "eval-factory/plan-example/v2"
+        },
+        {
+          "evidence_refs": [],
+          "example_id": "plan-example://LH_005/abstain",
+          "expected_treatment": "ABSTAIN rather than infer a negative fact.",
+          "input_summary": "The relevant source range is malformed, truncated, or unavailable.",
+          "kind": "ABSTAIN",
+          "schema_version": "eval-factory/plan-example/v2"
+        }
+      ],
+      "expected_model_path": [
+        "internal-semantic-labeler-v1"
+      ],
+      "intent": "Match when a capability-complete deterministic sequence first proves an executed tool error followed by further task-directed action, and bounded semantic evidence shows that the later action meaningfully adapts strategy toward the same user intent rather than merely repeating the identical failed call or abandoning the task.",
+      "label_plan_id": "label-plan://LH_005/v2",
+      "label_spec_ref": {
+        "object_id": "label-spec://contextual-recovery-after-tool-error/v1",
+        "object_sha256": "1f195bad430b0fe36a58f48927a7722282b3e2c12b74743cceb6402659e86b29",
+        "object_type": "label-spec",
+        "object_version": "v1",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "schema_version": "eval-factory/label-plan/v2",
+      "semantic_clause_refs": [
+        {
+          "object_id": "semantic-residual://contextual-recovery/v1",
+          "object_sha256": "3b8a69dec2ae09167cbc3d3fde2391bb3bcbaefad3e49f79f00fd9a20eca0560",
+          "object_type": "semantic-residual-spec",
+          "object_version": "v1",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ]
+    },
+    "producer_task_view": {
+      "allowed_tools": [
+        "file-read",
+        "file-write"
+      ],
+      "attachment_dependencies": [
+        {
+          "criticality": "REQUIRED",
+          "dependency_id": "attachment-dependency://LH_005/workspace",
+          "description": "Candidate input-state workspace needed to execute the reconstructed task.",
+          "evidence": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "evidence_priority": "EXPLICIT_REQUIREMENT",
+          "schema_version": "eval-factory/attachment-dependency/v1"
+        }
+      ],
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "task-draft://LH_005/v2",
+            "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+            "object_type": "task-draft",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "forbidden_outputs": [
+        "original agent final answer",
+        "pre-completed requested deliverable",
+        "grader rules or hidden pass conditions"
+      ],
+      "producer_task_view_id": "producer-task-view://LH_005/v2",
+      "projection_policy_ref": {
+        "object_id": "projection-policy://LH_005/attachment-producer-v2",
+        "object_sha256": "d5695d7648c63d080bd86bf5ba11f1dfa79118c0ef3134b6ed1771fb1fd71d00",
+        "object_type": "projection-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "query_instruction": "Inspect the current design workspace and determine whether a DESIGN.md file exists. Explain whether this project should have one, using the observable workspace structure and existing design documentation as evidence.",
+      "safe_evidence_bundle_refs": [
+        {
+          "object_id": "evidence-bundle://LH_005/candidate-safe-view",
+          "object_sha256": "e29ad4a0cd9021444bc9986f763d5b1e3a2534a3fa61fbd3ed4ef39b1a473fb1",
+          "object_type": "evidence-bundle",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "schema_version": "eval-factory/producer-task-view/v1",
+      "source_task_draft_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5"
+    },
+    "provenance_manifest": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "raw-traj://LH_005",
+            "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+            "object_type": "raw-trace",
+            "object_version": "raw",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "environment-spec://LH_005/v2",
+            "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+            "object_type": "environment-spec",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "entries": [],
+      "exact_set_verified": true,
+      "inventory_ref": {
+        "object_id": "package-inventory://LH_005/empty-candidate",
+        "object_sha256": "112bc0798aa375ab4368fb8d1d424603fa5b2caba91b1b4f67955fb2ceab680c",
+        "object_type": "package-inventory",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "package_sha256": "c5b644a3d63d3d7ad6e6501f7d948e40a4f69fb9c4677d7e8e6a86cad1155541",
+      "policy_version": "eval-factory-safety/v1",
+      "provenance_manifest_id": "provenance-manifest://LH_005/v2",
+      "schema_version": "eval-factory/provenance-manifest/v1"
+    },
+    "quality_report": {
+      "approvable": false,
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "query-spec://LH_005/v2",
+            "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+            "object_type": "query-spec",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "environment-spec://LH_005/v2",
+            "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+            "object_type": "environment-spec",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "provenance-manifest://LH_005/v2",
+            "object_sha256": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+            "object_type": "provenance-manifest",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "deterministic_validation_refs": [
+        {
+          "object_id": "validation-result://LH_005/reference-scaffold",
+          "object_sha256": "7c497c4ba49638974abc60376e5df30bb7c268d609b7804e8b6f95703f838217",
+          "object_type": "validation-result",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "finding_refs": [],
+      "item_subject_refs": [
+        {
+          "object_id": "query-spec://LH_005/v2",
+          "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+          "object_type": "query-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "environment-spec://LH_005/v2",
+          "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+          "object_type": "environment-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "rubric-set://LH_005/v2",
+          "object_sha256": "08cc561ab5c8a488d2a9a496cf1d710272fb3d914359567528a7b49f56b45119",
+          "object_type": "rubric-set",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "evaluator-spec://LH_005/v2",
+          "object_sha256": "2708aa26d8bf0af89f45fe700db46534125edacff75976d052cb3c6d0e705353",
+          "object_type": "evaluator-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "reference-policy://LH_005/v2",
+          "object_sha256": "ece6475b4b84a489684f5334bc61ec795ec81dc61965a06e03743fa6d52b10db",
+          "object_type": "reference-policy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "tool-policy://LH_005/v2",
+          "object_sha256": "f83db854bbceb49aeec89eef1a1e5c9c833afa6815c2a64d45792abf7129c8c2",
+          "object_type": "tool-policy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "provenance-manifest://LH_005/v2",
+          "object_sha256": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+          "object_type": "provenance-manifest",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "open_p0_count": 0,
+      "open_p1_count": 0,
+      "quality_report_id": "quality-report://LH_005/v2",
+      "schema_version": "eval-factory/quality-report/v1",
+      "semantic_round_refs": [
+        {
+          "object_id": "semantic-review-result://LH_005/round-1-pending",
+          "object_sha256": "65fb48a5c04293155f1fd94c6646f850a689124f1a3a502ee095f48318c4be49",
+          "object_type": "semantic-review-result",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "semantic-review-result://LH_005/round-2-pending",
+          "object_sha256": "821adeaad6b26226de4914a16481519c8c8dfbd260023a77e7eface179386b03",
+          "object_type": "semantic-review-result",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        {
+          "object_id": "semantic-review-result://LH_005/round-3-pending",
+          "object_sha256": "50e40459f7382a2e0ac9283b3701306349fef52e76f1000e45f14fdf7f4d9f3e",
+          "object_type": "semantic-review-result",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "unresolved_non_waivable_count": 0
+    },
+    "query_spec": {
+      "attachment_dependency_ids": [
+        "attachment-dependency://LH_005/workspace"
+      ],
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "task-draft://LH_005/v2",
+            "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+            "object_type": "task-draft",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "contestant_visible": true,
+      "prompt": "Inspect the current design workspace and determine whether a DESIGN.md file exists. Explain whether this project should have one, using the observable workspace structure and existing design documentation as evidence.",
+      "prompt_sha256": "3303ad145eb1b9b29c8503663d21014874e919a6dc078e42f02e28b4a2792cd8",
+      "query_spec_id": "query-spec://LH_005/v2",
+      "schema_version": "eval-factory/query-spec/v1",
+      "task_draft_ref": {
+        "object_id": "task-draft://LH_005/v2",
+        "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+        "object_type": "task-draft",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      }
+    },
+    "reference_policy": {
+      "attachment_producer_access": false,
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "query-spec://LH_005/v2",
+            "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+            "object_type": "query-spec",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "contestant_access": false,
+      "evaluator_access": false,
+      "human_only_access": false,
+      "mode": "NONE",
+      "policy_version": "reference-policy/v2-candidate",
+      "reference_policy_id": "reference-policy://LH_005/v2",
+      "reference_refs": [],
+      "schema_version": "eval-factory/reference-policy/v1"
+    },
+    "release_decision": {
+      "action": "REQUEST_RELEASE",
+      "actor": "r0-09-reference-fixture-builder",
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "quality-report://LH_005/v2",
+            "object_sha256": "0c0392a9f977fd294870acf974b57dcac2001b48ed98175d93a1e1caa6681c5d",
+            "object_type": "quality-report",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "provenance-manifest://LH_005/v2",
+            "object_sha256": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+            "object_type": "provenance-manifest",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "automated_quality_passed": false,
+      "batch_quality_report_ref": null,
+      "chain_id": "release-chain://LH_005",
+      "channel": "CANARY",
+      "checkpoint_decisions": [],
+      "components": {
+        "environment_spec_ref": {
+          "object_id": "environment-spec://LH_005/v2",
+          "object_sha256": "9b0adc8035443f1e10f31509f86328c5637cfb3be15d9380ac734abd9d09ffb0",
+          "object_type": "environment-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "evaluator_spec_ref": {
+          "object_id": "evaluator-spec://LH_005/v2",
+          "object_sha256": "2708aa26d8bf0af89f45fe700db46534125edacff75976d052cb3c6d0e705353",
+          "object_type": "evaluator-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "provenance_manifest_ref": {
+          "object_id": "provenance-manifest://LH_005/v2",
+          "object_sha256": "e3121f4d073dafbe4b1675c8e89a79d0d0b9afa8e3e1e5dccd8db58426dc3475",
+          "object_type": "provenance-manifest",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "quality_report_ref": {
+          "object_id": "quality-report://LH_005/v2",
+          "object_sha256": "0c0392a9f977fd294870acf974b57dcac2001b48ed98175d93a1e1caa6681c5d",
+          "object_type": "quality-report",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "query_spec_ref": {
+          "object_id": "query-spec://LH_005/v2",
+          "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+          "object_type": "query-spec",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "reference_policy_ref": {
+          "object_id": "reference-policy://LH_005/v2",
+          "object_sha256": "ece6475b4b84a489684f5334bc61ec795ec81dc61965a06e03743fa6d52b10db",
+          "object_type": "reference-policy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "rubric_set_ref": {
+          "object_id": "rubric-set://LH_005/v2",
+          "object_sha256": "08cc561ab5c8a488d2a9a496cf1d710272fb3d914359567528a7b49f56b45119",
+          "object_type": "rubric-set",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        },
+        "schema_version": "eval-factory/evaluation-item-components/v1",
+        "tool_policy_ref": {
+          "object_id": "tool-policy://LH_005/v2",
+          "object_sha256": "f83db854bbceb49aeec89eef1a1e5c9c833afa6815c2a64d45792abf7129c8c2",
+          "object_type": "tool-policy",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      },
+      "decided_at": "2026-07-20T00:00:00Z",
+      "decision_sha256": "93cedcfc8b47c86b1d12c125956fc26e6f96e7d7535101a261b409864aa66820",
+      "export_profile": "LH",
+      "export_profile_version": "v1",
+      "idempotency_key": "reference-release-LH_005-v2",
+      "item_id": "evaluation-item://LH_005",
+      "item_version": "v2",
+      "open_p0_count": 0,
+      "open_p1_count": 0,
+      "package_manifest_ref": {
+        "object_id": "package-inventory://LH_005/empty-candidate",
+        "object_sha256": "112bc0798aa375ab4368fb8d1d424603fa5b2caba91b1b4f67955fb2ceab680c",
+        "object_type": "package-inventory",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "package_sha256": "c5b644a3d63d3d7ad6e6501f7d948e40a4f69fb9c4677d7e8e6a86cad1155541",
+      "previous_decision_ref": null,
+      "production_attestation_ref": null,
+      "registry": "registry://reference-fixtures",
+      "release_decision_id": "release-decision://LH_005/v2",
+      "release_subject_sha256": "03174526342a2854e9d8f5570647ece5bd0e683c1c6cbff57bc4e186f31a948d",
+      "required_checkpoints": [
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW",
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN"
+      ],
+      "schema_version": "eval-factory/release-decision/v2",
+      "state": "CANDIDATE",
+      "unresolved_non_waivable_count": 0,
+      "user_approval_policy_ref": {
+        "object_id": "user-approval-policy://LH_005/v2",
+        "object_sha256": "fe91838dbe110cceebabd1d0d76bba3a283d056b75026c806206c7ca700ad147",
+        "object_type": "user-approval-policy",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      }
+    },
+    "rubric_set": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "query-spec://LH_005/v2",
+            "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+            "object_type": "query-spec",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "criteria": [
+        {
+          "approval_status": "CANDIDATE",
+          "criterion_id": "criterion://LH_005/task-completion",
+          "description": "Completes the stated task without relying on hidden trace content or producing unsupported claims.",
+          "evaluator_binding": "evaluator://LH_005/v2",
+          "judged_object": "contestant-output",
+          "reachability_evidence": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "schema_version": "eval-factory/rubric-criterion/v1",
+          "visibility": "EVALUATOR_ONLY",
+          "weight": 1.0
+        }
+      ],
+      "imported_from_ref": null,
+      "query_spec_ref": {
+        "object_id": "query-spec://LH_005/v2",
+        "object_sha256": "0ddd1d387fb3e26cd249ff229d746ca562920e33610873c4863da0d9b042a3ba",
+        "object_type": "query-spec",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "rubric_set_id": "rubric-set://LH_005/v2",
+      "schema_version": "eval-factory/rubric-set/v1",
+      "total_weight": 1.0
+    },
+    "task_draft": {
+      "allowed_tools": [
+        "file-read",
+        "file-write",
+        "shell"
+      ],
+      "attachment_dependencies": [
+        {
+          "criticality": "REQUIRED",
+          "dependency_id": "attachment-dependency://LH_005/workspace",
+          "description": "Candidate input-state workspace needed to execute the reconstructed task.",
+          "evidence": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "evidence_priority": "EXPLICIT_REQUIREMENT",
+          "schema_version": "eval-factory/attachment-dependency/v1"
+        }
+      ],
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "raw-traj://LH_005",
+            "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+            "object_type": "raw-trace",
+            "object_version": "raw",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "label-decision://LH_005/reference-candidate",
+            "object_sha256": "f22657a16de4300a7334c21804e22b37d198d8f0cbcd49532595e80f222543be",
+            "object_type": "label-decision",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "evaluation_claim": "The contestant can complete the scoped task using only the prompt, approved tools, and reconstructable input-state dependencies.",
+      "forbidden_outputs": [
+        "original agent final answer",
+        "pre-completed requested deliverable",
+        "grader rules or hidden pass conditions"
+      ],
+      "required_capabilities": [
+        "workspace-design-governance"
+      ],
+      "requirement_lineage": [
+        {
+          "conflict_status": "NONE",
+          "evidence": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "evidence_priority": "DIRECT_OBSERVATION",
+          "requirement_id": "requirement://LH_005/primary-intent",
+          "schema_version": "eval-factory/requirement-lineage/v1",
+          "statement": "Evaluate whether the active design workspace has sufficient design-system governance."
+        }
+      ],
+      "schema_version": "eval-factory/task-draft/v1",
+      "selection_context_ref": {
+        "object_id": "selection-context://LH_005/reference-candidate",
+        "object_sha256": "bf14ad1af56074f1cfe3b2a4bd461c1b1216ebe92656382058e2c24dde2dff56",
+        "object_type": "selection-context",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "selection_firewall": {
+        "completed_deliverable_excluded": true,
+        "final_answer_excluded": true,
+        "grader_rules_excluded": true,
+        "hidden_selection_signals_excluded": true,
+        "private_reference_excluded": true,
+        "schema_version": "eval-factory/selection-firewall/v1",
+        "trajectory_specific_steps_excluded": true
+      },
+      "status": "CANDIDATE",
+      "task_draft_id": "task-draft://LH_005/v2",
+      "task_episode_refs": [
+        {
+          "object_id": "task-episode://LH_005/candidate",
+          "object_sha256": "3beea23ce9961ae6ea6b4f746869bc24e7284c804a38c7e3952e29e01792cb77",
+          "object_type": "task-episode",
+          "object_version": "v2",
+          "schema_version": "eval-factory/object-ref/v1"
+        }
+      ],
+      "task_intent": "Evaluate whether the active design workspace has sufficient design-system governance.",
+      "uncertainties": [],
+      "visible_prompt": "Inspect the current design workspace and determine whether a DESIGN.md file exists. Explain whether this project should have one, using the observable workspace structure and existing design documentation as evidence."
+    },
+    "task_rewrite_plan": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "raw-traj://LH_005",
+            "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+            "object_type": "raw-trace",
+            "object_version": "raw",
+            "schema_version": "eval-factory/object-ref/v1"
+          },
+          {
+            "object_id": "selection-context://LH_005/reference-candidate",
+            "object_sha256": "bf14ad1af56074f1cfe3b2a4bd461c1b1216ebe92656382058e2c24dde2dff56",
+            "object_type": "selection-context",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "examples": [
+        {
+          "evidence_refs": [
+            {
+              "capability": "candidate-user-intent",
+              "capability_complete": true,
+              "evidence_ref_id": "evidence-ref://LH_005/candidate-intent",
+              "polarity": "POSITIVE",
+              "schema_version": "eval-factory/evidence-ref/v1",
+              "source_spans": [
+                {
+                  "approximate": false,
+                  "raw_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                  "schema_version": "eval-factory/source-span-ref/v1",
+                  "source_trace_id": "source-trace://LH_005",
+                  "span_id": "source-span://LH_005/candidate-intent"
+                }
+              ],
+              "subject_ref": {
+                "object_id": "raw-traj://LH_005",
+                "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+                "object_type": "raw-trace",
+                "object_version": "raw",
+                "schema_version": "eval-factory/object-ref/v1"
+              }
+            }
+          ],
+          "example_id": "plan-example://LH_005/rewrite",
+          "expected_treatment": "Inspect the current design workspace and determine whether a DESIGN.md file exists. Explain whether this project should have one, using the observable workspace structure and existing design documentation as evidence.",
+          "input_summary": "Multi-turn operational trace with a stable user objective.",
+          "kind": "REWRITE",
+          "schema_version": "eval-factory/plan-example/v2"
+        }
+      ],
+      "expected_capability_impact": "Preserve the evaluated capability without preserving accidental steps.",
+      "fidelity": "CAPABILITY_PRESERVING",
+      "forbidden_content_rules": [
+        "original agent final answer",
+        "pre-completed requested deliverable",
+        "grader rules or hidden pass conditions"
+      ],
+      "operational_noise_policy": "Remove retries, runtime chatter, and accidental implementation path while preserving explicit user constraints and required inputs.",
+      "rewrite_style": "Concise engineering recommendation grounded in workspace evidence.",
+      "schema_version": "eval-factory/task-rewrite-plan/v2",
+      "selection_context_ref": {
+        "object_id": "selection-context://LH_005/reference-candidate",
+        "object_sha256": "bf14ad1af56074f1cfe3b2a4bd461c1b1216ebe92656382058e2c24dde2dff56",
+        "object_type": "selection-context",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "target_capability": "workspace-design-governance",
+      "task_rewrite_plan_id": "task-rewrite-plan://LH_005/v2"
+    },
+    "tool_policy": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "task-draft://LH_005/v2",
+            "object_sha256": "55136dab97f1cb12e25a1b504e6c2f494a808b1f4ade9624d52feddf37ffa5d5",
+            "object_type": "task-draft",
+            "object_version": "v2",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "contestant_projection_ref": {
+        "object_id": "tool-policy-projection://LH_005/candidate",
+        "object_sha256": "663ed2cd6d7742db4a270da2b2a0efe16e0d3062d9105576a11e55978dea4381",
+        "object_type": "tool-policy-projection",
+        "object_version": "v2",
+        "schema_version": "eval-factory/object-ref/v1"
+      },
+      "default_action": "DENY",
+      "policy_version": "tool-policy/v2-candidate",
+      "rules": [],
+      "schema_version": "eval-factory/tool-policy/v1",
+      "tool_policy_id": "tool-policy://LH_005/v2"
+    },
+    "user_approval_policy": {
+      "audit": {
+        "created_at": "2026-07-20T00:00:00Z",
+        "created_by": "r0-09-reference-fixture-builder",
+        "governing_versions": [
+          {
+            "component": "eval-factory-spec",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": null,
+            "version": "approved-v2-2026-07-20"
+          },
+          {
+            "component": "cross-stage-contracts",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc",
+            "version": "v2"
+          },
+          {
+            "component": "user-approval-policy",
+            "schema_version": "eval-factory/version-binding/v1",
+            "sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f",
+            "version": "v2"
+          }
+        ],
+        "input_refs": [
+          {
+            "object_id": "raw-traj://LH_005",
+            "object_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede",
+            "object_type": "raw-trace",
+            "object_version": "raw",
+            "schema_version": "eval-factory/object-ref/v1"
+          }
+        ],
+        "schema_version": "eval-factory/contract-audit/v1"
+      },
+      "enabled_checkpoints": [
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW",
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN"
+      ],
+      "explicit_unattended_choice": false,
+      "final_review_scope": "FULL_DATASET",
+      "mode": "PLAN_AND_FINAL",
+      "policy_id": "user-approval-policy://LH_005/v2",
+      "policy_version": "v2-reference-preview",
+      "schema_version": "eval-factory/user-approval-policy/v2"
+    }
+  },
+  "release_assertions": {
+    "automated_quality_passed": false,
+    "production_ready": false,
+    "required_checkpoints_satisfied": false,
+    "state": "CANDIDATE"
+  },
+  "required_evaluation_components": [
+    "QuerySpec",
+    "EnvironmentSpec",
+    "RubricSet",
+    "EvaluatorSpec",
+    "ReferencePolicy",
+    "ToolPolicy",
+    "ProvenanceManifest",
+    "QualityReport",
+    "ReleaseDecisionV2"
+  ],
+  "schema_version": "eval-factory-reference-fixture/v2",
+  "semantic_gold": false,
+  "source": {
+    "instance_id": "LH_005",
+    "signal_quality": "strict_events",
+    "source_ref": "raw_traj://LH_005",
+    "source_sha256": "bb55d4514c8d596ed29acfe302a137b9260eae6d9189c9953168892516d2cede"
+  },
+  "status": "REVIEW_READY_NOT_GOLD",
+  "user_approved": false,
+  "user_decision_records": []
+}

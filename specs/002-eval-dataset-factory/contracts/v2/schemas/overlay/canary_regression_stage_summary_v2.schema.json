@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/canary_regression_stage_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "reached_count": {
+      "maximum": 30,
+      "minimum": 0,
+      "title": "Reached Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/canary-regression-stage-summary/v2",
+      "default": "eval-factory/canary-regression-stage-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage": {
+      "$ref": "#/$defs/StageNameV2"
+    },
+    "terminal_count": {
+      "maximum": 30,
+      "minimum": 0,
+      "title": "Terminal Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "stage",
+    "reached_count",
+    "terminal_count"
+  ],
+  "title": "CanaryRegressionStageSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionStageSummaryV2",
+  "x-schema-version": "eval-factory/canary-regression-stage-summary/v2"
+}

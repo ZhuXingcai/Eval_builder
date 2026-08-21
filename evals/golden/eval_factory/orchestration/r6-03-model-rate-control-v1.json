@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "case_id": "model-admission-available",
+      "expected_eligible_after_microseconds": 0,
+      "expected_outcome": "ADMITTED",
+      "job_budget": {
+        "requests": 8,
+        "tokens": 20000
+      },
+      "pool": {
+        "concurrency": 2,
+        "request_burst": 4,
+        "requests_per_minute": 60,
+        "token_burst": 8000,
+        "tokens_per_minute": 60000
+      },
+      "request": {
+        "concurrency": 1,
+        "requests": 1,
+        "tokens": 3500
+      }
+    },
+    {
+      "case_id": "model-request-rate-wait",
+      "expected_eligible_after_microseconds": 60000000,
+      "expected_outcome": "WAITING_RATE",
+      "pool": {
+        "available_request_credits": 0,
+        "request_burst": 1,
+        "requests_per_minute": 1
+      },
+      "request": {
+        "requests": 1
+      }
+    },
+    {
+      "case_id": "model-concurrency-wait",
+      "expected_eligible_after_microseconds": null,
+      "expected_outcome": "WAITING_CONCURRENCY",
+      "pool": {
+        "active_concurrency": 1,
+        "concurrency": 1
+      },
+      "request": {
+        "concurrency": 1
+      }
+    },
+    {
+      "case_id": "model-envelope-unsatisfiable",
+      "expected_eligible_after_microseconds": null,
+      "expected_outcome": "UNSATISFIABLE_DEMAND",
+      "pool": {
+        "request_burst": 1,
+        "token_burst": 1000
+      },
+      "request": {
+        "requests": 2,
+        "tokens": 500
+      }
+    }
+  ],
+  "gold_version": "r6-03-model-rate-control-v1",
+  "identity_rules": {
+    "audit_time_in_hash": false,
+    "provider_payloads": false,
+    "raw_prompts": false,
+    "runtime_transcripts": false
+  }
+}

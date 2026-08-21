@@ -1,0 +1,55 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/resource_budget.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "max_model_requests": {
+      "minimum": 0,
+      "title": "Max Model Requests",
+      "type": "integer"
+    },
+    "max_model_tokens": {
+      "minimum": 0,
+      "title": "Max Model Tokens",
+      "type": "integer"
+    },
+    "max_network_requests": {
+      "minimum": 0,
+      "title": "Max Network Requests",
+      "type": "integer"
+    },
+    "max_processes": {
+      "minimum": 0,
+      "title": "Max Processes",
+      "type": "integer"
+    },
+    "max_renderers": {
+      "minimum": 0,
+      "title": "Max Renderers",
+      "type": "integer"
+    },
+    "max_storage_bytes": {
+      "minimum": 0,
+      "title": "Max Storage Bytes",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/resource-budget/v1",
+      "default": "eval-factory/resource-budget/v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "max_model_requests",
+    "max_model_tokens",
+    "max_processes",
+    "max_renderers",
+    "max_network_requests",
+    "max_storage_bytes"
+  ],
+  "title": "ResourceBudget",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration.ResourceBudget",
+  "x-schema-version": "eval-factory/resource-budget/v1"
+}

@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "ConcurrencyExperimentUnitV2": {
+      "enum": [
+        "NANOSECONDS",
+        "MICROSECONDS",
+        "MILLIJOBS_PER_SECOND"
+      ],
+      "title": "ConcurrencyExperimentUnitV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/concurrency_experiment_percentile_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "maximum": {
+      "maximum": 1000000000000000000,
+      "minimum": 0,
+      "title": "Maximum",
+      "type": "integer"
+    },
+    "minimum": {
+      "maximum": 1000000000000000000,
+      "minimum": 0,
+      "title": "Minimum",
+      "type": "integer"
+    },
+    "p50": {
+      "maximum": 1000000000000000000,
+      "minimum": 0,
+      "title": "P50",
+      "type": "integer"
+    },
+    "p95": {
+      "maximum": 1000000000000000000,
+      "minimum": 0,
+      "title": "P95",
+      "type": "integer"
+    },
+    "sample_count": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Sample Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/concurrency-experiment-percentile-summary/v2",
+      "default": "eval-factory/concurrency-experiment-percentile-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "unit": {
+      "$ref": "#/$defs/ConcurrencyExperimentUnitV2"
+    }
+  },
+  "required": [
+    "sample_count",
+    "minimum",
+    "p50",
+    "p95",
+    "maximum",
+    "unit"
+  ],
+  "title": "ConcurrencyExperimentPercentileSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentPercentileSummaryV2",
+  "x-schema-version": "eval-factory/concurrency-experiment-percentile-summary/v2"
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "eval-factory-r5-09-gold/v1",
+  "policy_version": "semantic-review/r5-09-v1",
+  "scenarios": [
+    {
+      "scenario_id": "clean-three-round-pass",
+      "initial_validation": "PASSED",
+      "round_outcomes": [
+        "ACCEPTED",
+        "ACCEPTED",
+        "ACCEPTED"
+      ],
+      "repair_waves": 0,
+      "deterministic_validation_versions": 1,
+      "workflow_outcome": "PASSED"
+    },
+    {
+      "scenario_id": "pre-round-deterministic-repair",
+      "initial_validation": "REQUIRES_REPAIR",
+      "round_outcomes": [
+        "ACCEPTED",
+        "ACCEPTED",
+        "ACCEPTED"
+      ],
+      "repair_waves": 1,
+      "deterministic_validation_versions": 2,
+      "workflow_outcome": "PASSED"
+    },
+    {
+      "scenario_id": "round-one-repair-confirmed-by-round-two",
+      "initial_validation": "PASSED",
+      "round_outcomes": [
+        "REQUIRES_REPAIR",
+        "ACCEPTED",
+        "ACCEPTED"
+      ],
+      "repair_waves": 1,
+      "deterministic_validation_versions": 2,
+      "workflow_outcome": "PASSED"
+    },
+    {
+      "scenario_id": "round-two-repair-confirmed-by-round-three",
+      "initial_validation": "PASSED",
+      "round_outcomes": [
+        "ACCEPTED",
+        "REQUIRES_REPAIR",
+        "ACCEPTED"
+      ],
+      "repair_waves": 1,
+      "deterministic_validation_versions": 2,
+      "workflow_outcome": "PASSED"
+    },
+    {
+      "scenario_id": "round-three-non-waivable-reject",
+      "initial_validation": "PASSED",
+      "round_outcomes": [
+        "ACCEPTED",
+        "ACCEPTED",
+        "REJECTED"
+      ],
+      "repair_waves": 0,
+      "deterministic_validation_versions": 1,
+      "workflow_outcome": "REJECTED"
+    },
+    {
+      "scenario_id": "item-scoped-requires-repair",
+      "initial_validation": "PASSED",
+      "round_outcomes": [
+        "REQUIRES_REPAIR"
+      ],
+      "repair_waves": 0,
+      "deterministic_validation_versions": 1,
+      "workflow_outcome": "REQUIRES_REPAIR"
+    },
+    {
+      "scenario_id": "review-capability-blocked",
+      "initial_validation": "PASSED",
+      "round_outcomes": [
+        "BLOCKED"
+      ],
+      "repair_waves": 0,
+      "deterministic_validation_versions": 1,
+      "workflow_outcome": "BLOCKED"
+    },
+    {
+      "scenario_id": "upstream-incomplete",
+      "initial_validation": "UPSTREAM_INCOMPLETE",
+      "round_outcomes": [],
+      "repair_waves": 0,
+      "deterministic_validation_versions": 1,
+      "workflow_outcome": "UPSTREAM_INCOMPLETE"
+    }
+  ]
+}

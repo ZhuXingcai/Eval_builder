@@ -1,0 +1,65 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/typed_adjustment.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "operation": {
+      "enum": [
+        "SET",
+        "ADD",
+        "REMOVE",
+        "REPLACE"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/typed-adjustment/v2",
+      "default": "eval-factory/typed-adjustment/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "target_path": {
+      "pattern": "^[A-Za-z0-9_.\\[\\]-]{1,256}$",
+      "title": "Target Path",
+      "type": "string"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Value"
+    }
+  },
+  "required": [
+    "target_path",
+    "operation",
+    "value",
+    "reason"
+  ],
+  "title": "TypedAdjustment",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.approval.TypedAdjustment",
+  "x-schema-version": "eval-factory/typed-adjustment/v2"
+}

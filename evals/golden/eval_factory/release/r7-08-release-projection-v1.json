@@ -1,0 +1,81 @@
+{
+  "candidate_release_stage_result_count": 0,
+  "job_terminal_release_stage_result_count": 1,
+  "policy_version": "release-projection/r7-08-v1",
+  "publication_authority_count": 0,
+  "registry_write_count": 0,
+  "scenarios": [
+    {
+      "candidate_item_status": "RUNNING",
+      "candidate_state": "CANDIDATE",
+      "expected_action": "APPROVE",
+      "expected_state": "APPROVED",
+      "required_checkpoints": [],
+      "scenario_id": "final-disabled-immediate-approval"
+    },
+    {
+      "candidate_item_status": "NEEDS_REVIEW",
+      "candidate_state": "CANDIDATE",
+      "decision_outcome": "ACCEPTED",
+      "expected_action": "APPROVE",
+      "expected_state": "APPROVED",
+      "required_checkpoints": [
+        "FINAL_DATASET_REVIEW"
+      ],
+      "scenario_id": "final-accepted"
+    },
+    {
+      "candidate_item_status": "NEEDS_REVIEW",
+      "candidate_state": "CANDIDATE",
+      "decision_outcome": "REJECTED",
+      "expected_action": "REJECT",
+      "expected_state": "REJECTED",
+      "required_checkpoints": [
+        "FINAL_DATASET_REVIEW"
+      ],
+      "scenario_id": "final-rejected"
+    },
+    {
+      "candidate_item_status": "NEEDS_REVIEW",
+      "candidate_state": "CANDIDATE",
+      "decision_outcome": "DEFERRED",
+      "expected_error": "RELEASE_PROJECTION_PENDING",
+      "required_checkpoints": [
+        "FINAL_DATASET_REVIEW"
+      ],
+      "scenario_id": "final-deferred"
+    },
+    {
+      "expected_state": "APPROVED",
+      "relevant_application_count": 2,
+      "required_complete_report_count": 2,
+      "scenario_id": "adjusted-complete-and-reapproved"
+    },
+    {
+      "expected_error": "STALE_REVALIDATION_AUTHORITY",
+      "scenario_id": "stale-report-or-current-head"
+    },
+    {
+      "expected_error": "AUTOMATED_HARD_GATE_BLOCKED",
+      "scenario_id": "item-or-batch-quality-blocked"
+    },
+    {
+      "expected_outcome": "EXACT_REPLAY",
+      "outbox_delta": 0,
+      "scenario_id": "candidate-exact-replay"
+    },
+    {
+      "expected_error": "RELEASE_PROJECTION_CONFLICT",
+      "scenario_id": "changed-same-key-or-second-authority"
+    },
+    {
+      "expected_outcome": "REBUILT",
+      "scenario_id": "current-projection-rebuild"
+    }
+  ],
+  "schema_version": "eval-factory/release-projection-gold/r7-08-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ]
+}

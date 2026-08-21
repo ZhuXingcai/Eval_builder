@@ -1,0 +1,197 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/concurrency_experiment_host_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "architecture": {
+      "const": "ARM64",
+      "title": "Architecture",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "host_summary_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Host Summary Sha256",
+      "type": "string"
+    },
+    "logical_cpu_count": {
+      "maximum": 4096,
+      "minimum": 1,
+      "title": "Logical Cpu Count",
+      "type": "integer"
+    },
+    "memory_bytes": {
+      "maximum": 10000000000000000,
+      "minimum": 1,
+      "title": "Memory Bytes",
+      "type": "integer"
+    },
+    "physical_cpu_count": {
+      "maximum": 4096,
+      "minimum": 1,
+      "title": "Physical Cpu Count",
+      "type": "integer"
+    },
+    "platform_family": {
+      "const": "DARWIN",
+      "title": "Platform Family",
+      "type": "string"
+    },
+    "python_version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Python Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/concurrency-experiment-host-summary/v2",
+      "default": "eval-factory/concurrency-experiment-host-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "platform_family",
+    "architecture",
+    "logical_cpu_count",
+    "physical_cpu_count",
+    "memory_bytes",
+    "python_version",
+    "host_summary_sha256",
+    "audit"
+  ],
+  "title": "ConcurrencyExperimentHostSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentHostSummaryV2",
+  "x-schema-version": "eval-factory/concurrency-experiment-host-summary/v2"
+}

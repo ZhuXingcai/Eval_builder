@@ -1,0 +1,63 @@
+{
+  "cases": [
+    {
+      "case_id": "existing-direct-target-retained",
+      "expected_outcome": "RESOLVED",
+      "setup": "EXISTING_DIRECT_TARGET"
+    },
+    {
+      "case_id": "explicit-path-deterministic-media",
+      "expected_outcome": "RESOLVED",
+      "setup": "EXPLICIT_REQUIREMENT_PATH"
+    },
+    {
+      "case_id": "inferred-neutral-path-semantic-media",
+      "expected_outcome": "RESOLVED",
+      "setup": "INFERRED_MEDIA"
+    },
+    {
+      "case_id": "multiple-prompt-only-dependencies",
+      "expected_outcome": "RESOLVED",
+      "setup": "MULTIPLE_EXPLICIT_PATHS"
+    },
+    {
+      "case_id": "no-requirements",
+      "expected_outcome": "NOT_REQUIRED",
+      "setup": "NO_REQUIREMENTS"
+    },
+    {
+      "case_id": "direct-evidence-target-missing",
+      "expected_outcome": "BLOCKED_CAPABILITY",
+      "setup": "DIRECT_TARGET_MISSING"
+    },
+    {
+      "case_id": "semantic-model-unavailable",
+      "expected_outcome": "BLOCKED_CAPABILITY",
+      "setup": "MODEL_UNAVAILABLE"
+    },
+    {
+      "case_id": "ambiguous-explicit-paths",
+      "expected_outcome": "ABSTAIN",
+      "setup": "AMBIGUOUS_EXPLICIT_PATHS"
+    },
+    {
+      "case_id": "ambiguous-input-output-role",
+      "expected_outcome": "ABSTAIN",
+      "setup": "AMBIGUOUS_ROLE"
+    },
+    {
+      "case_id": "deterministic-forbidden-path",
+      "expected_outcome": "BLOCKED_SAFETY",
+      "setup": "FORBIDDEN_PATH"
+    },
+    {
+      "case_id": "semantic-requested-output",
+      "expected_outcome": "BLOCKED_SAFETY",
+      "setup": "REQUESTED_OUTPUT"
+    }
+  ],
+  "claim_scope": "CONTENT_FREE_DEPENDENCY_DISCOVERY_POLICY_ONLY",
+  "description": "Content-free R5-03 dependency facts. These cases do not contain source text, artifact content, private references, grader rules, or final outputs.",
+  "policy_version": "prompt-only-dependency/r5-03-v1",
+  "schema_version": "eval-factory/r5-03-prompt-only-dependency-gold/v1"
+}

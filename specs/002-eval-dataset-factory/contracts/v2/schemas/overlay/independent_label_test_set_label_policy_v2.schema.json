@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelTestSetEvaluationKindV2": {
+      "enum": [
+        "STRUCTURED",
+        "SEMANTIC"
+      ],
+      "title": "LabelTestSetEvaluationKindV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/independent_label_test_set_label_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "evaluation_kind": {
+      "$ref": "#/$defs/LabelTestSetEvaluationKindV2"
+    },
+    "label_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/independent-label-test-set-label-policy/v2",
+      "default": "eval-factory/independent-label-test-set-label-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_classes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/LabelDecisionValueV2"
+      },
+      "title": "Semantic Classes",
+      "type": "array"
+    },
+    "semantic_total_minimum": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Semantic Total Minimum",
+      "type": "integer"
+    },
+    "structured_negative_minimum": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Structured Negative Minimum",
+      "type": "integer"
+    },
+    "structured_positive_minimum": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Structured Positive Minimum",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "label_spec_ref",
+    "evaluation_kind",
+    "structured_positive_minimum",
+    "structured_negative_minimum",
+    "semantic_total_minimum"
+  ],
+  "title": "IndependentLabelTestSetLabelPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetLabelPolicyV2",
+  "x-schema-version": "eval-factory/independent-label-test-set-label-policy/v2"
+}

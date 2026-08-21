@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/evaluation_item_components.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "environment_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "evaluator_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "provenance_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "quality_report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "query_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reference_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "rubric_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/evaluation-item-components/v1",
+      "default": "eval-factory/evaluation-item-components/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "query_spec_ref",
+    "environment_spec_ref",
+    "rubric_set_ref",
+    "evaluator_spec_ref",
+    "reference_policy_ref",
+    "tool_policy_ref",
+    "provenance_manifest_ref",
+    "quality_report_ref"
+  ],
+  "title": "EvaluationItemComponents",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release.EvaluationItemComponents",
+  "x-schema-version": "eval-factory/evaluation-item-components/v1"
+}

@@ -1,0 +1,130 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ModelDemandModeFacadeV2": {
+      "enum": [
+        "DIRECT_REQUEST",
+        "OPAQUE_RUNTIME_ENVELOPE"
+      ],
+      "title": "ModelDemandModeFacadeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/model_invocation_descriptor_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "cache_token_allowance": {
+      "minimum": 0,
+      "title": "Cache Token Allowance",
+      "type": "integer"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "input_token_allowance": {
+      "minimum": 0,
+      "title": "Input Token Allowance",
+      "type": "integer"
+    },
+    "invocation_descriptor_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Invocation Descriptor Id",
+      "type": "string"
+    },
+    "invocation_descriptor_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Invocation Descriptor Sha256",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/ModelDemandModeFacadeV2"
+    },
+    "model_profile_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "operation_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "output_token_allowance": {
+      "minimum": 1,
+      "title": "Output Token Allowance",
+      "type": "integer"
+    },
+    "policy_version": {
+      "const": "attachment-model-control/r6-03-v1",
+      "default": "attachment-model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "request_allowance": {
+      "minimum": 1,
+      "title": "Request Allowance",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/model-invocation-descriptor/v2",
+      "default": "env-mock-agent/model-invocation-descriptor/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "token_allowance": {
+      "minimum": 1,
+      "title": "Token Allowance",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "invocation_descriptor_id",
+    "operation_ref",
+    "model_profile_ref",
+    "mode",
+    "request_allowance",
+    "input_token_allowance",
+    "output_token_allowance",
+    "cache_token_allowance",
+    "token_allowance",
+    "idempotency_key",
+    "invocation_descriptor_sha256"
+  ],
+  "title": "ModelInvocationDescriptorV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.model_control_v2.ModelInvocationDescriptorV2",
+  "x-schema-version": "env-mock-agent/model-invocation-descriptor/v2"
+}

@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelTestSetShortageReasonV2": {
+      "enum": [
+        "CLASS_SHORTAGE",
+        "TOTAL_SHORTAGE"
+      ],
+      "title": "LabelTestSetShortageReasonV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_test_set_shortage_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "available_count": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Available Count",
+      "type": "integer"
+    },
+    "decision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LabelDecisionValueV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "label_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "reason": {
+      "$ref": "#/$defs/LabelTestSetShortageReasonV2"
+    },
+    "required_count": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Required Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-test-set-shortage/v2",
+      "default": "eval-factory/label-test-set-shortage/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "label_spec_ref",
+    "reason",
+    "required_count",
+    "available_count"
+  ],
+  "title": "LabelTestSetShortageV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.statistics_v2.LabelTestSetShortageV2",
+  "x-schema-version": "eval-factory/label-test-set-shortage/v2"
+}

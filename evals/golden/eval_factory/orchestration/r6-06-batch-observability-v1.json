@@ -1,0 +1,53 @@
+{
+  "attempt_metrics_ref": {
+    "object_id": "work-attempt-metrics://sha256/d99fe1b7f50ca2ed9bb864b5a03a59e8d0104066f8068d9b6d9487d83fcddf1c",
+    "object_sha256": "d99fe1b7f50ca2ed9bb864b5a03a59e8d0104066f8068d9b6d9487d83fcddf1c",
+    "object_type": "work-attempt-metrics",
+    "object_version": "v2",
+    "schema_version": "eval-factory/object-ref/v1"
+  },
+  "batch_metrics_ref": {
+    "object_id": "batch-metrics-snapshot://sha256/6481006c3543d4da60c86eca815f2075e79f743be4fa9332b131f441e0a2c2c6",
+    "object_sha256": "6481006c3543d4da60c86eca815f2075e79f743be4fa9332b131f441e0a2c2c6",
+    "object_type": "batch-metrics-snapshot",
+    "object_version": "v2",
+    "schema_version": "eval-factory/object-ref/v1"
+  },
+  "claim_scope": "PRIVATE_CONTENT_FREE_OPERATIONAL_OBSERVABILITY_ONLY",
+  "event_kinds": [
+    "ATTEMPT_METRICS_RECORDED",
+    "ITEM_CREATED",
+    "JOB_CREATED",
+    "JOB_STATUS_CHANGED",
+    "MODEL_ADMISSION_DECIDED",
+    "MODEL_POLICY_BOUND",
+    "MODEL_USAGE_RECORDED",
+    "MODEL_USAGE_RECORDED",
+    "STAGE_RUN_COMPLETED",
+    "STAGE_RUN_CREATED",
+    "WORK_CONTROL_POLICY_BOUND",
+    "WORK_DISPATCHED",
+    "WORK_GRAPH_CREATED",
+    "WORK_LEASE_ACQUIRED",
+    "WORK_LEASE_TERMINAL",
+    "WORK_READINESS_RECORDED"
+  ],
+  "job_metrics": {
+    "cache_hit_attempts": 1,
+    "charged_tokens": 95,
+    "model_requests": 1,
+    "reported_cost_microusd": 1250,
+    "terminal_attempts": 1,
+    "tool_calls": 2,
+    "unavailable_cost_attempts": 0
+  },
+  "report_ref": {
+    "object_id": "batch-audit-report://sha256/eae2c34f41323e91706329b82c50e899087894118a67677207ad0dfdefc78a31",
+    "object_sha256": "eae2c34f41323e91706329b82c50e899087894118a67677207ad0dfdefc78a31",
+    "object_type": "batch-audit-report",
+    "object_version": "v2",
+    "schema_version": "eval-factory/object-ref/v1"
+  },
+  "schema_version": "eval-factory/r6-06-batch-observability-gold/v1",
+  "source_fingerprint": "a9215a033fe17053aeaa058dc94cd395e97bf5aab2e8eee6d615e57316c94728"
+}

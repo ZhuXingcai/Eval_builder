@@ -1,0 +1,236 @@
+{
+  "schema_version": "eval-factory/production-readiness-attestation-policy/v2",
+  "policy_id": "production-readiness-attestation-policy://sha256/e8f4d6e9506859edd301756ad3c35d87c94da95b0643c58f56c7587c4f4515d3",
+  "expected_system_version": "env-mock-agent/0.1.0",
+  "base_contract_manifest_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "contract-manifest",
+    "object_id": "contract-manifest://v1",
+    "object_version": "v1",
+    "object_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+  },
+  "overlay_contract_manifest_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "contract-manifest",
+    "object_id": "contract-manifest://v2",
+    "object_version": "v2",
+    "object_sha256": "c64800adf02872128951b64b529d52f91bf5472b942c997fce5794be94c7362e"
+  },
+  "required_schema_manifest_refs": [
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "contract-schema-manifest",
+      "object_id": "contract-schema-manifest://v1",
+      "object_version": "v1",
+      "object_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+    },
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "contract-schema-manifest",
+      "object_id": "contract-schema-manifest://v2",
+      "object_version": "v2",
+      "object_sha256": "c64800adf02872128951b64b529d52f91bf5472b942c997fce5794be94c7362e"
+    }
+  ],
+  "required_policy_refs": [
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "compatibility-policy",
+      "object_id": "compatibility-policy://v1",
+      "object_version": "v1",
+      "object_sha256": "f41a17d79aee67e2536272b90d2732962905712a3bb969af3c87d168d1fdc3d9"
+    },
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "compatibility-policy",
+      "object_id": "compatibility-policy://v2",
+      "object_version": "v2",
+      "object_sha256": "fe68dd66dbd40c05daaeb93caa3bbebcd4a6359989c19a0e2cc55e368598c245"
+    },
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "data-classification-policy",
+      "object_id": "data-classification-policy://v1",
+      "object_version": "v1",
+      "object_sha256": "a6d2c3e136c9920199ef4bd49d2cde0f470e516feb935aced5b23ea29ac4feb0"
+    },
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "data-classification-policy",
+      "object_id": "data-classification-policy://v2",
+      "object_version": "v2",
+      "object_sha256": "e264870a49de9c2e2e1ecfcc582055d05da9da8bb3e0cebd8210de175023875f"
+    },
+    {
+      "schema_version": "eval-factory/object-ref/v1",
+      "object_type": "user-approval-policy",
+      "object_id": "user-approval-policy://v2",
+      "object_version": "v2",
+      "object_sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f"
+    }
+  ],
+  "release_profile_decision_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "release-profile-decision",
+    "object_id": "release-profile-decision://r0-11/v1",
+    "object_version": "v1",
+    "object_sha256": "6b4c0f86d76757c2ea7a6331022e2d6926cfb79f1424dfc664929ff6357d5ace"
+  },
+  "repository_pending_evidence_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "production-attestation-repository-evidence",
+    "object_id": "production-attestation-repository-evidence://r8-08/v1",
+    "object_version": "json/v1",
+    "object_sha256": "4627db5d82f3da0cf52f53ae1a3df9580e36fbe140223dffd3bfb80f0d02d068"
+  },
+  "invalidation_policy": {
+    "schema_version": "eval-factory/production-readiness-invalidation-policy/v2",
+    "policy_id": "production-readiness-invalidation-policy://sha256/60ad193f049a5cad2357d93410ffe5d0fe3706502a9652cb23fd491f62b9a6fb",
+    "required_triggers": [
+      "SYSTEM_VERSION_CHANGED",
+      "BASE_CONTRACT_MANIFEST_CHANGED",
+      "OVERLAY_CONTRACT_MANIFEST_CHANGED",
+      "SCHEMA_SET_CHANGED",
+      "POLICY_SET_CHANGED",
+      "EVIDENCE_SUPERSEDED",
+      "ISSUER_REGISTRY_CHANGED",
+      "ISSUER_REVOKED_OR_EXPIRED",
+      "ATTESTATION_EXPIRED",
+      "EXPLICIT_INCIDENT_REVOCATION",
+      "EXPLICIT_RELEASE_REVOCATION"
+    ],
+    "max_projection_revisions": 1000,
+    "max_invalidation_refs": 128,
+    "policy_version": "production-readiness-attestation/r8-08-v1",
+    "policy_sha256": "60ad193f049a5cad2357d93410ffe5d0fe3706502a9652cb23fd491f62b9a6fb",
+    "audit": {
+      "schema_version": "eval-factory/contract-audit/v1",
+      "created_at": "2026-08-04T00:00:00Z",
+      "created_by": "r8-08-policy-authority",
+      "governing_versions": [
+        {
+          "schema_version": "eval-factory/version-binding/v1",
+          "component": "production-readiness-attestation",
+          "version": "production-readiness-attestation/r8-08-v1",
+          "sha256": null
+        }
+      ],
+      "input_refs": []
+    }
+  },
+  "trusted_issuer_registry_ref": null,
+  "evidence_class": "REPOSITORY_PENDING_ONLY",
+  "required_gates": [
+    "SC_010_LABEL_QUALITY",
+    "SC_011_REAL_TRACE_STABILITY",
+    "SC_012_RESOURCE_POLICY",
+    "SC_013_ORGANIZATION_APPROVALS",
+    "SC_014_ZERO_OPEN_GATES"
+  ],
+  "minimum_issuer_count": 2,
+  "maximum_validity_seconds": 2592000,
+  "max_evidence_refs": 128,
+  "max_private_bytes": 100000000,
+  "max_report_bytes": 10000000,
+  "policy_version": "production-readiness-attestation/r8-08-v1",
+  "policy_sha256": "e8f4d6e9506859edd301756ad3c35d87c94da95b0643c58f56c7587c4f4515d3",
+  "audit": {
+    "schema_version": "eval-factory/contract-audit/v1",
+    "created_at": "2026-08-04T00:00:00Z",
+    "created_by": "r8-08-policy-authority",
+    "governing_versions": [
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "production-readiness-attestation",
+        "version": "production-readiness-attestation/r8-08-v1",
+        "sha256": null
+      }
+    ],
+    "input_refs": [
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "compatibility-policy",
+        "object_id": "compatibility-policy://v1",
+        "object_version": "v1",
+        "object_sha256": "f41a17d79aee67e2536272b90d2732962905712a3bb969af3c87d168d1fdc3d9"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "compatibility-policy",
+        "object_id": "compatibility-policy://v2",
+        "object_version": "v2",
+        "object_sha256": "fe68dd66dbd40c05daaeb93caa3bbebcd4a6359989c19a0e2cc55e368598c245"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "contract-manifest",
+        "object_id": "contract-manifest://v1",
+        "object_version": "v1",
+        "object_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "contract-manifest",
+        "object_id": "contract-manifest://v2",
+        "object_version": "v2",
+        "object_sha256": "c64800adf02872128951b64b529d52f91bf5472b942c997fce5794be94c7362e"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "contract-schema-manifest",
+        "object_id": "contract-schema-manifest://v1",
+        "object_version": "v1",
+        "object_sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "contract-schema-manifest",
+        "object_id": "contract-schema-manifest://v2",
+        "object_version": "v2",
+        "object_sha256": "c64800adf02872128951b64b529d52f91bf5472b942c997fce5794be94c7362e"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "data-classification-policy",
+        "object_id": "data-classification-policy://v1",
+        "object_version": "v1",
+        "object_sha256": "a6d2c3e136c9920199ef4bd49d2cde0f470e516feb935aced5b23ea29ac4feb0"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "data-classification-policy",
+        "object_id": "data-classification-policy://v2",
+        "object_version": "v2",
+        "object_sha256": "e264870a49de9c2e2e1ecfcc582055d05da9da8bb3e0cebd8210de175023875f"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "production-attestation-repository-evidence",
+        "object_id": "production-attestation-repository-evidence://r8-08/v1",
+        "object_version": "json/v1",
+        "object_sha256": "4627db5d82f3da0cf52f53ae1a3df9580e36fbe140223dffd3bfb80f0d02d068"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "production-readiness-invalidation-policy",
+        "object_id": "production-readiness-invalidation-policy://sha256/60ad193f049a5cad2357d93410ffe5d0fe3706502a9652cb23fd491f62b9a6fb",
+        "object_version": "v2",
+        "object_sha256": "60ad193f049a5cad2357d93410ffe5d0fe3706502a9652cb23fd491f62b9a6fb"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "release-profile-decision",
+        "object_id": "release-profile-decision://r0-11/v1",
+        "object_version": "v1",
+        "object_sha256": "6b4c0f86d76757c2ea7a6331022e2d6926cfb79f1424dfc664929ff6357d5ace"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "user-approval-policy",
+        "object_id": "user-approval-policy://v2",
+        "object_version": "v2",
+        "object_sha256": "aa5b0548d392c85978f14f88013422cfb96ddca67814141b9e018ac951fa919f"
+      }
+    ]
+  }
+}

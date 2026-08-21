@@ -1,0 +1,446 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "CheckpointDecisionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint": {
+          "$ref": "#/$defs/ApprovalCheckpoint"
+        },
+        "decision_record_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "request_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/checkpoint-decision-binding/v2",
+          "default": "eval-factory/checkpoint-decision-binding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "checkpoint",
+        "request_ref",
+        "decision_record_ref"
+      ],
+      "title": "CheckpointDecisionBinding",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "EvaluationItemComponents": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "evaluator_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "provenance_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "quality_report_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "query_spec_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "reference_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "rubric_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/evaluation-item-components/v1",
+          "default": "eval-factory/evaluation-item-components/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "tool_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        }
+      },
+      "required": [
+        "query_spec_ref",
+        "environment_spec_ref",
+        "rubric_set_ref",
+        "evaluator_spec_ref",
+        "reference_policy_ref",
+        "tool_policy_ref",
+        "provenance_manifest_ref",
+        "quality_report_ref"
+      ],
+      "title": "EvaluationItemComponents",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReleaseActionV2": {
+      "enum": [
+        "REQUEST_RELEASE",
+        "APPROVE",
+        "REJECT",
+        "PUBLISH",
+        "REVOKE"
+      ],
+      "title": "ReleaseActionV2",
+      "type": "string"
+    },
+    "ReleaseChannel": {
+      "enum": [
+        "CANARY",
+        "INTERNAL_REVIEW",
+        "PRODUCTION"
+      ],
+      "title": "ReleaseChannel",
+      "type": "string"
+    },
+    "ReleaseStateV2": {
+      "enum": [
+        "CANDIDATE",
+        "REJECTED",
+        "APPROVED",
+        "RELEASED",
+        "REVOKED"
+      ],
+      "title": "ReleaseStateV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/release_decision_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/ReleaseActionV2"
+    },
+    "actor": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Actor",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "automated_quality_passed": {
+      "title": "Automated Quality Passed",
+      "type": "boolean"
+    },
+    "batch_quality_report_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "chain_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Chain Id",
+      "type": "string"
+    },
+    "channel": {
+      "$ref": "#/$defs/ReleaseChannel"
+    },
+    "checkpoint_decisions": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CheckpointDecisionBinding"
+      },
+      "title": "Checkpoint Decisions",
+      "type": "array"
+    },
+    "components": {
+      "$ref": "#/$defs/EvaluationItemComponents"
+    },
+    "decided_at": {
+      "format": "date-time",
+      "title": "Decided At",
+      "type": "string"
+    },
+    "decision_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Decision Sha256",
+      "type": "string"
+    },
+    "export_profile": {
+      "enum": [
+        "LH",
+        "GENERIC"
+      ],
+      "title": "Export Profile",
+      "type": "string"
+    },
+    "export_profile_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Export Profile Version",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Id",
+      "type": "string"
+    },
+    "item_version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Item Version",
+      "type": "string"
+    },
+    "open_p0_count": {
+      "minimum": 0,
+      "title": "Open P0 Count",
+      "type": "integer"
+    },
+    "open_p1_count": {
+      "minimum": 0,
+      "title": "Open P1 Count",
+      "type": "integer"
+    },
+    "package_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "previous_decision_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "production_attestation_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "registry": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Registry",
+      "type": "string"
+    },
+    "release_decision_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Release Decision Id",
+      "type": "string"
+    },
+    "release_subject_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Release Subject Sha256",
+      "type": "string"
+    },
+    "required_checkpoints": {
+      "items": {
+        "$ref": "#/$defs/ApprovalCheckpoint"
+      },
+      "title": "Required Checkpoints",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "eval-factory/release-decision/v2",
+      "default": "eval-factory/release-decision/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/ReleaseStateV2"
+    },
+    "unresolved_non_waivable_count": {
+      "minimum": 0,
+      "title": "Unresolved Non Waivable Count",
+      "type": "integer"
+    },
+    "user_approval_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "release_decision_id",
+    "chain_id",
+    "previous_decision_ref",
+    "item_id",
+    "item_version",
+    "components",
+    "release_subject_sha256",
+    "package_manifest_ref",
+    "package_sha256",
+    "batch_quality_report_ref",
+    "automated_quality_passed",
+    "open_p0_count",
+    "open_p1_count",
+    "unresolved_non_waivable_count",
+    "user_approval_policy_ref",
+    "required_checkpoints",
+    "channel",
+    "registry",
+    "export_profile",
+    "export_profile_version",
+    "production_attestation_ref",
+    "action",
+    "state",
+    "idempotency_key",
+    "actor",
+    "decided_at",
+    "decision_sha256",
+    "audit"
+  ],
+  "title": "ReleaseDecisionV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release_v2.ReleaseDecisionV2",
+  "x-schema-version": "eval-factory/release-decision/v2"
+}

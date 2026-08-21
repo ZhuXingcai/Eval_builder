@@ -1,0 +1,51 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/public_source_search_hit_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "provider_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "rank": {
+      "minimum": 1,
+      "title": "Rank",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/public-source-search-hit/v2",
+      "default": "env-mock-agent/public-source-search-hit/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "search_hit_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Search Hit Id",
+      "type": "string"
+    },
+    "search_hit_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Search Hit Sha256",
+      "type": "string"
+    },
+    "source_uri": {
+      "maxLength": 2048,
+      "minLength": 3,
+      "title": "Source Uri",
+      "type": "string"
+    }
+  },
+  "required": [
+    "search_hit_id",
+    "source_uri",
+    "rank",
+    "provider_id",
+    "search_hit_sha256"
+  ],
+  "title": "PublicSourceSearchHitV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.retrieval_v2.PublicSourceSearchHitV2",
+  "x-schema-version": "env-mock-agent/public-source-search-hit/v2"
+}

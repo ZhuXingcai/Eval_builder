@@ -1,0 +1,60 @@
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+node/pi_bridge/dist/
+npm-debug.log*
+
+# Runtime outputs and credentials
+runs/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.token
+
+# Local agent workflow and continuity state
+.agent/
+.agents/
+.beads/
+.claude/
+.codex/
+.trae/
+.trellis/
+handoffs/
+PROJECT_STATE.md
+
+# Generated caches and local artifacts
+.cache/
+.tmp/
+dist/
+build/
+*.egg-info/
+.DS_Store
+
+# Benchmark outputs are generated; manifests and summaries are tracked.
+evals/results/*
+!evals/results/.gitkeep
+!evals/results/*/
+evals/results/*/*
+!evals/results/*/manifest.json
+!evals/results/*/metrics.jsonl
+!evals/results/*/report.md
+!evals/results/*/SUPERSEDED.md

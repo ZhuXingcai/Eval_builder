@@ -1,0 +1,260 @@
+{
+  "$defs": {
+    "component": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "maxLength": 512,
+          "minLength": 3,
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "ref",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "payload": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "channel": {
+                "const": "PRODUCTION"
+              }
+            },
+            "required": [
+              "channel"
+            ]
+          },
+          "then": {
+            "properties": {
+              "production_attestation": {
+                "$ref": "#/$defs/component"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "automated_quality_passed": {
+          "type": "boolean"
+        },
+        "channel": {
+          "enum": [
+            "CANARY",
+            "INTERNAL_REVIEW",
+            "PRODUCTION"
+          ]
+        },
+        "checkpoint_decisions": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "checkpoint": {
+                "enum": [
+                  "LABEL_PLAN",
+                  "TASK_REWRITE_PLAN",
+                  "ENVIRONMENT_STRATEGY",
+                  "FINAL_DATASET_REVIEW"
+                ]
+              },
+              "decision_record_ref": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/identifier"
+              },
+              "request_ref": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/identifier"
+              }
+            },
+            "required": [
+              "checkpoint",
+              "request_ref",
+              "decision_record_ref"
+            ],
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "component_hashes": {
+          "additionalProperties": false,
+          "properties": {
+            "environment_spec": {
+              "$ref": "#/$defs/component"
+            },
+            "evaluator_spec": {
+              "$ref": "#/$defs/component"
+            },
+            "provenance_manifest": {
+              "$ref": "#/$defs/component"
+            },
+            "quality_report": {
+              "$ref": "#/$defs/component"
+            },
+            "query_spec": {
+              "$ref": "#/$defs/component"
+            },
+            "reference_policy": {
+              "$ref": "#/$defs/component"
+            },
+            "rubric_set": {
+              "$ref": "#/$defs/component"
+            },
+            "tool_policy": {
+              "$ref": "#/$defs/component"
+            }
+          },
+          "required": [
+            "query_spec",
+            "environment_spec",
+            "rubric_set",
+            "evaluator_spec",
+            "reference_policy",
+            "tool_policy",
+            "provenance_manifest",
+            "quality_report"
+          ],
+          "type": "object"
+        },
+        "expected_action": {
+          "enum": [
+            "REQUEST_RELEASE",
+            "APPROVE",
+            "REJECT",
+            "PUBLISH",
+            "REVOKE",
+            "BLOCK"
+          ]
+        },
+        "expected_state": {
+          "enum": [
+            "CANDIDATE",
+            "REJECTED",
+            "APPROVED",
+            "RELEASED",
+            "REVOKED"
+          ]
+        },
+        "hard_gate_findings": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "finding_ref": {
+                "maxLength": 255,
+                "minLength": 3,
+                "type": "string"
+              },
+              "non_waivable": {
+                "type": "boolean"
+              },
+              "severity": {
+                "enum": [
+                  "P0",
+                  "P1",
+                  "P2",
+                  "P3"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "OPEN",
+                  "RESOLVED",
+                  "SUPERSEDED"
+                ]
+              }
+            },
+            "required": [
+              "finding_ref",
+              "severity",
+              "status",
+              "non_waivable",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "package_manifest_sha256": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/sha256"
+        },
+        "package_provenance_exact_set": {
+          "type": "boolean"
+        },
+        "production_attestation": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/component"
+            }
+          ]
+        },
+        "registry_isolated": {
+          "type": "boolean"
+        },
+        "registry_target": {
+          "maxLength": 255,
+          "minLength": 3,
+          "type": "string"
+        },
+        "release_allowed": {
+          "type": "boolean"
+        },
+        "required_checkpoints": {
+          "items": {
+            "enum": [
+              "LABEL_PLAN",
+              "TASK_REWRITE_PLAN",
+              "ENVIRONMENT_STRATEGY",
+              "FINAL_DATASET_REVIEW"
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "user_approval_policy_ref": {
+          "$ref": "#/$defs/component"
+        }
+      },
+      "required": [
+        "component_hashes",
+        "package_manifest_sha256",
+        "package_provenance_exact_set",
+        "hard_gate_findings",
+        "channel",
+        "registry_target",
+        "registry_isolated",
+        "production_attestation",
+        "expected_action",
+        "expected_state",
+        "release_allowed",
+        "automated_quality_passed",
+        "user_approval_policy_ref",
+        "required_checkpoints",
+        "checkpoint_decisions"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/release-annotation.schema.json",
+  "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/annotationRecord",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "annotation_type": {
+      "const": "RELEASE"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "title": "Eval Factory Release Annotation v2"
+}

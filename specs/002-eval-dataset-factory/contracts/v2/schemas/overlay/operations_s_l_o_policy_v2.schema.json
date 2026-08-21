@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/operations_s_l_o_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approval_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "maximum_cost_micro_usd_per_job": {
+      "minimum": 0,
+      "title": "Maximum Cost Micro Usd Per Job",
+      "type": "integer"
+    },
+    "maximum_error_rate_basis_points": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Maximum Error Rate Basis Points",
+      "type": "integer"
+    },
+    "maximum_model_requests_per_job_milli": {
+      "minimum": 0,
+      "title": "Maximum Model Requests Per Job Milli",
+      "type": "integer"
+    },
+    "maximum_p50_latency_microseconds": {
+      "minimum": 0,
+      "title": "Maximum P50 Latency Microseconds",
+      "type": "integer"
+    },
+    "maximum_p95_latency_microseconds": {
+      "minimum": 0,
+      "title": "Maximum P95 Latency Microseconds",
+      "type": "integer"
+    },
+    "maximum_queue_wait_p95_microseconds": {
+      "minimum": 0,
+      "title": "Maximum Queue Wait P95 Microseconds",
+      "type": "integer"
+    },
+    "minimum_resume_success_basis_points": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Minimum Resume Success Basis Points",
+      "type": "integer"
+    },
+    "minimum_sample_count": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Minimum Sample Count",
+      "type": "integer"
+    },
+    "minimum_throughput_millijobs_per_second": {
+      "minimum": 0,
+      "title": "Minimum Throughput Millijobs Per Second",
+      "type": "integer"
+    },
+    "policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "production-readiness-review/r8-07-v1",
+      "default": "production-readiness-review/r8-07-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/operations-slo-policy/v2",
+      "default": "eval-factory/operations-slo-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "valid_from": {
+      "format": "date-time",
+      "title": "Valid From",
+      "type": "string"
+    },
+    "valid_until": {
+      "format": "date-time",
+      "title": "Valid Until",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_id",
+    "approval_policy_ref",
+    "minimum_throughput_millijobs_per_second",
+    "maximum_p50_latency_microseconds",
+    "maximum_p95_latency_microseconds",
+    "maximum_model_requests_per_job_milli",
+    "maximum_cost_micro_usd_per_job",
+    "maximum_queue_wait_p95_microseconds",
+    "maximum_error_rate_basis_points",
+    "minimum_resume_success_basis_points",
+    "minimum_sample_count",
+    "valid_from",
+    "valid_until",
+    "policy_sha256",
+    "audit"
+  ],
+  "title": "OperationsSLOPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_readiness_review_v2.OperationsSLOPolicyV2",
+  "x-schema-version": "eval-factory/operations-slo-policy/v2"
+}

@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "RubricJudgedObjectKindV2": {
+      "enum": [
+        "CONTESTANT_RESPONSE",
+        "OUTPUT_ARTIFACT",
+        "WORKSPACE_STATE",
+        "TOOL_BEHAVIOR",
+        "STRUCTURED_VALUE"
+      ],
+      "title": "RubricJudgedObjectKindV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/criteria_rubric_goal_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tool_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 1000,
+      "title": "Allowed Tool Ids",
+      "type": "array"
+    },
+    "attachment_dependency_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 10000,
+      "title": "Attachment Dependency Ids",
+      "type": "array"
+    },
+    "evaluator_binding_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Evaluator Binding Id",
+      "type": "string"
+    },
+    "goal_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Goal Id",
+      "type": "string"
+    },
+    "goal_summary": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Goal Summary",
+      "type": "string"
+    },
+    "judged_object_kind": {
+      "$ref": "#/$defs/RubricJudgedObjectKindV2"
+    },
+    "prompt_requirement_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 10000,
+      "title": "Prompt Requirement Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/criteria-rubric-goal/v2",
+      "default": "eval-factory/criteria-rubric-goal/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "visibility": {
+      "const": "EVALUATOR_ONLY",
+      "default": "EVALUATOR_ONLY",
+      "title": "Visibility",
+      "type": "string"
+    },
+    "weight_basis_points": {
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Weight Basis Points",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "goal_id",
+    "goal_summary",
+    "judged_object_kind",
+    "evaluator_binding_id",
+    "weight_basis_points"
+  ],
+  "title": "CriteriaRubricGoalV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.agent_system_v2.CriteriaRubricGoalV2",
+  "x-schema-version": "eval-factory/criteria-rubric-goal/v2"
+}

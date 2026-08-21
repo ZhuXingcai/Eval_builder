@@ -1,0 +1,54 @@
+{
+  "schema_version": "eval-factory/label-spec/v1",
+  "label_spec_id": "label-spec://search-tool-usage/v1",
+  "label_version": "v1",
+  "name": "search_tool_usage",
+  "requirement": "Match only when a normalized, capability-complete ToolCallRecord proves that a search-family tool call was executed. Tool definitions, prompt mentions, fetch-only calls, malformed-request heuristics, and unpaired text do not satisfy the label.",
+  "positive_predicates": [
+    {
+      "schema_version": "eval-factory/structured-predicate/v1",
+      "predicate_id": "predicate://search-tool-usage/positive/v1",
+      "fact_type": "ToolCallRecord",
+      "field_path": "tool_family",
+      "operator": "EQUALS",
+      "expected_value": "search",
+      "window_events": null,
+      "required_capability": "tool_events"
+    }
+  ],
+  "negative_predicates": [
+    {
+      "schema_version": "eval-factory/structured-predicate/v1",
+      "predicate_id": "predicate://search-tool-usage/negative/v1",
+      "fact_type": "ToolCallRecord",
+      "field_path": "tool_family",
+      "operator": "NOT_EXISTS",
+      "expected_value": "search",
+      "window_events": null,
+      "required_capability": "tool_events"
+    }
+  ],
+  "semantic_residual": null,
+  "decision_threshold": 1.0,
+  "review_threshold": 1.0,
+  "audit": {
+    "schema_version": "eval-factory/contract-audit/v1",
+    "created_at": "2026-07-20T00:00:00Z",
+    "created_by": "r0-11-approved-decision",
+    "governing_versions": [
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "eval-factory-spec",
+        "version": "approved-2026-07-19",
+        "sha256": null
+      },
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "cross-stage-contracts",
+        "version": "v1",
+        "sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+      }
+    ],
+    "input_refs": []
+  }
+}

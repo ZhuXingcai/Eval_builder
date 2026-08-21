@@ -1,0 +1,691 @@
+{
+  "$defs": {
+    "CanaryRegressionCaseResultV2": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Attempt Count",
+          "type": "integer"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "audit_report_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "case_result_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Case Result Id",
+          "type": "string"
+        },
+        "case_result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Case Result Sha256",
+          "type": "string"
+        },
+        "child_dataset_result_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "child_manifest_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "expectation": {
+          "$ref": "#/$defs/CanaryRegressionExpectationV2"
+        },
+        "expectation_matched": {
+          "title": "Expectation Matched",
+          "type": "boolean"
+        },
+        "highest_reached_stage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StageNameV2"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "instance_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Instance Id",
+          "type": "string"
+        },
+        "item_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Item Id"
+        },
+        "item_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ItemStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "job_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Job Id",
+          "type": "string"
+        },
+        "job_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JobStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "observed_outcome": {
+          "$ref": "#/$defs/CanaryRegressionObservedOutcomeV2"
+        },
+        "package_manifest_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Package Manifest Refs",
+          "type": "array"
+        },
+        "policy_version": {
+          "const": "canary-regression/r8-03-v1",
+          "default": "canary-regression/r8-03-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provider_invocation_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Provider Invocation Count",
+          "type": "integer"
+        },
+        "quality_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Quality Result Refs",
+          "type": "array"
+        },
+        "reason_code": {
+          "$ref": "#/$defs/CanaryRegressionReasonCodeV2"
+        },
+        "resume_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Resume Count",
+          "type": "integer"
+        },
+        "retry_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Retry Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/canary-regression-case-result/v2",
+          "default": "eval-factory/canary-regression-case-result/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "signal_quality": {
+          "enum": [
+            "strict_events",
+            "heuristic_requires_annotation"
+          ],
+          "title": "Signal Quality",
+          "type": "string"
+        },
+        "source_trace_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "stage_result_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Stage Result Refs",
+          "type": "array"
+        },
+        "stage_run_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Stage Run Count",
+          "type": "integer"
+        },
+        "work_lease_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Work Lease Count",
+          "type": "integer"
+        },
+        "work_unit_count": {
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Work Unit Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "case_result_id",
+        "instance_id",
+        "source_trace_ref",
+        "signal_quality",
+        "expectation",
+        "observed_outcome",
+        "expectation_matched",
+        "reason_code",
+        "child_manifest_ref",
+        "job_id",
+        "work_unit_count",
+        "work_lease_count",
+        "stage_run_count",
+        "attempt_count",
+        "retry_count",
+        "resume_count",
+        "provider_invocation_count",
+        "case_result_sha256",
+        "audit"
+      ],
+      "title": "CanaryRegressionCaseResultV2",
+      "type": "object"
+    },
+    "CanaryRegressionExpectationV2": {
+      "enum": [
+        "MUST_SUCCEED",
+        "ANY_TYPED_TERMINAL"
+      ],
+      "title": "CanaryRegressionExpectationV2",
+      "type": "string"
+    },
+    "CanaryRegressionObservedOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED",
+        "FAILED",
+        "INFRASTRUCTURE_ERROR",
+        "INCOMPLETE"
+      ],
+      "title": "CanaryRegressionObservedOutcomeV2",
+      "type": "string"
+    },
+    "CanaryRegressionOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "INCOMPLETE"
+      ],
+      "title": "CanaryRegressionOutcomeV2",
+      "type": "string"
+    },
+    "CanaryRegressionReasonCodeV2": {
+      "enum": [
+        "NONE",
+        "LABEL_NO_MATCH",
+        "STAGE_BLOCKED_POLICY",
+        "STAGE_BLOCKED_CAPABILITY",
+        "STAGE_RETRY_EXHAUSTED",
+        "RESOURCE_WAITING",
+        "RESOURCE_BUDGET_EXHAUSTED",
+        "RESOURCE_UNSATISFIABLE",
+        "PROFILE_POLICY_ERROR",
+        "LIFECYCLE_POLICY_ERROR",
+        "MATERIAL_INTEGRITY_ERROR",
+        "CHILD_STATE_INCOMPLETE",
+        "OUTCOME_MISMATCH",
+        "INTERNAL_ERROR"
+      ],
+      "title": "CanaryRegressionReasonCodeV2",
+      "type": "string"
+    },
+    "CanaryRegressionStageSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "reached_count": {
+          "maximum": 30,
+          "minimum": 0,
+          "title": "Reached Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/canary-regression-stage-summary/v2",
+          "default": "eval-factory/canary-regression-stage-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stage": {
+          "$ref": "#/$defs/StageNameV2"
+        },
+        "terminal_count": {
+          "maximum": 30,
+          "minimum": 0,
+          "title": "Terminal Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "stage",
+        "reached_count",
+        "terminal_count"
+      ],
+      "title": "CanaryRegressionStageSummaryV2",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ItemStatus": {
+      "enum": [
+        "CANDIDATE",
+        "RUNNING",
+        "NEEDS_REVIEW",
+        "APPROVED",
+        "REJECTED",
+        "RELEASED",
+        "REVOKED",
+        "FAILED"
+      ],
+      "title": "ItemStatus",
+      "type": "string"
+    },
+    "JobStatus": {
+      "enum": [
+        "CREATED",
+        "RUNNING",
+        "BLOCKED",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "title": "JobStatus",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/canary_regression_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "blocked_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Blocked Ids",
+      "type": "array"
+    },
+    "case_result_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "title": "Case Result Refs",
+      "type": "array"
+    },
+    "case_results": {
+      "items": {
+        "$ref": "#/$defs/CanaryRegressionCaseResultV2"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "title": "Case Results",
+      "type": "array"
+    },
+    "claim_scope": {
+      "const": "CANARY_REGRESSION_ONLY",
+      "default": "CANARY_REGRESSION_ONLY",
+      "title": "Claim Scope",
+      "type": "string"
+    },
+    "cohort_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "expected_must_succeed_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Expected Must Succeed Ids",
+      "type": "array"
+    },
+    "expected_typed_terminal_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Expected Typed Terminal Ids",
+      "type": "array"
+    },
+    "failed_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Failed Ids",
+      "type": "array"
+    },
+    "incomplete_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Incomplete Ids",
+      "type": "array"
+    },
+    "infrastructure_error_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Infrastructure Error Ids",
+      "type": "array"
+    },
+    "matched_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Matched Ids",
+      "type": "array"
+    },
+    "mismatched_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Mismatched Ids",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/CanaryRegressionOutcomeV2"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "canary-regression/r8-03-v1",
+      "default": "canary-regression/r8-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/canary-regression-report/v2",
+      "default": "eval-factory/canary-regression-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage_summaries": {
+      "items": {
+        "$ref": "#/$defs/CanaryRegressionStageSummaryV2"
+      },
+      "title": "Stage Summaries",
+      "type": "array"
+    },
+    "succeeded_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Succeeded Ids",
+      "type": "array"
+    },
+    "template_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "total_attempts": {
+      "minimum": 0,
+      "title": "Total Attempts",
+      "type": "integer"
+    },
+    "total_provider_invocations": {
+      "minimum": 0,
+      "title": "Total Provider Invocations",
+      "type": "integer"
+    },
+    "total_resumes": {
+      "minimum": 0,
+      "title": "Total Resumes",
+      "type": "integer"
+    },
+    "total_retries": {
+      "minimum": 0,
+      "title": "Total Retries",
+      "type": "integer"
+    },
+    "total_stage_runs": {
+      "minimum": 0,
+      "title": "Total Stage Runs",
+      "type": "integer"
+    },
+    "total_work_leases": {
+      "minimum": 0,
+      "title": "Total Work Leases",
+      "type": "integer"
+    },
+    "total_work_units": {
+      "minimum": 0,
+      "title": "Total Work Units",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "report_id",
+    "cohort_manifest_ref",
+    "policy_ref",
+    "template_ref",
+    "case_results",
+    "case_result_refs",
+    "expected_must_succeed_ids",
+    "expected_typed_terminal_ids",
+    "succeeded_ids",
+    "blocked_ids",
+    "failed_ids",
+    "infrastructure_error_ids",
+    "incomplete_ids",
+    "matched_ids",
+    "mismatched_ids",
+    "stage_summaries",
+    "total_work_units",
+    "total_work_leases",
+    "total_stage_runs",
+    "total_attempts",
+    "total_retries",
+    "total_resumes",
+    "total_provider_invocations",
+    "outcome",
+    "report_sha256",
+    "audit"
+  ],
+  "title": "CanaryRegressionReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionReportV2",
+  "x-schema-version": "eval-factory/canary-regression-report/v2"
+}

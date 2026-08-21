@@ -1,0 +1,78 @@
+{
+  "schema_version": "eval-factory/r5-07-artifact-result-gold/v1",
+  "policy_version": "artifact-results/r5-07-v1",
+  "cases": [
+    {
+      "case_id": "not-required",
+      "scenario": "NOT_REQUIRED",
+      "expected_outcome": "NOT_REQUIRED",
+      "expected_candidate_count": 0,
+      "expected_failed_artifact_ids": [],
+      "expected_resumable_artifact_ids": [],
+      "expected_dependency_blocked_artifact_ids": [],
+      "expected_required_incomplete_artifact_ids": [],
+      "expected_optional_incomplete_artifact_ids": []
+    },
+    {
+      "case_id": "required-routing-block",
+      "scenario": "ROUTING_BLOCKED_REQUIRED",
+      "expected_outcome": "BLOCKED",
+      "expected_candidate_count": 0,
+      "expected_failed_artifact_ids": [
+        "artifact://a"
+      ],
+      "expected_resumable_artifact_ids": [],
+      "expected_dependency_blocked_artifact_ids": [],
+      "expected_required_incomplete_artifact_ids": [
+        "artifact://a"
+      ],
+      "expected_optional_incomplete_artifact_ids": []
+    },
+    {
+      "case_id": "optional-routing-block",
+      "scenario": "ROUTING_BLOCKED_OPTIONAL",
+      "expected_outcome": "BLOCKED",
+      "expected_candidate_count": 0,
+      "expected_failed_artifact_ids": [
+        "artifact://a"
+      ],
+      "expected_resumable_artifact_ids": [],
+      "expected_dependency_blocked_artifact_ids": [],
+      "expected_required_incomplete_artifact_ids": [],
+      "expected_optional_incomplete_artifact_ids": [
+        "artifact://a"
+      ]
+    },
+    {
+      "case_id": "all-success-pending-validation",
+      "scenario": "ALL_SUCCESS",
+      "expected_outcome": "PENDING_VALIDATION",
+      "expected_candidate_count": 2,
+      "expected_failed_artifact_ids": [],
+      "expected_resumable_artifact_ids": [],
+      "expected_dependency_blocked_artifact_ids": [],
+      "expected_required_incomplete_artifact_ids": [],
+      "expected_optional_incomplete_artifact_ids": []
+    },
+    {
+      "case_id": "retry-root-dependency-and-independent-success",
+      "scenario": "PARTIAL_RETRY_DEPENDENCY",
+      "expected_outcome": "PARTIAL_FAILURE",
+      "expected_candidate_count": 1,
+      "expected_failed_artifact_ids": [
+        "artifact://a"
+      ],
+      "expected_resumable_artifact_ids": [
+        "artifact://a"
+      ],
+      "expected_dependency_blocked_artifact_ids": [
+        "artifact://b"
+      ],
+      "expected_required_incomplete_artifact_ids": [
+        "artifact://a",
+        "artifact://b"
+      ],
+      "expected_optional_incomplete_artifact_ids": []
+    }
+  ]
+}

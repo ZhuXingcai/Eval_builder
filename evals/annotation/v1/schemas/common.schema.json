@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.eval-factory.local/annotation/v1/common.schema.json",
+  "title": "Eval Factory Annotation Common Definitions v1",
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$"
+    },
+    "stringSet": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "uniqueItems": true
+    },
+    "evidenceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_ref_id",
+        "source_ref",
+        "source_sha256",
+        "locator_type",
+        "locator_ref",
+        "supports",
+        "capability",
+        "capability_complete",
+        "approximate"
+      ],
+      "properties": {
+        "evidence_ref_id": {
+          "type": "string",
+          "pattern": "^ev_[a-z0-9][a-z0-9._-]{5,127}$"
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 512
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "locator_type": {
+          "enum": [
+            "SOURCE_SPAN",
+            "TRACE_EVENT",
+            "TOOL_CALL",
+            "FILE_VERSION",
+            "INTERACTION_SEGMENT",
+            "OBJECT",
+            "PACKAGE_MEMBER",
+            "POLICY"
+          ]
+        },
+        "locator_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "supports": {
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "UNCERTAINTY",
+            "CONTRADICTION"
+          ]
+        },
+        "capability": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "capability_complete": {
+          "type": "boolean"
+        },
+        "approximate": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    },
+    "governingVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spec",
+        "trace_adr",
+        "safety_adr",
+        "human_review_policy",
+        "canary_manifest_sha256"
+      ],
+      "properties": {
+        "spec": {
+          "const": "002-eval-dataset-factory/approved-2026-07-19"
+        },
+        "trace_adr": {
+          "const": "ADR-0009"
+        },
+        "safety_adr": {
+          "const": "ADR-0010"
+        },
+        "human_review_policy": {
+          "const": "eval-factory-human-review/v1"
+        },
+        "canary_manifest_sha256": {
+          "const": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+        }
+      }
+    },
+    "adjudication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adjudicator_id",
+        "adjudicator_role",
+        "input_annotation_ids",
+        "decision",
+        "disagreement_codes",
+        "review_record_refs",
+        "reason",
+        "decided_at"
+      ],
+      "properties": {
+        "adjudicator_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "adjudicator_role": {
+          "enum": [
+            "LABEL_REVIEWER",
+            "TASK_REVIEWER",
+            "PROVENANCE_REVIEWER",
+            "ARTIFACT_REVIEWER",
+            "RUBRIC_REVIEWER",
+            "EVALUATOR_REVIEWER",
+            "PRIVACY_REVIEWER",
+            "SAFETY_EXCEPTION_REVIEWER",
+            "ITEM_REVIEWER",
+            "RELEASE_AUTHORITY",
+            "AUDITOR"
+          ]
+        },
+        "input_annotation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^ann_[a-z0-9][a-z0-9._-]{7,127}$"
+          },
+          "uniqueItems": true
+        },
+        "decision": {
+          "enum": [
+            "ACCEPT",
+            "REVISE",
+            "ABSTAIN",
+            "REJECT"
+          ]
+        },
+        "disagreement_codes": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "review_record_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "uniqueItems": true
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "annotationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "annotation_id",
+        "annotation_type",
+        "canary_instance_id",
+        "source_ref",
+        "source_sha256",
+        "subject_ref",
+        "subject_version",
+        "subject_sha256",
+        "guide_version",
+        "contract_manifest_sha256",
+        "governing_versions",
+        "annotator_id",
+        "annotator_role",
+        "status",
+        "conclusion",
+        "evidence",
+        "uncertainty_codes",
+        "finding_refs",
+        "rationale",
+        "adjudication",
+        "supersedes",
+        "created_at",
+        "payload"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "eval-factory-annotation/v1"
+        },
+        "annotation_id": {
+          "type": "string",
+          "pattern": "^ann_[a-z0-9][a-z0-9._-]{7,127}$"
+        },
+        "annotation_type": {
+          "enum": [
+            "PARSER",
+            "SAFETY",
+            "LABEL",
+            "TASK",
+            "ATTACHMENT",
+            "RELEASE"
+          ]
+        },
+        "canary_instance_id": {
+          "type": "string",
+          "pattern": "^LH_[0-9]+$"
+        },
+        "source_ref": {
+          "type": "string",
+          "pattern": "^raw_traj://LH_[0-9]+$"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "subject_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "subject_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "guide_version": {
+          "const": "eval-factory-annotation-guide/v1"
+        },
+        "contract_manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "governing_versions": {
+          "$ref": "#/$defs/governingVersions"
+        },
+        "annotator_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255
+        },
+        "annotator_role": {
+          "enum": [
+            "LABEL_REVIEWER",
+            "TASK_REVIEWER",
+            "PROVENANCE_REVIEWER",
+            "ARTIFACT_REVIEWER",
+            "RUBRIC_REVIEWER",
+            "EVALUATOR_REVIEWER",
+            "PRIVACY_REVIEWER",
+            "SAFETY_EXCEPTION_REVIEWER",
+            "ITEM_REVIEWER",
+            "RELEASE_AUTHORITY",
+            "AUDITOR"
+          ]
+        },
+        "status": {
+          "enum": [
+            "DRAFT",
+            "SUBMITTED",
+            "ADJUDICATED",
+            "ABSTAINED",
+            "SUPERSEDED"
+          ]
+        },
+        "conclusion": {
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "MIXED",
+            "NOT_APPLICABLE",
+            "INDETERMINATE",
+            "BLOCKED"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceRef"
+          }
+        },
+        "uncertainty_codes": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "finding_refs": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "adjudication": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/adjudication"
+            }
+          ]
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ann_[a-z0-9][a-z0-9._-]{7,127}$"
+          },
+          "uniqueItems": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "payload": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ADJUDICATED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "adjudication": {
+                "$ref": "#/$defs/adjudication"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "SUPERSEDED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "supersedes": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ABSTAINED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "conclusion": {
+                "enum": [
+                  "INDETERMINATE",
+                  "BLOCKED"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

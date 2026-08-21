@@ -1,0 +1,48 @@
+{
+  "$defs": {
+    "AttachmentCriticality": {
+      "enum": [
+        "CRITICAL",
+        "REQUIRED",
+        "OPTIONAL"
+      ],
+      "title": "AttachmentCriticality",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/producer_attachment_requirement_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "criticality": {
+      "$ref": "#/$defs/AttachmentCriticality"
+    },
+    "dependency_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Dependency Id",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/producer-attachment-requirement/v2",
+      "default": "eval-factory/producer-attachment-requirement/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dependency_id",
+    "description",
+    "criticality"
+  ],
+  "title": "ProducerAttachmentRequirementV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.ProducerAttachmentRequirementV2",
+  "x-schema-version": "eval-factory/producer-attachment-requirement/v2"
+}

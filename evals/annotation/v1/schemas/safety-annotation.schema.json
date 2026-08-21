@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.eval-factory.local/annotation/v1/safety-annotation.schema.json",
+  "title": "Eval Factory Safety Annotation v1",
+  "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/annotationRecord",
+  "properties": {
+    "annotation_type": {
+      "const": "SAFETY"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_decisions",
+        "known_output_contamination",
+        "answer_leakage",
+        "inventory_provenance_equality",
+        "expected_package_disposition",
+        "non_waivable_blockers"
+      ],
+      "properties": {
+        "subject_decisions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "subject_ref",
+              "file_version_stage",
+              "origin_class",
+              "taint_labels",
+              "content_risk_labels",
+              "disposition",
+              "non_waivable",
+              "evidence_ref_ids"
+            ],
+            "properties": {
+              "subject_ref": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 512
+              },
+              "file_version_stage": {
+                "enum": [
+                  "V0_PRE_MUTATION",
+                  "POST_MUTATION",
+                  "UNKNOWN",
+                  "NOT_FILE"
+                ]
+              },
+              "origin_class": {
+                "enum": [
+                  "USER_SUPPLIED_INPUT",
+                  "PREEXISTING_WORKSPACE_INPUT",
+                  "SYSTEM_OR_HARNESS_CONTEXT",
+                  "AGENT_RETRIEVED_EXTERNAL",
+                  "AGENT_GENERATED_INTERMEDIATE",
+                  "AGENT_GENERATED_FINAL",
+                  "UNKNOWN"
+                ]
+              },
+              "taint_labels": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "FINAL_OUTPUT_DERIVED",
+                    "PRIVATE_REFERENCE_DERIVED",
+                    "GRADER_RULE_DERIVED",
+                    "UNKNOWN_DERIVATION",
+                    "SENSITIVE_SOURCE_DERIVED",
+                    "UNTRUSTED_INSTRUCTION_DERIVED"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "content_risk_labels": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "ANSWER_BEARING",
+                    "HIDDEN_PASS_CONDITION",
+                    "SECRET",
+                    "RESTRICTED_PII",
+                    "PROMPT_INJECTION",
+                    "UNSCANNABLE_CONTENT"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "disposition": {
+                "enum": [
+                  "ALLOW_INPUT_EVIDENCE",
+                  "ALLOW_STRUCTURE_ONLY",
+                  "ALLOW_EXTERNAL_LEAD_ONLY",
+                  "NEEDS_REVIEW",
+                  "QUARANTINE",
+                  "REJECT"
+                ]
+              },
+              "non_waivable": {
+                "type": "boolean"
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+              }
+            }
+          }
+        },
+        "known_output_contamination": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "INDETERMINATE"
+          ]
+        },
+        "answer_leakage": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "INDETERMINATE"
+          ]
+        },
+        "inventory_provenance_equality": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_EVALUATED"
+          ]
+        },
+        "expected_package_disposition": {
+          "enum": [
+            "ALLOW",
+            "NEEDS_REVIEW",
+            "QUARANTINE",
+            "REJECT"
+          ]
+        },
+        "non_waivable_blockers": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v1/common.schema.json#/$defs/stringSet"
+        }
+      }
+    }
+  }
+}

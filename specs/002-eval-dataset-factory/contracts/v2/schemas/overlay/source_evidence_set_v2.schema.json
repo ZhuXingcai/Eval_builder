@@ -1,0 +1,625 @@
+{
+  "$defs": {
+    "ContentRiskLabel": {
+      "enum": [
+        "ANSWER_BEARING",
+        "HIDDEN_PASS_CONDITION",
+        "SECRET",
+        "RESTRICTED_PII",
+        "PROMPT_INJECTION",
+        "UNSCANNABLE_CONTENT"
+      ],
+      "title": "ContentRiskLabel",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "Disposition": {
+      "enum": [
+        "ALLOW_INPUT_EVIDENCE",
+        "ALLOW_STRUCTURE_ONLY",
+        "ALLOW_EXTERNAL_LEAD_ONLY",
+        "NEEDS_REVIEW",
+        "QUARANTINE",
+        "REJECT"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "OriginClass": {
+      "enum": [
+        "USER_SUPPLIED_INPUT",
+        "PREEXISTING_WORKSPACE_INPUT",
+        "SYSTEM_OR_HARNESS_CONTEXT",
+        "AGENT_RETRIEVED_EXTERNAL",
+        "AGENT_GENERATED_INTERMEDIATE",
+        "AGENT_GENERATED_FINAL",
+        "UNKNOWN"
+      ],
+      "title": "OriginClass",
+      "type": "string"
+    },
+    "ProvenanceDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "content_risk_labels": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ContentRiskLabel"
+          },
+          "title": "Content Risk Labels",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "derived_from": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Derived From",
+          "type": "array"
+        },
+        "disposition": {
+          "$ref": "#/$defs/Disposition"
+        },
+        "origin_class": {
+          "$ref": "#/$defs/OriginClass"
+        },
+        "policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "provenance_decision_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Provenance Decision Id",
+          "type": "string"
+        },
+        "review_required": {
+          "title": "Review Required",
+          "type": "boolean"
+        },
+        "rule_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/provenance-decision/v1",
+          "default": "eval-factory/provenance-decision/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_event_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Source Event Refs",
+          "type": "array"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "subject_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Sha256",
+          "type": "string"
+        },
+        "taint_labels": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/TaintLabel"
+          },
+          "title": "Taint Labels",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility"
+        }
+      },
+      "required": [
+        "provenance_decision_id",
+        "subject_ref",
+        "origin_class",
+        "visibility",
+        "disposition",
+        "rule_ids",
+        "confidence",
+        "review_required",
+        "policy_version",
+        "subject_sha256",
+        "audit"
+      ],
+      "title": "ProvenanceDecision",
+      "type": "object"
+    },
+    "SourceEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "content_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "content_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "provenance_decision_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "retrieval_policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Retrieval Policy Version",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-evidence/v1",
+          "default": "eval-factory/source-evidence/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Evidence Id",
+          "type": "string"
+        },
+        "source_uri": {
+          "maxLength": 2048,
+          "minLength": 3,
+          "title": "Source Uri",
+          "type": "string"
+        },
+        "supported_claim_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Supported Claim Ids",
+          "type": "array"
+        },
+        "usage_basis": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Usage Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_evidence_id",
+        "source_uri",
+        "retrieved_at",
+        "retrieval_policy_version",
+        "usage_basis",
+        "content_ref",
+        "content_sha256",
+        "supported_claim_ids",
+        "provenance_decision_ref",
+        "audit"
+      ],
+      "title": "SourceEvidence",
+      "type": "object"
+    },
+    "SourceEvidenceClaimBindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_evidence_target_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "attachment_dependency_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Attachment Dependency Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-evidence-claim-binding/v2",
+          "default": "eval-factory/source-evidence-claim-binding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "supported_claim_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Supported Claim Ids",
+          "type": "array"
+        },
+        "usage_basis": {
+          "enum": [
+            "FACTS_ONLY",
+            "STRUCTURE_AND_STYLE_ONLY"
+          ],
+          "title": "Usage Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_evidence_target_ref",
+        "attachment_dependency_id",
+        "supported_claim_ids",
+        "usage_basis"
+      ],
+      "title": "SourceEvidenceClaimBindingV2",
+      "type": "object"
+    },
+    "SourceEvidenceV2": {
+      "additionalProperties": false,
+      "properties": {
+        "attachment_planning_context_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "claim_bindings": {
+          "items": {
+            "$ref": "#/$defs/SourceEvidenceClaimBindingV2"
+          },
+          "minItems": 1,
+          "title": "Claim Bindings",
+          "type": "array"
+        },
+        "content_provenance_decision": {
+          "$ref": "#/$defs/ProvenanceDecision"
+        },
+        "external_lead_decision_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "external_lead_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "fetch_result_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "policy_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "producer_task_view_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "prompt_only_dependency_discovery_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "retrieval_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "safety_assessment_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/source-evidence/v2",
+          "default": "eval-factory/source-evidence/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "search_result_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "source_evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Evidence Id",
+          "type": "string"
+        },
+        "source_evidence_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Evidence Sha256",
+          "type": "string"
+        },
+        "source_evidence_v1": {
+          "$ref": "#/$defs/SourceEvidence"
+        }
+      },
+      "required": [
+        "source_evidence_id",
+        "attachment_planning_context_ref",
+        "producer_task_view_ref",
+        "prompt_only_dependency_discovery_ref",
+        "retrieval_policy_ref",
+        "fetch_result_ref",
+        "safety_assessment_ref",
+        "claim_bindings",
+        "source_evidence_v1",
+        "content_provenance_decision",
+        "policy_version",
+        "source_evidence_sha256",
+        "audit"
+      ],
+      "title": "SourceEvidenceV2",
+      "type": "object"
+    },
+    "TaintLabel": {
+      "enum": [
+        "FINAL_OUTPUT_DERIVED",
+        "PRIVATE_REFERENCE_DERIVED",
+        "GRADER_RULE_DERIVED",
+        "UNKNOWN_DERIVATION",
+        "SENSITIVE_SOURCE_DERIVED",
+        "UNTRUSTED_INSTRUCTION_DERIVED"
+      ],
+      "title": "TaintLabel",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    },
+    "Visibility": {
+      "enum": [
+        "PRIVATE_STORE",
+        "PRIVILEGED_AUDIT",
+        "STAGE_PROJECTION",
+        "EVALUATOR_PROJECTION",
+        "CONTESTANT_VISIBLE",
+        "PUBLIC_RELEASE"
+      ],
+      "title": "Visibility",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/source_evidence_set_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_planning_context_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "covered_target_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Covered Target Refs",
+      "type": "array"
+    },
+    "not_required_target_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Not Required Target Refs",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "producer_task_view_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "prompt_only_dependency_discovery_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "retrieval_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "retrieval_request_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Retrieval Request Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/source-evidence-set/v2",
+      "default": "eval-factory/source-evidence-set/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_evidence": {
+      "items": {
+        "$ref": "#/$defs/SourceEvidenceV2"
+      },
+      "minItems": 1,
+      "title": "Source Evidence",
+      "type": "array"
+    },
+    "source_evidence_set_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Evidence Set Id",
+      "type": "string"
+    },
+    "source_evidence_set_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Evidence Set Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_evidence_set_id",
+    "attachment_planning_context_ref",
+    "producer_task_view_ref",
+    "prompt_only_dependency_discovery_ref",
+    "retrieval_policy_ref",
+    "retrieval_request_refs",
+    "source_evidence",
+    "covered_target_refs",
+    "policy_version",
+    "source_evidence_set_sha256",
+    "audit"
+  ],
+  "title": "SourceEvidenceSetV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.attachment_v2.SourceEvidenceSetV2",
+  "x-schema-version": "eval-factory/source-evidence-set/v2"
+}

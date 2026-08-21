@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "expected_decision": {
+          "enum": [
+            "MATCH",
+            "NO_MATCH",
+            "ABSTAIN"
+          ]
+        },
+        "label_spec_ref": {
+          "maxLength": 255,
+          "minLength": 3,
+          "type": "string"
+        },
+        "label_spec_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "model_profile": {
+          "maxLength": 128,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "negative_evidence_ref_ids": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "positive_evidence_ref_ids": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "prompt_version": {
+          "maxLength": 128,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "NOT_REVIEWED",
+            "REVIEW_REQUIRED",
+            "APPROVED",
+            "REJECTED"
+          ]
+        },
+        "rule_version": {
+          "maxLength": 128,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "semantic_evidence_ref_ids": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "semantic_residual": {
+          "enum": [
+            "NOT_REQUIRED",
+            "REQUIRED",
+            "BLOCKED"
+          ]
+        },
+        "structured_capability_complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "label_spec_ref",
+        "label_spec_version",
+        "expected_decision",
+        "positive_evidence_ref_ids",
+        "negative_evidence_ref_ids",
+        "semantic_evidence_ref_ids",
+        "structured_capability_complete",
+        "semantic_residual",
+        "confidence",
+        "rule_version",
+        "model_profile",
+        "prompt_version",
+        "review_status"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/label-annotation.schema.json",
+  "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/annotationRecord",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "annotation_type": {
+      "const": "LABEL"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "title": "Eval Factory Label Annotation v2"
+}

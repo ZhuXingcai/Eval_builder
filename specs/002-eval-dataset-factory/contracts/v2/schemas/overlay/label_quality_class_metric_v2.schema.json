@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "LabelDecisionValueV2": {
+      "enum": [
+        "MATCH",
+        "NO_MATCH",
+        "ABSTAIN"
+      ],
+      "title": "LabelDecisionValueV2",
+      "type": "string"
+    },
+    "LabelQualityMetricAvailabilityV2": {
+      "enum": [
+        "MEASURED",
+        "UNDEFINED",
+        "NOT_COMPUTED"
+      ],
+      "title": "LabelQualityMetricAvailabilityV2",
+      "type": "string"
+    },
+    "LabelQualityMetricNameV2": {
+      "enum": [
+        "PRECISION",
+        "RECALL",
+        "F1",
+        "MACRO_F1"
+      ],
+      "title": "LabelQualityMetricNameV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_quality_class_metric_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "availability": {
+      "$ref": "#/$defs/LabelQualityMetricAvailabilityV2"
+    },
+    "decision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LabelDecisionValueV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "denominator": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Denominator",
+      "type": "integer"
+    },
+    "metric": {
+      "$ref": "#/$defs/LabelQualityMetricNameV2"
+    },
+    "numerator": {
+      "anyOf": [
+        {
+          "maximum": 10000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Numerator"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-quality-class-metric/v2",
+      "default": "eval-factory/label-quality-class-metric/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "value_basis_points": {
+      "anyOf": [
+        {
+          "maximum": 10000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Basis Points"
+    }
+  },
+  "required": [
+    "metric",
+    "denominator",
+    "availability"
+  ],
+  "title": "LabelQualityClassMetricV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.label_quality_v2.LabelQualityClassMetricV2",
+  "x-schema-version": "eval-factory/label-quality-class-metric/v2"
+}

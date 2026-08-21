@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "R6CanaryExpectedItemOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED",
+        "FAILED"
+      ],
+      "title": "R6CanaryExpectedItemOutcomeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/r6_canary_trace_binding_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_fixture_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Attachment Fixture Refs",
+      "type": "array"
+    },
+    "expected_outcome": {
+      "$ref": "#/$defs/R6CanaryExpectedItemOutcomeV2"
+    },
+    "label_spec_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Label Spec Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/r6-canary-trace-binding/v2",
+      "default": "eval-factory/r6-canary-trace-binding/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_fixture_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Semantic Fixture Refs",
+      "type": "array"
+    },
+    "source_trace_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "structured_fact_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "task_fixture_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Task Fixture Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_trace_ref",
+    "structured_fact_set_ref",
+    "label_spec_refs",
+    "expected_outcome"
+  ],
+  "title": "R6CanaryTraceBindingV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_execution_v2.R6CanaryTraceBindingV2",
+  "x-schema-version": "eval-factory/r6-canary-trace-binding/v2"
+}

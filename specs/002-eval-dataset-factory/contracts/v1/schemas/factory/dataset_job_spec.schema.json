@@ -1,0 +1,435 @@
+{
+  "$defs": {
+    "ConcurrencyLimit": {
+      "additionalProperties": false,
+      "properties": {
+        "artifacts_per_item": {
+          "minimum": 1,
+          "title": "Artifacts Per Item",
+          "type": "integer"
+        },
+        "items": {
+          "minimum": 1,
+          "title": "Items",
+          "type": "integer"
+        },
+        "model_requests": {
+          "minimum": 1,
+          "title": "Model Requests",
+          "type": "integer"
+        },
+        "network_requests": {
+          "minimum": 1,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 1,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 1,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/concurrency-limit/v1",
+          "default": "eval-factory/concurrency-limit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model_requests",
+        "processes",
+        "renderers",
+        "network_requests",
+        "artifacts_per_item",
+        "items"
+      ],
+      "title": "ConcurrencyLimit",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ExportTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "enum": [
+            "CANARY",
+            "INTERNAL_REVIEW",
+            "PRODUCTION"
+          ],
+          "title": "Channel",
+          "type": "string"
+        },
+        "profile": {
+          "enum": [
+            "LH",
+            "GENERIC"
+          ],
+          "title": "Profile",
+          "type": "string"
+        },
+        "profile_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Profile Version",
+          "type": "string"
+        },
+        "registry": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Registry",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/export-target/v1",
+          "default": "eval-factory/export-target/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "profile",
+        "profile_version",
+        "channel",
+        "registry"
+      ],
+      "title": "ExportTarget",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ResourceBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_model_requests": {
+          "minimum": 0,
+          "title": "Max Model Requests",
+          "type": "integer"
+        },
+        "max_model_tokens": {
+          "minimum": 0,
+          "title": "Max Model Tokens",
+          "type": "integer"
+        },
+        "max_network_requests": {
+          "minimum": 0,
+          "title": "Max Network Requests",
+          "type": "integer"
+        },
+        "max_processes": {
+          "minimum": 0,
+          "title": "Max Processes",
+          "type": "integer"
+        },
+        "max_renderers": {
+          "minimum": 0,
+          "title": "Max Renderers",
+          "type": "integer"
+        },
+        "max_storage_bytes": {
+          "minimum": 0,
+          "title": "Max Storage Bytes",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/resource-budget/v1",
+          "default": "eval-factory/resource-budget/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "max_model_requests",
+        "max_model_tokens",
+        "max_processes",
+        "max_renderers",
+        "max_network_requests",
+        "max_storage_bytes"
+      ],
+      "title": "ResourceBudget",
+      "type": "object"
+    },
+    "StageName": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label",
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "human_review",
+        "release"
+      ],
+      "title": "StageName",
+      "type": "string"
+    },
+    "TraceSourceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Adapter Name",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "processing_class": {
+          "const": "RESTRICTED_TRACE_RAW",
+          "title": "Processing Class",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/trace-source-ref/v1",
+          "default": "eval-factory/trace-source-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "source_uri": {
+          "maxLength": 1024,
+          "minLength": 3,
+          "title": "Source Uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_trace_id",
+        "source_uri",
+        "raw_sha256",
+        "adapter_name",
+        "adapter_version",
+        "processing_class"
+      ],
+      "title": "TraceSourceRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/dataset_job_spec.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "budget": {
+      "$ref": "#/$defs/ResourceBudget"
+    },
+    "concurrency": {
+      "$ref": "#/$defs/ConcurrencyLimit"
+    },
+    "export_target": {
+      "$ref": "#/$defs/ExportTarget"
+    },
+    "idempotency_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "model_profiles": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Model Profiles",
+      "type": "array"
+    },
+    "privacy_profile": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Privacy Profile",
+      "type": "string"
+    },
+    "requested_stages": {
+      "items": {
+        "$ref": "#/$defs/StageName"
+      },
+      "minItems": 1,
+      "title": "Requested Stages",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/dataset-job-spec/v1",
+      "default": "eval-factory/dataset-job-spec/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selection_spec_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "traces": {
+      "items": {
+        "$ref": "#/$defs/TraceSourceRef"
+      },
+      "minItems": 1,
+      "title": "Traces",
+      "type": "array"
+    }
+  },
+  "required": [
+    "job_id",
+    "traces",
+    "requested_stages",
+    "privacy_profile",
+    "budget",
+    "concurrency",
+    "export_target",
+    "idempotency_key",
+    "audit"
+  ],
+  "title": "DatasetJobSpec",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration.DatasetJobSpec",
+  "x-schema-version": "eval-factory/dataset-job-spec/v1"
+}

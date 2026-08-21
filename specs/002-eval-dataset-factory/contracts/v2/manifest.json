@@ -1,0 +1,3538 @@
+{
+  "architecture": "v1-base-plus-v2-overlay",
+  "base_contract_set": {
+    "path": "specs/002-eval-dataset-factory/contracts/v1/manifest.json",
+    "sha256": "d550d84262d3f727394c65e52ec0bf6e41fdaf532bfde0851c72e6d1495d59a9"
+  },
+  "compatibility_policy": {
+    "path": "specs/002-eval-dataset-factory/contracts/compatibility-policy-v2.md",
+    "sha256": "fe68dd66dbd40c05daaeb93caa3bbebcd4a6359989c19a0e2cc55e368598c245"
+  },
+  "contract_set_version": "v2",
+  "contracts": [
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AgentCapabilityV2",
+      "schema_path": "schemas/overlay/agent_capability_v2.schema.json",
+      "schema_sha256": "12dd67cbab47ac2a5c859a869c5f4d562c6e8b73b63655228d077886e78d1cfc",
+      "schema_version": "eval-factory/agent-capability/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AgentDefinitionV2",
+      "schema_path": "schemas/overlay/agent_definition_v2.schema.json",
+      "schema_sha256": "d35a24d7b217da6c5343e589f9787ad8f8c40a41e31cf4ed25d47ee9b1fdcb71",
+      "schema_version": "eval-factory/agent-definition/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AgentResultEnvelopeV2",
+      "schema_path": "schemas/overlay/agent_result_envelope_v2.schema.json",
+      "schema_sha256": "7bea5759825f6abafe1919f1f854ff24bb28f620ff7c49b1e3206d0dbd27f28f",
+      "schema_version": "eval-factory/agent-result-envelope/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AgentTaskV2",
+      "schema_path": "schemas/overlay/agent_task_v2.schema.json",
+      "schema_sha256": "19ee5518b79ecf28cac9c9df11d30ea8c8a2e4afbc5227453da6620122487583",
+      "schema_version": "eval-factory/agent-task/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AgentWorkspaceReceiptV2",
+      "schema_path": "schemas/overlay/agent_workspace_receipt_v2.schema.json",
+      "schema_sha256": "5496703961c328f5ac0ca7be8aa6fdc802bcf0a8d2567712c246763b573d0b6e",
+      "schema_version": "eval-factory/agent-workspace-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cross_item_safety_v2.AnswerReusePairEvidenceV2",
+      "schema_path": "schemas/overlay/answer_reuse_pair_evidence_v2.schema.json",
+      "schema_sha256": "082763635aa2c0c33af83934eed17e7964c776b1ba3bff066db0294e7d7b273a",
+      "schema_version": "eval-factory/answer-reuse-pair-evidence/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_v2.ApprovalRequestGenerationPolicyV2",
+      "schema_path": "schemas/overlay/approval_request_generation_policy_v2.schema.json",
+      "schema_sha256": "d1232260edd43806464793e07c56b5ed91986068037adaae0b95e24d4c94290d",
+      "schema_version": "eval-factory/approval-request-generation-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactBuildContractV2",
+      "schema_path": "schemas/overlay/artifact_build_contract_v2.schema.json",
+      "schema_sha256": "2b67b42e043ad9d3f863e502d7d7c88675735e917b4bbf33e8259ac984a52983",
+      "schema_version": "eval-factory/artifact-build-contract/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactBuildResultV2",
+      "schema_path": "schemas/overlay/artifact_build_result_v2.schema.json",
+      "schema_sha256": "ad3b945add77ab9273ccfbfaec9e88340666e2c1f330145b9aaddc7e5ccd2498",
+      "schema_version": "eval-factory/artifact-build-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactBuildSpecV2",
+      "schema_path": "schemas/overlay/artifact_build_spec_v2.schema.json",
+      "schema_sha256": "ca70165ca0b2a7fd2c902b81cc0220c503acaee46312d4784914df4c60e2856e",
+      "schema_version": "eval-factory/artifact-build-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.validation_v2.ArtifactDeterministicValidationResultV2",
+      "schema_path": "schemas/overlay/artifact_deterministic_validation_result_v2.schema.json",
+      "schema_sha256": "1576ae832f5aec407216ce791da421ddda33b6184e611a0d0a637e23e264110a",
+      "schema_version": "eval-factory/artifact-deterministic-validation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactEvidenceMatrixV2",
+      "schema_path": "schemas/overlay/artifact_evidence_matrix_v2.schema.json",
+      "schema_sha256": "7ac65364b13ffa7d7e027ed3fe367b3c45dbc4495caf0329778632fb755ab8d0",
+      "schema_version": "eval-factory/artifact-evidence-matrix/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactEvidenceRowV2",
+      "schema_path": "schemas/overlay/artifact_evidence_row_v2.schema.json",
+      "schema_sha256": "39b4590bbf872d2dedc616550b9a520fcf3a4e4fe1a4aa030efa5175148181f2",
+      "schema_version": "eval-factory/artifact-evidence-row/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactEvidenceTargetV2",
+      "schema_path": "schemas/overlay/artifact_evidence_target_v2.schema.json",
+      "schema_sha256": "a96f5bc5d796a31c496ff2cc1aa955c4a41ad905c4651c8f1691fde7fddc5ff8",
+      "schema_version": "eval-factory/artifact-evidence-target/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactExecutionBatchV2",
+      "schema_path": "schemas/overlay/artifact_execution_batch_v2.schema.json",
+      "schema_sha256": "aa7ddc352b394a88fb1c3de3d677d55c8578a8ef7b43f1e381e940d866cf377b",
+      "schema_version": "eval-factory/artifact-execution-batch/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactExecutionGroupV2",
+      "schema_path": "schemas/overlay/artifact_execution_group_v2.schema.json",
+      "schema_sha256": "b837a66e9e1c256e14537d0b2b2c058a36ac7bf7931906d5557074b3c7c5a4e1",
+      "schema_version": "eval-factory/artifact-execution-group/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactExecutionPlanV2",
+      "schema_path": "schemas/overlay/artifact_execution_plan_v2.schema.json",
+      "schema_sha256": "4150220cab5aaae7b10ef965aecd4460413684389352dd73039c326825ac8d9f",
+      "schema_version": "eval-factory/artifact-execution-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactExecutionReceiptV2",
+      "schema_path": "schemas/overlay/artifact_execution_receipt_v2.schema.json",
+      "schema_sha256": "31e0c7d870ea19df4e2b9bdb7a5a2fa42ee76eaf7447fb3c70cebc0e2990f8a0",
+      "schema_version": "eval-factory/artifact-execution-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactExecutionUnitV2",
+      "schema_path": "schemas/overlay/artifact_execution_unit_v2.schema.json",
+      "schema_sha256": "7d6ca74721afba62e7cd47ab91cd4e880066c3e7a3f0937b89c3b85e4f64d7cb",
+      "schema_version": "eval-factory/artifact-execution-unit/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.ArtifactGroupFanoutV2",
+      "schema_path": "schemas/overlay/artifact_group_fanout_v2.schema.json",
+      "schema_sha256": "bff1c1f98f392694b0e19ddcafd138e4e55caebe0ce31d3279a4ae7ee00fafab",
+      "schema_version": "eval-factory/artifact-group-fanout/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.ArtifactMetricSliceV2",
+      "schema_path": "schemas/overlay/artifact_metric_slice_v2.schema.json",
+      "schema_sha256": "50df1c7c758765c6b6ef5b025181ef086e0a5f61c0947d6d25041226f2377f5e",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactRoutePlanEntryV2",
+      "schema_path": "schemas/overlay/artifact_route_plan_entry_v2.schema.json",
+      "schema_sha256": "f83f40ea68903249bae64bea383830e19d785e7f81aadb601a2565ab83dea1e0",
+      "schema_version": "eval-factory/artifact-route-plan-entry/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactRoutingPlanV2",
+      "schema_path": "schemas/overlay/artifact_routing_plan_v2.schema.json",
+      "schema_sha256": "802610bd4ef5d088df81ba50fed3f4c140b70bc36dcadba5884b0e9189ab8f3e",
+      "schema_version": "eval-factory/artifact-routing-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.ArtifactRoutingPolicyV2",
+      "schema_path": "schemas/overlay/artifact_routing_policy_v2.schema.json",
+      "schema_sha256": "1e1f31b9945858d75bd68c5788b2d62466a9131eff257ecb6d5a52d567313312",
+      "schema_version": "eval-factory/artifact-routing-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.AttachmentCandidateRevisionV2",
+      "schema_path": "schemas/overlay/attachment_candidate_revision_v2.schema.json",
+      "schema_sha256": "cd1ca51413ba42c8a4704a1cd9aab6cf71059038a783a60a5431d00891d4d26f",
+      "schema_version": "eval-factory/attachment-candidate-revision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cross_item_safety_v2.AttachmentCrossItemSafetyScanEvidenceV2",
+      "schema_path": "schemas/overlay/attachment_cross_item_safety_scan_evidence_v2.schema.json",
+      "schema_sha256": "bd4711056f4c9906258154c9d060b1c5c9c28dfa031fb09c0523075232cc1eb3",
+      "schema_version": "eval-factory/attachment-cross-item-safety-scan-evidence/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.cross_item_safety_v2.AttachmentCrossItemSafetyScanLimitsV2",
+      "schema_path": "schemas/overlay/attachment_cross_item_safety_scan_limits_v2.schema.json",
+      "schema_sha256": "0488d55486eaef1600e46a4678f54d46fda440a25d8ba5ad250057925a58e977",
+      "schema_version": "env-mock-agent/attachment-cross-item-safety-scan-limits/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.cross_item_safety_v2.AttachmentCrossItemSafetyScanRequestV2",
+      "schema_path": "schemas/overlay/attachment_cross_item_safety_scan_request_v2.schema.json",
+      "schema_sha256": "01f4d40d8113b099bb47ca2b9881472dc120c7e8ffa85e47fbaa44751c2ae0a4",
+      "schema_version": "env-mock-agent/attachment-cross-item-safety-scan-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.cross_item_safety_v2.AttachmentCrossItemSafetyScanResultV2",
+      "schema_path": "schemas/overlay/attachment_cross_item_safety_scan_result_v2.schema.json",
+      "schema_sha256": "6bad1125a2f225b3a993f574d26c09480ed1fc446e45bfb96bbb409c9a3f4898",
+      "schema_version": "env-mock-agent/attachment-cross-item-safety-scan-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.duplicate_v2.AttachmentDuplicateFingerprintLimitsV2",
+      "schema_path": "schemas/overlay/attachment_duplicate_fingerprint_limits_v2.schema.json",
+      "schema_sha256": "a4c2cb3f7ee24c90734f95f670bd6070f11d245d36b66ab196c4e16f92940d17",
+      "schema_version": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.duplicate_v2.AttachmentDuplicateFingerprintRequestV2",
+      "schema_path": "schemas/overlay/attachment_duplicate_fingerprint_request_v2.schema.json",
+      "schema_sha256": "53d8e6bc401cd7cc9c94129c834b093cefe32e3c142738309773923118774f8e",
+      "schema_version": "env-mock-agent/attachment-duplicate-fingerprint-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.duplicate_v2.AttachmentDuplicateFingerprintResultV2",
+      "schema_path": "schemas/overlay/attachment_duplicate_fingerprint_result_v2.schema.json",
+      "schema_sha256": "d5b78b58211c70b1bbed5b9d9a7a70ae0e03e492eb55aef058e88ebd0969b1d9",
+      "schema_version": "env-mock-agent/attachment-duplicate-fingerprint-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.duplicate_v2.AttachmentDuplicateFingerprintV2",
+      "schema_path": "schemas/overlay/attachment_duplicate_fingerprint_v2.schema.json",
+      "schema_sha256": "1136ae793e5d24e52a3077cbbc9b0d38a1437e5eb4fc862608609f20278ef2b3",
+      "schema_version": "eval-factory/attachment-duplicate-fingerprint/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.AttachmentExecutionEvidenceGrantV2",
+      "schema_path": "schemas/overlay/attachment_execution_evidence_grant_v2.schema.json",
+      "schema_sha256": "f167e2e629264455f865370a3fcbf70cf50daef1432b19509fd858674070a280",
+      "schema_version": "env-mock-agent/attachment-execution-evidence-grant/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.AttachmentExecutionRequestV2",
+      "schema_path": "schemas/overlay/attachment_execution_request_v2.schema.json",
+      "schema_sha256": "42adc687116a24c19727bc414af408201eaf1d2f4f71df0a249839c21173c057",
+      "schema_version": "env-mock-agent/attachment-execution-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.AttachmentExecutionResultV2",
+      "schema_path": "schemas/overlay/attachment_execution_result_v2.schema.json",
+      "schema_sha256": "cd62d2c25357460c7ef2f1a0aba318eb1b677939752b9a50fec6310e630b7f9c",
+      "schema_version": "env-mock-agent/attachment-execution-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.AttachmentExecutionSourceSpanV2",
+      "schema_path": "schemas/overlay/attachment_execution_source_span_v2.schema.json",
+      "schema_sha256": "0c1dc0165795ce0cac2483c6efdeba8a1666b01728625d078c0c41724c635bfe",
+      "schema_version": "env-mock-agent/attachment-execution-source-span/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AttachmentGenerationPlanV2",
+      "schema_path": "schemas/overlay/attachment_generation_plan_v2.schema.json",
+      "schema_sha256": "806f3b2736bd2bd7e8de48454f164d6f8639cd13a1e080213dd5c34695c397cf",
+      "schema_version": "eval-factory/attachment-generation-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AttachmentGroupResultV2",
+      "schema_path": "schemas/overlay/attachment_group_result_v2.schema.json",
+      "schema_sha256": "f60ea09498c7c00524325cdd2045e32379fa55a1a239c3bc909a48a610f54e97",
+      "schema_version": "eval-factory/attachment-group-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentInventoryMemberV2",
+      "schema_path": "schemas/overlay/attachment_inventory_member_v2.schema.json",
+      "schema_sha256": "f07d6dc666deace8217187bbaa661570389cf7be0515dcaf33cd7cd82f7bbb99",
+      "schema_version": "env-mock-agent/attachment-inventory-member/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AttachmentMockWorkV2",
+      "schema_path": "schemas/overlay/attachment_mock_work_v2.schema.json",
+      "schema_sha256": "c6cadaa38e96a2add7f03e39ad8245f6c79f3117482ce1797735e154e7039ba0",
+      "schema_version": "eval-factory/attachment-mock-work/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.AttachmentPlanningContextV2",
+      "schema_path": "schemas/overlay/attachment_planning_context_v2.schema.json",
+      "schema_sha256": "3eb44e8e10eb6e0c2ebf257aa8ad19dbe23cf6b2d99cb4823116fb32a50e485b",
+      "schema_version": "eval-factory/attachment-planning-context/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AttachmentQualityAssessmentV2",
+      "schema_path": "schemas/overlay/attachment_quality_assessment_v2.schema.json",
+      "schema_sha256": "ce1bb1f677d57eeab27ddfaec155345002edad1211df810e367515ed0cac23ce",
+      "schema_version": "eval-factory/attachment-quality-assessment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.AttachmentReconstructionResultV2",
+      "schema_path": "schemas/overlay/attachment_reconstruction_result_v2.schema.json",
+      "schema_sha256": "2deefe4d27e47ac651bb720e59601cca78caf357e4f5abaff86981070f7c54fb",
+      "schema_version": "eval-factory/attachment-reconstruction-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentRepairRequestV2",
+      "schema_path": "schemas/overlay/attachment_repair_request_v2.schema.json",
+      "schema_sha256": "f066d93a0d9b38369c11c777ff9a9c06e4e27a229a25c0cf839170c118cfc760",
+      "schema_version": "env-mock-agent/attachment-repair-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentRepairResultV2",
+      "schema_path": "schemas/overlay/attachment_repair_result_v2.schema.json",
+      "schema_sha256": "414717f1df7a32715cf354e7b54c12339345283ada1c68f94dc1c50fd83e1324",
+      "schema_version": "env-mock-agent/attachment-repair-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.AttachmentResourceGrantV2",
+      "schema_path": "schemas/overlay/attachment_resource_grant_v2.schema.json",
+      "schema_sha256": "91f80f54e931b32a8c472f2e13e901f4c300557eef6894716400ca93c55753d1",
+      "schema_version": "env-mock-agent/attachment-resource-grant/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.AttachmentResourceTerminationRequestV2",
+      "schema_path": "schemas/overlay/attachment_resource_termination_request_v2.schema.json",
+      "schema_sha256": "43f812b8d0276c04b539ca723e8dfc961af933666241ac815abf9fb6042d2e35",
+      "schema_version": "env-mock-agent/attachment-resource-termination-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.AttachmentResourceTerminationResultV2",
+      "schema_path": "schemas/overlay/attachment_resource_termination_result_v2.schema.json",
+      "schema_sha256": "88fc0b5420aa45a869d1ca11ea2bb32fd21bb58f571be79c12e8602357a3fc67",
+      "schema_version": "env-mock-agent/attachment-resource-termination-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.AttachmentResourceUsageV2",
+      "schema_path": "schemas/overlay/attachment_resource_usage_v2.schema.json",
+      "schema_sha256": "10b82db68d284b7f996c09613b394c7ecadb1bd7e8a4b607c2935ef87a9e71dc",
+      "schema_version": "env-mock-agent/attachment-resource-usage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.routing_v2.AttachmentRouteDecisionV2",
+      "schema_path": "schemas/overlay/attachment_route_decision_v2.schema.json",
+      "schema_sha256": "5d86dbd18e80c29cd38df1a76c3c45af16e24a1fea310d9a4cb91a2300d3ff75",
+      "schema_version": "env-mock-agent/attachment-route-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.routing_v2.AttachmentRouteRequestV2",
+      "schema_path": "schemas/overlay/attachment_route_request_v2.schema.json",
+      "schema_sha256": "da6aea4a445a6578c12931d259b0438976035388b87141a676d4611d3dfca315",
+      "schema_version": "env-mock-agent/attachment-route-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.routing_v2.AttachmentRouteSkipV2",
+      "schema_path": "schemas/overlay/attachment_route_skip_v2.schema.json",
+      "schema_sha256": "979ce661d5eff34df9b71a6a88f4b571057da5a0b6b5a52237068a5eadbdce9e",
+      "schema_version": "env-mock-agent/attachment-route-skip/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticFindingPolicyV2",
+      "schema_path": "schemas/overlay/attachment_semantic_finding_policy_v2.schema.json",
+      "schema_sha256": "e6ad8b464f40446749d08ce4c855a126f270d0a9b3f923a0bf7190dcf12f3b31",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticFindingResolutionV2",
+      "schema_path": "schemas/overlay/attachment_semantic_finding_resolution_v2.schema.json",
+      "schema_sha256": "e8d46601cb849f7c4905a3e98a5b4add286798237f618ce335729b96ae706ba2",
+      "schema_version": "env-mock-agent/attachment-semantic-finding-resolution/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticReviewFindingV2",
+      "schema_path": "schemas/overlay/attachment_semantic_review_finding_v2.schema.json",
+      "schema_sha256": "ed369f53888ee076229aa52cca3fba7b11007ea1e2849bafbb68fd0ea03efcb4",
+      "schema_version": "env-mock-agent/attachment-semantic-review-finding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticReviewRequestV2",
+      "schema_path": "schemas/overlay/attachment_semantic_review_request_v2.schema.json",
+      "schema_sha256": "77354a542271449a53b1c0d9dfd9fd195d33cc802d03e8445f049386d350ad62",
+      "schema_version": "env-mock-agent/attachment-semantic-review-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.AttachmentSemanticReviewResultV2",
+      "schema_path": "schemas/overlay/attachment_semantic_review_result_v2.schema.json",
+      "schema_sha256": "2ec63d81e94849d37385ae2331d3b4b7dc001f107daba3107df41327bf2a4d17",
+      "schema_version": "env-mock-agent/attachment-semantic-review-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AttachmentSubgraphResultV2",
+      "schema_path": "schemas/overlay/attachment_subgraph_result_v2.schema.json",
+      "schema_sha256": "965d95845647ab7e66d2632992e983717ac634a1376e5fe1972ea3c1c3531e8e",
+      "schema_version": "eval-factory/attachment-subgraph-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentValidationFindingV2",
+      "schema_path": "schemas/overlay/attachment_validation_finding_v2.schema.json",
+      "schema_sha256": "34638e68e3298d676873abc9e77b59ff9d2ea9378b8794424a811f587cd990da",
+      "schema_version": "env-mock-agent/attachment-validation-finding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentValidationFingerprintV2",
+      "schema_path": "schemas/overlay/attachment_validation_fingerprint_v2.schema.json",
+      "schema_sha256": "abd9044048132700ccb0c33b982f234a33c60fd2afd506f55f3bc42d7c79f5c2",
+      "schema_version": "env-mock-agent/attachment-validation-fingerprint/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentValidationPiiRuleV2",
+      "schema_path": "schemas/overlay/attachment_validation_pii_rule_v2.schema.json",
+      "schema_sha256": "82743e718011e63172dac36edf1b3d0ba2741433124865a5be8ad8e754f98774",
+      "schema_version": "env-mock-agent/attachment-validation-pii-rule/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentValidationRequestV2",
+      "schema_path": "schemas/overlay/attachment_validation_request_v2.schema.json",
+      "schema_sha256": "30915e5aaa3f871a533570154de7888fd44c6a70f9b44d33b62bb040b4ed5ec8",
+      "schema_version": "env-mock-agent/attachment-validation-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentValidationResultV2",
+      "schema_path": "schemas/overlay/attachment_validation_result_v2.schema.json",
+      "schema_sha256": "46ff4105f761706988667af08a17d00e97d5bdecbdad91e7b00ffcac56a916b1",
+      "schema_version": "env-mock-agent/attachment-validation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.validation_v2.AttachmentValidationScanLimitsV2",
+      "schema_path": "schemas/overlay/attachment_validation_scan_limits_v2.schema.json",
+      "schema_sha256": "8c94b7e7a83833ba728a0ccd75f695613500f6871701351c5431d17dff05a59b",
+      "schema_version": "env-mock-agent/attachment-validation-scan-limits/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.AttachmentWorkAssignmentV2",
+      "schema_path": "schemas/overlay/attachment_work_assignment_v2.schema.json",
+      "schema_sha256": "ca07070d038224722fe1b73e38f5222cd2440f55020df3e3f8c18526d28f77f5",
+      "schema_version": "eval-factory/attachment-work-assignment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.BatchAuditEventV2",
+      "schema_path": "schemas/overlay/batch_audit_event_v2.schema.json",
+      "schema_sha256": "70930f555364f67492f3f403758818334a9790300e051921941e0b965e3f8a9a",
+      "schema_version": "eval-factory/batch-audit-event/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.BatchAuditFindingV2",
+      "schema_path": "schemas/overlay/batch_audit_finding_v2.schema.json",
+      "schema_sha256": "463fc9688e7ce3816022048e210bac53210c9e6a8742b869421acb17f1baa868",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.BatchAuditReportV2",
+      "schema_path": "schemas/overlay/batch_audit_report_v2.schema.json",
+      "schema_sha256": "e00a14d3a2f8fca3db3b40f79f49b3a7224276d18dfea1260eb9f6593b0c9bd5",
+      "schema_version": "eval-factory/batch-audit-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.BatchMetricsSnapshotV2",
+      "schema_path": "schemas/overlay/batch_metrics_snapshot_v2.schema.json",
+      "schema_sha256": "7de079884ea8a9160248d6cc80865d5a8ec4ec84f8dffd1baa18db3afc7d5773",
+      "schema_version": "eval-factory/batch-metrics-snapshot/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.batch_quality_v2.BatchQualityPolicyV2",
+      "schema_path": "schemas/overlay/batch_quality_policy_v2.schema.json",
+      "schema_sha256": "3055e35e24246813f73207c9c290270ac94cf2bb3c224fe362b8f15d5a332bc8",
+      "schema_version": "eval-factory/batch-quality-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.batch_quality_v2.BatchQualityReportV2",
+      "schema_path": "schemas/overlay/batch_quality_report_v2.schema.json",
+      "schema_sha256": "cc425ea729618c7b13ea7811431839bc3bdf77014d973433d4bf0468a304b5f5",
+      "schema_version": "eval-factory/batch-quality-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.batch_quality_v2.BatchReviewerFindingV2",
+      "schema_path": "schemas/overlay/batch_reviewer_finding_v2.schema.json",
+      "schema_sha256": "c1215b0a4366eeed000d909b995e3e925918991d418d957407a2c8cf724d0ba8",
+      "schema_version": "eval-factory/batch-reviewer-finding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionCaseResultV2",
+      "schema_path": "schemas/overlay/canary_regression_case_result_v2.schema.json",
+      "schema_sha256": "d2d1d96edac070c9c3cd9f134f6c021d069df5f57d5c4c80d9688169c010c15a",
+      "schema_version": "eval-factory/canary-regression-case-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionPolicyV2",
+      "schema_path": "schemas/overlay/canary_regression_policy_v2.schema.json",
+      "schema_sha256": "e521c12c06936de9efabd88a723c8c64f59fcfd7015cefbe9324879f7af4ae79",
+      "schema_version": "eval-factory/canary-regression-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionReportV2",
+      "schema_path": "schemas/overlay/canary_regression_report_v2.schema.json",
+      "schema_sha256": "ae1158669662e5c9243142f34189eb276767daa93898779eb2ec7ae70f72e74d",
+      "schema_version": "eval-factory/canary-regression-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_regression_v2.CanaryRegressionStageSummaryV2",
+      "schema_path": "schemas/overlay/canary_regression_stage_summary_v2.schema.json",
+      "schema_sha256": "d087dce6024336e3b4c4b7f41164a49af503697da6e7a7314cd3855d60027252",
+      "schema_version": "eval-factory/canary-regression-stage-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.CandidateArtifactVersionV2",
+      "schema_path": "schemas/overlay/candidate_artifact_version_v2.schema.json",
+      "schema_sha256": "e89a1727a73b23b95a486f0bf159ff4175b9943682dfb1e04b207df533f046d2",
+      "schema_version": "eval-factory/candidate-artifact-version/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.CandidateDatasetDeliveryManifestV2",
+      "schema_path": "schemas/overlay/candidate_dataset_delivery_manifest_v2.schema.json",
+      "schema_sha256": "421075c7ae71db298799cb07019fa268b487640a3b08357cf7636ac1eb3cbec5",
+      "schema_version": "eval-factory/candidate-dataset-delivery-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.validation_v2.CandidatePackageInventoryEntryV2",
+      "schema_path": "schemas/overlay/candidate_package_inventory_entry_v2.schema.json",
+      "schema_sha256": "f7211d64a839af2960b49ba9634cd038920df1ee039f3699148582426e84a022",
+      "schema_version": "eval-factory/candidate-package-inventory-entry/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.validation_v2.CandidatePackageInventoryV2",
+      "schema_path": "schemas/overlay/candidate_package_inventory_v2.schema.json",
+      "schema_sha256": "33071133df883bbcb6e9e9927ce8d781abfe44cf6ba2b0b7c5b74ddca739898f",
+      "schema_version": "eval-factory/candidate-package-inventory/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_v2.CheckpointDecisionBinding",
+      "schema_path": "schemas/overlay/checkpoint_decision_binding.schema.json",
+      "schema_sha256": "5de4fc8951ea0a13089680cf579ada717dcbbeb4869cd10f015a63de95f2056e",
+      "schema_version": "eval-factory/checkpoint-decision-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CompiledAttachmentGenerationPlanV2",
+      "schema_path": "schemas/overlay/compiled_attachment_generation_plan_v2.schema.json",
+      "schema_sha256": "c1750b67e703409493a92e0f9c928aea56d31bf5401a88d6950cbcb7a9bf88a6",
+      "schema_version": "eval-factory/compiled-attachment-generation-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CompiledCriteriaRubricPlanV2",
+      "schema_path": "schemas/overlay/compiled_criteria_rubric_plan_v2.schema.json",
+      "schema_sha256": "cf2122521ad8c91395b8792569682685d1bce31c1ec6d2ddb380057da7c5647d",
+      "schema_version": "eval-factory/compiled-criteria-rubric-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CompiledDatasetBuildPlanV2",
+      "schema_path": "schemas/overlay/compiled_dataset_build_plan_v2.schema.json",
+      "schema_sha256": "7befa7e73dfa1f539dc571384057c62756a9d29276284fb43fd1541fd24dfe5d",
+      "schema_version": "eval-factory/compiled-dataset-build-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.CompiledDatasetDeliveryPlanV2",
+      "schema_path": "schemas/overlay/compiled_dataset_delivery_plan_v2.schema.json",
+      "schema_sha256": "f53ea4634a4cfe786685423331b7e992ffb928a2b7f5b2eedc6ece3f89cfdda0",
+      "schema_version": "eval-factory/compiled-dataset-delivery-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CompiledGradingDesignPlanV2",
+      "schema_path": "schemas/overlay/compiled_grading_design_plan_v2.schema.json",
+      "schema_sha256": "50682095ced948f2cd8fa742d955e817f64af014f7834f675c430ef458b13531",
+      "schema_version": "eval-factory/compiled-grading-design-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentHostSummaryV2",
+      "schema_path": "schemas/overlay/concurrency_experiment_host_summary_v2.schema.json",
+      "schema_sha256": "e09ce47c01fe7ceb645e206b1b5743392ba25d9b229114e4e80e650d1b5e62a8",
+      "schema_version": "eval-factory/concurrency-experiment-host-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentLevelSummaryV2",
+      "schema_path": "schemas/overlay/concurrency_experiment_level_summary_v2.schema.json",
+      "schema_sha256": "a95ece1e4ce7e50e0aef2bc449d587d86774edc915062274a58d83ed14815fdd",
+      "schema_version": "eval-factory/concurrency-experiment-level-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentPercentileSummaryV2",
+      "schema_path": "schemas/overlay/concurrency_experiment_percentile_summary_v2.schema.json",
+      "schema_sha256": "df0e481f668c85854ef4b5b66a5ed8d9440cc9669a6fdc452e9ea229cf853b61",
+      "schema_version": "eval-factory/concurrency-experiment-percentile-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentPolicyV2",
+      "schema_path": "schemas/overlay/concurrency_experiment_policy_v2.schema.json",
+      "schema_sha256": "a012f3c54bda47f2368e05fed5876fcc79445d1644fc9f58ef2fcef0558e69c2",
+      "schema_version": "eval-factory/concurrency-experiment-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentRecoverySummaryV2",
+      "schema_path": "schemas/overlay/concurrency_experiment_recovery_summary_v2.schema.json",
+      "schema_sha256": "a09272552df674ac8afb779ba0bc4042c6f3f8ec53069a5d5ae1b85e526f712a",
+      "schema_version": "eval-factory/concurrency-experiment-recovery-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.ConcurrencyExperimentReportV2",
+      "schema_path": "schemas/overlay/concurrency_experiment_report_v2.schema.json",
+      "schema_sha256": "c54f7567fc7929fc8b1e2b005fcd31ebed82c1c13cbb5ad9cafde765203ff3ea",
+      "schema_version": "eval-factory/concurrency-experiment-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ContestantToolPolicyV2",
+      "schema_path": "schemas/overlay/contestant_tool_policy_v2.schema.json",
+      "schema_sha256": "2a603e8e3c121535fdeab477c8bb27ac9c83f39253753f68d6386a58202fcd6b",
+      "schema_version": "eval-factory/contestant-tool-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ContestantToolRuleV2",
+      "schema_path": "schemas/overlay/contestant_tool_rule_v2.schema.json",
+      "schema_sha256": "0ef174424a95d48d11ef6cd18fa748890bbf2569286025422290695eaddef1d3",
+      "schema_version": "eval-factory/contestant-tool-rule/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CoreVerticalResultV2",
+      "schema_path": "schemas/overlay/core_vertical_result_v2.schema.json",
+      "schema_sha256": "0a254788e3638d2694dc2b13c8e5a85a6851775dc7cfd0e982c8ffd595d5879e",
+      "schema_version": "eval-factory/core-vertical-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.CostObservationV2",
+      "schema_path": "schemas/overlay/cost_observation_v2.schema.json",
+      "schema_sha256": "095109f6c8b0e1eebd651870f3eedda0c1714557f7e17934df32e9a38d58981d",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.CoverageSolvabilityReviewViewV2",
+      "schema_path": "schemas/overlay/coverage_solvability_review_view_v2.schema.json",
+      "schema_sha256": "d95a0c3708a51cb0dcefe2718b3c24754f3acb690ebdd160ee21bee3802a2545",
+      "schema_version": "eval-factory/coverage-solvability-review-view/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CriteriaRubricGoalV2",
+      "schema_path": "schemas/overlay/criteria_rubric_goal_v2.schema.json",
+      "schema_sha256": "9120e5aa2d29b9b720738261919ddcfa1651e99f5d2b2ed5d394fc4c626e098c",
+      "schema_version": "eval-factory/criteria-rubric-goal/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CriteriaRubricPlanV2",
+      "schema_path": "schemas/overlay/criteria_rubric_plan_v2.schema.json",
+      "schema_sha256": "94fe53cb0dea05fdcb840544cc2a34e6d6a29ecc5e233dec4da72d1028d88fab",
+      "schema_version": "eval-factory/criteria-rubric-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.CriteriaRubricResultV2",
+      "schema_path": "schemas/overlay/criteria_rubric_result_v2.schema.json",
+      "schema_sha256": "4b2e1398faf457bc76aad26e4842ce5be9355a874cf64d4ed51b478513e4a697",
+      "schema_version": "eval-factory/criteria-rubric-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cross_item_safety_v2.CrossItemSafetyClusterV2",
+      "schema_path": "schemas/overlay/cross_item_safety_cluster_v2.schema.json",
+      "schema_sha256": "519ee5daf6804d456f99e759b1616e267897c62dd37f55703c582fa6631f21ec",
+      "schema_version": "eval-factory/cross-item-safety-cluster/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cross_item_safety_v2.CrossItemSafetyPolicyV2",
+      "schema_path": "schemas/overlay/cross_item_safety_policy_v2.schema.json",
+      "schema_sha256": "bdacf189cc3e212c72973a92aad0db5e9bc514f2e23d4a7477637514bd70eee1",
+      "schema_version": "eval-factory/cross-item-safety-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cross_item_safety_v2.CrossItemSafetyResultV2",
+      "schema_path": "schemas/overlay/cross_item_safety_result_v2.schema.json",
+      "schema_sha256": "b3799468d95ab8e07c7fc817a5001c4c803c2d443e7a3e4ea6e23379b788bdf4",
+      "schema_version": "eval-factory/cross-item-safety-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cross_item_safety_v2.CrossItemVisibleMatchEvidenceV2",
+      "schema_path": "schemas/overlay/cross_item_visible_match_evidence_v2.schema.json",
+      "schema_sha256": "9a419638062e8b75cff798eef0e429f384a8730dbd5330bbf90b7ebc245cffdd",
+      "schema_version": "eval-factory/cross-item-visible-match-evidence/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.DatasetBuildPlanTaskV2",
+      "schema_path": "schemas/overlay/dataset_build_plan_task_v2.schema.json",
+      "schema_sha256": "95f74e5f8ff40565583c86ecb1a4295b4ebc7d59b0c7a95a4b311a763e1b1afd",
+      "schema_version": "eval-factory/dataset-build-plan-task/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.DatasetBuildPlanV2",
+      "schema_path": "schemas/overlay/dataset_build_plan_v2.schema.json",
+      "schema_sha256": "55be3a7995ba8dcfafdca17ff0bf43afc3bf5a5c37796fb6b304ea26cd01a87f",
+      "schema_version": "eval-factory/dataset-build-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.DatasetDeliveryManifestV2",
+      "schema_path": "schemas/overlay/dataset_delivery_manifest_v2.schema.json",
+      "schema_sha256": "954bd3d0bdf60432cdddb94f07a6a0affc11982eac7f75db4034c88d511cc732",
+      "schema_version": "eval-factory/dataset-delivery-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.DatasetDeliveryPlanV2",
+      "schema_path": "schemas/overlay/dataset_delivery_plan_v2.schema.json",
+      "schema_sha256": "e137738ef18c60fa885a3ce30518c006cb647d4e0b7931cff8ccca15a3c3272d",
+      "schema_version": "eval-factory/dataset-delivery-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.DatasetJobSpecV2",
+      "schema_path": "schemas/overlay/dataset_job_spec_v2.schema.json",
+      "schema_sha256": "27e725d314e758311fd4b0cad707a220a88df4cefbaafe98cdfe4161747e85a6",
+      "schema_version": "eval-factory/dataset-job-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.validation_v2.DeterministicItemValidationResultV2",
+      "schema_path": "schemas/overlay/deterministic_item_validation_result_v2.schema.json",
+      "schema_sha256": "c4050f53c1e06c39d53f73f6ffe6f61a682962b7cfe22b726a2e6e43d63c4975",
+      "schema_version": "eval-factory/deterministic-item-validation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.DeterministicRepairTargetV2",
+      "schema_path": "schemas/overlay/deterministic_repair_target_v2.schema.json",
+      "schema_sha256": "b643ea69e61c51035ebf471d2f4685c982c987c8b4618de4d37ddd72027e583b",
+      "schema_version": "eval-factory/deterministic-repair-target/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.validation_v2.DeterministicValidationFindingV2",
+      "schema_path": "schemas/overlay/deterministic_validation_finding_v2.schema.json",
+      "schema_sha256": "ef2f1228c77197061ed3988de0fd02ace43977ff203499132459eccbb7b06bb8",
+      "schema_version": "eval-factory/deterministic-validation-finding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.DirectedRevalidationPlanV2",
+      "schema_path": "schemas/overlay/directed_revalidation_plan_v2.schema.json",
+      "schema_sha256": "9dfabdc522b90d83c56384966c183e966788507963ca314e457549068d818d53",
+      "schema_version": "eval-factory/directed-revalidation-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.DirectedRevalidationReportV2",
+      "schema_path": "schemas/overlay/directed_revalidation_report_v2.schema.json",
+      "schema_sha256": "d991e99f6290ef8593ba387077abb300de611693d1a7fe63c47757f4045e7315",
+      "schema_version": "eval-factory/directed-revalidation-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.duplicate_v2.DuplicateClusterV2",
+      "schema_path": "schemas/overlay/duplicate_cluster_v2.schema.json",
+      "schema_sha256": "e0f7d107b8951d2a57080c452155495605bd7aeff3e566e2f117498b9ccb617b",
+      "schema_version": "eval-factory/duplicate-cluster/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.duplicate_v2.DuplicateDetectionPolicyV2",
+      "schema_path": "schemas/overlay/duplicate_detection_policy_v2.schema.json",
+      "schema_sha256": "bd0d1044eb591b370317d1fa653604f79d6647fabf06d6377af7f937554627c8",
+      "schema_version": "eval-factory/duplicate-detection-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.duplicate_v2.DuplicateDetectionResultV2",
+      "schema_path": "schemas/overlay/duplicate_detection_result_v2.schema.json",
+      "schema_sha256": "2f5d370ca7e4ceaefe1aa329ffe7ee023eb50a7384571f5fe67c13a408c0115b",
+      "schema_version": "eval-factory/duplicate-detection-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.duplicate_v2.DuplicatePairEvidenceV2",
+      "schema_path": "schemas/overlay/duplicate_pair_evidence_v2.schema.json",
+      "schema_sha256": "361db919acfe829a78d63737f07c6e16195f210d9abd98bab177ae8f3a26d254",
+      "schema_version": "eval-factory/duplicate-pair-evidence/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.EnvironmentAlternative",
+      "schema_path": "schemas/overlay/environment_alternative.schema.json",
+      "schema_sha256": "ff765c73dd59f666382b70507c1348ccfc8c49ba7a4b09d247ba00ba3b92591a",
+      "schema_version": "eval-factory/environment-alternative/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.EnvironmentArtifactV2",
+      "schema_path": "schemas/overlay/environment_artifact_v2.schema.json",
+      "schema_sha256": "76b0715224a6bc714ad4285e60ec2b646a968c61899e5b861e29a147d409e907",
+      "schema_version": "eval-factory/environment-artifact/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.EnvironmentRequirement",
+      "schema_path": "schemas/overlay/environment_requirement.schema.json",
+      "schema_sha256": "3448a93e5f85c32734357b414bbf37cfa5335934ec2d5774bf8d1418954a89d9",
+      "schema_version": "eval-factory/environment-requirement/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.EnvironmentScopeDecision",
+      "schema_path": "schemas/overlay/environment_scope_decision.schema.json",
+      "schema_sha256": "1a5de898fabcb3cab14b329d1a8257af03fc188a889dace10c99a7a22a30b7b3",
+      "schema_version": "eval-factory/environment-scope-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.EnvironmentSpecV2",
+      "schema_path": "schemas/overlay/environment_spec_v2.schema.json",
+      "schema_sha256": "8b06f9c0f07eff8084038cb93ebff029d1e9b44f5d65f857edf40efe78a31c9a",
+      "schema_version": "eval-factory/environment-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.EnvironmentStrategy",
+      "schema_path": "schemas/overlay/environment_strategy.schema.json",
+      "schema_sha256": "e74c371e18b88427d404f081f43fbba9c8c7cc085046966999e47a531fc7c514",
+      "schema_version": "eval-factory/environment-strategy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.EnvironmentStrategyAdjustmentResultV2",
+      "schema_path": "schemas/overlay/environment_strategy_adjustment_result_v2.schema.json",
+      "schema_sha256": "7ced60ad99525771d7dfdadf044618a5786aa2e8104610d78c1f5e2bdeb435ab",
+      "schema_version": "eval-factory/environment-strategy-adjustment-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_projection_v2.EvaluationItemReleaseSubjectV2",
+      "schema_path": "schemas/overlay/evaluation_item_release_subject_v2.schema.json",
+      "schema_sha256": "2d161ea1c5cb37c14174d2a4a57e01d5e72ff2f93df9d3daa28c05c8bed41b40",
+      "schema_version": "eval-factory/evaluation-item-release-subject/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_v2.EvaluationItemV2",
+      "schema_path": "schemas/overlay/evaluation_item_v2.schema.json",
+      "schema_sha256": "0a2d294f975d3623752c98b030dbcfde601d0bf1196a9e8766b9174ba253d001",
+      "schema_version": "eval-factory/evaluation-item/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.EvaluationRequirementSpecV2",
+      "schema_path": "schemas/overlay/evaluation_requirement_spec_v2.schema.json",
+      "schema_sha256": "60ef1fb63fd7d176633af124f24483ce639e414899331c2f6143928b919e1d42",
+      "schema_version": "eval-factory/evaluation-requirement-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.EvaluatorBindingV2",
+      "schema_path": "schemas/overlay/evaluator_binding_v2.schema.json",
+      "schema_sha256": "c94feaeef61c0120cf425eea4f8f43958a721b4b61f15137f80c54dc641a37f5",
+      "schema_version": "eval-factory/evaluator-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.EvaluatorFailureRuleV2",
+      "schema_path": "schemas/overlay/evaluator_failure_rule_v2.schema.json",
+      "schema_sha256": "d65851d566f5ccc76b4791a304b64e0c86d4bcadc9456e245182c4dc927478f8",
+      "schema_version": "eval-factory/evaluator-failure-rule/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.EvaluatorReferenceGrantV2",
+      "schema_path": "schemas/overlay/evaluator_reference_grant_v2.schema.json",
+      "schema_sha256": "f577c9cd93f7cd084166dd6ae439014a9f3d2958fcb20a7ca88dd9e04f375c3e",
+      "schema_version": "eval-factory/evaluator-reference-grant/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.EvaluatorSpecV2",
+      "schema_path": "schemas/overlay/evaluator_spec_v2.schema.json",
+      "schema_sha256": "76be1ee97ea41788a75f9a0015937b76b2e7f32744406e2e7192193732b71000",
+      "schema_version": "eval-factory/evaluator-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.telemetry_v2.ExecutionTelemetryV2",
+      "schema_path": "schemas/overlay/execution_telemetry_v2.schema.json",
+      "schema_sha256": "c82c0dd6c0f65f886c799d73db97e65c0989754b3a88e8ee4b9b97912a4060da",
+      "schema_version": "env-mock-agent/execution-telemetry/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.external_evidence_v2.ExternalEvidenceAdmissionReportV2",
+      "schema_path": "schemas/overlay/external_evidence_admission_report_v2.schema.json",
+      "schema_sha256": "9e4e06b70d435f12e14acfdf885ddee2b2fad80bbfd35ba3b813713dbbd46373",
+      "schema_version": "eval-factory/external-evidence-admission-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.external_evidence_v2.ExternalEvidencePackageManifestV2",
+      "schema_path": "schemas/overlay/external_evidence_package_manifest_v2.schema.json",
+      "schema_sha256": "2ea70f0174bcd7c93851c776d89b3bf4b172308601c22ccd4b57337a34cf4444",
+      "schema_version": "eval-factory/external-evidence-package-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.external_evidence_v2.ExternalLabelObservationSummaryV2",
+      "schema_path": "schemas/overlay/external_label_observation_summary_v2.schema.json",
+      "schema_sha256": "b549a95676c9f7a525b6caafd01b00bd0cfb39a6103f0b0d2f5c1288d272c439",
+      "schema_version": "eval-factory/external-label-observation-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.external_stability_v2.ExternalRealTraceStabilityPolicyV2",
+      "schema_path": "schemas/overlay/external_real_trace_stability_policy_v2.schema.json",
+      "schema_sha256": "63ba08b86bd3f5839cf543a9214521c900ef4381204a84f70ad2647fc81919e4",
+      "schema_version": "eval-factory/external-real-trace-stability-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.external_stability_v2.ExternalRealTraceStabilityReportV2",
+      "schema_path": "schemas/overlay/external_real_trace_stability_report_v2.schema.json",
+      "schema_sha256": "04c0c109b9c00bc88169a60f38fe29ed40366edb7cd1321b1b75011f377a4de5",
+      "schema_version": "eval-factory/external-real-trace-stability-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.external_evidence_v2.ExternalSc010Sc011EvidenceIndexV2",
+      "schema_path": "schemas/overlay/external_sc010_sc011_evidence_index_v2.schema.json",
+      "schema_sha256": "d27b9f411a43f33e53efdd555ea724451077d65072d4302aebbb4b1eff6dbd34",
+      "schema_version": "eval-factory/external-sc010-sc011-evidence-index/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.ExtractedUserPromptV2",
+      "schema_path": "schemas/overlay/extracted_user_prompt_v2.schema.json",
+      "schema_sha256": "289f58a9b2e9c1a915fefeb929c2c1d8671d3ad5e4e661a202a01d31145bde77",
+      "schema_version": "eval-factory/extracted-user-prompt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.FactoryDatasetAggregateResultV2",
+      "schema_path": "schemas/overlay/factory_dataset_aggregate_result_v2.schema.json",
+      "schema_sha256": "8c65981d602640407883c5a7eff922cf8f7a576f963705fe6ae0238123777e4f",
+      "schema_version": "eval-factory/factory-dataset-aggregate-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.FactoryDatasetPlanningAuthorityV2",
+      "schema_path": "schemas/overlay/factory_dataset_planning_authority_v2.schema.json",
+      "schema_sha256": "d401ca202281280dde6673446b6cfee4f546a3331bf5d8e7492e8a502d6d132f",
+      "schema_version": "eval-factory/factory-dataset-planning-authority/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.FactoryDatasetRunRequestV2",
+      "schema_path": "schemas/overlay/factory_dataset_run_request_v2.schema.json",
+      "schema_sha256": "2c5a10a77777587766612ddffefb60c257fbb3009eb98d5c86ede8e06ec45204",
+      "schema_version": "eval-factory/factory-dataset-run-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.FactoryDatasetRunViewV2",
+      "schema_path": "schemas/overlay/factory_dataset_run_view_v2.schema.json",
+      "schema_sha256": "6850a6e8c8b1dcb89af03f72a68e0cec1bd9d030c27e31965c8621e5c82ce462",
+      "schema_version": "eval-factory/factory-dataset-run-view/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.FactoryItemRunBindingV2",
+      "schema_path": "schemas/overlay/factory_item_run_binding_v2.schema.json",
+      "schema_sha256": "da63cc1ec4b905db977b1338db2ff5ec7de3bd120c0dee66f87bd587126173c7",
+      "schema_version": "eval-factory/factory-item-run-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.dataset_runtime_v2.FactoryItemStageHeadV2",
+      "schema_path": "schemas/overlay/factory_item_stage_head_v2.schema.json",
+      "schema_sha256": "118422bc92240166e328a7cc288313c05fcf23b392afa4bb212ce5bde75f3910",
+      "schema_version": "eval-factory/factory-item-stage-head/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.FactoryRunCompletionV2",
+      "schema_path": "schemas/overlay/factory_run_completion_v2.schema.json",
+      "schema_sha256": "23e52822c61efe55b09f59191f7788d9973e18bdfd066c9c3651fd0f4b166993",
+      "schema_version": "eval-factory/factory-run-completion/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.FactoryRunPolicyV2",
+      "schema_path": "schemas/overlay/factory_run_policy_v2.schema.json",
+      "schema_sha256": "eb586732bb5126f81f50ef66752ef3c33b9191d6e3228c83e5626b39b53701a4",
+      "schema_version": "eval-factory/factory-run-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.FactoryRunV2",
+      "schema_path": "schemas/overlay/factory_run_v2.schema.json",
+      "schema_sha256": "cb5a762dba4955d93e4472fd662c6b2f9c0b547cb80f05032a1f8f66b16bc081",
+      "schema_version": "eval-factory/factory-run/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.FinalDatasetAdjustmentResultV2",
+      "schema_path": "schemas/overlay/final_dataset_adjustment_result_v2.schema.json",
+      "schema_sha256": "9d85a59ca95bde6931f4d71bd3bf814a0c13fcb7d8e7e9a0da3446bc210cbcd8",
+      "schema_version": "eval-factory/final-dataset-adjustment-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_v2.FinalDatasetReviewPreviewV2",
+      "schema_path": "schemas/overlay/final_dataset_review_preview_v2.schema.json",
+      "schema_sha256": "f70fc309bee8b008e01e954aa2c78b255499aeba3f99a6dcbba708ce3bd26312",
+      "schema_version": "eval-factory/final-dataset-review-preview/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.FinalPackageManifestV2",
+      "schema_path": "schemas/overlay/final_package_manifest_v2.schema.json",
+      "schema_sha256": "b40317ff22e9e26dc46a4f95cf28d68ab1e4843587c89e35440c05e06a806177",
+      "schema_version": "eval-factory/final-package-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.GatewayInvocationRequestV2",
+      "schema_path": "schemas/overlay/gateway_invocation_request_v2.schema.json",
+      "schema_sha256": "384329d2db51ee7fc5eee04617d6a8731103a97d7dd7e3a1ba3e0ae6188dc0f6",
+      "schema_version": "eval-factory/gateway-invocation-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.GatewayInvocationResultV2",
+      "schema_path": "schemas/overlay/gateway_invocation_result_v2.schema.json",
+      "schema_sha256": "9d69b15f343e3609fef0e72e0de7ecae8ce1535b7e3961e86274702208259164",
+      "schema_version": "eval-factory/gateway-invocation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.GatewayReceiptV2",
+      "schema_path": "schemas/overlay/gateway_receipt_v2.schema.json",
+      "schema_sha256": "ed3c69460c80becb86668ee202110fb51dab628656321a4cf9b6f199fd7eec1e",
+      "schema_version": "eval-factory/gateway-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.GatewayUsageV2",
+      "schema_path": "schemas/overlay/gateway_usage_v2.schema.json",
+      "schema_sha256": "380cb597060a75f7727962e4f0bbd72a51d7ebb6b8e6e97cbf938e3347d6ab65",
+      "schema_version": "eval-factory/gateway-usage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.GradingDesignPlanV2",
+      "schema_path": "schemas/overlay/grading_design_plan_v2.schema.json",
+      "schema_sha256": "6bfb1dcf2ff7d207b853f0bf4649c79e2327ec80944f158ff6360be289017ad2",
+      "schema_version": "eval-factory/grading-design-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.GradingDesignResultV2",
+      "schema_path": "schemas/overlay/grading_design_result_v2.schema.json",
+      "schema_sha256": "4669bb872c7390047889cd20d7fab77f4e21e8f7e2e2a394e82b0e545b8cba4a",
+      "schema_version": "eval-factory/grading-design-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelPartitionManifestV2",
+      "schema_path": "schemas/overlay/independent_label_partition_manifest_v2.schema.json",
+      "schema_sha256": "18c2a63386f564a919afab2b430d0e90f70bc0b6cc03920552d9219a6d079d76",
+      "schema_version": "eval-factory/independent-label-partition-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetAccessPolicyV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_access_policy_v2.schema.json",
+      "schema_sha256": "eb305a4b25eb2c6e30fe3d4ba172b2a0f1624ea7b315fbf9f402590556cb9176",
+      "schema_version": "eval-factory/independent-label-test-set-access-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetAccessReceiptV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_access_receipt_v2.schema.json",
+      "schema_sha256": "310a09c9061138c9dcecd03cbcefe6f376834bcf0e25814e88d32a91ef3f2eae",
+      "schema_version": "eval-factory/independent-label-test-set-access-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetFreezeRecordV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_freeze_record_v2.schema.json",
+      "schema_sha256": "3d5529236620311d8705d47ca5cdcf3376dc8ca8999b27ee8c98d49cd579b734",
+      "schema_version": "eval-factory/independent-label-test-set-freeze-record/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetFreezeResultV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_freeze_result_v2.schema.json",
+      "schema_sha256": "11a3f42672a71f789d48c8f9a8291c63fb89ce53350596dd93da0b1b031ae091",
+      "schema_version": "eval-factory/independent-label-test-set-freeze-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetLabelPolicyV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_label_policy_v2.schema.json",
+      "schema_sha256": "749da00288b62c1516bf322322d68fcb3dbeee85c2e6756dc9c08a2c61c1246f",
+      "schema_version": "eval-factory/independent-label-test-set-label-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetManifestV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_manifest_v2.schema.json",
+      "schema_sha256": "1494cb62bd11f3738de8d5e60ba884f20f09aade9db5d145b05b464b60b001e5",
+      "schema_version": "eval-factory/independent-label-test-set-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetPolicyV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_policy_v2.schema.json",
+      "schema_sha256": "9c5ce02516898008d471b3b47e185a34521ff0c580c0c98c7bd38311218af78b",
+      "schema_version": "eval-factory/independent-label-test-set-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.IndependentLabelTestSetPrincipalGrantV2",
+      "schema_path": "schemas/overlay/independent_label_test_set_principal_grant_v2.schema.json",
+      "schema_sha256": "78f9c0fc5f53256a5bb09c8a07f52b5f9c054ab3e846007191b60b2c61297a4f",
+      "schema_version": "eval-factory/independent-label-test-set-principal-grant/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.InferredUserIntentV2",
+      "schema_path": "schemas/overlay/inferred_user_intent_v2.schema.json",
+      "schema_sha256": "1fad764d462d872130538b2ad0372c2750d249246ea2c80c3751c00e23354556",
+      "schema_version": "eval-factory/inferred-user-intent/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.IntentClaimV2",
+      "schema_path": "schemas/overlay/intent_claim_v2.schema.json",
+      "schema_sha256": "998e23871783d8888a89fd0f6e4cb0040f598ef4c5f6ee4c6023ab8d9ad03286",
+      "schema_version": "eval-factory/intent-claim/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.InvalidationScope",
+      "schema_path": "schemas/overlay/invalidation_scope.schema.json",
+      "schema_sha256": "a14a19221f11e0bc6594255a256d0ed9c3be7dd405c997555aa7bd66c6f6b823",
+      "schema_version": "eval-factory/invalidation-scope/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.batch_quality_v2.ItemLineageAuditResultV2",
+      "schema_path": "schemas/overlay/item_lineage_audit_result_v2.schema.json",
+      "schema_sha256": "1cecfa10161b93e0ef26c8dca360f95ea09e08f39a8416c7af031954171b94ed",
+      "schema_version": "eval-factory/item-lineage-audit-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.ItemMetricsSnapshotV2",
+      "schema_path": "schemas/overlay/item_metrics_snapshot_v2.schema.json",
+      "schema_sha256": "51217cc13eb6e22fa8c60e40b484b29aa7928b2ccc17f41f6eccd7fb9843906b",
+      "schema_version": "eval-factory/item-metrics-snapshot/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.ItemQualityCompilationResultV2",
+      "schema_path": "schemas/overlay/item_quality_compilation_result_v2.schema.json",
+      "schema_sha256": "c67810555ab265b909c32a71d5aeca6d7e3ce4e9f05294da47c7f2f9299b4d75",
+      "schema_version": "eval-factory/item-quality-compilation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.batch_quality_v2.ItemQualityReportRevisionV2",
+      "schema_path": "schemas/overlay/item_quality_report_revision_v2.schema.json",
+      "schema_sha256": "c374bf05228249b1f8171ed1b011e2a174c2628807c257e22aa81370adaea925",
+      "schema_version": "eval-factory/item-quality-report-revision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_projection_v2.ItemReleaseProjectionV2",
+      "schema_path": "schemas/overlay/item_release_projection_v2.schema.json",
+      "schema_sha256": "d75ee71a25af64958f60c7bb87de162a08d2c0dc9f682cc283c4db2196fced9b",
+      "schema_version": "eval-factory/item-release-projection/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.JobModelPolicyV2",
+      "schema_path": "schemas/overlay/job_model_policy_v2.schema.json",
+      "schema_sha256": "898a159bbc756608284727ecf134524de90df6b1a64bdc4744455673fe1848d4",
+      "schema_version": "eval-factory/job-model-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.JobResourcePolicyV2",
+      "schema_path": "schemas/overlay/job_resource_policy_v2.schema.json",
+      "schema_sha256": "d92b4abadb8b93cfd475f18d094e82a29533b85ed5a181e1f366c85814a13cf0",
+      "schema_version": "eval-factory/job-resource-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.JudgeDesignSpecV2",
+      "schema_path": "schemas/overlay/judge_design_spec_v2.schema.json",
+      "schema_sha256": "0e8837be8af9dc68d97d86d66963032df812e878da6343e4543885815fe4e81f",
+      "schema_version": "eval-factory/judge-design-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.JudgeDesignValidationV2",
+      "schema_path": "schemas/overlay/judge_design_validation_v2.schema.json",
+      "schema_sha256": "0f3203f658f40d4b38bb9f455c9a8b719ac9836e1314f1421519bd1349b299ed",
+      "schema_version": "eval-factory/judge-design-validation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.JudgeTaskMappingV2",
+      "schema_path": "schemas/overlay/judge_task_mapping_v2.schema.json",
+      "schema_sha256": "dd53f911605220603a015f1365af2dd061fc22cb78a73b25b693f5f726c087ce",
+      "schema_version": "eval-factory/judge-task-mapping/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.LHExportReceiptV2",
+      "schema_path": "schemas/overlay/l_h_export_receipt_v2.schema.json",
+      "schema_sha256": "33fa5fef6a9d605cd608c59d633a8473961a3af2ed61f2b2b198c0971c0ae100",
+      "schema_version": "eval-factory/lh-export-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.LHReleaseItemManifestV2",
+      "schema_path": "schemas/overlay/l_h_release_item_manifest_v2.schema.json",
+      "schema_sha256": "1192c373865da23dd1aca3bfe704a2722e13458a8a18701cd69ba5ae5046e94e",
+      "schema_version": "eval-factory/lh-release-item-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.release_export_v2.LHWorkspaceExportMemberV2",
+      "schema_path": "schemas/overlay/l_h_workspace_export_member_v2.schema.json",
+      "schema_sha256": "a5f567988fa88d34327f3d19b43deb701c4585af17aced1f5ee29a190c57a257",
+      "schema_version": "env-mock-agent/lh-workspace-export-member/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.release_export_v2.LHWorkspaceExportRequestV2",
+      "schema_path": "schemas/overlay/l_h_workspace_export_request_v2.schema.json",
+      "schema_sha256": "763a968d3cacda54dd63f56c7a2a621eecc051f370196645cfcab06a57e0bde5",
+      "schema_version": "env-mock-agent/lh-workspace-export-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.release_export_v2.LHWorkspaceExportResultV2",
+      "schema_path": "schemas/overlay/l_h_workspace_export_result_v2.schema.json",
+      "schema_sha256": "2ac49b6b1326fc7b56eb91633cca3741cbdc0e82649f1d2a9de35f3fc6d044a6",
+      "schema_version": "env-mock-agent/lh-workspace-export-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling_v2.LabelDecisionV2",
+      "schema_path": "schemas/overlay/label_decision_v2.schema.json",
+      "schema_sha256": "a8e8ed74f56e1d19e16f0c0e023b25437d591b923596798b7538e1e622de6fe2",
+      "schema_version": "eval-factory/label-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.LabelPlan",
+      "schema_path": "schemas/overlay/label_plan.schema.json",
+      "schema_sha256": "aad89f4fdc781a7ca9c03360dba558119ecd689f5c02ccb89fe71d360c7dd74a",
+      "schema_version": "eval-factory/label-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.LabelPlanAdjustmentResultV2",
+      "schema_path": "schemas/overlay/label_plan_adjustment_result_v2.schema.json",
+      "schema_sha256": "111efe498a5c47e35109c96dcc074a2a6fc6350044eb64c238657069389d6d22",
+      "schema_version": "eval-factory/label-plan-adjustment-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.LabelQualityClassMetricV2",
+      "schema_path": "schemas/overlay/label_quality_class_metric_v2.schema.json",
+      "schema_sha256": "38fcdcda6bdc5b2c957cf49ae0e9b997f975bcef844299806e9f6efe4547c532",
+      "schema_version": "eval-factory/label-quality-class-metric/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.LabelQualityConfidenceIntervalV2",
+      "schema_path": "schemas/overlay/label_quality_confidence_interval_v2.schema.json",
+      "schema_sha256": "0d9e73af5658e9035cd56cae3dfdbcb7a5d044fa2bf2eb7eda7d839580050b53",
+      "schema_version": "eval-factory/label-quality-confidence-interval/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.LabelQualityConfusionRowV2",
+      "schema_path": "schemas/overlay/label_quality_confusion_row_v2.schema.json",
+      "schema_sha256": "dfe2e189cee582b43d9a721bfc130819de5d69316988e7b7fdfd334e6fa9f35d",
+      "schema_version": "eval-factory/label-quality-confusion-row/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.LabelQualityEvaluationPolicyV2",
+      "schema_path": "schemas/overlay/label_quality_evaluation_policy_v2.schema.json",
+      "schema_sha256": "2054274e91d0f86ffb86595d48ee7ead3b3bf0910a988babd2c20f8d2382ba62",
+      "schema_version": "eval-factory/label-quality-evaluation-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.LabelQualityEvaluationReportV2",
+      "schema_path": "schemas/overlay/label_quality_evaluation_report_v2.schema.json",
+      "schema_sha256": "38326735c7ea52f7ca47bbd65c182838f126f43a5c6a3d2883d328e393512542",
+      "schema_version": "eval-factory/label-quality-evaluation-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.LabelQualityPrerequisiteSummaryV2",
+      "schema_path": "schemas/overlay/label_quality_prerequisite_summary_v2.schema.json",
+      "schema_sha256": "830cc27a4ef5027fea3e54669471afc062be619dac7b827ab1fdb2fec43b5220",
+      "schema_version": "eval-factory/label-quality-prerequisite-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling_v2.LabelSpecV2",
+      "schema_path": "schemas/overlay/label_spec_v2.schema.json",
+      "schema_sha256": "210789293745674b852cf01bac09d4def9553dd43cddfb6927b11f241222b8fc",
+      "schema_version": "eval-factory/label-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.LabelTestSetClassCountV2",
+      "schema_path": "schemas/overlay/label_test_set_class_count_v2.schema.json",
+      "schema_sha256": "de9f7f2a1132ba3a01862340a4e3d683152b0212b9a2b2c7a7991bb4fdfa4829",
+      "schema_version": "eval-factory/label-test-set-class-count/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.LabelTestSetLabelSummaryV2",
+      "schema_path": "schemas/overlay/label_test_set_label_summary_v2.schema.json",
+      "schema_sha256": "5a1b3af8e34beea84bc8f38cb56bb61149f5ae8e8e64a35dd65fd70947ba24aa",
+      "schema_version": "eval-factory/label-test-set-label-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.statistics_v2.LabelTestSetShortageV2",
+      "schema_path": "schemas/overlay/label_test_set_shortage_v2.schema.json",
+      "schema_sha256": "52345705b7366e0e2834d93421d411415b8859334326d994f874f01bcf973a08",
+      "schema_version": "eval-factory/label-test-set-shortage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.LeakageExecutabilityReviewViewV2",
+      "schema_path": "schemas/overlay/leakage_executability_review_view_v2.schema.json",
+      "schema_sha256": "2e8d8bee88da041db821836f99fa18f4ef8ef8cb08c5993ac4ee445b9cf4f7b4",
+      "schema_version": "eval-factory/leakage-executability-review-view/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.batch_quality_v2.LineageAuditCheckV2",
+      "schema_path": "schemas/overlay/lineage_audit_check_v2.schema.json",
+      "schema_sha256": "08ab68f7a08466da7677b4561e2aeb7bb46ba52c867297db90cd98710aad98a4",
+      "schema_version": "eval-factory/lineage-audit-check/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.MetricSliceV2",
+      "schema_path": "schemas/overlay/metric_slice_v2.schema.json",
+      "schema_sha256": "970bd437a052ba6f48279027345b21be8ec9ba0889df685ccda76f08e2bfc506",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.ModelAdmissionDecisionV2",
+      "schema_path": "schemas/overlay/model_admission_decision_v2.schema.json",
+      "schema_sha256": "8561446fb162f0fb082bfd621b4f5565f8bf9e59ebafb8a3bd35b335e03303b1",
+      "schema_version": "eval-factory/model-admission-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelCapabilityProfileV2",
+      "schema_path": "schemas/overlay/model_capability_profile_v2.schema.json",
+      "schema_sha256": "48ddc9d2df59d7f2a7665360c57b85a8490b4a2cb623fd7778955fe74689f131",
+      "schema_version": "eval-factory/model-capability-profile/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelControlGrantV2",
+      "schema_path": "schemas/overlay/model_control_grant_v2.schema.json",
+      "schema_sha256": "2d9d4a9bb4c85e14ff17822698d741e281b75733a672dbf24df0249e92399934",
+      "schema_version": "env-mock-agent/model-control-grant/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelControlReceiptV2",
+      "schema_path": "schemas/overlay/model_control_receipt_v2.schema.json",
+      "schema_sha256": "b7f8f487675216cc69acebb5d5daf50f15ce54ffaee434b817c510eb59e3c95c",
+      "schema_version": "env-mock-agent/model-control-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelControlUsageV2",
+      "schema_path": "schemas/overlay/model_control_usage_v2.schema.json",
+      "schema_sha256": "d36a3ea2403e84fd8b3749bfe66c00dfa62f0af7fceba75ee1881283d5d4cb8b",
+      "schema_version": "env-mock-agent/model-control-usage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelHealthSnapshotV2",
+      "schema_path": "schemas/overlay/model_health_snapshot_v2.schema.json",
+      "schema_sha256": "5d9e900753518945cab5a0f62b6a81424a33c294c46d1f497dcf8abd1a4d9346",
+      "schema_version": "eval-factory/model-health-snapshot/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelInvocationCancellationRequestV2",
+      "schema_path": "schemas/overlay/model_invocation_cancellation_request_v2.schema.json",
+      "schema_sha256": "74e19aaaa6d0feff3bdd128d4af26b23f7aebf022f6a4001985b5378b4296734",
+      "schema_version": "env-mock-agent/model-invocation-cancellation-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelInvocationCancellationResultV2",
+      "schema_path": "schemas/overlay/model_invocation_cancellation_result_v2.schema.json",
+      "schema_sha256": "2c487623227069c3556ec4b18bc9e0d2ce6a3066fb15def8d1dd64482fff21cf",
+      "schema_version": "env-mock-agent/model-invocation-cancellation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelInvocationDescriptorV2",
+      "schema_path": "schemas/overlay/model_invocation_descriptor_v2.schema.json",
+      "schema_sha256": "6db1f89b5314ec8873c942e92205a75af4a505ccbc552b58c9a834ba4573d7f3",
+      "schema_version": "env-mock-agent/model-invocation-descriptor/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelPriceScheduleV2",
+      "schema_path": "schemas/overlay/model_price_schedule_v2.schema.json",
+      "schema_sha256": "fc407429b6d03e77c3f6dcad0b09d628a4baf393add0fd9485ae15f73bc4d2d0",
+      "schema_version": "eval-factory/model-price-schedule/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.model_control_v2.ModelProviderBackpressureV2",
+      "schema_path": "schemas/overlay/model_provider_backpressure_v2.schema.json",
+      "schema_sha256": "c3d6bced06a1af82f02962d9e21ebe415dc48b905bebabb81b20f0c50e944c74",
+      "schema_version": "env-mock-agent/model-provider-backpressure/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelQualityBaselineV2",
+      "schema_path": "schemas/overlay/model_quality_baseline_v2.schema.json",
+      "schema_sha256": "0eb9d4440bf0d8ae1b5a3b7e02fbdad3edff2e342bfdd32639082c843245a98a",
+      "schema_version": "eval-factory/model-quality-baseline/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.ModelRatePoolPolicyV2",
+      "schema_path": "schemas/overlay/model_rate_pool_policy_v2.schema.json",
+      "schema_sha256": "308f530daf5a8c16033ab6c8c63eb60d85dcb49c906280196086bea8d98c9e8a",
+      "schema_version": "eval-factory/model-rate-pool-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelRouteCandidateV2",
+      "schema_path": "schemas/overlay/model_route_candidate_v2.schema.json",
+      "schema_sha256": "febbe3de88fe9572f8b0cab8c2d4437cdbfc9a642d882b5c9e441a17b13507ba",
+      "schema_version": "eval-factory/model-route-candidate/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelRouteDecisionV2",
+      "schema_path": "schemas/overlay/model_route_decision_v2.schema.json",
+      "schema_sha256": "8170a4c1a6b189669dcc8d80cb146b4eb46146fcb0561c97ab2307beebdbad64",
+      "schema_version": "eval-factory/model-route-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelRouteRequestV2",
+      "schema_path": "schemas/overlay/model_route_request_v2.schema.json",
+      "schema_sha256": "48443717aee9a50157b82392fba66494af2bcde387f7435ec5d2432fc9e78c5f",
+      "schema_version": "eval-factory/model-route-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.ModelRoutingPolicyV2",
+      "schema_path": "schemas/overlay/model_routing_policy_v2.schema.json",
+      "schema_sha256": "4f161db2777aa2646374dc44d2d3228e1914e277bad64f37c39f930c4231eb99",
+      "schema_version": "eval-factory/model-routing-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.ModelUsageV2",
+      "schema_path": "schemas/overlay/model_usage_v2.schema.json",
+      "schema_sha256": "f7b1487a0c2afb8b2baae15d452366a3a38acc50b81388463a6de099f93dee18",
+      "schema_version": "eval-factory/model-usage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.concurrency_experiment_v2.NonModelResourceRecommendationV2",
+      "schema_path": "schemas/overlay/non_model_resource_recommendation_v2.schema.json",
+      "schema_sha256": "40bb6ff6188659ca61fa7c1bb646e4650320051bb6a2a75519f29c47f48d43d5",
+      "schema_version": "eval-factory/non-model-resource-recommendation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.NonModelResourceVectorV2",
+      "schema_path": "schemas/overlay/non_model_resource_vector_v2.schema.json",
+      "schema_sha256": "0852cbda7d76d839c29bcff5d545b10ae186b11a58800c9e0f285bcf93205837",
+      "schema_version": "eval-factory/non-model-resource-vector/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.NonProductionRegistryEntryV2",
+      "schema_path": "schemas/overlay/non_production_registry_entry_v2.schema.json",
+      "schema_sha256": "eae9a71bc9b4b4b54bb8b41e17c29e0f044944bd055e85b93ab87b1915e3cd0d",
+      "schema_version": "eval-factory/nonproduction-registry-entry/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.NonProductionReleaseManifestV2",
+      "schema_path": "schemas/overlay/non_production_release_manifest_v2.schema.json",
+      "schema_sha256": "23a50750d17fd1f195690b15a9530ecc3c1d115c4059c0a9d1a47df844d902c0",
+      "schema_version": "eval-factory/nonproduction-release-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.OperationsSLOAssessmentV2",
+      "schema_path": "schemas/overlay/operations_s_l_o_assessment_v2.schema.json",
+      "schema_sha256": "2707b443d239afe292317e2c1e02036b65f243df279cd086a9eec7fcf14dadc4",
+      "schema_version": "eval-factory/operations-slo-assessment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.OperationsSLOMetricV2",
+      "schema_path": "schemas/overlay/operations_s_l_o_metric_v2.schema.json",
+      "schema_sha256": "6af7b2ef95f9bc34b0400526c1f3726e55674c58915b0d11fd858e4ac67f5069",
+      "schema_version": "eval-factory/operations-slo-metric/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.OperationsSLOPolicyV2",
+      "schema_path": "schemas/overlay/operations_s_l_o_policy_v2.schema.json",
+      "schema_sha256": "903e086b0905b41c6470ff1bad8b2935c1c9ece7565a48c90ac8027a54b318a3",
+      "schema_version": "eval-factory/operations-slo-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.PackageMemberProvenanceV2",
+      "schema_path": "schemas/overlay/package_member_provenance_v2.schema.json",
+      "schema_sha256": "41c03322eeecb3a5a7be0201bf30e268818f22d62892dfcdc56ff33be020151f",
+      "schema_version": "eval-factory/package-member-provenance/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineCancellationResultV2",
+      "schema_path": "schemas/overlay/pipeline_cancellation_result_v2.schema.json",
+      "schema_sha256": "82c4297aeddcec0f5e61cc83dc3fd09b3d054e352b6fed585f7d4c0b8891bc27",
+      "schema_version": "eval-factory/pipeline-cancellation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineControlConfigV2",
+      "schema_path": "schemas/overlay/pipeline_control_config_v2.schema.json",
+      "schema_sha256": "99533bb118392bb02e14a88df7010fdb2467f1d9c47d24710254ffb393e4de03",
+      "schema_version": "eval-factory/pipeline-control-config/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineCreateResultV2",
+      "schema_path": "schemas/overlay/pipeline_create_result_v2.schema.json",
+      "schema_sha256": "f68298e825f24d1e1771cf6b22e4b989003fba563fc6c8a167a584331ffbc9c1",
+      "schema_version": "eval-factory/pipeline-create-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineEventsResultV2",
+      "schema_path": "schemas/overlay/pipeline_events_result_v2.schema.json",
+      "schema_sha256": "e07d7b15cf1caa6089dd0f4fc44d77eff3ce4d8ebbe960cd9176cc33f438d3c9",
+      "schema_version": "eval-factory/pipeline-events-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineMetricSliceSummaryV2",
+      "schema_path": "schemas/overlay/pipeline_metric_slice_summary_v2.schema.json",
+      "schema_sha256": "b43465a213345fb6ec95bdf021e5f4359880575fd7c898fb7b9d9f64be0ba16d",
+      "schema_version": "eval-factory/pipeline-metric-slice-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineMetricsResultV2",
+      "schema_path": "schemas/overlay/pipeline_metrics_result_v2.schema.json",
+      "schema_sha256": "d64eb6f04d524770002e9bc2ea4f5f67064bff4f4eb9ad8e72fdfc5594d82e20",
+      "schema_version": "eval-factory/pipeline-metrics-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelinePlanResultV2",
+      "schema_path": "schemas/overlay/pipeline_plan_result_v2.schema.json",
+      "schema_sha256": "1f1e975d605625f2f0ed659892150a0556f814eb0365d1c06fa4ebcb62688391",
+      "schema_version": "eval-factory/pipeline-plan-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineResumeResultV2",
+      "schema_path": "schemas/overlay/pipeline_resume_result_v2.schema.json",
+      "schema_sha256": "a679d626915b2029a3fd1a045c6a4d00a0a3429a0fa4eb42c83f11a5e68449e7",
+      "schema_version": "eval-factory/pipeline-resume-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineStatusResultV2",
+      "schema_path": "schemas/overlay/pipeline_status_result_v2.schema.json",
+      "schema_sha256": "61bc2f929fb6b7d1d629dd62b74a0a48373a302a24936f8812d3bdf86959e2e1",
+      "schema_version": "eval-factory/pipeline-status-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.cli_v2.PipelineWorkUnitStatusV2",
+      "schema_path": "schemas/overlay/pipeline_work_unit_status_v2.schema.json",
+      "schema_sha256": "bf55a61c6a1898dfd62d14bb02b9d2eede4c24f481d55fac9cb405c52870a3aa",
+      "schema_version": "eval-factory/pipeline-work-unit-status/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.PlanDecisionV2",
+      "schema_path": "schemas/overlay/plan_decision_v2.schema.json",
+      "schema_sha256": "b4c54cdb679ef00919a753b86dc95f8edee46b3293ad307f73f4c0a97f1db6da",
+      "schema_version": "eval-factory/plan-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.PlanExample",
+      "schema_path": "schemas/overlay/plan_example.schema.json",
+      "schema_sha256": "f1f1090c4d6a8347a4e358330ebafbdb659ffc20ea5f2a5d297a0a22895bc445",
+      "schema_version": "eval-factory/plan-example/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.PlanReviewPresentationV2",
+      "schema_path": "schemas/overlay/plan_review_presentation_v2.schema.json",
+      "schema_sha256": "b13c65c1f08601c3858a8ada10215bb291fb76e4aa9008a176d769a9c7c99c7a",
+      "schema_version": "eval-factory/plan-review-presentation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.PlanReviewRequestV2",
+      "schema_path": "schemas/overlay/plan_review_request_v2.schema.json",
+      "schema_sha256": "ca83c49b0563dc0833f3ebe55b7a2bccd9500a91b5983d24f58e5b7c85e90eb1",
+      "schema_version": "eval-factory/plan-review-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.PlanReviewResultV2",
+      "schema_path": "schemas/overlay/plan_review_result_v2.schema.json",
+      "schema_sha256": "1d419289a96ba8b8113b2d0b7bf0c458beb787c1622129b7993bc74086483feb",
+      "schema_version": "eval-factory/plan-review-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.PlanRevisionV2",
+      "schema_path": "schemas/overlay/plan_revision_v2.schema.json",
+      "schema_sha256": "a897418081b1d5efe971e4410e08bc3ae5b97299fc4ce500ef951cd150340979",
+      "schema_version": "eval-factory/plan-revision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.PlannerAssessmentV2",
+      "schema_path": "schemas/overlay/planner_assessment_v2.schema.json",
+      "schema_sha256": "28dfe9f68c643f5a35af6d990be6a6f856ccbabd6d281dce48c40478ee260e5b",
+      "schema_version": "eval-factory/planner-assessment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ProducerAttachmentRequirementV2",
+      "schema_path": "schemas/overlay/producer_attachment_requirement_v2.schema.json",
+      "schema_sha256": "50ca18823c88707ff21d69df0690ec1578f2a1569943e002bd7b07efadf7d799",
+      "schema_version": "eval-factory/producer-attachment-requirement/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ProducerStorageAuthorizationV2",
+      "schema_path": "schemas/overlay/producer_storage_authorization_v2.schema.json",
+      "schema_sha256": "6305d1836fbcf43cf7f6de54ab329c4ecb9f8ec46af2aa899341c8f6de22ad3b",
+      "schema_version": "eval-factory/producer-storage-authorization/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ProducerTaskViewV2",
+      "schema_path": "schemas/overlay/producer_task_view_v2.schema.json",
+      "schema_sha256": "405e52a5e9b8a18eb0d3933d4bdb1771ef3352d9ce26b8174f3bdb584d239554",
+      "schema_version": "eval-factory/producer-task-view/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionAttestationAuthorityV2",
+      "schema_path": "schemas/overlay/production_attestation_authority_v2.schema.json",
+      "schema_sha256": "33d5ebab74a6a146b296f93553f3a747dfe3d5cadeac9acd0fb49e52a032fc16",
+      "schema_version": "eval-factory/production-attestation-authority/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionLHExportReceiptV2",
+      "schema_path": "schemas/overlay/production_l_h_export_receipt_v2.schema.json",
+      "schema_sha256": "4c6ba7886b5953d29c4f384e177b5d3c246dd4bac11ec929f68bac3063309eb2",
+      "schema_version": "eval-factory/production-lh-export-receipt/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionPublishedItemProjectionV2",
+      "schema_path": "schemas/overlay/production_published_item_projection_v2.schema.json",
+      "schema_sha256": "0445e9273cd7b8d1db6e01a21805c4f0a1b529a8bcf06b028ca39af9ad1945c8",
+      "schema_version": "eval-factory/production-published-item-projection/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.ProductionReadinessApprovalRecordV2",
+      "schema_path": "schemas/overlay/production_readiness_approval_record_v2.schema.json",
+      "schema_sha256": "4d318f372bccb63339c5cf6c476c9d1eb8b9b002f40f6db07fbf73a5e04e0cf1",
+      "schema_version": "eval-factory/production-readiness-approval-record/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessAttestationPolicyV2",
+      "schema_path": "schemas/overlay/production_readiness_attestation_policy_v2.schema.json",
+      "schema_sha256": "7b2668f1ad33097930bdc3cf2f74a6657d40a4ff6663533a527aa28a6285a350",
+      "schema_version": "eval-factory/production-readiness-attestation-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessAttestationPrerequisiteV2",
+      "schema_path": "schemas/overlay/production_readiness_attestation_prerequisite_v2.schema.json",
+      "schema_sha256": "de66d67c0cbb5d2e117fef66b84ef03785253fc663e8ff528f94e0370256a04b",
+      "schema_version": "eval-factory/production-readiness-attestation-prerequisite/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessAttestationProjectionV2",
+      "schema_path": "schemas/overlay/production_readiness_attestation_projection_v2.schema.json",
+      "schema_sha256": "384e1c686fb80dab536cab79a54a815383394da3a8fc6d50d6df6aca80d404d9",
+      "schema_version": "eval-factory/production-readiness-attestation-projection/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessAttestationResultV2",
+      "schema_path": "schemas/overlay/production_readiness_attestation_result_v2.schema.json",
+      "schema_sha256": "1eb08c9608a1d4e99b2a78e2d1f5030ad5aa509e12655eeb7c21162766654401",
+      "schema_version": "eval-factory/production-readiness-attestation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.ProductionReadinessDomainReviewV2",
+      "schema_path": "schemas/overlay/production_readiness_domain_review_v2.schema.json",
+      "schema_sha256": "01359425d12675db20831970e1010d6ba73f9c2c5201d02e03c5c2b8bc949d9e",
+      "schema_version": "eval-factory/production-readiness-domain-review/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessGateAssessmentV2",
+      "schema_path": "schemas/overlay/production_readiness_gate_assessment_v2.schema.json",
+      "schema_sha256": "3b3d448dc90c33f56a4fa3d88dabc53fcd8b9accc0a06498737f0c9ee6e78b94",
+      "schema_version": "eval-factory/production-readiness-gate-assessment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessInvalidationPolicyV2",
+      "schema_path": "schemas/overlay/production_readiness_invalidation_policy_v2.schema.json",
+      "schema_sha256": "d072032c7bd0e89c98880fe95d3ef7d7d095c34ccbdeb710dbdb02b41275f132",
+      "schema_version": "eval-factory/production-readiness-invalidation-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessInvalidationRecordV2",
+      "schema_path": "schemas/overlay/production_readiness_invalidation_record_v2.schema.json",
+      "schema_sha256": "d8d3b58e9dff0230c34803a67526cc9f49604213a13dab55b1af9f6dfaa0c0cc",
+      "schema_version": "eval-factory/production-readiness-invalidation-record/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.ProductionReadinessPrerequisiteSummaryV2",
+      "schema_path": "schemas/overlay/production_readiness_prerequisite_summary_v2.schema.json",
+      "schema_sha256": "6a581c4f67b2596b9b2a0b6b03e9f0160cb3f15f213e3045351565c4dd5b70d8",
+      "schema_version": "eval-factory/production-readiness-prerequisite-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.ProductionReadinessReviewPolicyV2",
+      "schema_path": "schemas/overlay/production_readiness_review_policy_v2.schema.json",
+      "schema_sha256": "cd2651bb801d516f2c1568da14dd007b26cf0676405e9911c4c53a22740530a9",
+      "schema_version": "eval-factory/production-readiness-review-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_readiness_review_v2.ProductionReadinessReviewReportV2",
+      "schema_path": "schemas/overlay/production_readiness_review_report_v2.schema.json",
+      "schema_sha256": "b3c8461b4321a797b6cc124e142c724748c084bc81270cee5963ecc299b5d54a",
+      "schema_version": "eval-factory/production-readiness-review-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_attestation_v2.ProductionReadinessVersionSetV2",
+      "schema_path": "schemas/overlay/production_readiness_version_set_v2.schema.json",
+      "schema_sha256": "88a35b568dbdfb2655b5a5406a0ddb3bccad38d8a1cd896d0b21c3b61ba5a820",
+      "schema_version": "eval-factory/production-readiness-version-set/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionRegistryEntryV2",
+      "schema_path": "schemas/overlay/production_registry_entry_v2.schema.json",
+      "schema_sha256": "d463fc3122fb5d5244732039e43925745dcaf464e88a2d4878834c8c8a6f2c05",
+      "schema_version": "eval-factory/production-registry-entry/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionReleaseItemManifestV2",
+      "schema_path": "schemas/overlay/production_release_item_manifest_v2.schema.json",
+      "schema_sha256": "d32a0898a7b88deb70e9ee319a24d28f51db0a0298ad8f0e7fdea6288e0086b6",
+      "schema_version": "eval-factory/production-release-item-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionReleaseManifestV2",
+      "schema_path": "schemas/overlay/production_release_manifest_v2.schema.json",
+      "schema_sha256": "b48109776eaf23f6b4f329e1626a31079bca639b7f493543b469073135df8bc6",
+      "schema_version": "eval-factory/production-release-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionReleasePolicyV2",
+      "schema_path": "schemas/overlay/production_release_policy_v2.schema.json",
+      "schema_sha256": "32b53b24fd9a409e723dacd8e9ca39ff5e2318c0a0e9cf5e3ac80e194bd06220",
+      "schema_version": "eval-factory/production-release-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.production_release_v2.ProductionReleaseResultV2",
+      "schema_path": "schemas/overlay/production_release_result_v2.schema.json",
+      "schema_sha256": "0eedb976edb1e079209676e86b3928b40127f5e2beb60d32f40db6f76a18d559",
+      "schema_version": "eval-factory/production-release-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.PromptLeakageFingerprintV2",
+      "schema_path": "schemas/overlay/prompt_leakage_fingerprint_v2.schema.json",
+      "schema_sha256": "b5ed1373baf236430fe7782191670789519bb2b4a36561df926551ffe82464f1",
+      "schema_version": "eval-factory/prompt-leakage-fingerprint/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.PromptLeakageReferenceSetV2",
+      "schema_path": "schemas/overlay/prompt_leakage_reference_set_v2.schema.json",
+      "schema_sha256": "3decad73f15aa685ea5f83a3deb0328bc9fb8861e854c846c348851232947c52",
+      "schema_version": "eval-factory/prompt-leakage-reference-set/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.PromptOnlyDependencyDiscoveryV2",
+      "schema_path": "schemas/overlay/prompt_only_dependency_discovery_v2.schema.json",
+      "schema_sha256": "1c5c5cc96bbb86d62da0f33c9fc86e6c86b54651873c00056aa4280786273de4",
+      "schema_version": "eval-factory/prompt-only-dependency-discovery/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.PromptOnlyDependencyEvidenceBindingV2",
+      "schema_path": "schemas/overlay/prompt_only_dependency_evidence_binding_v2.schema.json",
+      "schema_sha256": "ec45d5e209788c08dcb7d0e8c59bcbbf059114052ac70675136367bfb9e3207b",
+      "schema_version": "eval-factory/prompt-only-dependency-evidence-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.PromptOnlyDependencyPlanningContextV2",
+      "schema_path": "schemas/overlay/prompt_only_dependency_planning_context_v2.schema.json",
+      "schema_sha256": "7b1984f23bec7840d741a39dd68d7241833e3595d95d6a19484c092b54ef96d3",
+      "schema_version": "eval-factory/prompt-only-dependency-planning-context/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.PromptTemplateV2",
+      "schema_path": "schemas/overlay/prompt_template_v2.schema.json",
+      "schema_sha256": "2d6daa51679ac7b404ef5af419413b436fb6d9e717344691ecb55631669187cc",
+      "schema_version": "eval-factory/prompt-template/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.ProvenanceManifestV2",
+      "schema_path": "schemas/overlay/provenance_manifest_v2.schema.json",
+      "schema_sha256": "100fec00b9623e7ca1b461f5bbfbc4bdf81b1a61b1b5f88fda3b3e46d41c71c8",
+      "schema_version": "eval-factory/provenance-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.ProviderBackpressureRecordV2",
+      "schema_path": "schemas/overlay/provider_backpressure_record_v2.schema.json",
+      "schema_sha256": "3ce13e55f89a662302d165e4fbee8057efc4f5e0e7264fbafa3f4dfdbc18d586",
+      "schema_version": "eval-factory/provider-backpressure-record/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.retrieval_v2.PublicSourceFetchRequestV2",
+      "schema_path": "schemas/overlay/public_source_fetch_request_v2.schema.json",
+      "schema_sha256": "1eb175909e084b1c816f79b4ff0f4be982d8a568773547038e66155e80faebc1",
+      "schema_version": "env-mock-agent/public-source-fetch-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.retrieval_v2.PublicSourceFetchResultV2",
+      "schema_path": "schemas/overlay/public_source_fetch_result_v2.schema.json",
+      "schema_sha256": "9a1748000f606c9ffe07667fc9faaee271ce24f1a578790683430c1b7f65c3ff",
+      "schema_version": "env-mock-agent/public-source-fetch-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.PublicSourceRetrievalPolicyV2",
+      "schema_path": "schemas/overlay/public_source_retrieval_policy_v2.schema.json",
+      "schema_sha256": "eaf7f3bc9c1825c522951fa078d24d5998e9a51a5c21e7540dd53224183673e2",
+      "schema_version": "eval-factory/public-source-retrieval-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.PublicSourceSafetyAssessmentV2",
+      "schema_path": "schemas/overlay/public_source_safety_assessment_v2.schema.json",
+      "schema_sha256": "806c7a2390caaa2ea4c225343b00e63a3a57545c2ea45e242b82486c14e41235",
+      "schema_version": "eval-factory/public-source-safety-assessment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.retrieval_v2.PublicSourceSearchHitV2",
+      "schema_path": "schemas/overlay/public_source_search_hit_v2.schema.json",
+      "schema_sha256": "db0f4dfe4bc70baa93368ddf0a5e651ac7f70eb16148252acde4942eafc01c9f",
+      "schema_version": "env-mock-agent/public-source-search-hit/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.retrieval_v2.PublicSourceSearchRequestV2",
+      "schema_path": "schemas/overlay/public_source_search_request_v2.schema.json",
+      "schema_sha256": "1a6c0673b4646597150209bddf5e73a5a9040393a8c5dbb2b68b9effd8a405c0",
+      "schema_version": "env-mock-agent/public-source-search-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.retrieval_v2.PublicSourceSearchResultV2",
+      "schema_path": "schemas/overlay/public_source_search_result_v2.schema.json",
+      "schema_sha256": "a482cf90b890547b4e51713e9d893d2272cf581890fe8af5ae7e3565732cd192",
+      "schema_version": "env-mock-agent/public-source-search-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.PublishedItemProjectionV2",
+      "schema_path": "schemas/overlay/published_item_projection_v2.schema.json",
+      "schema_sha256": "84668372ed27b034427f408d57d4cc2ff5dc2d2d84d0eeac04bec932f3476555",
+      "schema_version": "eval-factory/published-item-projection/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.quality_v2.QualityReportV2",
+      "schema_path": "schemas/overlay/quality_report_v2.schema.json",
+      "schema_sha256": "dfa11dc8a427ad1d69cf3bb632bcd45e0bc56ba16966e1c13c47ce009ed555b5",
+      "schema_version": "eval-factory/quality-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.R4TaskContractSetV2",
+      "schema_path": "schemas/overlay/r4_task_contract_set_v2.schema.json",
+      "schema_sha256": "6bf1a896d4c3f0a8750ddec22042bc968d2bf102a6c01f4a46b1636489c12822",
+      "schema_version": "eval-factory/r4-task-contract-set/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.R6CanaryControlPlaneV2",
+      "schema_path": "schemas/overlay/r6_canary_control_plane_v2.schema.json",
+      "schema_sha256": "b1456dbcfd05fcd8ae8b4802b115963b546b6c141ea58e9793866d984049dcf2",
+      "schema_version": "eval-factory/r6-canary-control-plane/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.R6CanaryDatasetResultV2",
+      "schema_path": "schemas/overlay/r6_canary_dataset_result_v2.schema.json",
+      "schema_sha256": "10dd3f1f115800954c9054f405628c872c96e67216663f6f3f539ce149620795",
+      "schema_version": "eval-factory/r6-canary-dataset-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.R6CanaryExecutionManifestV2",
+      "schema_path": "schemas/overlay/r6_canary_execution_manifest_v2.schema.json",
+      "schema_sha256": "339d14c903f5c41c56766ae1c9b17f3f22670346d98df2ff749a77a0ee3921e0",
+      "schema_version": "eval-factory/r6-canary-execution-manifest/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.R6CanarySeedObjectV2",
+      "schema_path": "schemas/overlay/r6_canary_seed_object_v2.schema.json",
+      "schema_sha256": "a135d8b92d8fe36ebbdc10f7c07536f8d9eb689c8a3bf650f4d9fbd1fb088e3d",
+      "schema_version": "eval-factory/r6-canary-seed-object/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.R6CanaryTraceBindingV2",
+      "schema_path": "schemas/overlay/r6_canary_trace_binding_v2.schema.json",
+      "schema_sha256": "511786d06268a38437061b64bd7b5e75830423a8654cf0b3db144aae2941ea42",
+      "schema_version": "eval-factory/r6-canary-trace-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.RAGRequestV2",
+      "schema_path": "schemas/overlay/r_a_g_request_v2.schema.json",
+      "schema_sha256": "9a36f13233110a4da9dee8ef3d018e52ca007442e3452162dd6642fd63b622a8",
+      "schema_version": "eval-factory/rag-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.RAGResultV2",
+      "schema_path": "schemas/overlay/r_a_g_result_v2.schema.json",
+      "schema_sha256": "98e14db3dd4a3644edafdb8240c3a3df6f6d064f04225365bb75810bc6921e94",
+      "schema_version": "eval-factory/rag-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.ai_gateway_v2.RAGSourcePolicyV2",
+      "schema_path": "schemas/overlay/r_a_g_source_policy_v2.schema.json",
+      "schema_sha256": "ef4098f3c5f091fe0d6be9a62cd99a90bef7313733f32eb4686f51334def37dc",
+      "schema_version": "eval-factory/rag-source-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityCaseSummaryV2",
+      "schema_path": "schemas/overlay/real_trace_stability_case_summary_v2.schema.json",
+      "schema_sha256": "186c2fab2766d26858389a85caad9961a2f13cddbfb9499d161ad32f4db34316",
+      "schema_version": "eval-factory/real-trace-stability-case-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityCategoryCountV2",
+      "schema_path": "schemas/overlay/real_trace_stability_category_count_v2.schema.json",
+      "schema_sha256": "4b349b19b2d4fad00103a4552d2619c0fddd13fa013520a1c7fadf776f16b015",
+      "schema_version": "eval-factory/real-trace-stability-category-count/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityCorpusSummaryV2",
+      "schema_path": "schemas/overlay/real_trace_stability_corpus_summary_v2.schema.json",
+      "schema_sha256": "ffd02632b8b6f4736341f3cb54009e1055deff8124db10f8fae69ee6d328de3a",
+      "schema_version": "eval-factory/real-trace-stability-corpus-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityPolicyV2",
+      "schema_path": "schemas/overlay/real_trace_stability_policy_v2.schema.json",
+      "schema_sha256": "e06c7f582c117a80996cd85c2279e894361a50877beb05bf82b0205c33291ef3",
+      "schema_version": "eval-factory/real-trace-stability-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityReportV2",
+      "schema_path": "schemas/overlay/real_trace_stability_report_v2.schema.json",
+      "schema_sha256": "583c4137b2d4aefe62a8ac0f29e43ea74a06e9c790f8c945158235a5b5e7c7c0",
+      "schema_version": "eval-factory/real-trace-stability-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.RealismConsistencyReviewViewV2",
+      "schema_path": "schemas/overlay/realism_consistency_review_view_v2.schema.json",
+      "schema_sha256": "bceca3baca82d88ccbf34d33252e001a887f947cdf359d7f3f880433f4043ab8",
+      "schema_version": "eval-factory/realism-consistency-review-view/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ReferencePolicyV2",
+      "schema_path": "schemas/overlay/reference_policy_v2.schema.json",
+      "schema_sha256": "6f0610a07496aa92ecaca78b841de93550ccffb7a811d1b24c2a274aff5b6fe7",
+      "schema_version": "eval-factory/reference-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_v2.ReleaseDecisionV2",
+      "schema_path": "schemas/overlay/release_decision_v2.schema.json",
+      "schema_sha256": "69c8283df2f5d938981c127acdc3e706425f24b61e46cc4a100e3c6549a0f00e",
+      "schema_version": "eval-factory/release-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_projection_v2.ReleaseProjectionPolicyV2",
+      "schema_path": "schemas/overlay/release_projection_policy_v2.schema.json",
+      "schema_sha256": "2488094582f935ad1ce8a487c0e2ab3b4178784ee6ed16860ecf04a001c5b25a",
+      "schema_version": "eval-factory/release-projection-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_projection_v2.ReleaseProjectionResultV2",
+      "schema_path": "schemas/overlay/release_projection_result_v2.schema.json",
+      "schema_sha256": "f1abcd1d039eaa20b0abe17d0cfe0667f21b57c3c4b12dba935bebfed8b0aebf",
+      "schema_version": "eval-factory/release-projection-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.ReleasePublicationPolicyV2",
+      "schema_path": "schemas/overlay/release_publication_policy_v2.schema.json",
+      "schema_sha256": "665e12269cc1f5de6e47f1ee71ae1e12fb2a69989ec6fce92e01da489dc5880a",
+      "schema_version": "eval-factory/release-publication-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.release_publication_v2.ReleasePublicationResultV2",
+      "schema_path": "schemas/overlay/release_publication_result_v2.schema.json",
+      "schema_sha256": "8abc46593f918d8a3588d6f93908398fce5bd5d35a5ddece286f7d08d5ca9667",
+      "schema_version": "eval-factory/release-publication-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.RepairedArtifactBuildResultV2",
+      "schema_path": "schemas/overlay/repaired_artifact_build_result_v2.schema.json",
+      "schema_sha256": "4a0645f7da901f0abd866ee34d2a69f039ca24c21117f7af7183db5d06c2c569",
+      "schema_version": "eval-factory/repaired-artifact-build-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.telemetry_v2.ReportedCostV2",
+      "schema_path": "schemas/overlay/reported_cost_v2.schema.json",
+      "schema_sha256": "312e22e4420a7ef73865fc67c1ebdfa0a1b8dd5068f92e920423c0f77af95516",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.ResolvedDatasetJobPlanV2",
+      "schema_path": "schemas/overlay/resolved_dataset_job_plan_v2.schema.json",
+      "schema_sha256": "2f977ef4f526833a4668b52f94f3856a2e611eec220e71c350eb4ec12331b3ce",
+      "schema_version": "eval-factory/resolved-dataset-job-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.ResolvedJobWorkGraphV2",
+      "schema_path": "schemas/overlay/resolved_job_work_graph_v2.schema.json",
+      "schema_sha256": "a9372f708cb06483a8a245826d3c687dd9654c47a023017ee795117611506303",
+      "schema_version": "eval-factory/resolved-job-work-graph/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.ResolvedStageNodeV2",
+      "schema_path": "schemas/overlay/resolved_stage_node_v2.schema.json",
+      "schema_sha256": "2774ae65d0b08e6f61d5c9bd2d37faaf131d5bdc2430acfb0d801dab19f08ae1",
+      "schema_version": "eval-factory/resolved-stage-node/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.ResolvedWorkUnitV2",
+      "schema_path": "schemas/overlay/resolved_work_unit_v2.schema.json",
+      "schema_sha256": "9c77c62e64c5caac4cd5280c9942a3b35a49ad37e0131b65919fe4435f8d6d94",
+      "schema_version": "eval-factory/resolved-work-unit/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.ResourceAdmissionDecisionV2",
+      "schema_path": "schemas/overlay/resource_admission_decision_v2.schema.json",
+      "schema_sha256": "96d416e4f00cc7f6122f815143eebf7562592f8c45a4a23790403642eb5cad9e",
+      "schema_version": "eval-factory/resource-admission-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.ResourceBoundAttachmentExecutionResultV2",
+      "schema_path": "schemas/overlay/resource_bound_attachment_execution_result_v2.schema.json",
+      "schema_sha256": "07383dea77a67242d42290738a22671beb65fce17c8235fc16e4bd3b5e5c977f",
+      "schema_version": "env-mock-agent/resource-bound-attachment-execution-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.ResourceBoundPublicSourceFetchResultV2",
+      "schema_path": "schemas/overlay/resource_bound_public_source_fetch_result_v2.schema.json",
+      "schema_sha256": "c2669c6ad0921eba6900009fcd4dd1b8facca7a8b66cd030549e9041364be054",
+      "schema_version": "env-mock-agent/resource-bound-public-source-fetch-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.resource_v2.ResourceBoundPublicSourceSearchResultV2",
+      "schema_path": "schemas/overlay/resource_bound_public_source_search_result_v2.schema.json",
+      "schema_sha256": "2669b9657994dd399b67b48e11e1236ce88c28b815c020d759db068aa0fc3aff",
+      "schema_version": "env-mock-agent/resource-bound-public-source-search-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.ResourcePoolPolicyV2",
+      "schema_path": "schemas/overlay/resource_pool_policy_v2.schema.json",
+      "schema_sha256": "1efe4c6629bb19915a515a51bea108e299ba53b69d0a8eced41f790733533c9d",
+      "schema_version": "eval-factory/resource-pool-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.ResourceUsageV2",
+      "schema_path": "schemas/overlay/resource_usage_v2.schema.json",
+      "schema_sha256": "b9ae40d60d0b15ccc616b113154a093d51f7af7d626c34d31e20b3a1283b0a77",
+      "schema_version": "eval-factory/resource-usage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.RevalidationWorkItemV2",
+      "schema_path": "schemas/overlay/revalidation_work_item_v2.schema.json",
+      "schema_sha256": "afbfad817891e60c83032f173b6d74b8d849699edf7487e59f580bfc0d4d3a91",
+      "schema_version": "eval-factory/revalidation-work-item/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.RevalidationWorkResultV2",
+      "schema_path": "schemas/overlay/revalidation_work_result_v2.schema.json",
+      "schema_sha256": "dd12d2793119aef45218effe408e15fe04c76373576b7cd27b515df21f091f4f",
+      "schema_version": "eval-factory/revalidation-work-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.RevisionDeterministicValidationV2",
+      "schema_path": "schemas/overlay/revision_deterministic_validation_v2.schema.json",
+      "schema_sha256": "90e191db51c901521fa82ddd3d4b1dd3d429e126554669f83f99916cc88e16e4",
+      "schema_version": "eval-factory/revision-deterministic-validation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.RubricCriterionV2",
+      "schema_path": "schemas/overlay/rubric_criterion_v2.schema.json",
+      "schema_sha256": "5e49dbd6c1bd9c01fcd1dd5e912a869b2b39ae63208dcf6171ae95eb1695ac36",
+      "schema_version": "eval-factory/rubric-criterion/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.RubricJudgedObjectV2",
+      "schema_path": "schemas/overlay/rubric_judged_object_v2.schema.json",
+      "schema_sha256": "7eba2e87fc16b07d84da15a40f31fd21ac61d5192c7b47e4ba9dd3abda32f0e2",
+      "schema_version": "eval-factory/rubric-judged-object/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.RubricReachabilityV2",
+      "schema_path": "schemas/overlay/rubric_reachability_v2.schema.json",
+      "schema_sha256": "0079da90a2ec3cbe1d067bc3d40dfae645162229abcf195648e6ca9377986de5",
+      "schema_version": "eval-factory/rubric-reachability/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.RubricSetV2",
+      "schema_path": "schemas/overlay/rubric_set_v2.schema.json",
+      "schema_sha256": "1e2ade3413aeb315ed2421dec719d93d28d8b8dc0219b6e84f1c0621f74f759d",
+      "schema_version": "eval-factory/rubric-set/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadCaseSummaryV2",
+      "schema_path": "schemas/overlay/scheduler_load_case_summary_v2.schema.json",
+      "schema_sha256": "0ad2ad77e6743528e593abb3a1ab2bd61b3f3654d46ac51874eca4908861e0e0",
+      "schema_version": "eval-factory/scheduler-load-case-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadFaultCountV2",
+      "schema_path": "schemas/overlay/scheduler_load_fault_count_v2.schema.json",
+      "schema_sha256": "c7a5044ec4d3a45b1f8196eb46a69fc1a9dde5b17d2e72af62a08729f22d5408",
+      "schema_version": "eval-factory/scheduler-load-fault-count/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadPhaseSummaryV2",
+      "schema_path": "schemas/overlay/scheduler_load_phase_summary_v2.schema.json",
+      "schema_sha256": "cc6872d98eef9abb88f17d07f1e6cfde3120f06ecc5bcac96eb230e49d4412a3",
+      "schema_version": "eval-factory/scheduler-load-phase-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadPolicyV2",
+      "schema_path": "schemas/overlay/scheduler_load_policy_v2.schema.json",
+      "schema_sha256": "5f155f0c602461f154293797f73e26ac5201872739bed8bd27274407673bb2a7",
+      "schema_version": "eval-factory/scheduler-load-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.scheduler_load_v2.SchedulerLoadReportV2",
+      "schema_path": "schemas/overlay/scheduler_load_report_v2.schema.json",
+      "schema_sha256": "4f1a40575bff42672a7596c41c00c83a2089ff22a896649475beafcc9f4cff37",
+      "schema_version": "eval-factory/scheduler-load-report/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling_v2.SelectionContextV2",
+      "schema_path": "schemas/overlay/selection_context_v2.schema.json",
+      "schema_sha256": "196ed8a72337cd8b881d70b09f0a5d6954d2ddab6e00d25c210bd4b00930a30c",
+      "schema_version": "eval-factory/selection-context/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.semantic_review_v2.SemanticCleanContextAttestationV2",
+      "schema_path": "schemas/overlay/semantic_clean_context_attestation_v2.schema.json",
+      "schema_sha256": "2add506b0011a34b9a9860cd64a551c9395df5228ff8f089bb6897e854542716",
+      "schema_version": "env-mock-agent/semantic-clean-context-attestation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.SemanticFindingResolutionV2",
+      "schema_path": "schemas/overlay/semantic_finding_resolution_v2.schema.json",
+      "schema_sha256": "db256104a6ac852dbed97d3d7abd27b08136389fe21873357edc3225938a8151",
+      "schema_version": "eval-factory/semantic-finding-resolution/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.SemanticLabelQualitySummaryV2",
+      "schema_path": "schemas/overlay/semantic_label_quality_summary_v2.schema.json",
+      "schema_sha256": "be11e784c30483875ae71ca64fb379178b5ff5802619e8f3f4797574db7b2ec0",
+      "schema_version": "eval-factory/semantic-label-quality-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling_v2.SemanticResidualSpecV2",
+      "schema_path": "schemas/overlay/semantic_residual_spec_v2.schema.json",
+      "schema_sha256": "2d85f70a1cc7e1fd2fffd7e095e493135e3510c22fe762b272e40e190c6b5a6c",
+      "schema_version": "eval-factory/semantic-residual-spec/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.SemanticReviewFanoutV2",
+      "schema_path": "schemas/overlay/semantic_review_fanout_v2.schema.json",
+      "schema_sha256": "e0e905fd9491eef84f698c32bcad209b5b788a1b8758af1413695ba58a0e5fd5",
+      "schema_version": "eval-factory/semantic-review-fanout/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.SemanticReviewFindingV2",
+      "schema_path": "schemas/overlay/semantic_review_finding_v2.schema.json",
+      "schema_sha256": "9642aa7346955e932d51c7786c63f6920c506e8ace0907f16865931b300e76bb",
+      "schema_version": "eval-factory/semantic-review-finding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.SemanticReviewPolicyV2",
+      "schema_path": "schemas/overlay/semantic_review_policy_v2.schema.json",
+      "schema_sha256": "b9031dfc4fa3431bd426a739b6294437a80b7c36783726d67bcec1a3b95ef549",
+      "schema_version": "eval-factory/semantic-review-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.SemanticReviewRoundResultV2",
+      "schema_path": "schemas/overlay/semantic_review_round_result_v2.schema.json",
+      "schema_sha256": "f9f15059f4aa02dd592fa03b611139de20758f92aacb5bd1ba21952709096b2e",
+      "schema_version": "eval-factory/semantic-review-round-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.canary_execution_v2.SemanticReviewRoundWorkV2",
+      "schema_path": "schemas/overlay/semantic_review_round_work_v2.schema.json",
+      "schema_sha256": "3e886e55d5ae902f34a0d9998b5598cb49454b9c37dc98224986a7a2cd5b30e2",
+      "schema_version": "eval-factory/semantic-review-round-work/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.SemanticReviewWorkflowResultV2",
+      "schema_path": "schemas/overlay/semantic_review_workflow_result_v2.schema.json",
+      "schema_sha256": "f3ea895dd871118a8277153fec1af11cd0d7d7383b4d9733ffa390789133c397",
+      "schema_version": "eval-factory/semantic-review-workflow-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.SolvabilityAssessmentV2",
+      "schema_path": "schemas/overlay/solvability_assessment_v2.schema.json",
+      "schema_sha256": "89cd26615372966e863a627ed8d50b5c35b4ef9bbde4ceaf99135337972c8f62",
+      "schema_version": "eval-factory/solvability-assessment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.SourceEvidenceClaimBindingV2",
+      "schema_path": "schemas/overlay/source_evidence_claim_binding_v2.schema.json",
+      "schema_sha256": "1c066636c3ce9c7f3b768406282f7b220c7cb0b866c0973b3215917afb439614",
+      "schema_version": "eval-factory/source-evidence-claim-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.SourceEvidenceSetV2",
+      "schema_path": "schemas/overlay/source_evidence_set_v2.schema.json",
+      "schema_sha256": "2892da6bb0a5c2aaad7627370e394b1a6e87ea265ba694379801fd7e28562555",
+      "schema_version": "eval-factory/source-evidence-set/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.attachment_v2.SourceEvidenceV2",
+      "schema_path": "schemas/overlay/source_evidence_v2.schema.json",
+      "schema_sha256": "2bf67fd2ad2e1ab9e6e8c646fa2c6e7950743de47115d2069f17c01c5cdf5d41",
+      "schema_version": "eval-factory/source-evidence/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.label_quality_v2.StructuredLabelQualitySummaryV2",
+      "schema_path": "schemas/overlay/structured_label_quality_summary_v2.schema.json",
+      "schema_sha256": "8d3b8374bee1a1143fc6995a94469495c9b8f9a4d66b6d2019453ea5a4a9d337",
+      "schema_version": "eval-factory/structured-label-quality-summary/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.labeling_v2.StructuredPredicateV2",
+      "schema_path": "schemas/overlay/structured_predicate_v2.schema.json",
+      "schema_sha256": "7b9cd23d4a2ce333c430e6cc14b18ffdb48ec1b5fb043340caa84942c151a291",
+      "schema_version": "eval-factory/structured-predicate/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.review_v2.TargetedRepairPlanV2",
+      "schema_path": "schemas/overlay/targeted_repair_plan_v2.schema.json",
+      "schema_sha256": "efa6859f847f2286731a0f2dd90202cca7afa51223bc4a009709bec5a9e924f4",
+      "schema_version": "eval-factory/targeted-repair-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskContractInvalidationV2",
+      "schema_path": "schemas/overlay/task_contract_invalidation_v2.schema.json",
+      "schema_sha256": "e51e8977c00ca6de7df006c7ad34b707aa9040c9ef94166b7db1664945d9bf05",
+      "schema_version": "eval-factory/task-contract-invalidation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskDraftV2",
+      "schema_path": "schemas/overlay/task_draft_v2.schema.json",
+      "schema_sha256": "8aefaa956f85a5eb2b15d44822d5df81dded2de6bd41b8fb1e0a79522fdf1948",
+      "schema_version": "eval-factory/task-draft/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.duplicate_v2.TaskDuplicateFingerprintV2",
+      "schema_path": "schemas/overlay/task_duplicate_fingerprint_v2.schema.json",
+      "schema_sha256": "487be5d4793e322537848f55b15baab95885be93d213fc7818770e3390e69eb5",
+      "schema_version": "eval-factory/task-duplicate-fingerprint/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskEpisodeSegmentEvidenceBindingV2",
+      "schema_path": "schemas/overlay/task_episode_segment_evidence_binding_v2.schema.json",
+      "schema_sha256": "b7c7c268b4c06ba7317d84053f0ef41d459e47e79887c2307056772e3f0378bf",
+      "schema_version": "eval-factory/task-episode-segment-evidence-binding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskEpisodeV2",
+      "schema_path": "schemas/overlay/task_episode_v2.schema.json",
+      "schema_sha256": "4031a6c1530ae87282bb7ed8000fe1256bec82d3ee97231800899d25f78658c1",
+      "schema_version": "eval-factory/task-episode/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskPromptSafetyCheckV2",
+      "schema_path": "schemas/overlay/task_prompt_safety_check_v2.schema.json",
+      "schema_sha256": "10235377ae70e795774b798029d4f840c3e97ed127cd38bffd0fe398a7f0ae34",
+      "schema_version": "eval-factory/task-prompt-safety-check/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskPromptSafetyFindingV2",
+      "schema_path": "schemas/overlay/task_prompt_safety_finding_v2.schema.json",
+      "schema_sha256": "ebe9a93ec37c4d6402b745550241833ba51d25d8b600aaac00bf8cb1ce6ad1ef",
+      "schema_version": "eval-factory/task-prompt-safety-finding/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskPromptSafetyGateV2",
+      "schema_path": "schemas/overlay/task_prompt_safety_gate_v2.schema.json",
+      "schema_sha256": "6590608b7fd6d2b9863a173927e381e9259c4e060690b115e955f9fd33a1709b",
+      "schema_version": "eval-factory/task-prompt-safety-gate/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskRequirementLineageV2",
+      "schema_path": "schemas/overlay/task_requirement_lineage_v2.schema.json",
+      "schema_sha256": "926bcb3856c8dc44a408be3d514c0b8312d1f7162a722a4b65e7994ba9349a31",
+      "schema_version": "eval-factory/task-requirement-lineage/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskRewriteApplicationV2",
+      "schema_path": "schemas/overlay/task_rewrite_application_v2.schema.json",
+      "schema_sha256": "435946b16fc38da4ff45ff80ceefc41708857dd6ea61b636fd9629448226ead5",
+      "schema_version": "eval-factory/task-rewrite-application/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.TaskRewriteCandidateV2",
+      "schema_path": "schemas/overlay/task_rewrite_candidate_v2.schema.json",
+      "schema_sha256": "d68f2fc7398b1c8099268d19cbe7924b37e33b7d168051d250bc58432c7f1b48",
+      "schema_version": "eval-factory/task-rewrite-candidate/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskRewriteExamplePreviewV2",
+      "schema_path": "schemas/overlay/task_rewrite_example_preview_v2.schema.json",
+      "schema_sha256": "62b7f61940ce82b9d459310435cc1ed2232009bb6a445930aeeed808ab725435",
+      "schema_version": "eval-factory/task-rewrite-example-preview/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.TaskRewritePlan",
+      "schema_path": "schemas/overlay/task_rewrite_plan.schema.json",
+      "schema_sha256": "81ff91ee85921e309dfcd949882aff64c6db34b7d459e951990127224fee033a",
+      "schema_version": "eval-factory/task-rewrite-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskRewritePlanPreviewV2",
+      "schema_path": "schemas/overlay/task_rewrite_plan_preview_v2.schema.json",
+      "schema_sha256": "adea59f9464b951d93d5076891892ceac2fec825334902933b3296d5aeeb0552",
+      "schema_version": "eval-factory/task-rewrite-plan-preview/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.TaskRewritePlanV2",
+      "schema_path": "schemas/overlay/task_rewrite_plan_v2.schema.json",
+      "schema_sha256": "86791963f9b78b721eac9a11ec6dbef1dd59cd5b8e13ad2c40dc5f5e29ebbd5c",
+      "schema_version": "eval-factory/task-rewrite-plan/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskRewritePlanVersionV2",
+      "schema_path": "schemas/overlay/task_rewrite_plan_version_v2.schema.json",
+      "schema_sha256": "edc50294e238b14ba26f48f84f6011d4a885ea859e1a12ea91912976f8e45739",
+      "schema_version": "eval-factory/task-rewrite-plan-version/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.TaskRewritePreviewSafetyGateV2",
+      "schema_path": "schemas/overlay/task_rewrite_preview_safety_gate_v2.schema.json",
+      "schema_sha256": "d97e24dd0fde2e3124e88a5d101ea76b6de740041e8ef783d1b60391b8188cac",
+      "schema_version": "eval-factory/task-rewrite-preview-safety-gate/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.telemetry_v2.ToolFamilyCountV2",
+      "schema_path": "schemas/overlay/tool_family_count_v2.schema.json",
+      "schema_sha256": "1107c6720503e67d3e4a5aafa20fd489ca8171f369f584bc6ff8e1dd43bb6e3e",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.ToolMetricV2",
+      "schema_path": "schemas/overlay/tool_metric_v2.schema.json",
+      "schema_sha256": "7223e4c2b9eba92fccafaa18d3e90f46701af873d0a80a52eeb69cb7819f5c1c",
+      "schema_version": null
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ToolPolicyV2",
+      "schema_path": "schemas/overlay/tool_policy_v2.schema.json",
+      "schema_sha256": "d84fc9e1cdc60782afeb2c4103fb9318551fcc178ab650edda11444cac1dd066",
+      "schema_version": "eval-factory/tool-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.task_v2.ToolRuleV2",
+      "schema_path": "schemas/overlay/tool_rule_v2.schema.json",
+      "schema_sha256": "65f269a68f997aa2f52c6d4e68129dfb76c981457aadbae576ca3b6e011ba64c",
+      "schema_version": "eval-factory/tool-rule/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.agent_system_v2.TraceCandidateDecisionV2",
+      "schema_path": "schemas/overlay/trace_candidate_decision_v2.schema.json",
+      "schema_sha256": "27b42db6e1fcdc26999495f534fd39252f41842722ab1c8740d5d2a40131fc36",
+      "schema_version": "eval-factory/trace-candidate-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.TypedAdjustment",
+      "schema_path": "schemas/overlay/typed_adjustment.schema.json",
+      "schema_sha256": "02938fe230a040521555fc079dc7187c53e804006b523f3c939b1f52c9aaacaf",
+      "schema_version": "eval-factory/typed-adjustment/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.UserApprovalPolicy",
+      "schema_path": "schemas/overlay/user_approval_policy.schema.json",
+      "schema_sha256": "bbb8e5e9fc5316329a59307850411f9dd1d58d0150e2de45cd70ab1416741354",
+      "schema_version": "eval-factory/user-approval-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.UserApprovalRequest",
+      "schema_path": "schemas/overlay/user_approval_request.schema.json",
+      "schema_sha256": "0bee632cb1c056004dfb8be69a463a8cb529e689c644d02a2099127e8979a6da",
+      "schema_version": "eval-factory/user-approval-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_v2.UserApprovalRequestCompilationResultV2",
+      "schema_path": "schemas/overlay/user_approval_request_compilation_result_v2.schema.json",
+      "schema_sha256": "464f9737a04269e481d47a46ffb25105909ebc481bdd88528ea43a050b62bca5",
+      "schema_version": "eval-factory/user-approval-request-compilation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_decision_v2.UserApprovalRequestRevisionV2",
+      "schema_path": "schemas/overlay/user_approval_request_revision_v2.schema.json",
+      "schema_sha256": "eecce359ab57d46a21e7171d9fbb800ab5de2e1f9976d0460dba2f8d3406e53d",
+      "schema_version": "eval-factory/user-approval-request-revision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointDecisionResultV2",
+      "schema_path": "schemas/overlay/user_checkpoint_decision_result_v2.schema.json",
+      "schema_sha256": "7179c2f3331a833c7549c91571494bd821a324448f41089a007955b616831ac7",
+      "schema_version": "eval-factory/user-checkpoint-decision-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointDecisionSubmissionV2",
+      "schema_path": "schemas/overlay/user_checkpoint_decision_submission_v2.schema.json",
+      "schema_sha256": "d45a485178968dd86e67f71d27d27bb24d900a83efb10bf1ee591e7994ab62b8",
+      "schema_version": "eval-factory/user-checkpoint-decision-submission/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointInteractionPageV2",
+      "schema_path": "schemas/overlay/user_checkpoint_interaction_page_v2.schema.json",
+      "schema_sha256": "0270bdc041e88579c6c6425b94dad1f45b4baa69719e300e6aa27513c511f9f8",
+      "schema_version": "eval-factory/user-checkpoint-interaction-page/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointInteractionPolicyV2",
+      "schema_path": "schemas/overlay/user_checkpoint_interaction_policy_v2.schema.json",
+      "schema_sha256": "b2ec2be0eb3419d8d2dd6f9b15735304a0a7e9e3b535f1a387468df33d1a7793",
+      "schema_version": "eval-factory/user-checkpoint-interaction-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointInteractionV2",
+      "schema_path": "schemas/overlay/user_checkpoint_interaction_v2.schema.json",
+      "schema_sha256": "43c470ce2f1d7a6633475b3962f91bd4440a003e2f8347d71277072ba26a042a",
+      "schema_version": "eval-factory/user-checkpoint-interaction/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointOpenResultV2",
+      "schema_path": "schemas/overlay/user_checkpoint_open_result_v2.schema.json",
+      "schema_sha256": "c14f380fe545f381e5edd15980f90c4188dd356743550341ef255c7cc1dd203e",
+      "schema_version": "eval-factory/user-checkpoint-open-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointPresentationV2",
+      "schema_path": "schemas/overlay/user_checkpoint_presentation_v2.schema.json",
+      "schema_sha256": "da10d927c491cff7cc95a32d34ea83b92af480e83d962fab9f6f22b9efb9934e",
+      "schema_version": "eval-factory/user-checkpoint-presentation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointResumeResultV2",
+      "schema_path": "schemas/overlay/user_checkpoint_resume_result_v2.schema.json",
+      "schema_sha256": "482c2996b2f6894b6d3daa71b099073e0ef4220f6004fb10d98232ddd35af4bc",
+      "schema_version": "eval-factory/user-checkpoint-resume-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.checkpoint_interaction_v2.UserCheckpointShowResultV2",
+      "schema_path": "schemas/overlay/user_checkpoint_show_result_v2.schema.json",
+      "schema_sha256": "d47b5e981aa6b5ef3a0d2f5b8c40ba7bdd50bed73e97cd50a32a52445bfeae0e",
+      "schema_version": "eval-factory/user-checkpoint-show-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_decision_v2.UserDecisionAdjustmentEffectV2",
+      "schema_path": "schemas/overlay/user_decision_adjustment_effect_v2.schema.json",
+      "schema_sha256": "8f976496cf2e94dee940b310e39eda1645b56fc618cb9bba2fde70bd60681118",
+      "schema_version": "eval-factory/user-decision-adjustment-effect/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_decision_v2.UserDecisionCommitResultV2",
+      "schema_path": "schemas/overlay/user_decision_commit_result_v2.schema.json",
+      "schema_sha256": "98e270c6e957a35e95608225e11c37f5a45233c0c317d016c2fbcf8e390994fe",
+      "schema_version": "eval-factory/user-decision-commit-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_decision_v2.UserDecisionHandlingPolicyV2",
+      "schema_path": "schemas/overlay/user_decision_handling_policy_v2.schema.json",
+      "schema_sha256": "c10b49612c26d37ed92bced8ecae93b665fffdbc1104f42545e7e441b64914f6",
+      "schema_version": "eval-factory/user-decision-handling-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval.UserDecisionRecord",
+      "schema_path": "schemas/overlay/user_decision_record.schema.json",
+      "schema_sha256": "9cdd9c16bb80f7d55953b80b1bd1f11cdeb3fa337c2a1b1298b9599e926eafba",
+      "schema_version": "eval-factory/user-decision-record/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.UserPlanApplicationPolicyV2",
+      "schema_path": "schemas/overlay/user_plan_application_policy_v2.schema.json",
+      "schema_sha256": "01fe8f593a420d43bd10fedde0664a7e8fea19af2c27d74161d72e372889d0f6",
+      "schema_version": "eval-factory/user-plan-application-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.approval_application_v2.UserPlanApplicationV2",
+      "schema_path": "schemas/overlay/user_plan_application_v2.schema.json",
+      "schema_sha256": "a87bf3b6f7a0fc8b08a14a68b0dd293a94711ffe54c60222f041e49b74458234",
+      "schema_version": "eval-factory/user-plan-application/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.observability_v2.WorkAttemptMetricsV2",
+      "schema_path": "schemas/overlay/work_attempt_metrics_v2.schema.json",
+      "schema_sha256": "d9f7b35fe53a5ba65059b64e662116989bdf1e79645e7ef5b0dc48a192996eb9",
+      "schema_version": "eval-factory/work-attempt-metrics/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkCancellationRecordV2",
+      "schema_path": "schemas/overlay/work_cancellation_record_v2.schema.json",
+      "schema_sha256": "08c273c0498e18128e2645c071d136c5ac3e41140a34ea4edfc2c66a3620c238",
+      "schema_version": "eval-factory/work-cancellation-record/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkControlPolicyV2",
+      "schema_path": "schemas/overlay/work_control_policy_v2.schema.json",
+      "schema_sha256": "ff1301c81c575e55d3ffa479c227eaed2a4d96fd98c58b662436924baadeda05",
+      "schema_version": "eval-factory/work-control-policy/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkDispatchDecisionV2",
+      "schema_path": "schemas/overlay/work_dispatch_decision_v2.schema.json",
+      "schema_sha256": "7856b23b0cd8ca12a9609d52e8b90f53399f817cfcdf41ee621113dfe912f70f",
+      "schema_version": "eval-factory/work-dispatch-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkLeaseEventV2",
+      "schema_path": "schemas/overlay/work_lease_event_v2.schema.json",
+      "schema_sha256": "ad638e7a8b56dfb7e25341c6742bd16aec2017e728a69c8e6166817825538ed8",
+      "schema_version": "eval-factory/work-lease-event/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkLeaseV2",
+      "schema_path": "schemas/overlay/work_lease_v2.schema.json",
+      "schema_sha256": "776f20d3f4d275187f65285490036b7027d0fc966aca431c09fe3da305ad3b25",
+      "schema_version": "eval-factory/work-lease/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.WorkModelCancellationRequestV2",
+      "schema_path": "schemas/overlay/work_model_cancellation_request_v2.schema.json",
+      "schema_sha256": "a22b7521da47baf762945c0597c11ca998b87ea4613c2d40810113a33ad68023",
+      "schema_version": "eval-factory/work-model-cancellation-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.WorkModelCancellationResultV2",
+      "schema_path": "schemas/overlay/work_model_cancellation_result_v2.schema.json",
+      "schema_sha256": "6d18d6f1dc323f42fa58e0dee94f6622362eeb272bcbcac8fd8655409170f9db",
+      "schema_version": "eval-factory/work-model-cancellation-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.WorkModelDemandV2",
+      "schema_path": "schemas/overlay/work_model_demand_v2.schema.json",
+      "schema_sha256": "d08eaddd56c35f4030d5794ea2be8e412520c5755fa34815f5c70ccbcd6c6d01",
+      "schema_version": "eval-factory/work-model-demand/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.WorkModelEventV2",
+      "schema_path": "schemas/overlay/work_model_event_v2.schema.json",
+      "schema_sha256": "ce977002acc7473c8d0449affcb4f989e787edd001c0f5484cd6dde189f0d03b",
+      "schema_version": "eval-factory/work-model-event/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.model_control_v2.WorkModelReservationV2",
+      "schema_path": "schemas/overlay/work_model_reservation_v2.schema.json",
+      "schema_sha256": "3d9ab8db8bfb48140acd448775b553b36e2536c3e1041862a9e2b0e63005936f",
+      "schema_version": "eval-factory/work-model-reservation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkReadinessSnapshotV2",
+      "schema_path": "schemas/overlay/work_readiness_snapshot_v2.schema.json",
+      "schema_sha256": "289976de9d939300d2059817bc825ef5b445d77f7d4b2cc736e74891f1caec78",
+      "schema_version": "eval-factory/work-readiness-snapshot/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.WorkResourceDemandV2",
+      "schema_path": "schemas/overlay/work_resource_demand_v2.schema.json",
+      "schema_sha256": "8a3c86562834dad3c24abb22389cc062ea0cf92936c276f0ddae1c20ce0f6306",
+      "schema_version": "eval-factory/work-resource-demand/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.WorkResourceEventV2",
+      "schema_path": "schemas/overlay/work_resource_event_v2.schema.json",
+      "schema_sha256": "5b2b862ba645e610c9ad0f3cf8ea2755806a8cddc6864b24b60d92d643554633",
+      "schema_version": "eval-factory/work-resource-event/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.WorkResourceReservationV2",
+      "schema_path": "schemas/overlay/work_resource_reservation_v2.schema.json",
+      "schema_sha256": "2166b200285479f34d58fa8b39e4747d7b3af87f0d2a4c0e5f401519ef853fd0",
+      "schema_version": "eval-factory/work-resource-reservation/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.WorkResourceTerminationRequestV2",
+      "schema_path": "schemas/overlay/work_resource_termination_request_v2.schema.json",
+      "schema_sha256": "f7d8cb0947c2fcb711a05fefad3803664a0a591af42259cfe641a761004e2a4b",
+      "schema_version": "eval-factory/work-resource-termination-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.resource_v2.WorkResourceTerminationResultV2",
+      "schema_path": "schemas/overlay/work_resource_termination_result_v2.schema.json",
+      "schema_sha256": "21c5954a8876354c7a3bcdcca0c4423ead51e524a5811969d43b0659b4cd1f61",
+      "schema_version": "eval-factory/work-resource-termination-result/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "factory",
+      "python_type": "eval_factory.contracts.orchestration_v2.WorkRetryDecisionV2",
+      "schema_path": "schemas/overlay/work_retry_decision_v2.schema.json",
+      "schema_sha256": "3fa3413c92ad55c36b3f8eb245c0f598d9e67373784dccbbd7584edff6af1b78",
+      "schema_version": "eval-factory/work-retry-decision/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.WorldLedgerFactLockV2",
+      "schema_path": "schemas/overlay/world_ledger_fact_lock_v2.schema.json",
+      "schema_sha256": "4ca6cc9abd7a6eefa844553a056dc468fbf87fb3cd63eb280e4ec1a2b95bf2f7",
+      "schema_version": "env-mock-agent/world-ledger-fact-lock/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.WorldLedgerSnapshotRequestV2",
+      "schema_path": "schemas/overlay/world_ledger_snapshot_request_v2.schema.json",
+      "schema_sha256": "2c2fd9ecd5020eded9bb13f79e36b05e5a357afa7024740ab480c2604d948fb7",
+      "schema_version": "env-mock-agent/world-ledger-snapshot-request/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.execution_v2.WorldLedgerSnapshotV2",
+      "schema_path": "schemas/overlay/world_ledger_snapshot_v2.schema.json",
+      "schema_sha256": "a915eb4510d478a5dd5373352a05511eb1693e1d3928cc162c934c01563e40b2",
+      "schema_version": "env-mock-agent/world-ledger-snapshot/v2"
+    }
+  ],
+  "generator": "scripts/export_eval_factory_contracts_v2.py",
+  "generator_version": "2.0.0",
+  "historical_only_for_v2_jobs": [
+    "eval-factory/human-review-record/v1",
+    "eval-factory/review-record-invalidation/v1",
+    "eval-factory/review-quorum/v1"
+  ],
+  "pydantic_version": "2.13.4",
+  "schema_version": "eval-factory-contract-manifest/v2",
+  "source_files": [
+    {
+      "path": "src/env_mock_agent/facade/cross_item_safety_v2.py",
+      "sha256": "bd0540c57397e17d83dc5d2cb6ec0f5b36b12a300fb2686494c2ca2a1eafc35a"
+    },
+    {
+      "path": "src/env_mock_agent/facade/duplicate_v2.py",
+      "sha256": "d270977b7e7c16ac7cf231b7d9afff9188e068858f5b8699dda68587f0afde70"
+    },
+    {
+      "path": "src/env_mock_agent/facade/execution_v2.py",
+      "sha256": "34e4974e54970144c46c038bd17a0a5386eaf6be753a90a8da7159abb64cfdf0"
+    },
+    {
+      "path": "src/env_mock_agent/facade/model_control_v2.py",
+      "sha256": "11da24a88b7ca31d69137d4bfde7a25e2350c50e9a73ab3918c72c8538c63060"
+    },
+    {
+      "path": "src/env_mock_agent/facade/release_export_v2.py",
+      "sha256": "671ae47a8df45b295bc5cc58eb1fb4fa6768add91d46a867393cfe05a13b9cb0"
+    },
+    {
+      "path": "src/env_mock_agent/facade/resource_v2.py",
+      "sha256": "00f42e11b08a26d8fe542a57bc767e7b7254a538221fac093167e27695d423c4"
+    },
+    {
+      "path": "src/env_mock_agent/facade/retrieval_v2.py",
+      "sha256": "3cd4a7610c2f8449133b340dc041e64742c572add0259afeae9866a6811a8f53"
+    },
+    {
+      "path": "src/env_mock_agent/facade/routing_v2.py",
+      "sha256": "f93c0120f9cf1eaa5d2efeae5ea30e3dd295d15bf1fa2121f1c572211dfa5590"
+    },
+    {
+      "path": "src/env_mock_agent/facade/semantic_review_v2.py",
+      "sha256": "505678a13b4771e7f2800d85e5d828b2954bfa8df96105e31f01232e57a0afce"
+    },
+    {
+      "path": "src/env_mock_agent/facade/telemetry_v2.py",
+      "sha256": "f3e8c7757cfe53eb9531b5e2806c558f72793d8ec6ab15fd2b5d85b318c7a642"
+    },
+    {
+      "path": "src/env_mock_agent/facade/validation_v2.py",
+      "sha256": "b85312fd79f06b10f070c492cc5410f669730e7075a95f53ea8b1d998ec51902"
+    },
+    {
+      "path": "src/eval_factory/contracts/agent_system_v2.py",
+      "sha256": "cb1f9783ac14f0b2deb51b761128b0e6647506f1d1b7fee0ac94ebdf8e96875d"
+    },
+    {
+      "path": "src/eval_factory/contracts/ai_gateway_v2.py",
+      "sha256": "7c35f52995203fd78a57a9626ea36a85b11a6d80f512e8d768e24c41f2f7b706"
+    },
+    {
+      "path": "src/eval_factory/contracts/approval.py",
+      "sha256": "21df2d54e1ed6c1d4497f9168191829cf41c1672d152e6c85ce09f4faf2e8b8a"
+    },
+    {
+      "path": "src/eval_factory/contracts/approval_application_v2.py",
+      "sha256": "67f6f424c8526d1e2ec85b1189e828a89a84f65b9c0a2b630d89062b80698956"
+    },
+    {
+      "path": "src/eval_factory/contracts/approval_decision_v2.py",
+      "sha256": "3d315b1f3a85a8c210292e00726dd8af69975e126ade2e6a40b97ea3f0e859bd"
+    },
+    {
+      "path": "src/eval_factory/contracts/approval_v2.py",
+      "sha256": "fc89a525d7930c8be97409b0321712778b3bcfc46c57579d214003eba3d6e2c1"
+    },
+    {
+      "path": "src/eval_factory/contracts/attachment_v2.py",
+      "sha256": "ceebb70c09ece9a82a0e04d3be2494cbc89163e8c8e23556d9b1ccbaf91d3acc"
+    },
+    {
+      "path": "src/eval_factory/contracts/batch_quality_v2.py",
+      "sha256": "866ef5e883339b93bbb498a4a9022b364630592805ced2c228fa8e90f35121b3"
+    },
+    {
+      "path": "src/eval_factory/contracts/canary_execution_v2.py",
+      "sha256": "e4d84312dff5eb60128c85f95b3b19cd133d64d260878746e26bf88925f9a339"
+    },
+    {
+      "path": "src/eval_factory/contracts/canary_regression_v2.py",
+      "sha256": "725b5e41cafe7ade788031a7e7d1725db5e8abc3c218159a7c14b83dd3c6ce50"
+    },
+    {
+      "path": "src/eval_factory/contracts/checkpoint_interaction_v2.py",
+      "sha256": "6fb236316458540f026563fc4e4d08a23dedf46f1f0463092c8d3beb5692c24c"
+    },
+    {
+      "path": "src/eval_factory/contracts/cli_v2.py",
+      "sha256": "7b1b703cd9fe73352372f7272ea7396ca934b8812ad8eb9970058d83620e9047"
+    },
+    {
+      "path": "src/eval_factory/contracts/concurrency_experiment_v2.py",
+      "sha256": "03a7f8b6009970f781bf16215aafacbd5cb2c6f175b1ff42734fa2d7be11a4e5"
+    },
+    {
+      "path": "src/eval_factory/contracts/core_v2.py",
+      "sha256": "eab63a77e417538c10cbef43edf1eca2e68b8b010c331facd4f514d104938a3b"
+    },
+    {
+      "path": "src/eval_factory/contracts/cross_item_safety_v2.py",
+      "sha256": "a3d8aa4a2de7c6e79d4a1291415af233dd5e93bf4c22aba6fcf34cdb3633c9c7"
+    },
+    {
+      "path": "src/eval_factory/contracts/dataset_runtime_v2.py",
+      "sha256": "485886efe3f3d9b3251260e1b82288678f69a2add5a7216c508e7683edcfca68"
+    },
+    {
+      "path": "src/eval_factory/contracts/duplicate_v2.py",
+      "sha256": "cdb1ce89b2677602c785cf8a669fcca50af19315a4b13e5b79b3eb94f9b95dce"
+    },
+    {
+      "path": "src/eval_factory/contracts/external_evidence_v2.py",
+      "sha256": "fcdfb5079d6538151727a49a66fef56acf104f58ee0ae6f9a94748376de5cf15"
+    },
+    {
+      "path": "src/eval_factory/contracts/external_stability_v2.py",
+      "sha256": "81150d81833e6c127e43eda91b86b6acb943c9f8d7b9c7869fbc8531a9bbb09e"
+    },
+    {
+      "path": "src/eval_factory/contracts/label_quality_v2.py",
+      "sha256": "3828a5fcbe259b2f6821fff19bf9256a8b41110cd9d0d36daa36727e47dcea6b"
+    },
+    {
+      "path": "src/eval_factory/contracts/labeling_v2.py",
+      "sha256": "76787b5d994616c67d6f9b8156832d79ded44fdc09430be8455272b89c0d7e3e"
+    },
+    {
+      "path": "src/eval_factory/contracts/model_control_v2.py",
+      "sha256": "a07f93198688db649726c44e71a3f4afc8571aeb1bb3c8a523ae57f73d7f0d2d"
+    },
+    {
+      "path": "src/eval_factory/contracts/observability_v2.py",
+      "sha256": "82b7c5cb6de6f19d6b30ceb4c666e6b2eeecb7efa866e132f3a9d7a6be25407f"
+    },
+    {
+      "path": "src/eval_factory/contracts/orchestration_v2.py",
+      "sha256": "0d1349fc1240792e5090d39d273a144ddd7c8c15f9b9019e763719a7b78bb4d8"
+    },
+    {
+      "path": "src/eval_factory/contracts/production_attestation_v2.py",
+      "sha256": "9b43100eaaedadef0e001b111a177f8ee3f7ae0e42973c69f7a968b15e174fb3"
+    },
+    {
+      "path": "src/eval_factory/contracts/production_readiness_review_v2.py",
+      "sha256": "764727e4efdd48a0ade911d2abe8146dfb572ae961046a627730f259d09704f5"
+    },
+    {
+      "path": "src/eval_factory/contracts/production_release_v2.py",
+      "sha256": "cae98fcf4e7256f747d9a83c370928a86001bd93a0a2799d4f6282e71aac1e3e"
+    },
+    {
+      "path": "src/eval_factory/contracts/quality_v2.py",
+      "sha256": "e1a4ce546f6997c92e6e0098f0dc12f55b3b6cc581ea1dcfc549f0fff6b1a6f1"
+    },
+    {
+      "path": "src/eval_factory/contracts/real_trace_stability_v2.py",
+      "sha256": "cf429e548480efbfa6b48614e9c43c540acf8b9bdf9616afcd297e4b1134555c"
+    },
+    {
+      "path": "src/eval_factory/contracts/release_projection_v2.py",
+      "sha256": "b26b420146e1b574c9d36f687b3bcddcafb361a8df9979457d0a42110513dc6c"
+    },
+    {
+      "path": "src/eval_factory/contracts/release_publication_v2.py",
+      "sha256": "f703f399ae913ec99eb7a2345a7c825451ded28f1e50753ac6145c2149e0c8c3"
+    },
+    {
+      "path": "src/eval_factory/contracts/release_v2.py",
+      "sha256": "23804f1ee8aca3a873e15ca78239df7604a08f1c2adc669a104e26dea6526cbb"
+    },
+    {
+      "path": "src/eval_factory/contracts/resource_v2.py",
+      "sha256": "8e2d9d30238352e81d91f598259f2a5cd17a4b6ca02da161ec274ae577070176"
+    },
+    {
+      "path": "src/eval_factory/contracts/review_v2.py",
+      "sha256": "a85c0127e92970180990e2f3fb779b22806503dfe1faa2deb1312eb5105d9b41"
+    },
+    {
+      "path": "src/eval_factory/contracts/scheduler_load_v2.py",
+      "sha256": "a97294cffe7cd8d333552141d5750d68627565bc34845c63e29c0b5ad6f57652"
+    },
+    {
+      "path": "src/eval_factory/contracts/statistics_v2.py",
+      "sha256": "bb498542faee5024b5afc6ecec3e9453b2a1ef2c54592f9df8fcfdf40579af76"
+    },
+    {
+      "path": "src/eval_factory/contracts/task_v2.py",
+      "sha256": "efc377336ef552f46cc9c390b235a73ebcba1e45c7768a5e984cdc235999c957"
+    },
+    {
+      "path": "src/eval_factory/contracts/validation_v2.py",
+      "sha256": "6c50314d293612bc521030d24c7f5f5bf0baf9259b75d6cca2e96ed99c8d7c6b"
+    }
+  ],
+  "supersedes_for_v2_jobs": [
+    "eval-factory/artifact-build-spec/v1",
+    "eval-factory/artifact-evidence-matrix/v1",
+    "eval-factory/artifact-evidence-row/v1",
+    "eval-factory/dataset-job-spec/v1",
+    "eval-factory/evaluation-item/v1",
+    "eval-factory/evaluator-spec/v1",
+    "eval-factory/environment-spec/v1",
+    "eval-factory/producer-task-view/v1",
+    "eval-factory/provenance-manifest/v1",
+    "eval-factory/quality-report/v1",
+    "eval-factory/reference-policy/v1",
+    "eval-factory/release-decision/v1",
+    "eval-factory/rubric-criterion/v1",
+    "eval-factory/rubric-set/v1",
+    "eval-factory/source-evidence/v1",
+    "eval-factory/task-draft/v1",
+    "eval-factory/task-episode/v1",
+    "eval-factory/tool-policy/v1",
+    "eval-factory/tool-rule/v1"
+  ]
+}

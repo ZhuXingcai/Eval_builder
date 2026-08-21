@@ -1,0 +1,71 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/projection_policy.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "denied_object_types": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Denied Object Types",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "principal_type": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Principal Type",
+      "type": "string"
+    },
+    "projection_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Projection Policy Id",
+      "type": "string"
+    },
+    "purpose": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Purpose",
+      "type": "string"
+    },
+    "recursive_allow_fields": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Recursive Allow Fields",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/projection-policy/v1",
+      "default": "eval-factory/projection-policy/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_schema_versions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Schema Versions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "projection_policy_id",
+    "principal_type",
+    "purpose",
+    "recursive_allow_fields",
+    "source_schema_versions",
+    "policy_version"
+  ],
+  "title": "ProjectionPolicy",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.safety.ProjectionPolicy",
+  "x-schema-version": "eval-factory/projection-policy/v1"
+}

@@ -1,0 +1,382 @@
+{
+  "$defs": {
+    "BatchAuditFindingCodeV2": {
+      "enum": [
+        "MISSING_OUTBOX_WITNESS",
+        "DUPLICATE_OUTBOX_WITNESS",
+        "MISSING_TERMINAL_METRICS",
+        "METRICS_BINDING_MISMATCH",
+        "MISSING_MODEL_EVENT",
+        "MISSING_RESOURCE_EVENT",
+        "LEASE_EVENT_GAP",
+        "RESERVATION_EVENT_GAP",
+        "RETRY_CHAIN_MISMATCH",
+        "CROSS_SCOPE_REFERENCE",
+        "CLOCK_REGRESSION",
+        "PROJECTION_DRIFT",
+        "UNEXPECTED_SOURCE_RECORD"
+      ],
+      "title": "BatchAuditFindingCodeV2",
+      "type": "string"
+    },
+    "BatchAuditOutcomeV2": {
+      "enum": [
+        "COMPLETE",
+        "INCOMPLETE"
+      ],
+      "title": "BatchAuditOutcomeV2",
+      "type": "string"
+    },
+    "MetricScopeV2": {
+      "enum": [
+        "JOB",
+        "ITEM",
+        "STAGE",
+        "MODEL_PROFILE",
+        "TOOL_FAMILY",
+        "ARTIFACT"
+      ],
+      "title": "MetricScopeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PipelineMetricSliceSummaryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "backpressure_events": {
+          "minimum": 0,
+          "title": "Backpressure Events",
+          "type": "integer"
+        },
+        "cache_creation_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Creation Input Tokens",
+          "type": "integer"
+        },
+        "cache_hit_attempts": {
+          "minimum": 0,
+          "title": "Cache Hit Attempts",
+          "type": "integer"
+        },
+        "cache_miss_attempts": {
+          "minimum": 0,
+          "title": "Cache Miss Attempts",
+          "type": "integer"
+        },
+        "cache_read_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Input Tokens",
+          "type": "integer"
+        },
+        "cache_unavailable_attempts": {
+          "minimum": 0,
+          "title": "Cache Unavailable Attempts",
+          "type": "integer"
+        },
+        "cancelled_attempts": {
+          "minimum": 0,
+          "title": "Cancelled Attempts",
+          "type": "integer"
+        },
+        "charged_tokens": {
+          "minimum": 0,
+          "title": "Charged Tokens",
+          "type": "integer"
+        },
+        "conservative_usage_attempts": {
+          "minimum": 0,
+          "title": "Conservative Usage Attempts",
+          "type": "integer"
+        },
+        "error_events": {
+          "minimum": 0,
+          "title": "Error Events",
+          "type": "integer"
+        },
+        "execution_sample_count": {
+          "minimum": 0,
+          "title": "Execution Sample Count",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "model_requests": {
+          "minimum": 0,
+          "title": "Model Requests",
+          "type": "integer"
+        },
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "process_starts": {
+          "minimum": 0,
+          "title": "Process Starts",
+          "type": "integer"
+        },
+        "queue_wait_sample_count": {
+          "minimum": 0,
+          "title": "Queue Wait Sample Count",
+          "type": "integer"
+        },
+        "renderer_operations": {
+          "minimum": 0,
+          "title": "Renderer Operations",
+          "type": "integer"
+        },
+        "reported_cost_microusd": {
+          "minimum": 0,
+          "title": "Reported Cost Microusd",
+          "type": "integer"
+        },
+        "reported_usage_attempts": {
+          "minimum": 0,
+          "title": "Reported Usage Attempts",
+          "type": "integer"
+        },
+        "resume_attempts": {
+          "minimum": 0,
+          "title": "Resume Attempts",
+          "type": "integer"
+        },
+        "retained_storage_bytes": {
+          "minimum": 0,
+          "title": "Retained Storage Bytes",
+          "type": "integer"
+        },
+        "retry_attempts": {
+          "minimum": 0,
+          "title": "Retry Attempts",
+          "type": "integer"
+        },
+        "retryable_attempts": {
+          "minimum": 0,
+          "title": "Retryable Attempts",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/pipeline-metric-slice-summary/v2",
+          "default": "eval-factory/pipeline-metric-slice-summary/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/MetricScopeV2"
+        },
+        "scope_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Scope Id",
+          "type": "string"
+        },
+        "succeeded_attempts": {
+          "minimum": 0,
+          "title": "Succeeded Attempts",
+          "type": "integer"
+        },
+        "terminal_attempts": {
+          "minimum": 0,
+          "title": "Terminal Attempts",
+          "type": "integer"
+        },
+        "terminal_non_success_attempts": {
+          "minimum": 0,
+          "title": "Terminal Non Success Attempts",
+          "type": "integer"
+        },
+        "tool_calls": {
+          "minimum": 0,
+          "title": "Tool Calls",
+          "type": "integer"
+        },
+        "total_sample_count": {
+          "minimum": 0,
+          "title": "Total Sample Count",
+          "type": "integer"
+        },
+        "unavailable_cost_attempts": {
+          "minimum": 0,
+          "title": "Unavailable Cost Attempts",
+          "type": "integer"
+        },
+        "work_units": {
+          "minimum": 0,
+          "title": "Work Units",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "scope",
+        "scope_id",
+        "work_units",
+        "terminal_attempts",
+        "succeeded_attempts",
+        "retryable_attempts",
+        "terminal_non_success_attempts",
+        "cancelled_attempts",
+        "retry_attempts",
+        "resume_attempts",
+        "model_requests",
+        "input_tokens",
+        "output_tokens",
+        "cache_creation_input_tokens",
+        "cache_read_input_tokens",
+        "charged_tokens",
+        "reported_usage_attempts",
+        "conservative_usage_attempts",
+        "cache_hit_attempts",
+        "cache_miss_attempts",
+        "cache_unavailable_attempts",
+        "process_starts",
+        "renderer_operations",
+        "network_requests",
+        "retained_storage_bytes",
+        "tool_calls",
+        "reported_cost_microusd",
+        "unavailable_cost_attempts",
+        "backpressure_events",
+        "error_events",
+        "queue_wait_sample_count",
+        "execution_sample_count",
+        "total_sample_count"
+      ],
+      "title": "PipelineMetricSliceSummaryV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/pipeline_metrics_result_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attempt_limit": {
+      "maximum": 500,
+      "minimum": 1,
+      "title": "Attempt Limit",
+      "type": "integer"
+    },
+    "attempt_metrics_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Attempt Metrics Refs",
+      "type": "array"
+    },
+    "attempt_offset": {
+      "minimum": 0,
+      "title": "Attempt Offset",
+      "type": "integer"
+    },
+    "audit_outcome": {
+      "$ref": "#/$defs/BatchAuditOutcomeV2"
+    },
+    "finding_codes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/BatchAuditFindingCodeV2"
+      },
+      "title": "Finding Codes",
+      "type": "array"
+    },
+    "item_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Item Id"
+    },
+    "job_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Job Id",
+      "type": "string"
+    },
+    "metric_slices": {
+      "items": {
+        "$ref": "#/$defs/PipelineMetricSliceSummaryV2"
+      },
+      "title": "Metric Slices",
+      "type": "array"
+    },
+    "report_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/pipeline-metrics-result/v2",
+      "default": "eval-factory/pipeline-metrics-result/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "total_attempts": {
+      "minimum": 0,
+      "title": "Total Attempts",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "job_id",
+    "report_ref",
+    "audit_outcome",
+    "total_attempts",
+    "attempt_offset",
+    "attempt_limit",
+    "attempt_metrics_refs",
+    "metric_slices"
+  ],
+  "title": "PipelineMetricsResultV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cli_v2.PipelineMetricsResultV2",
+  "x-schema-version": "eval-factory/pipeline-metrics-result/v2"
+}

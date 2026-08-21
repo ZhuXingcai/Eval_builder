@@ -1,0 +1,417 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PredicateOperatorV2": {
+      "enum": [
+        "EXISTS",
+        "NOT_EXISTS",
+        "EQUALS",
+        "CONTAINS",
+        "REGEX",
+        "SEQUENCE",
+        "WITHIN_WINDOW",
+        "ERROR_SIGNATURE",
+        "NOT_ERROR_SIGNATURE"
+      ],
+      "title": "PredicateOperatorV2",
+      "type": "string"
+    },
+    "SemanticResidualSpecV2": {
+      "additionalProperties": false,
+      "properties": {
+        "abstain_conditions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Abstain Conditions",
+          "type": "array"
+        },
+        "allowed_evidence_types": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Allowed Evidence Types",
+          "type": "array"
+        },
+        "evidence_bundle_purpose": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Evidence Bundle Purpose",
+          "type": "string"
+        },
+        "model_profile": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Model Profile",
+          "type": "string"
+        },
+        "prompt_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "question": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Question",
+          "type": "string"
+        },
+        "residual_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Residual Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/semantic-residual-spec/v2",
+          "default": "eval-factory/semantic-residual-spec/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "residual_id",
+        "question",
+        "evidence_bundle_purpose",
+        "allowed_evidence_types",
+        "abstain_conditions",
+        "model_profile",
+        "prompt_version"
+      ],
+      "title": "SemanticResidualSpecV2",
+      "type": "object"
+    },
+    "StructuredPredicateV2": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Value"
+        },
+        "fact_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Fact Type",
+          "type": "string"
+        },
+        "field_path": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Field Path",
+          "type": "string"
+        },
+        "operator": {
+          "$ref": "#/$defs/PredicateOperatorV2"
+        },
+        "predicate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Predicate Id",
+          "type": "string"
+        },
+        "required_capability": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Required Capability",
+          "type": "string"
+        },
+        "rule_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Rule Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/structured-predicate/v2",
+          "default": "eval-factory/structured-predicate/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "window_events": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Window Events"
+        }
+      },
+      "required": [
+        "predicate_id",
+        "fact_type",
+        "field_path",
+        "operator",
+        "required_capability",
+        "rule_version"
+      ],
+      "title": "StructuredPredicateV2",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_spec_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "decision_threshold": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Decision Threshold",
+      "type": "number"
+    },
+    "label_plan_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "label_spec_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Label Spec Id",
+      "type": "string"
+    },
+    "label_spec_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Label Spec Sha256",
+      "type": "string"
+    },
+    "label_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Label Version",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 255,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "negative_predicates": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/StructuredPredicateV2"
+      },
+      "title": "Negative Predicates",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "positive_predicates": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/StructuredPredicateV2"
+      },
+      "title": "Positive Predicates",
+      "type": "array"
+    },
+    "prerequisite_predicates": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/StructuredPredicateV2"
+      },
+      "title": "Prerequisite Predicates",
+      "type": "array"
+    },
+    "requirement": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "title": "Requirement",
+      "type": "string"
+    },
+    "review_threshold": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Review Threshold",
+      "type": "number"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-spec/v2",
+      "default": "eval-factory/label-spec/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_residual": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SemanticResidualSpecV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "label_spec_id",
+    "label_version",
+    "name",
+    "requirement",
+    "decision_threshold",
+    "review_threshold",
+    "policy_version",
+    "label_spec_sha256",
+    "audit"
+  ],
+  "title": "LabelSpecV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.labeling_v2.LabelSpecV2",
+  "x-schema-version": "eval-factory/label-spec/v2"
+}

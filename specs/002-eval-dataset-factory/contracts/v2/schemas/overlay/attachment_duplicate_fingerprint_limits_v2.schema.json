@@ -1,0 +1,82 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_duplicate_fingerprint_limits_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "fingerprint_bits": {
+      "const": 256,
+      "title": "Fingerprint Bits",
+      "type": "integer"
+    },
+    "max_compression_ratio_milli": {
+      "maximum": 10000000,
+      "minimum": 1000,
+      "title": "Max Compression Ratio Milli",
+      "type": "integer"
+    },
+    "max_expanded_bytes": {
+      "maximum": 5000000000,
+      "minimum": 1,
+      "title": "Max Expanded Bytes",
+      "type": "integer"
+    },
+    "max_extracted_characters": {
+      "maximum": 10000000,
+      "minimum": 1,
+      "title": "Max Extracted Characters",
+      "type": "integer"
+    },
+    "max_file_bytes": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Max File Bytes",
+      "type": "integer"
+    },
+    "max_inventory_members": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Inventory Members",
+      "type": "integer"
+    },
+    "max_nested_depth": {
+      "maximum": 16,
+      "minimum": 1,
+      "title": "Max Nested Depth",
+      "type": "integer"
+    },
+    "min_token_count": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Min Token Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2",
+      "default": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shingle_size": {
+      "maximum": 16,
+      "minimum": 1,
+      "title": "Shingle Size",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "max_file_bytes",
+    "max_extracted_characters",
+    "max_inventory_members",
+    "max_nested_depth",
+    "max_expanded_bytes",
+    "max_compression_ratio_milli",
+    "min_token_count",
+    "shingle_size",
+    "fingerprint_bits"
+  ],
+  "title": "AttachmentDuplicateFingerprintLimitsV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.duplicate_v2.AttachmentDuplicateFingerprintLimitsV2",
+  "x-schema-version": "env-mock-agent/attachment-duplicate-fingerprint-limits/v2"
+}

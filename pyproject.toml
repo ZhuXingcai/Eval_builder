@@ -1,0 +1,110 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "env-mock-agent"
+version = "0.1.0"
+description = "Evidence-grounded, multi-runtime environment attachment generation agent."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Proprietary" }
+authors = [{ name = "Environment Mock Agent Team" }]
+dependencies = [
+  "aiosqlite>=0.20",
+  "anthropic>=0.80",
+  "claude-agent-sdk>=0.1.54",
+  "defusedxml>=0.7.1",
+  "faker>=37",
+  "filetype>=1.2",
+  "httpx>=0.28",
+  "jsonschema>=4.25",
+  "langgraph>=1.0",
+  "langgraph-checkpoint-sqlite>=3.0",
+  "openpyxl>=3.1",
+  "pandas>=2.3",
+  "pillow>=11",
+  "pydantic>=2.12",
+  "pymupdf>=1.26",
+  "pyarrow>=20",
+  "pypdf>=6",
+  "python-docx>=1.2",
+  "python-pptx>=1.0",
+  "pyyaml>=6.0",
+  "reportlab>=4.4",
+  "rich>=14",
+  "typer>=0.21",
+  "fastapi>=0.141.1",
+  "uvicorn>=0.51.0",
+]
+
+[project.optional-dependencies]
+documents = [
+  "docling>=2.100",
+  "faker-file[common]>=0.19",
+  "markitdown[all]>=0.1.4",
+]
+eval = [
+  "inspect-ai>=0.3",
+]
+dev = [
+  "hypothesis>=6.140",
+  "mypy>=1.17",
+  "playwright>=1.62.0",
+  "pytest>=8.4",
+  "pytest-asyncio>=1.1",
+  "pytest-cov>=6.2",
+  "ruff>=0.12",
+  "types-openpyxl",
+  "types-pyyaml>=6.0",
+  "types-reportlab",
+]
+
+[project.scripts]
+evalfactory = "eval_factory.cli:app"
+envmock = "env_mock_agent.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/env_mock_agent", "src/eval_factory"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+markers = [
+  "live_claude_cli: requires an authenticated Claude Code CLI",
+  "live_claude_sdk: requires ANTHROPIC_API_KEY",
+  "live_pi: requires configured Pi credentials",
+  "live_ark: requires ARK_API_KEY",
+  "slow: long-running integration or benchmark test",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 110
+src = ["src", "tests", "scripts"]
+exclude = [".trellis", ".trae"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "scripts"]
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.coverage.run]
+branch = true
+source = ["env_mock_agent"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

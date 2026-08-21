@@ -1,0 +1,88 @@
+{
+  "direct_evidence_authority": true,
+  "ownership_mode": "TARGET_ITEM_RELATION_BATCH",
+  "policy_version": "batch-quality/r7-03-v1",
+  "scenarios": [
+    {
+      "approvable": true,
+      "finding_count": 0,
+      "scenario_id": "clean"
+    },
+    {
+      "approvable": false,
+      "batch_finding_count": 1,
+      "blocked_item_count": 2,
+      "open_p1_count": 1,
+      "scenario_id": "exact-task"
+    },
+    {
+      "approvable": true,
+      "batch_finding_count": 1,
+      "blocked_item_count": 0,
+      "open_p2_count": 1,
+      "scenario_id": "near-task"
+    },
+    {
+      "approvable": true,
+      "batch_finding_count": 2,
+      "blocked_item_count": 0,
+      "open_p2_count": 2,
+      "scenario_id": "attachment-p2"
+    },
+    {
+      "approvable": false,
+      "blocked_item_count": 1,
+      "item_finding_count": 1,
+      "report_revision_count": 1,
+      "scenario_id": "directed-p0"
+    },
+    {
+      "approvable": false,
+      "blocked_item_count": 1,
+      "item_finding_count": 1,
+      "report_revision_count": 1,
+      "scenario_id": "directed-p1"
+    },
+    {
+      "approvable": false,
+      "batch_finding_count": 1,
+      "blocked_item_count": 2,
+      "open_p0_count": 1,
+      "scenario_id": "answer-reuse"
+    },
+    {
+      "approvable": false,
+      "blocked_item_count": 1,
+      "item_finding_count": 1,
+      "report_revision_count": 1,
+      "scenario_id": "single-item-lineage"
+    },
+    {
+      "approvable": false,
+      "batch_finding_count": 1,
+      "batch_lineage_check_count": 1,
+      "blocked_item_count": 2,
+      "scenario_id": "cross-item-lineage-alias"
+    },
+    {
+      "approvable": true,
+      "cluster_member_count": 3,
+      "direct_finding_count": 2,
+      "fabricated_finding_count": 0,
+      "scenario_id": "connected-transitive"
+    },
+    {
+      "expected_outcome": "REJECTED_SOURCE",
+      "scenario_id": "stale-source"
+    },
+    {
+      "expected_outcome": "REJECTED_BUDGET",
+      "scenario_id": "preflight-budget"
+    }
+  ],
+  "schema_version": "eval-factory/batch-quality-gold/r7-03-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/interaction_segment.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "boundary_method": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Boundary Method",
+      "type": "string"
+    },
+    "member_event_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Member Event Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/interaction-segment/v1",
+      "default": "eval-factory/interaction-segment/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "segment_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Segment Id",
+      "type": "string"
+    },
+    "sequence_end": {
+      "minimum": 0,
+      "title": "Sequence End",
+      "type": "integer"
+    },
+    "sequence_start": {
+      "minimum": 0,
+      "title": "Sequence Start",
+      "type": "integer"
+    },
+    "trace_ir_version_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Trace Ir Version Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "segment_id",
+    "trace_ir_version_id",
+    "boundary_method",
+    "sequence_start",
+    "sequence_end",
+    "member_event_refs"
+  ],
+  "title": "InteractionSegment",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.trace.InteractionSegment",
+  "x-schema-version": "eval-factory/interaction-segment/v1"
+}

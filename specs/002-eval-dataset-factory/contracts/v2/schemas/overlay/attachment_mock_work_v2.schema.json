@@ -1,0 +1,207 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_mock_work_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_check_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Acceptance Check Refs",
+      "type": "array"
+    },
+    "agent_role": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Agent Role",
+      "type": "string"
+    },
+    "allowed_tool_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Allowed Tool Ids",
+      "type": "array"
+    },
+    "artifact_group_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "artifact_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 100000,
+      "minItems": 1,
+      "title": "Artifact Ids",
+      "type": "array"
+    },
+    "data_classifications": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "title": "Data Classifications",
+      "type": "array"
+    },
+    "data_purposes": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "title": "Data Purposes",
+      "type": "array"
+    },
+    "dependency_work_keys": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 1000,
+      "title": "Dependency Work Keys",
+      "type": "array"
+    },
+    "input_object_types": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Input Object Types",
+      "type": "array"
+    },
+    "max_attempts": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Max Attempts",
+      "type": "integer"
+    },
+    "max_cost_micro_usd": {
+      "maximum": 1000000000000,
+      "minimum": 0,
+      "title": "Max Cost Micro Usd",
+      "type": "integer"
+    },
+    "max_model_requests": {
+      "maximum": 1000000,
+      "minimum": 0,
+      "title": "Max Model Requests",
+      "type": "integer"
+    },
+    "max_model_tokens": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Max Model Tokens",
+      "type": "integer"
+    },
+    "output_object_types": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Output Object Types",
+      "type": "array"
+    },
+    "required_capability_ids": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Required Capability Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/attachment-mock-work/v2",
+      "default": "eval-factory/attachment-mock-work/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "work_key": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Work Key",
+      "type": "string"
+    },
+    "workspace_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "work_key",
+    "artifact_group_ref",
+    "artifact_ids",
+    "agent_role",
+    "input_object_types",
+    "output_object_types",
+    "required_capability_ids",
+    "allowed_tool_ids",
+    "data_purposes",
+    "data_classifications",
+    "workspace_policy_ref",
+    "acceptance_check_refs",
+    "max_attempts",
+    "max_model_requests",
+    "max_model_tokens",
+    "max_cost_micro_usd"
+  ],
+  "title": "AttachmentMockWorkV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.agent_system_v2.AttachmentMockWorkV2",
+  "x-schema-version": "eval-factory/attachment-mock-work/v2"
+}

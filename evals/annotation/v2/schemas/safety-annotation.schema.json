@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "answer_leakage": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "INDETERMINATE"
+          ]
+        },
+        "expected_package_disposition": {
+          "enum": [
+            "ALLOW",
+            "NEEDS_REVIEW",
+            "QUARANTINE",
+            "REJECT"
+          ]
+        },
+        "inventory_provenance_equality": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_EVALUATED"
+          ]
+        },
+        "known_output_contamination": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "INDETERMINATE"
+          ]
+        },
+        "non_waivable_blockers": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "subject_decisions": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "content_risk_labels": {
+                "items": {
+                  "enum": [
+                    "ANSWER_BEARING",
+                    "HIDDEN_PASS_CONDITION",
+                    "SECRET",
+                    "RESTRICTED_PII",
+                    "PROMPT_INJECTION",
+                    "UNSCANNABLE_CONTENT"
+                  ]
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "disposition": {
+                "enum": [
+                  "ALLOW_INPUT_EVIDENCE",
+                  "ALLOW_STRUCTURE_ONLY",
+                  "ALLOW_EXTERNAL_LEAD_ONLY",
+                  "NEEDS_REVIEW",
+                  "QUARANTINE",
+                  "REJECT"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "file_version_stage": {
+                "enum": [
+                  "V0_PRE_MUTATION",
+                  "POST_MUTATION",
+                  "UNKNOWN",
+                  "NOT_FILE"
+                ]
+              },
+              "non_waivable": {
+                "type": "boolean"
+              },
+              "origin_class": {
+                "enum": [
+                  "USER_SUPPLIED_INPUT",
+                  "PREEXISTING_WORKSPACE_INPUT",
+                  "SYSTEM_OR_HARNESS_CONTEXT",
+                  "AGENT_RETRIEVED_EXTERNAL",
+                  "AGENT_GENERATED_INTERMEDIATE",
+                  "AGENT_GENERATED_FINAL",
+                  "UNKNOWN"
+                ]
+              },
+              "subject_ref": {
+                "maxLength": 512,
+                "minLength": 3,
+                "type": "string"
+              },
+              "taint_labels": {
+                "items": {
+                  "enum": [
+                    "FINAL_OUTPUT_DERIVED",
+                    "PRIVATE_REFERENCE_DERIVED",
+                    "GRADER_RULE_DERIVED",
+                    "UNKNOWN_DERIVATION",
+                    "SENSITIVE_SOURCE_DERIVED",
+                    "UNTRUSTED_INSTRUCTION_DERIVED"
+                  ]
+                },
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "subject_ref",
+              "file_version_stage",
+              "origin_class",
+              "taint_labels",
+              "content_risk_labels",
+              "disposition",
+              "non_waivable",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "subject_decisions",
+        "known_output_contamination",
+        "answer_leakage",
+        "inventory_provenance_equality",
+        "expected_package_disposition",
+        "non_waivable_blockers"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/safety-annotation.schema.json",
+  "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/annotationRecord",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "annotation_type": {
+      "const": "SAFETY"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "title": "Eval Factory Safety Annotation v2"
+}

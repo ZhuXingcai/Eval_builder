@@ -1,0 +1,287 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "RealTraceStabilityCategoryCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "count": {
+          "maximum": 100000,
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/real-trace-stability-category-count/v2",
+          "default": "eval-factory/real-trace-stability-category-count/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "count"
+      ],
+      "title": "RealTraceStabilityCategoryCountV2",
+      "type": "object"
+    },
+    "RealTraceStabilitySampleStatusV2": {
+      "enum": [
+        "SUFFICIENT",
+        "INSUFFICIENT"
+      ],
+      "title": "RealTraceStabilitySampleStatusV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/real_trace_stability_corpus_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "category_counts": {
+      "items": {
+        "$ref": "#/$defs/RealTraceStabilityCategoryCountV2"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Category Counts",
+      "type": "array"
+    },
+    "corpus_summary_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Corpus Summary Id",
+      "type": "string"
+    },
+    "corpus_summary_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Corpus Summary Sha256",
+      "type": "string"
+    },
+    "eligible_unique_trace_count": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Eligible Unique Trace Count",
+      "type": "integer"
+    },
+    "maximum_raw_bytes": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Maximum Raw Bytes",
+      "type": "integer"
+    },
+    "minimum_raw_bytes": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Minimum Raw Bytes",
+      "type": "integer"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_version": {
+      "const": "real-trace-stability/r8-04-v1",
+      "default": "real-trace-stability/r8-04-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "private_inventory_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "required_unique_trace_count": {
+      "const": 100,
+      "default": 100,
+      "title": "Required Unique Trace Count",
+      "type": "integer"
+    },
+    "sample_status": {
+      "$ref": "#/$defs/RealTraceStabilitySampleStatusV2"
+    },
+    "schema_version": {
+      "const": "eval-factory/real-trace-stability-corpus-summary/v2",
+      "default": "eval-factory/real-trace-stability-corpus-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shortfall_count": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Shortfall Count",
+      "type": "integer"
+    },
+    "source_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "total_raw_bytes": {
+      "maximum": 1000000000000,
+      "minimum": 1,
+      "title": "Total Raw Bytes",
+      "type": "integer"
+    },
+    "unique_instance_count": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Unique Instance Count",
+      "type": "integer"
+    },
+    "unique_raw_hash_count": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Unique Raw Hash Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "corpus_summary_id",
+    "source_manifest_ref",
+    "policy_ref",
+    "private_inventory_ref",
+    "eligible_unique_trace_count",
+    "unique_instance_count",
+    "unique_raw_hash_count",
+    "shortfall_count",
+    "sample_status",
+    "total_raw_bytes",
+    "minimum_raw_bytes",
+    "maximum_raw_bytes",
+    "category_counts",
+    "corpus_summary_sha256",
+    "audit"
+  ],
+  "title": "RealTraceStabilityCorpusSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.real_trace_stability_v2.RealTraceStabilityCorpusSummaryV2",
+  "x-schema-version": "eval-factory/real-trace-stability-corpus-summary/v2"
+}

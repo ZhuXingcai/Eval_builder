@@ -1,0 +1,74 @@
+{
+  "schema_version": "eval-factory/concurrency-experiment-gold/v1",
+  "evidence_scope": "MECHANISM_VALIDATION_ONLY",
+  "policy_sha256": "35192e38dea35e8c0c2a90cfd8a91814cf5ee410e73cc323b7453a2bca4c981e",
+  "report_sha256": "372c2ae611864c9d4139b774b843830b02bd54496a5cf28db99ca16050710250",
+  "outcome": "NON_MODEL_RECOMMENDED",
+  "claim_scope": "CANARY_WORKER_STORAGE_ONLY",
+  "worker_levels": [
+    {
+      "worker_count": 1,
+      "median_throughput_millijobs_per_second": 100000,
+      "p95_case_latency_nanoseconds": 100,
+      "outcome": "ELIGIBLE"
+    },
+    {
+      "worker_count": 2,
+      "median_throughput_millijobs_per_second": 180000,
+      "p95_case_latency_nanoseconds": 110,
+      "outcome": "ELIGIBLE"
+    },
+    {
+      "worker_count": 4,
+      "median_throughput_millijobs_per_second": 195000,
+      "p95_case_latency_nanoseconds": 120,
+      "outcome": "ELIGIBLE"
+    },
+    {
+      "worker_count": 8,
+      "median_throughput_millijobs_per_second": 200000,
+      "p95_case_latency_nanoseconds": 140,
+      "outcome": "ELIGIBLE"
+    },
+    {
+      "worker_count": 16,
+      "median_throughput_millijobs_per_second": 199000,
+      "p95_case_latency_nanoseconds": 170,
+      "outcome": "ELIGIBLE"
+    }
+  ],
+  "recommendation": {
+    "recommendation_sha256": "3281a9d4ce27df55fe6fc3b45e6b0632c1ac4e230a57a438cfa876f09e9ea06a",
+    "recommended_worker_count": 2,
+    "recommended_storage_bytes_per_job": 25,
+    "recommended_storage_bytes_per_24_case_cohort": 600,
+    "reason": "BALANCED_KNEE",
+    "throughput_efficiency_basis_points": 9000,
+    "p95_baseline_limit_basis_points": 15000
+  },
+  "recovery": {
+    "probe_count": 24,
+    "faults_per_point": 6,
+    "fault_observed_count": 24,
+    "resume_success_count": 24,
+    "unexpected_retry_count": 0,
+    "duplicate_provider_fact_count": 0,
+    "exact_replay_stable": true
+  },
+  "availability": {
+    "model": "NOT_APPLICABLE",
+    "cache": "NOT_APPLICABLE",
+    "cost": "UNAVAILABLE",
+    "process": "UNAVAILABLE",
+    "renderer": "UNAVAILABLE",
+    "network": "UNAVAILABLE"
+  },
+  "authority": {
+    "satisfies_sc_012": false,
+    "satisfies_model_resource_policy": false,
+    "satisfies_operations_slo": false,
+    "authorizes_safety_or_privacy_approval": false,
+    "authorizes_attestation": false,
+    "authorizes_production_release": false
+  }
+}

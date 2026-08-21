@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/production_readiness_attestation.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approved_by": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Approved By",
+      "type": "array"
+    },
+    "attestation_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Attestation Id",
+      "type": "string"
+    },
+    "attestation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Attestation Sha256",
+      "type": "string"
+    },
+    "contract_manifest_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "operations_evidence_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "policy_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Policy Refs",
+      "type": "array"
+    },
+    "privacy_evidence_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "safety_evidence_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Schema Refs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/production-readiness-attestation/v1",
+      "default": "eval-factory/production-readiness-attestation/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stability_evidence_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "statistical_evidence_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "system_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "System Version",
+      "type": "string"
+    },
+    "valid_from": {
+      "format": "date-time",
+      "title": "Valid From",
+      "type": "string"
+    },
+    "valid_until": {
+      "format": "date-time",
+      "title": "Valid Until",
+      "type": "string"
+    }
+  },
+  "required": [
+    "attestation_id",
+    "system_version",
+    "contract_manifest_ref",
+    "policy_refs",
+    "schema_refs",
+    "statistical_evidence_ref",
+    "safety_evidence_ref",
+    "privacy_evidence_ref",
+    "stability_evidence_ref",
+    "operations_evidence_ref",
+    "approved_by",
+    "valid_from",
+    "valid_until",
+    "attestation_sha256"
+  ],
+  "title": "ProductionReadinessAttestation",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.release.ProductionReadinessAttestation",
+  "x-schema-version": "eval-factory/production-readiness-attestation/v1"
+}

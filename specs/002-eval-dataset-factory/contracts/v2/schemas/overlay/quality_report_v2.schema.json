@@ -1,0 +1,415 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ItemQualityFailureCodeV2": {
+      "enum": [
+        "PACKAGE_INVENTORY_MISSING",
+        "PACKAGE_INVENTORY_MISMATCH",
+        "PACKAGE_MEMBER_INVALID",
+        "PACKAGE_PATH_COLLISION",
+        "PACKAGE_CONTENT_HASH_MISSING",
+        "PACKAGE_HASH_MISMATCH",
+        "PROVENANCE_INCOMPLETE",
+        "PROVENANCE_UNSAFE",
+        "ENVIRONMENT_INCOMPLETE"
+      ],
+      "title": "ItemQualityFailureCodeV2",
+      "type": "string"
+    },
+    "ItemQualityOutcomeV2": {
+      "enum": [
+        "PASSED",
+        "REQUIRES_REPAIR",
+        "REJECTED",
+        "BLOCKED",
+        "UPSTREAM_INCOMPLETE"
+      ],
+      "title": "ItemQualityOutcomeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/quality_report_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_artifact_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Accepted Artifact Refs",
+      "type": "array"
+    },
+    "approvable": {
+      "title": "Approvable",
+      "type": "boolean"
+    },
+    "artifact_validation_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Artifact Validation Result Refs",
+      "type": "array"
+    },
+    "artifact_version_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Artifact Version Refs",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "candidate_inventory_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "candidate_revision_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "current_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Current Finding Refs",
+      "type": "array"
+    },
+    "deterministic_validation_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "environment_spec_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ItemQualityFailureCodeV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "final_package_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "input_state_only": {
+      "anyOf": [
+        {
+          "const": true,
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input State Only"
+    },
+    "open_p0_count": {
+      "minimum": 0,
+      "title": "Open P0 Count",
+      "type": "integer"
+    },
+    "open_p1_count": {
+      "minimum": 0,
+      "title": "Open P1 Count",
+      "type": "integer"
+    },
+    "outcome": {
+      "$ref": "#/$defs/ItemQualityOutcomeV2"
+    },
+    "output_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "package_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Sha256"
+    },
+    "policy_version": {
+      "const": "item-quality/r5-10-v1",
+      "default": "item-quality/r5-10-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "provenance_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "quality_report_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Quality Report Id",
+      "type": "string"
+    },
+    "quality_report_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Quality Report Sha256",
+      "type": "string"
+    },
+    "r4_task_contract_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "repair_plan_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Repair Plan Refs",
+      "type": "array"
+    },
+    "repair_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Repair Result Refs",
+      "type": "array"
+    },
+    "resolution_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Resolution Refs",
+      "type": "array"
+    },
+    "review_policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/quality-report/v2",
+      "default": "eval-factory/quality-report/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "semantic_round_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Semantic Round Result Refs",
+      "type": "array"
+    },
+    "semantic_workflow_result_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "source_deterministic_validation_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "stage_result_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Stage Result Refs",
+      "type": "array"
+    },
+    "stale_finding_refs": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Stale Finding Refs",
+      "type": "array"
+    },
+    "unresolved_non_waivable_count": {
+      "minimum": 0,
+      "title": "Unresolved Non Waivable Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "quality_report_id",
+    "r4_task_contract_set_ref",
+    "review_policy_ref",
+    "semantic_workflow_result_ref",
+    "candidate_revision_ref",
+    "deterministic_validation_ref",
+    "source_deterministic_validation_ref",
+    "outcome",
+    "open_p0_count",
+    "open_p1_count",
+    "unresolved_non_waivable_count",
+    "approvable",
+    "quality_report_sha256",
+    "audit"
+  ],
+  "title": "QualityReportV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.quality_v2.QualityReportV2",
+  "x-schema-version": "eval-factory/quality-report/v2"
+}

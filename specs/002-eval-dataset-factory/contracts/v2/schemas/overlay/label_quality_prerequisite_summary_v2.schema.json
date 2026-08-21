@@ -1,0 +1,164 @@
+{
+  "$defs": {
+    "LabelQualityPrerequisiteOutcomeV2": {
+      "enum": [
+        "FROZEN",
+        "STATISTICAL_GATE_PENDING"
+      ],
+      "title": "LabelQualityPrerequisiteOutcomeV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/label_quality_prerequisite_summary_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "access_receipt_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "available_semantic_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Available Semantic Count",
+      "type": "integer"
+    },
+    "dataset_manifest_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "dataset_version": {
+      "anyOf": [
+        {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Version"
+    },
+    "freeze_result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "material_verified": {
+      "title": "Material Verified",
+      "type": "boolean"
+    },
+    "outcome": {
+      "$ref": "#/$defs/LabelQualityPrerequisiteOutcomeV2"
+    },
+    "repository_evidence_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "required_semantic_count": {
+      "const": 100,
+      "default": 100,
+      "title": "Required Semantic Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/label-quality-prerequisite-summary/v2",
+      "default": "eval-factory/label-quality-prerequisite-summary/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_member_count": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Selected Member Count",
+      "type": "integer"
+    },
+    "shortage_count": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Shortage Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "outcome",
+    "selected_member_count",
+    "available_semantic_count",
+    "shortage_count",
+    "material_verified"
+  ],
+  "title": "LabelQualityPrerequisiteSummaryV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.label_quality_v2.LabelQualityPrerequisiteSummaryV2",
+  "x-schema-version": "eval-factory/label-quality-prerequisite-summary/v2"
+}

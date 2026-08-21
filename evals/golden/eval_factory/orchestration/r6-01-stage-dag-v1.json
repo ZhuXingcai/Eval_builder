@@ -1,0 +1,339 @@
+{
+  "cases": [
+    {
+      "approval_mode": "NONE",
+      "auto_added_stages": [
+        "safety"
+      ],
+      "case_id": "missing-label-prerequisite",
+      "edges": [
+        {
+          "depends_on": [],
+          "stage": "trace_index"
+        },
+        {
+          "depends_on": [
+            "trace_index"
+          ],
+          "stage": "safety"
+        },
+        {
+          "depends_on": [
+            "safety"
+          ],
+          "stage": "label"
+        }
+      ],
+      "enabled_checkpoints": [],
+      "policy_version": "dataset-job-stage-policy/r6-01-v1",
+      "requested_stages": [
+        "trace_index",
+        "label"
+      ],
+      "resolved_job_plan_sha256": "4afdb37233c00a7af357b4ada28b033765087069e7fd4dca2d2c41dc8f5f5d98",
+      "resolved_stages": [
+        "trace_index",
+        "safety",
+        "label"
+      ]
+    },
+    {
+      "approval_mode": "NONE",
+      "auto_added_stages": [
+        "safety",
+        "label",
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality"
+      ],
+      "case_id": "no-checkpoint-release",
+      "edges": [
+        {
+          "depends_on": [],
+          "stage": "trace_index"
+        },
+        {
+          "depends_on": [
+            "trace_index"
+          ],
+          "stage": "safety"
+        },
+        {
+          "depends_on": [
+            "safety"
+          ],
+          "stage": "label"
+        },
+        {
+          "depends_on": [
+            "label"
+          ],
+          "stage": "task_authoring"
+        },
+        {
+          "depends_on": [
+            "task_authoring"
+          ],
+          "stage": "attachment"
+        },
+        {
+          "depends_on": [
+            "attachment"
+          ],
+          "stage": "item_quality"
+        },
+        {
+          "depends_on": [
+            "item_quality"
+          ],
+          "stage": "batch_quality"
+        },
+        {
+          "depends_on": [
+            "batch_quality"
+          ],
+          "stage": "release"
+        }
+      ],
+      "enabled_checkpoints": [],
+      "policy_version": "dataset-job-stage-policy/r6-01-v1",
+      "requested_stages": [
+        "trace_index",
+        "release"
+      ],
+      "resolved_job_plan_sha256": "28ee7ec70732f79c685b959b040f5b24a9fc8a369bd49715f60fd48b338e1014",
+      "resolved_stages": [
+        "trace_index",
+        "safety",
+        "label",
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "release"
+      ]
+    },
+    {
+      "approval_mode": "PLAN_GATES",
+      "auto_added_stages": [
+        "safety",
+        "label",
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality"
+      ],
+      "case_id": "plan-gates-release",
+      "edges": [
+        {
+          "depends_on": [],
+          "stage": "trace_index"
+        },
+        {
+          "depends_on": [
+            "trace_index"
+          ],
+          "stage": "safety"
+        },
+        {
+          "depends_on": [
+            "safety"
+          ],
+          "stage": "label_plan"
+        },
+        {
+          "depends_on": [
+            "label_plan"
+          ],
+          "stage": "label"
+        },
+        {
+          "depends_on": [
+            "label"
+          ],
+          "stage": "task_rewrite_plan"
+        },
+        {
+          "depends_on": [
+            "task_rewrite_plan"
+          ],
+          "stage": "task_authoring"
+        },
+        {
+          "depends_on": [
+            "task_authoring"
+          ],
+          "stage": "environment_strategy"
+        },
+        {
+          "depends_on": [
+            "environment_strategy"
+          ],
+          "stage": "attachment"
+        },
+        {
+          "depends_on": [
+            "attachment"
+          ],
+          "stage": "item_quality"
+        },
+        {
+          "depends_on": [
+            "item_quality"
+          ],
+          "stage": "batch_quality"
+        },
+        {
+          "depends_on": [
+            "batch_quality"
+          ],
+          "stage": "release"
+        }
+      ],
+      "enabled_checkpoints": [
+        "ENVIRONMENT_STRATEGY",
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN"
+      ],
+      "policy_version": "dataset-job-stage-policy/r6-01-v1",
+      "requested_stages": [
+        "trace_index",
+        "label_plan",
+        "task_rewrite_plan",
+        "environment_strategy",
+        "release"
+      ],
+      "resolved_job_plan_sha256": "b42e1ea989baceb58c0f578272dfd1a745099f00e1133abea209c522b6577134",
+      "resolved_stages": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "release"
+      ]
+    },
+    {
+      "approval_mode": "PLAN_AND_FINAL",
+      "auto_added_stages": [
+        "safety",
+        "label",
+        "task_authoring",
+        "attachment",
+        "item_quality",
+        "batch_quality"
+      ],
+      "case_id": "plan-and-final-release",
+      "edges": [
+        {
+          "depends_on": [],
+          "stage": "trace_index"
+        },
+        {
+          "depends_on": [
+            "trace_index"
+          ],
+          "stage": "safety"
+        },
+        {
+          "depends_on": [
+            "safety"
+          ],
+          "stage": "label_plan"
+        },
+        {
+          "depends_on": [
+            "label_plan"
+          ],
+          "stage": "label"
+        },
+        {
+          "depends_on": [
+            "label"
+          ],
+          "stage": "task_rewrite_plan"
+        },
+        {
+          "depends_on": [
+            "task_rewrite_plan"
+          ],
+          "stage": "task_authoring"
+        },
+        {
+          "depends_on": [
+            "task_authoring"
+          ],
+          "stage": "environment_strategy"
+        },
+        {
+          "depends_on": [
+            "environment_strategy"
+          ],
+          "stage": "attachment"
+        },
+        {
+          "depends_on": [
+            "attachment"
+          ],
+          "stage": "item_quality"
+        },
+        {
+          "depends_on": [
+            "item_quality"
+          ],
+          "stage": "batch_quality"
+        },
+        {
+          "depends_on": [
+            "batch_quality"
+          ],
+          "stage": "final_dataset_review"
+        },
+        {
+          "depends_on": [
+            "final_dataset_review"
+          ],
+          "stage": "release"
+        }
+      ],
+      "enabled_checkpoints": [
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW",
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN"
+      ],
+      "policy_version": "dataset-job-stage-policy/r6-01-v1",
+      "requested_stages": [
+        "trace_index",
+        "label_plan",
+        "task_rewrite_plan",
+        "environment_strategy",
+        "final_dataset_review",
+        "release"
+      ],
+      "resolved_job_plan_sha256": "fd17966af16b7c6c9f5d166d7d766a70be04dd46356796cb94d7c6d07d9a2676",
+      "resolved_stages": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ]
+    }
+  ],
+  "claim_scope": "CANONICAL_STAGE_DAG_AND_RESOLVED_PLAN_ONLY",
+  "schema_version": "eval-factory/r6-01-stage-dag-gold/v1"
+}

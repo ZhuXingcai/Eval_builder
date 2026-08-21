@@ -1,0 +1,110 @@
+{
+  "answer_reuse_window_token_count": 8,
+  "classification_mode": "CATEGORY_EXACT",
+  "clustering_mode": "CONNECTED_COMPONENTS",
+  "direct_evidence_authority": true,
+  "normalization_version": "task-prompt-leakage-normalization/r4-04-v1",
+  "policy_version": "cross-item-safety/r7-02-v1",
+  "scenarios": [
+    {
+      "cluster_kind": "CONTAMINATION",
+      "direct_evidence_count": 1,
+      "expected_outcome": "MATCH",
+      "scenario_id": "prompt-contamination",
+      "surface": "PROMPT"
+    },
+    {
+      "cluster_kind": "LEAKAGE",
+      "direct_evidence_count": 1,
+      "expected_outcome": "MATCH",
+      "scenario_id": "prompt-leakage",
+      "surface": "PROMPT"
+    },
+    {
+      "cluster_kind": "CONTAMINATION",
+      "direct_evidence_count": 1,
+      "expected_outcome": "MATCH",
+      "scenario_id": "attachment-contamination",
+      "surface": "ATTACHMENT"
+    },
+    {
+      "cluster_kind": "LEAKAGE",
+      "direct_evidence_count": 1,
+      "expected_outcome": "MATCH",
+      "scenario_id": "attachment-leakage",
+      "surface": "ATTACHMENT"
+    },
+    {
+      "cluster_count": 0,
+      "direct_evidence_count": 0,
+      "expected_outcome": "CLEAN",
+      "scenario_id": "clean-unrelated"
+    },
+    {
+      "cluster_count": 0,
+      "direct_evidence_count": 0,
+      "expected_outcome": "CLEAN",
+      "scenario_id": "same-item-excluded"
+    },
+    {
+      "cluster_kind": "ANSWER_REUSE",
+      "direct_evidence_count": 1,
+      "expected_outcome": "MATCH",
+      "match_kind": "FULL_SOURCE",
+      "scenario_id": "full-answer-reuse"
+    },
+    {
+      "cluster_kind": "ANSWER_REUSE",
+      "direct_evidence_count": 1,
+      "expected_outcome": "MATCH",
+      "match_kind": "PARTIAL_WINDOWS",
+      "scenario_id": "partial-answer-reuse"
+    },
+    {
+      "direct_evidence_count": 0,
+      "expected_outcome": "CLEAN",
+      "scenario_id": "partial-below-window-count"
+    },
+    {
+      "direct_evidence_count": 0,
+      "expected_outcome": "CLEAN",
+      "scenario_id": "partial-below-coverage"
+    },
+    {
+      "cluster_kind": "ANSWER_REUSE",
+      "cluster_member_count": 3,
+      "direct_evidence_count": 2,
+      "expected_outcome": "MATCH",
+      "scenario_id": "connected-transitive",
+      "transitive_unobserved_pair_count": 1
+    },
+    {
+      "attachment_scan_count": 0,
+      "expected_outcome": "CLEAN",
+      "scenario_id": "no-attachment"
+    },
+    {
+      "expected_outcome": "BLOCKED",
+      "failure_code": "CONTAINER_UNSUPPORTED",
+      "scenario_id": "blocked-attachment"
+    },
+    {
+      "expected_outcome": "REJECTED_SOURCE",
+      "scenario_id": "stale-source"
+    },
+    {
+      "expected_outcome": "REJECTED_BUDGET",
+      "scenario_id": "preflight-budget"
+    }
+  ],
+  "schema_version": "eval-factory/batch-safety-gold/r7-02-v1",
+  "stable_hash_seeds": [
+    1,
+    321
+  ],
+  "strict_partial_rule": {
+    "minimum_shared_window_count_required": true,
+    "shorter_source_coverage_bps_required": true,
+    "single_window_never_sufficient": true
+  }
+}

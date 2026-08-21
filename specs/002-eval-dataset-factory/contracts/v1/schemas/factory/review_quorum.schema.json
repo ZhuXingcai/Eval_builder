@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ReviewQuorumStatus": {
+      "enum": [
+        "PENDING",
+        "SATISFIED",
+        "DENIED",
+        "STALE"
+      ],
+      "title": "ReviewQuorumStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v1/factory/review_quorum.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "aggregate_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Aggregate Sha256",
+      "type": "string"
+    },
+    "case_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Case Refs",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "quorum_group_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Quorum Group Id",
+      "type": "string"
+    },
+    "record_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "title": "Record Refs",
+      "type": "array"
+    },
+    "required_distinct_identities": {
+      "minimum": 1,
+      "title": "Required Distinct Identities",
+      "type": "integer"
+    },
+    "required_roles": {
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Required Roles",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/review-quorum/v1",
+      "default": "eval-factory/review-quorum/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ReviewQuorumStatus"
+    },
+    "subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "quorum_group_id",
+    "subject_ref",
+    "policy_version",
+    "required_roles",
+    "required_distinct_identities",
+    "case_refs",
+    "record_refs",
+    "status",
+    "aggregate_sha256"
+  ],
+  "title": "ReviewQuorum",
+  "type": "object",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.quality.ReviewQuorum",
+  "x-schema-version": "eval-factory/review-quorum/v1"
+}

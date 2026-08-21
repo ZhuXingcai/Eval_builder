@@ -1,0 +1,225 @@
+{
+  "$defs": {
+    "AttachmentRouteCandidateKind": {
+      "enum": [
+        "PROVIDER",
+        "RUNTIME"
+      ],
+      "title": "AttachmentRouteCandidateKind",
+      "type": "string"
+    },
+    "AttachmentRouteOutcome": {
+      "enum": [
+        "SELECTED_PROVIDER",
+        "SELECTED_RUNTIME",
+        "BLOCKED_CAPABILITY"
+      ],
+      "title": "AttachmentRouteOutcome",
+      "type": "string"
+    },
+    "AttachmentRouteSkipCode": {
+      "enum": [
+        "PROVIDER_PAYLOAD_MISSING",
+        "PROVIDER_UNSUPPORTED_ASSET_TYPE",
+        "PROVIDER_NOT_APPROVED",
+        "PROVIDER_UNAVAILABLE",
+        "PROVIDER_CAPABILITY_MISSING",
+        "PROVIDER_PROBE_FAILED",
+        "RUNTIME_NOT_REGISTERED",
+        "RUNTIME_UNAVAILABLE",
+        "RUNTIME_TOOL_MISSING",
+        "RUNTIME_RESUME_UNSUPPORTED",
+        "RUNTIME_PROBE_FAILED"
+      ],
+      "title": "AttachmentRouteSkipCode",
+      "type": "string"
+    },
+    "AttachmentRouteSkipV2": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "candidate_kind": {
+          "$ref": "#/$defs/AttachmentRouteCandidateKind"
+        },
+        "code": {
+          "$ref": "#/$defs/AttachmentRouteSkipCode"
+        },
+        "missing_capability_ids": {
+          "default": [],
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Missing Capability Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/attachment-route-skip/v2",
+          "default": "env-mock-agent/attachment-route-skip/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_kind",
+        "candidate_id",
+        "code"
+      ],
+      "title": "AttachmentRouteSkipV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_route_decision_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "capability_snapshot_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Capability Snapshot Sha256",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/AttachmentRouteOutcome"
+    },
+    "policy_version": {
+      "const": "artifact-routing/r5-05-v1",
+      "default": "artifact-routing/r5-05-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "probed_at": {
+      "format": "date-time",
+      "title": "Probed At",
+      "type": "string"
+    },
+    "route_decision_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Route Decision Id",
+      "type": "string"
+    },
+    "route_decision_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Route Decision Sha256",
+      "type": "string"
+    },
+    "route_request_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "satisfied_capability_ids": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/+-]{0,127}$",
+        "type": "string"
+      },
+      "title": "Satisfied Capability Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-route-decision/v2",
+      "default": "env-mock-agent/attachment-route-decision/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Id"
+    },
+    "selected_kind": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AttachmentRouteCandidateKind"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "selected_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Version"
+    },
+    "skipped": {
+      "items": {
+        "$ref": "#/$defs/AttachmentRouteSkipV2"
+      },
+      "title": "Skipped",
+      "type": "array"
+    }
+  },
+  "required": [
+    "route_decision_id",
+    "route_request_ref",
+    "outcome",
+    "satisfied_capability_ids",
+    "skipped",
+    "capability_snapshot_sha256",
+    "probed_at",
+    "route_decision_sha256"
+  ],
+  "title": "AttachmentRouteDecisionV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.routing_v2.AttachmentRouteDecisionV2",
+  "x-schema-version": "env-mock-agent/attachment-route-decision/v2"
+}

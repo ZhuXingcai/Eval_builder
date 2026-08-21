@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "capabilityStatus": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "MISSING",
+        "UNKNOWN"
+      ]
+    },
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "blocking_reason": {
+          "maxLength": 1000,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "call_result_expectations": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "call_ref": {
+                "maxLength": 255,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "relationship": {
+                "enum": [
+                  "PAIRED",
+                  "ORPHAN_CALL",
+                  "ORPHAN_RESULT",
+                  "AMBIGUOUS",
+                  "DUPLICATE_ID"
+                ]
+              },
+              "result_ref": {
+                "maxLength": 255,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "call_ref",
+              "result_ref",
+              "relationship",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "capability_truth": {
+          "additionalProperties": false,
+          "properties": {
+            "attachment_observations": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "call_result_pairing": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "conversation_events": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "file_timeline": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "final_response": {
+              "$ref": "#/$defs/capabilityStatus"
+            },
+            "tool_events": {
+              "$ref": "#/$defs/capabilityStatus"
+            }
+          },
+          "required": [
+            "conversation_events",
+            "tool_events",
+            "call_result_pairing",
+            "file_timeline",
+            "final_response",
+            "attachment_observations"
+          ],
+          "type": "object"
+        },
+        "event_expectations": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "event_type": {
+                "enum": [
+                  "user_text",
+                  "assistant_text",
+                  "system_context",
+                  "tool_call",
+                  "tool_result",
+                  "runtime_error",
+                  "continuation_marker",
+                  "attachment_reference"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "expected_count": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "event_type",
+              "expected_count",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "negative_predicate_capabilities": {
+          "items": {
+            "enum": [
+              "conversation_events",
+              "tool_events",
+              "call_result_pairing",
+              "file_timeline",
+              "final_response",
+              "attachment_observations"
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "parse_outcome": {
+          "enum": [
+            "STRICT",
+            "REPAIRED",
+            "PARTIAL",
+            "UNPARSEABLE"
+          ]
+        },
+        "repair_expectations": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "expected_outcome": {
+                "enum": [
+                  "APPLY",
+                  "REJECT",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "field": {
+                "enum": [
+                  "request",
+                  "response",
+                  "extra"
+                ]
+              },
+              "rule_id": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "semantic_critical": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "field",
+              "rule_id",
+              "expected_outcome",
+              "semantic_critical",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "source_span_accuracy": {
+          "enum": [
+            "EXACT",
+            "APPROXIMATE",
+            "MIXED",
+            "UNAVAILABLE"
+          ]
+        }
+      },
+      "required": [
+        "parse_outcome",
+        "capability_truth",
+        "repair_expectations",
+        "event_expectations",
+        "call_result_expectations",
+        "source_span_accuracy",
+        "negative_predicate_capabilities",
+        "blocking_reason"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/parser-annotation.schema.json",
+  "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/annotationRecord",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "annotation_type": {
+      "const": "PARSER"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "title": "Eval Factory Parser Annotation v2"
+}

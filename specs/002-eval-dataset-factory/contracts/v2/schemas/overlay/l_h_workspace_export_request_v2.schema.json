@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "LHWorkspaceExportMemberTypeV2": {
+      "enum": [
+        "DIRECTORY",
+        "FILE",
+        "NESTED_MEMBER"
+      ],
+      "title": "LHWorkspaceExportMemberTypeV2",
+      "type": "string"
+    },
+    "LHWorkspaceExportMemberV2": {
+      "additionalProperties": false,
+      "properties": {
+        "container_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FacadeObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "minLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "member_type": {
+          "$ref": "#/$defs/LHWorkspaceExportMemberTypeV2"
+        },
+        "normalized_path": {
+          "pattern": "^[A-Za-z0-9._ -][A-Za-z0-9._/ -]{0,511}$",
+          "title": "Normalized Path",
+          "type": "string"
+        },
+        "output_ref": {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/lh-workspace-export-member/v2",
+          "default": "env-mock-agent/lh-workspace-export-member/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 5000000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "normalized_path",
+        "member_type",
+        "size_bytes",
+        "output_ref"
+      ],
+      "title": "LHWorkspaceExportMemberV2",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/l_h_workspace_export_request_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "final_package_manifest_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Item Id",
+      "type": "string"
+    },
+    "max_compression_ratio": {
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Max Compression Ratio",
+      "type": "integer"
+    },
+    "max_file_bytes": {
+      "maximum": 5000000000,
+      "minimum": 1,
+      "title": "Max File Bytes",
+      "type": "integer"
+    },
+    "max_member_count": {
+      "maximum": 100000,
+      "minimum": 1,
+      "title": "Max Member Count",
+      "type": "integer"
+    },
+    "max_nested_depth": {
+      "maximum": 32,
+      "minimum": 1,
+      "title": "Max Nested Depth",
+      "type": "integer"
+    },
+    "max_total_bytes": {
+      "maximum": 5000000000,
+      "minimum": 1,
+      "title": "Max Total Bytes",
+      "type": "integer"
+    },
+    "members": {
+      "items": {
+        "$ref": "#/$defs/LHWorkspaceExportMemberV2"
+      },
+      "title": "Members",
+      "type": "array"
+    },
+    "output_refs": {
+      "items": {
+        "$ref": "#/$defs/FacadeObjectRef"
+      },
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "package_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "lh-release-export/r7-09-v1",
+      "default": "lh-release-export/r7-09-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "request_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/lh-workspace-export-request/v2",
+      "default": "env-mock-agent/lh-workspace-export-request/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "item_id",
+    "final_package_manifest_ref",
+    "package_sha256",
+    "output_refs",
+    "members",
+    "max_member_count",
+    "max_total_bytes",
+    "max_file_bytes",
+    "max_nested_depth",
+    "max_compression_ratio",
+    "request_sha256"
+  ],
+  "title": "LHWorkspaceExportRequestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.release_export_v2.LHWorkspaceExportRequestV2",
+  "x-schema-version": "env-mock-agent/lh-workspace-export-request/v2"
+}

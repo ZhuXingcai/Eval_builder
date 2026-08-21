@@ -1,0 +1,62 @@
+{
+  "gold_version": "r5-08-deterministic-validation-v1",
+  "policy_version": "deterministic-validation/r5-08-v1",
+  "cases": [
+    {
+      "name": "not-required",
+      "r5_07_outcome": "NOT_REQUIRED",
+      "facade_outcomes": [],
+      "expected_outcome": "NOT_REQUIRED",
+      "expected_finding_codes": [],
+      "candidate_inventory": false
+    },
+    {
+      "name": "clean-candidate",
+      "r5_07_outcome": "PENDING_VALIDATION",
+      "facade_outcomes": ["PASSED"],
+      "expected_outcome": "PASSED",
+      "expected_finding_codes": [],
+      "candidate_inventory": true
+    },
+    {
+      "name": "configured-pii-repair",
+      "r5_07_outcome": "PENDING_VALIDATION",
+      "facade_outcomes": ["FAILED"],
+      "expected_outcome": "REQUIRES_REPAIR",
+      "expected_finding_codes": ["CONFIGURED_PII_DETECTED"],
+      "candidate_inventory": true
+    },
+    {
+      "name": "restricted-fingerprint-reject",
+      "r5_07_outcome": "PENDING_VALIDATION",
+      "facade_outcomes": ["FAILED"],
+      "expected_outcome": "REJECTED",
+      "expected_finding_codes": ["RESTRICTED_FINGERPRINT_MATCH"],
+      "candidate_inventory": true
+    },
+    {
+      "name": "nested-container-block",
+      "r5_07_outcome": "PENDING_VALIDATION",
+      "facade_outcomes": ["BLOCKED"],
+      "expected_outcome": "BLOCKED",
+      "expected_failure_code": "CONTAINER_ENCRYPTED",
+      "candidate_inventory": false
+    },
+    {
+      "name": "upstream-partial",
+      "r5_07_outcome": "PARTIAL_FAILURE",
+      "facade_outcomes": ["PASSED"],
+      "expected_outcome": "UPSTREAM_INCOMPLETE",
+      "expected_finding_codes": [],
+      "candidate_inventory": true
+    }
+  ],
+  "downstream_boundary": {
+    "accepted_artifact_refs": [],
+    "environment_spec_ref": null,
+    "provenance_manifest_ref": null,
+    "quality_report_ref": null,
+    "package_sha256": null,
+    "input_state_only": null
+  }
+}

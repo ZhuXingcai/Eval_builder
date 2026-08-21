@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "AttachmentValidationFindingCategoryV2": {
+      "enum": [
+        "STRUCTURE",
+        "COVERAGE",
+        "EXECUTABILITY",
+        "SECURITY",
+        "PRIVACY",
+        "ANSWER_LEAKAGE",
+        "METADATA",
+        "PACKAGE",
+        "TRACEABILITY"
+      ],
+      "title": "AttachmentValidationFindingCategoryV2",
+      "type": "string"
+    },
+    "AttachmentValidationFindingCodeV2": {
+      "enum": [
+        "OUTPUT_EMPTY",
+        "FORMAT_INVALID",
+        "CONTENT_CONTRACT_VIOLATION",
+        "RENDER_CONTRACT_VIOLATION",
+        "SECRET_DETECTED",
+        "CONFIGURED_PII_DETECTED",
+        "RESTRICTED_FINGERPRINT_MATCH",
+        "FORBIDDEN_OUTPUT_MATCH",
+        "METADATA_POLICY_VIOLATION",
+        "LINEAGE_INCOMPLETE"
+      ],
+      "title": "AttachmentValidationFindingCodeV2",
+      "type": "string"
+    },
+    "AttachmentValidationSeverityV2": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "title": "AttachmentValidationSeverityV2",
+      "type": "string"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_validation_finding_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "category": {
+      "$ref": "#/$defs/AttachmentValidationFindingCategoryV2"
+    },
+    "code": {
+      "$ref": "#/$defs/AttachmentValidationFindingCodeV2"
+    },
+    "finding_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Finding Id",
+      "type": "string"
+    },
+    "finding_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Finding Sha256",
+      "type": "string"
+    },
+    "inventory_member_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inventory Member Id"
+    },
+    "matched_fingerprint_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Matched Fingerprint Ids",
+      "type": "array"
+    },
+    "non_waivable": {
+      "title": "Non Waivable",
+      "type": "boolean"
+    },
+    "rule_ids": {
+      "default": [],
+      "items": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+        "type": "string"
+      },
+      "title": "Rule Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-validation-finding/v2",
+      "default": "env-mock-agent/attachment-validation-finding/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "severity": {
+      "$ref": "#/$defs/AttachmentValidationSeverityV2"
+    },
+    "subject_output_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    }
+  },
+  "required": [
+    "finding_id",
+    "artifact_id",
+    "subject_output_ref",
+    "severity",
+    "category",
+    "code",
+    "non_waivable",
+    "finding_sha256"
+  ],
+  "title": "AttachmentValidationFindingV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.validation_v2.AttachmentValidationFindingV2",
+  "x-schema-version": "env-mock-agent/attachment-validation-finding/v2"
+}

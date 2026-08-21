@@ -1,0 +1,98 @@
+{
+  "schema_version": "eval-factory/concurrency-experiment-policy/v2",
+  "policy_id": "concurrency-experiment-policy://sha256/35192e38dea35e8c0c2a90cfd8a91814cf5ee410e73cc323b7453a2bca4c981e",
+  "canary_regression_report_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "canary-regression-report",
+    "object_id": "canary-regression-report://sha256/375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f",
+    "object_version": "v2",
+    "object_sha256": "375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f"
+  },
+  "real_trace_stability_report_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "real-trace-stability-report",
+    "object_id": "real-trace-stability-report://sha256/730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f",
+    "object_version": "v2",
+    "object_sha256": "730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f"
+  },
+  "scheduler_load_report_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "scheduler-load-report",
+    "object_id": "scheduler-load-report://sha256/52061b69b7b418874709bddc71450111680e7931f4e04a337103b34b9f379bac",
+    "object_version": "v2",
+    "object_sha256": "52061b69b7b418874709bddc71450111680e7931f4e04a337103b34b9f379bac"
+  },
+  "cohort_manifest_ref": {
+    "schema_version": "eval-factory/object-ref/v1",
+    "object_type": "development-canary-manifest",
+    "object_id": "development-canary-manifest://v4",
+    "object_version": "v4",
+    "object_sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+  },
+  "worker_levels": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "trial_count_per_level": 3,
+  "case_count_per_trial": 24,
+  "recovery_probe_count": 24,
+  "fault_points": [
+    "BEFORE_HANDLER",
+    "AFTER_OBJECT_PERSISTENCE",
+    "BEFORE_LEASE_COMPLETION",
+    "AFTER_LEASE_COMPLETION"
+  ],
+  "throughput_efficiency_basis_points": 9000,
+  "p95_baseline_limit_basis_points": 15000,
+  "max_capacity_readmissions": 24,
+  "max_private_bytes": 1000000000,
+  "max_report_bytes": 100000000,
+  "policy_version": "concurrency-experiment/r8-06-v1",
+  "policy_sha256": "35192e38dea35e8c0c2a90cfd8a91814cf5ee410e73cc323b7453a2bca4c981e",
+  "audit": {
+    "schema_version": "eval-factory/contract-audit/v1",
+    "created_at": "2026-08-03T00:00:00Z",
+    "created_by": "r8-06-concurrency-experiment",
+    "governing_versions": [
+      {
+        "schema_version": "eval-factory/version-binding/v1",
+        "component": "concurrency-experiment",
+        "version": "concurrency-experiment/r8-06-v1",
+        "sha256": null
+      }
+    ],
+    "input_refs": [
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "canary-regression-report",
+        "object_id": "canary-regression-report://sha256/375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f",
+        "object_version": "v2",
+        "object_sha256": "375b519dc3b40d3c8aab09d9a04574deca73ec80138c2fcaa2f1714eb1edbd4f"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "development-canary-manifest",
+        "object_id": "development-canary-manifest://v4",
+        "object_version": "v4",
+        "object_sha256": "1a409bbb92ef0fc075d8dd2144f36cfd5829976ab6718c20db3a8e9f2d61a6a6"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "real-trace-stability-report",
+        "object_id": "real-trace-stability-report://sha256/730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f",
+        "object_version": "v2",
+        "object_sha256": "730f151435d2472cfe456e9df350c2663e8702951bd1eb1e8f0dcb45b315374f"
+      },
+      {
+        "schema_version": "eval-factory/object-ref/v1",
+        "object_type": "scheduler-load-report",
+        "object_id": "scheduler-load-report://sha256/52061b69b7b418874709bddc71450111680e7931f4e04a337103b34b9f379bac",
+        "object_version": "v2",
+        "object_sha256": "52061b69b7b418874709bddc71450111680e7931f4e04a337103b34b9f379bac"
+      }
+    ]
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ToolDenyReasonV2": {
+      "enum": [
+        "NOT_REQUIRED",
+        "CATALOG_POLICY_DENIED"
+      ],
+      "title": "ToolDenyReasonV2",
+      "type": "string"
+    },
+    "ToolFamily": {
+      "enum": [
+        "file_read",
+        "file_write",
+        "file_edit",
+        "file_list",
+        "search",
+        "fetch",
+        "shell",
+        "code_execution",
+        "user_interaction",
+        "subagent",
+        "task_management",
+        "unknown"
+      ],
+      "title": "ToolFamily",
+      "type": "string"
+    },
+    "ToolRuleActionV2": {
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ],
+      "title": "ToolRuleActionV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/tool_rule_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/ToolRuleActionV2"
+    },
+    "capability_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "constraint_profile_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "deny_reason": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ToolDenyReasonV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "enforcement_profile_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "rule_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "rule_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Rule Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/tool-rule/v2",
+      "default": "eval-factory/tool-rule/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_family": {
+      "$ref": "#/$defs/ToolFamily"
+    },
+    "tool_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Tool Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "rule_id",
+    "tool_id",
+    "tool_family",
+    "action",
+    "capability_ref",
+    "enforcement_profile_ref",
+    "constraint_profile_ref",
+    "rule_sha256"
+  ],
+  "title": "ToolRuleV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.task_v2.ToolRuleV2",
+  "x-schema-version": "eval-factory/tool-rule/v2"
+}

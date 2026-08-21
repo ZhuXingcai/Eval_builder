@@ -1,0 +1,253 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "ResolvedStageNodeV2": {
+      "additionalProperties": false,
+      "properties": {
+        "depends_on": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/StageNameV2"
+          },
+          "title": "Depends On",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/resolved-stage-node/v2",
+          "default": "eval-factory/resolved-stage-node/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stage": {
+          "$ref": "#/$defs/StageNameV2"
+        }
+      },
+      "required": [
+        "stage"
+      ],
+      "title": "ResolvedStageNodeV2",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/resolved_dataset_job_plan_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "auto_added_stages": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/StageNameV2"
+      },
+      "title": "Auto Added Stages",
+      "type": "array"
+    },
+    "dataset_job_spec_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/ResolvedStageNodeV2"
+      },
+      "minItems": 1,
+      "title": "Nodes",
+      "type": "array"
+    },
+    "policy_version": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "requested_stages": {
+      "items": {
+        "$ref": "#/$defs/StageNameV2"
+      },
+      "minItems": 1,
+      "title": "Requested Stages",
+      "type": "array"
+    },
+    "resolved_job_plan_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Resolved Job Plan Id",
+      "type": "string"
+    },
+    "resolved_job_plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resolved Job Plan Sha256",
+      "type": "string"
+    },
+    "resolved_stages": {
+      "items": {
+        "$ref": "#/$defs/StageNameV2"
+      },
+      "minItems": 1,
+      "title": "Resolved Stages",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "eval-factory/resolved-dataset-job-plan/v2",
+      "default": "eval-factory/resolved-dataset-job-plan/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "resolved_job_plan_id",
+    "dataset_job_spec_ref",
+    "requested_stages",
+    "resolved_stages",
+    "nodes",
+    "policy_version",
+    "resolved_job_plan_sha256",
+    "audit"
+  ],
+  "title": "ResolvedDatasetJobPlanV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.orchestration_v2.ResolvedDatasetJobPlanV2",
+  "x-schema-version": "eval-factory/resolved-dataset-job-plan/v2"
+}

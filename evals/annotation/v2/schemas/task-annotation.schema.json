@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_tools": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "attachment_dependencies": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "criticality": {
+                "enum": [
+                  "CRITICAL",
+                  "REQUIRED",
+                  "OPTIONAL"
+                ]
+              },
+              "dependency_ref": {
+                "maxLength": 255,
+                "minLength": 3,
+                "type": "string"
+              },
+              "description": {
+                "maxLength": 2000,
+                "minLength": 1,
+                "type": "string"
+              },
+              "evidence_priority": {
+                "enum": [
+                  "DIRECT_OBSERVATION",
+                  "EXPLICIT_REQUIREMENT",
+                  "INFERRED_DEPENDENCY"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              }
+            },
+            "required": [
+              "dependency_ref",
+              "description",
+              "criticality",
+              "evidence_priority",
+              "evidence_ref_ids"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "evaluation_claim": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "forbidden_outputs": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "required_capabilities": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "requirement_lineage": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "conflict_status": {
+                "enum": [
+                  "NONE",
+                  "RESOLVED_BY_HIGHER_PRIORITY",
+                  "UNRESOLVED"
+                ]
+              },
+              "evidence_priority": {
+                "enum": [
+                  "DIRECT_OBSERVATION",
+                  "EXPLICIT_REQUIREMENT",
+                  "INFERRED_DEPENDENCY"
+                ]
+              },
+              "evidence_ref_ids": {
+                "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+              },
+              "requirement_id": {
+                "maxLength": 128,
+                "minLength": 3,
+                "type": "string"
+              },
+              "statement": {
+                "maxLength": 4000,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "requirement_id",
+              "statement",
+              "evidence_priority",
+              "evidence_ref_ids",
+              "conflict_status"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "selection_firewall": {
+          "additionalProperties": false,
+          "properties": {
+            "completed_deliverable_excluded": {
+              "type": "boolean"
+            },
+            "final_answer_excluded": {
+              "type": "boolean"
+            },
+            "grader_rules_excluded": {
+              "type": "boolean"
+            },
+            "hidden_selection_signals_excluded": {
+              "type": "boolean"
+            },
+            "private_reference_excluded": {
+              "type": "boolean"
+            },
+            "trajectory_specific_steps_excluded": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "final_answer_excluded",
+            "completed_deliverable_excluded",
+            "private_reference_excluded",
+            "grader_rules_excluded",
+            "hidden_selection_signals_excluded",
+            "trajectory_specific_steps_excluded"
+          ],
+          "type": "object"
+        },
+        "task_episode_refs": {
+          "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/stringSet"
+        },
+        "task_intent": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "task_status": {
+          "enum": [
+            "USABLE",
+            "NEEDS_REVIEW",
+            "BLOCKED"
+          ]
+        },
+        "visible_prompt": {
+          "maxLength": 20000,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_episode_refs",
+        "visible_prompt",
+        "task_intent",
+        "evaluation_claim",
+        "required_capabilities",
+        "allowed_tools",
+        "forbidden_outputs",
+        "attachment_dependencies",
+        "requirement_lineage",
+        "selection_firewall",
+        "task_status"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/annotation/v2/task-annotation.schema.json",
+  "$ref": "https://schemas.eval-factory.local/annotation/v2/common.schema.json#/$defs/annotationRecord",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "annotation_type": {
+      "const": "TASK"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "title": "Eval Factory Task Annotation v2"
+}

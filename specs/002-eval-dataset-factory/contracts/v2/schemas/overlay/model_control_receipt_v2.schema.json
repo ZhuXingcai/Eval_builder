@@ -1,0 +1,367 @@
+{
+  "$defs": {
+    "ExecutionTelemetryV2": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "duration_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration Us"
+        },
+        "execution_telemetry_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Execution Telemetry Id",
+          "type": "string"
+        },
+        "execution_telemetry_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Execution Telemetry Sha256",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "execution-telemetry/r6-06-v1",
+          "default": "execution-telemetry/r6-06-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "reported_cost": {
+          "$ref": "#/$defs/ReportedCostV2"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/execution-telemetry/v2",
+          "default": "env-mock-agent/execution-telemetry/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "tool_availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "tool_family_counts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ToolFamilyCountV2"
+          },
+          "title": "Tool Family Counts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "execution_telemetry_id",
+        "duration_availability",
+        "tool_availability",
+        "reported_cost",
+        "observed_at",
+        "execution_telemetry_sha256"
+      ],
+      "title": "ExecutionTelemetryV2",
+      "type": "object"
+    },
+    "FacadeObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "FacadeObjectRef",
+      "type": "object"
+    },
+    "ModelControlReceiptOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BACKPRESSURED",
+        "BLOCKED_POLICY",
+        "BLOCKED_CAPABILITY",
+        "FAILED"
+      ],
+      "title": "ModelControlReceiptOutcomeV2",
+      "type": "string"
+    },
+    "ModelControlUsageSourceV2": {
+      "enum": [
+        "REPORTED",
+        "CONSERVATIVE_ALLOWANCE"
+      ],
+      "title": "ModelControlUsageSourceV2",
+      "type": "string"
+    },
+    "ModelControlUsageV2": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_creation_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Creation Input Tokens",
+          "type": "integer"
+        },
+        "cache_read_input_tokens": {
+          "minimum": 0,
+          "title": "Cache Read Input Tokens",
+          "type": "integer"
+        },
+        "charged_tokens": {
+          "minimum": 0,
+          "title": "Charged Tokens",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "requests": {
+          "minimum": 0,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "env-mock-agent/model-control-usage/v2",
+          "default": "env-mock-agent/model-control-usage/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ModelControlUsageSourceV2"
+        }
+      },
+      "required": [
+        "requests",
+        "input_tokens",
+        "output_tokens",
+        "cache_creation_input_tokens",
+        "cache_read_input_tokens",
+        "charged_tokens",
+        "source"
+      ],
+      "title": "ModelControlUsageV2",
+      "type": "object"
+    },
+    "ReportedCostV2": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_microusd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Microusd"
+        },
+        "availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "currency": {
+          "const": "USD",
+          "default": "USD",
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "const": "HALF_EVEN_MICRO_USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding"
+        }
+      },
+      "required": [
+        "availability"
+      ],
+      "title": "ReportedCostV2",
+      "type": "object"
+    },
+    "TelemetryAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "DERIVED",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "TelemetryAvailabilityV2",
+      "type": "string"
+    },
+    "ToolFamilyCountV2": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "minimum": 1,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "tool_family": {
+          "$ref": "#/$defs/ToolFamilyV2"
+        }
+      },
+      "required": [
+        "tool_family",
+        "calls"
+      ],
+      "title": "ToolFamilyCountV2",
+      "type": "object"
+    },
+    "ToolFamilyV2": {
+      "enum": [
+        "FILE",
+        "SHELL",
+        "SEARCH",
+        "FETCH",
+        "RENDERER",
+        "OTHER"
+      ],
+      "title": "ToolFamilyV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/model_control_receipt_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "backpressure_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "descriptor_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "failure_code": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure Code"
+    },
+    "grant_ref": {
+      "$ref": "#/$defs/FacadeObjectRef"
+    },
+    "model_control_receipt_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Model Control Receipt Id",
+      "type": "string"
+    },
+    "model_control_receipt_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Model Control Receipt Sha256",
+      "type": "string"
+    },
+    "outcome": {
+      "$ref": "#/$defs/ModelControlReceiptOutcomeV2"
+    },
+    "policy_version": {
+      "const": "attachment-model-control/r6-03-v1",
+      "default": "attachment-model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "result_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FacadeObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "env-mock-agent/model-control-receipt/v2",
+      "default": "env-mock-agent/model-control-receipt/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "telemetry": {
+      "$ref": "#/$defs/ExecutionTelemetryV2"
+    },
+    "usage": {
+      "$ref": "#/$defs/ModelControlUsageV2"
+    }
+  },
+  "required": [
+    "model_control_receipt_id",
+    "descriptor_ref",
+    "grant_ref",
+    "outcome",
+    "usage",
+    "completed_at",
+    "telemetry",
+    "model_control_receipt_sha256"
+  ],
+  "title": "ModelControlReceiptV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.model_control_v2.ModelControlReceiptV2",
+  "x-schema-version": "env-mock-agent/model-control-receipt/v2"
+}

@@ -1,0 +1,158 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "OperationsSLOComparatorV2": {
+      "enum": [
+        "GREATER_THAN_OR_EQUAL",
+        "LESS_THAN_OR_EQUAL"
+      ],
+      "title": "OperationsSLOComparatorV2",
+      "type": "string"
+    },
+    "OperationsSLOMetricAvailabilityV2": {
+      "enum": [
+        "MEASURED",
+        "UNAVAILABLE",
+        "INSUFFICIENT_SAMPLE"
+      ],
+      "title": "OperationsSLOMetricAvailabilityV2",
+      "type": "string"
+    },
+    "OperationsSLOMetricNameV2": {
+      "enum": [
+        "THROUGHPUT_MILLIJOBS_PER_SECOND",
+        "P50_LATENCY_MICROSECONDS",
+        "P95_LATENCY_MICROSECONDS",
+        "MODEL_REQUESTS_PER_JOB_MILLI",
+        "COST_MICRO_USD_PER_JOB",
+        "QUEUE_WAIT_P95_MICROSECONDS",
+        "ERROR_RATE_BASIS_POINTS",
+        "RESUME_SUCCESS_BASIS_POINTS"
+      ],
+      "title": "OperationsSLOMetricNameV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/operations_s_l_o_metric_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "availability": {
+      "$ref": "#/$defs/OperationsSLOMetricAvailabilityV2"
+    },
+    "comparator": {
+      "$ref": "#/$defs/OperationsSLOComparatorV2"
+    },
+    "evidence_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "maxItems": 1000,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "meets_threshold": {
+      "title": "Meets Threshold",
+      "type": "boolean"
+    },
+    "metric": {
+      "$ref": "#/$defs/OperationsSLOMetricNameV2"
+    },
+    "observed_value": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed Value"
+    },
+    "required_sample_count": {
+      "maximum": 1000000000,
+      "minimum": 1,
+      "title": "Required Sample Count",
+      "type": "integer"
+    },
+    "sample_count": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "title": "Sample Count",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/operations-slo-metric/v2",
+      "default": "eval-factory/operations-slo-metric/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "threshold_value": {
+      "minimum": 0,
+      "title": "Threshold Value",
+      "type": "integer"
+    },
+    "unit": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Unit",
+      "type": "string"
+    }
+  },
+  "required": [
+    "metric",
+    "unit",
+    "comparator",
+    "threshold_value",
+    "sample_count",
+    "required_sample_count",
+    "availability",
+    "meets_threshold",
+    "evidence_refs"
+  ],
+  "title": "OperationsSLOMetricV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.production_readiness_review_v2.OperationsSLOMetricV2",
+  "x-schema-version": "eval-factory/operations-slo-metric/v2"
+}

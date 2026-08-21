@@ -1,0 +1,234 @@
+{
+  "$defs": {
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "WorkLeaseStateV2": {
+      "enum": [
+        "ACTIVE",
+        "SUCCEEDED",
+        "RETRYABLE_FAILURE",
+        "TERMINAL_FAILURE",
+        "EXPIRED",
+        "CANCELLED"
+      ],
+      "title": "WorkLeaseStateV2",
+      "type": "string"
+    },
+    "WorkReadinessV2": {
+      "enum": [
+        "READY",
+        "WAITING",
+        "BLOCKED_DEPENDENCY",
+        "SKIPPED_ITEM"
+      ],
+      "title": "WorkReadinessV2",
+      "type": "string"
+    },
+    "WorkRetryDecisionKindV2": {
+      "enum": [
+        "RETRY_SCHEDULED",
+        "EXHAUSTED"
+      ],
+      "title": "WorkRetryDecisionKindV2",
+      "type": "string"
+    },
+    "WorkUnitScopeV2": {
+      "enum": [
+        "JOB",
+        "ITEM",
+        "ARTIFACT_GROUP"
+      ],
+      "title": "WorkUnitScopeV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/pipeline_work_unit_status_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attempt_metrics_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "item_id": {
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Item Id"
+    },
+    "lease_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "lease_state": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/WorkLeaseStateV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "lease_version": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lease Version"
+    },
+    "readiness": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/WorkReadinessV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "readiness_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "retry_decision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/WorkRetryDecisionKindV2"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "retry_decision_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "eval-factory/pipeline-work-unit-status/v2",
+      "default": "eval-factory/pipeline-work-unit-status/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/WorkUnitScopeV2"
+    },
+    "stage": {
+      "$ref": "#/$defs/StageNameV2"
+    },
+    "work_unit_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    }
+  },
+  "required": [
+    "work_unit_ref",
+    "scope",
+    "stage"
+  ],
+  "title": "PipelineWorkUnitStatusV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cli_v2.PipelineWorkUnitStatusV2",
+  "x-schema-version": "eval-factory/pipeline-work-unit-status/v2"
+}

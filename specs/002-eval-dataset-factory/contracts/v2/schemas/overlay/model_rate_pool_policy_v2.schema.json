@@ -1,0 +1,218 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/model_rate_pool_policy_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_model_profile_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Allowed Model Profile Refs",
+      "type": "array"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "max_concurrent_requests": {
+      "minimum": 1,
+      "title": "Max Concurrent Requests",
+      "type": "integer"
+    },
+    "minimum_backpressure_seconds": {
+      "minimum": 1,
+      "title": "Minimum Backpressure Seconds",
+      "type": "integer"
+    },
+    "model_rate_pool_policy_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Model Rate Pool Policy Id",
+      "type": "string"
+    },
+    "model_rate_pool_policy_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Model Rate Pool Policy Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "model-control/r6-03-v1",
+      "default": "model-control/r6-03-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "provider_bucket_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "request_burst": {
+      "minimum": 1,
+      "title": "Request Burst",
+      "type": "integer"
+    },
+    "requests_per_minute": {
+      "minimum": 1,
+      "title": "Requests Per Minute",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "eval-factory/model-rate-pool-policy/v2",
+      "default": "eval-factory/model-rate-pool-policy/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "token_burst": {
+      "minimum": 1,
+      "title": "Token Burst",
+      "type": "integer"
+    },
+    "tokens_per_minute": {
+      "minimum": 1,
+      "title": "Tokens Per Minute",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "model_rate_pool_policy_id",
+    "provider_bucket_ref",
+    "allowed_model_profile_refs",
+    "requests_per_minute",
+    "tokens_per_minute",
+    "request_burst",
+    "token_burst",
+    "max_concurrent_requests",
+    "minimum_backpressure_seconds",
+    "model_rate_pool_policy_sha256",
+    "audit"
+  ],
+  "title": "ModelRatePoolPolicyV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.model_control_v2.ModelRatePoolPolicyV2",
+  "x-schema-version": "eval-factory/model-rate-pool-policy/v2"
+}

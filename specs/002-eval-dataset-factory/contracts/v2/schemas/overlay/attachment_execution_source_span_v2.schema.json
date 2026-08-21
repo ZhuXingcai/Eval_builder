@@ -1,0 +1,43 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_execution_source_span_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "approximate": {
+      "default": false,
+      "title": "Approximate",
+      "type": "boolean"
+    },
+    "raw_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-execution-source-span/v2",
+      "default": "env-mock-agent/attachment-execution-source-span/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_trace_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Trace Id",
+      "type": "string"
+    },
+    "span_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Span Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "span_id",
+    "source_trace_id",
+    "raw_sha256"
+  ],
+  "title": "AttachmentExecutionSourceSpanV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.execution_v2.AttachmentExecutionSourceSpanV2",
+  "x-schema-version": "env-mock-agent/attachment-execution-source-span/v2"
+}

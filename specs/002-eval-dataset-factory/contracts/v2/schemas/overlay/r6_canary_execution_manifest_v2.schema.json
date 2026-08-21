@@ -1,0 +1,815 @@
+{
+  "$defs": {
+    "ApprovalCheckpoint": {
+      "enum": [
+        "LABEL_PLAN",
+        "TASK_REWRITE_PLAN",
+        "ENVIRONMENT_STRATEGY",
+        "FINAL_DATASET_REVIEW"
+      ],
+      "title": "ApprovalCheckpoint",
+      "type": "string"
+    },
+    "ApprovalMode": {
+      "enum": [
+        "NONE",
+        "PLAN_GATES",
+        "FINAL_ONLY",
+        "PLAN_AND_FINAL",
+        "CUSTOM"
+      ],
+      "title": "ApprovalMode",
+      "type": "string"
+    },
+    "ConcurrencyLimit": {
+      "additionalProperties": false,
+      "properties": {
+        "artifacts_per_item": {
+          "minimum": 1,
+          "title": "Artifacts Per Item",
+          "type": "integer"
+        },
+        "items": {
+          "minimum": 1,
+          "title": "Items",
+          "type": "integer"
+        },
+        "model_requests": {
+          "minimum": 1,
+          "title": "Model Requests",
+          "type": "integer"
+        },
+        "network_requests": {
+          "minimum": 1,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 1,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 1,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/concurrency-limit/v1",
+          "default": "eval-factory/concurrency-limit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model_requests",
+        "processes",
+        "renderers",
+        "network_requests",
+        "artifacts_per_item",
+        "items"
+      ],
+      "title": "ConcurrencyLimit",
+      "type": "object"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "DatasetJobSpecV2": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_mode": {
+          "$ref": "#/$defs/ApprovalMode"
+        },
+        "approval_policy_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/ContractAudit"
+        },
+        "budget": {
+          "$ref": "#/$defs/ResourceBudget"
+        },
+        "concurrency": {
+          "$ref": "#/$defs/ConcurrencyLimit"
+        },
+        "enabled_checkpoints": {
+          "items": {
+            "$ref": "#/$defs/ApprovalCheckpoint"
+          },
+          "title": "Enabled Checkpoints",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "export_target": {
+          "$ref": "#/$defs/ExportTarget"
+        },
+        "idempotency_key": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "job_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Job Id",
+          "type": "string"
+        },
+        "model_profiles": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "type": "string"
+          },
+          "title": "Model Profiles",
+          "type": "array"
+        },
+        "privacy_profile": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Privacy Profile",
+          "type": "string"
+        },
+        "requested_stages": {
+          "items": {
+            "$ref": "#/$defs/StageNameV2"
+          },
+          "minItems": 1,
+          "title": "Requested Stages",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/dataset-job-spec/v2",
+          "default": "eval-factory/dataset-job-spec/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selection_spec_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "traces": {
+          "items": {
+            "$ref": "#/$defs/TraceSourceRef"
+          },
+          "minItems": 1,
+          "title": "Traces",
+          "type": "array"
+        }
+      },
+      "required": [
+        "job_id",
+        "traces",
+        "requested_stages",
+        "privacy_profile",
+        "budget",
+        "concurrency",
+        "approval_policy_ref",
+        "approval_mode",
+        "enabled_checkpoints",
+        "export_target",
+        "idempotency_key",
+        "audit"
+      ],
+      "title": "DatasetJobSpecV2",
+      "type": "object"
+    },
+    "ExportTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "enum": [
+            "CANARY",
+            "INTERNAL_REVIEW",
+            "PRODUCTION"
+          ],
+          "title": "Channel",
+          "type": "string"
+        },
+        "profile": {
+          "enum": [
+            "LH",
+            "GENERIC"
+          ],
+          "title": "Profile",
+          "type": "string"
+        },
+        "profile_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Profile Version",
+          "type": "string"
+        },
+        "registry": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Registry",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/export-target/v1",
+          "default": "eval-factory/export-target/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "profile",
+        "profile_version",
+        "channel",
+        "registry"
+      ],
+      "title": "ExportTarget",
+      "type": "object"
+    },
+    "NonModelResourceVectorV2": {
+      "additionalProperties": false,
+      "properties": {
+        "network_requests": {
+          "minimum": 0,
+          "title": "Network Requests",
+          "type": "integer"
+        },
+        "processes": {
+          "minimum": 0,
+          "title": "Processes",
+          "type": "integer"
+        },
+        "renderers": {
+          "minimum": 0,
+          "title": "Renderers",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/non-model-resource-vector/v2",
+          "default": "eval-factory/non-model-resource-vector/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "storage_bytes": {
+          "minimum": 0,
+          "title": "Storage Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "processes",
+        "renderers",
+        "network_requests",
+        "storage_bytes"
+      ],
+      "title": "NonModelResourceVectorV2",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PipelineControlConfigV2": {
+      "additionalProperties": false,
+      "properties": {
+        "heartbeat_extension_seconds": {
+          "minimum": 1,
+          "title": "Heartbeat Extension Seconds",
+          "type": "integer"
+        },
+        "lease_duration_seconds": {
+          "minimum": 1,
+          "title": "Lease Duration Seconds",
+          "type": "integer"
+        },
+        "max_attempts": {
+          "minimum": 1,
+          "title": "Max Attempts",
+          "type": "integer"
+        },
+        "policy_version": {
+          "const": "pipeline-cli/r6-07-v1",
+          "default": "pipeline-cli/r6-07-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "retry_delay_seconds": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Retry Delay Seconds",
+          "type": "array"
+        },
+        "retry_lease_expiry": {
+          "title": "Retry Lease Expiry",
+          "type": "boolean"
+        },
+        "schema_version": {
+          "const": "eval-factory/pipeline-control-config/v2",
+          "default": "eval-factory/pipeline-control-config/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lease_duration_seconds",
+        "heartbeat_extension_seconds",
+        "max_attempts",
+        "retry_delay_seconds",
+        "retry_lease_expiry"
+      ],
+      "title": "PipelineControlConfigV2",
+      "type": "object"
+    },
+    "R6CanaryControlPlaneV2": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_version": {
+          "const": "r6-canary-execution/r6-parent-v1",
+          "default": "r6-canary-execution/r6-parent-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "resource_capacity": {
+          "$ref": "#/$defs/NonModelResourceVectorV2"
+        },
+        "resource_domain_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "schema_version": {
+          "const": "eval-factory/r6-canary-control-plane/v2",
+          "default": "eval-factory/r6-canary-control-plane/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "worker_principal_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "worker_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Worker Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resource_domain_ref",
+        "resource_capacity",
+        "worker_principal_ref",
+        "worker_version"
+      ],
+      "title": "R6CanaryControlPlaneV2",
+      "type": "object"
+    },
+    "R6CanaryExpectedItemOutcomeV2": {
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED",
+        "FAILED"
+      ],
+      "title": "R6CanaryExpectedItemOutcomeV2",
+      "type": "string"
+    },
+    "R6CanaryObjectCodecV2": {
+      "enum": [
+        "STRUCTURED_FACT_SET",
+        "LABEL_SPEC",
+        "SEMANTIC_RESIDUAL_FIXTURE",
+        "TASK_EPISODE_FIXTURE",
+        "TASK_DRAFT_FIXTURE",
+        "TASK_PROMPT_SAFETY_FIXTURE",
+        "RUBRIC_GENERATION_FIXTURE",
+        "PROMPT_ONLY_DEPENDENCY_FIXTURE",
+        "SEMANTIC_REVIEW_POLICY",
+        "CANARY_ATTACHMENT_FIXTURE",
+        "CANARY_REVIEW_FIXTURE",
+        "TRACE_INDEX_OUTPUT",
+        "SAFETY_OUTPUT",
+        "LABEL_OUTPUT",
+        "TASK_AUTHORING_OUTPUT",
+        "ATTACHMENT_PREPARATION_OUTPUT",
+        "PROVIDER_OPERATION_OUTPUT",
+        "ARTIFACT_GROUP_OUTPUT",
+        "ATTACHMENT_OUTPUT",
+        "SEMANTIC_REVIEW_ROUND_OUTPUT",
+        "ITEM_QUALITY_OUTPUT"
+      ],
+      "title": "R6CanaryObjectCodecV2",
+      "type": "string"
+    },
+    "R6CanarySeedObjectV2": {
+      "additionalProperties": false,
+      "properties": {
+        "codec": {
+          "$ref": "#/$defs/R6CanaryObjectCodecV2"
+        },
+        "object_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "payload_json": {
+          "maxLength": 1048576,
+          "minLength": 2,
+          "title": "Payload Json",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/r6-canary-seed-object/v2",
+          "default": "eval-factory/r6-canary-seed-object/v2",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_ref",
+        "codec",
+        "payload_json"
+      ],
+      "title": "R6CanarySeedObjectV2",
+      "type": "object"
+    },
+    "R6CanaryTraceBindingV2": {
+      "additionalProperties": false,
+      "properties": {
+        "attachment_fixture_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Attachment Fixture Refs",
+          "type": "array"
+        },
+        "expected_outcome": {
+          "$ref": "#/$defs/R6CanaryExpectedItemOutcomeV2"
+        },
+        "label_spec_refs": {
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "minItems": 1,
+          "title": "Label Spec Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/r6-canary-trace-binding/v2",
+          "default": "eval-factory/r6-canary-trace-binding/v2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "semantic_fixture_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Semantic Fixture Refs",
+          "type": "array"
+        },
+        "source_trace_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "structured_fact_set_ref": {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        "task_fixture_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Task Fixture Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_trace_ref",
+        "structured_fact_set_ref",
+        "label_spec_refs",
+        "expected_outcome"
+      ],
+      "title": "R6CanaryTraceBindingV2",
+      "type": "object"
+    },
+    "ResourceBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_model_requests": {
+          "minimum": 0,
+          "title": "Max Model Requests",
+          "type": "integer"
+        },
+        "max_model_tokens": {
+          "minimum": 0,
+          "title": "Max Model Tokens",
+          "type": "integer"
+        },
+        "max_network_requests": {
+          "minimum": 0,
+          "title": "Max Network Requests",
+          "type": "integer"
+        },
+        "max_processes": {
+          "minimum": 0,
+          "title": "Max Processes",
+          "type": "integer"
+        },
+        "max_renderers": {
+          "minimum": 0,
+          "title": "Max Renderers",
+          "type": "integer"
+        },
+        "max_storage_bytes": {
+          "minimum": 0,
+          "title": "Max Storage Bytes",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "eval-factory/resource-budget/v1",
+          "default": "eval-factory/resource-budget/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "max_model_requests",
+        "max_model_tokens",
+        "max_processes",
+        "max_renderers",
+        "max_network_requests",
+        "max_storage_bytes"
+      ],
+      "title": "ResourceBudget",
+      "type": "object"
+    },
+    "StageNameV2": {
+      "enum": [
+        "trace_index",
+        "safety",
+        "label_plan",
+        "label",
+        "task_rewrite_plan",
+        "task_authoring",
+        "environment_strategy",
+        "attachment",
+        "item_quality",
+        "batch_quality",
+        "final_dataset_review",
+        "release"
+      ],
+      "title": "StageNameV2",
+      "type": "string"
+    },
+    "TraceSourceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Adapter Name",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "processing_class": {
+          "const": "RESTRICTED_TRACE_RAW",
+          "title": "Processing Class",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/trace-source-ref/v1",
+          "default": "eval-factory/trace-source-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_trace_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Source Trace Id",
+          "type": "string"
+        },
+        "source_uri": {
+          "maxLength": 1024,
+          "minLength": 3,
+          "title": "Source Uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_trace_id",
+        "source_uri",
+        "raw_sha256",
+        "adapter_name",
+        "adapter_version",
+        "processing_class"
+      ],
+      "title": "TraceSourceRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/r6_canary_execution_manifest_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "claim_scope": {
+      "const": "DEVELOPMENT_CANARY_ONLY",
+      "default": "DEVELOPMENT_CANARY_ONLY",
+      "title": "Claim Scope",
+      "type": "string"
+    },
+    "control": {
+      "$ref": "#/$defs/PipelineControlConfigV2"
+    },
+    "control_plane": {
+      "$ref": "#/$defs/R6CanaryControlPlaneV2"
+    },
+    "execution_profile": {
+      "const": "r6-canary/r1-r5-v1",
+      "default": "r6-canary/r1-r5-v1",
+      "title": "Execution Profile",
+      "type": "string"
+    },
+    "job_spec": {
+      "$ref": "#/$defs/DatasetJobSpecV2"
+    },
+    "manifest_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Manifest Id",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "policy_version": {
+      "const": "r6-canary-execution/r6-parent-v1",
+      "default": "r6-canary-execution/r6-parent-v1",
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "eval-factory/r6-canary-execution-manifest/v2",
+      "default": "eval-factory/r6-canary-execution-manifest/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "seed_objects": {
+      "items": {
+        "$ref": "#/$defs/R6CanarySeedObjectV2"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Seed Objects",
+      "type": "array"
+    },
+    "trace_bindings": {
+      "items": {
+        "$ref": "#/$defs/R6CanaryTraceBindingV2"
+      },
+      "maxItems": 128,
+      "minItems": 1,
+      "title": "Trace Bindings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "manifest_id",
+    "job_spec",
+    "control",
+    "control_plane",
+    "seed_objects",
+    "trace_bindings",
+    "manifest_sha256",
+    "audit"
+  ],
+  "title": "R6CanaryExecutionManifestV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.canary_execution_v2.R6CanaryExecutionManifestV2",
+  "x-schema-version": "eval-factory/r6-canary-execution-manifest/v2"
+}

@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "AnswerReuseMatchKindV2": {
+      "enum": [
+        "FULL_SOURCE",
+        "PARTIAL_WINDOWS"
+      ],
+      "title": "AnswerReuseMatchKindV2",
+      "type": "string"
+    },
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/answer_reuse_pair_evidence_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "answer_reuse_pair_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Answer Reuse Pair Id",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "coverage_bps": {
+      "maximum": 10000,
+      "minimum": 0,
+      "title": "Coverage Bps",
+      "type": "integer"
+    },
+    "left_item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Left Item Id",
+      "type": "string"
+    },
+    "left_matched_fingerprint_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Left Matched Fingerprint Refs",
+      "type": "array"
+    },
+    "left_reference_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "left_source_subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "match_kind": {
+      "$ref": "#/$defs/AnswerReuseMatchKindV2"
+    },
+    "non_waivable": {
+      "const": true,
+      "default": true,
+      "title": "Non Waivable",
+      "type": "boolean"
+    },
+    "pair_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Pair Sha256",
+      "type": "string"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "right_item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Right Item Id",
+      "type": "string"
+    },
+    "right_matched_fingerprint_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Right Matched Fingerprint Refs",
+      "type": "array"
+    },
+    "right_reference_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "right_source_subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/answer-reuse-pair-evidence/v2",
+      "default": "eval-factory/answer-reuse-pair-evidence/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "shared_window_count": {
+      "minimum": 0,
+      "title": "Shared Window Count",
+      "type": "integer"
+    },
+    "shorter_source_window_count": {
+      "minimum": 0,
+      "title": "Shorter Source Window Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "answer_reuse_pair_id",
+    "left_item_id",
+    "right_item_id",
+    "left_reference_set_ref",
+    "right_reference_set_ref",
+    "left_source_subject_ref",
+    "right_source_subject_ref",
+    "left_matched_fingerprint_refs",
+    "right_matched_fingerprint_refs",
+    "match_kind",
+    "shared_window_count",
+    "shorter_source_window_count",
+    "coverage_bps",
+    "policy_ref",
+    "pair_sha256",
+    "audit"
+  ],
+  "title": "AnswerReusePairEvidenceV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cross_item_safety_v2.AnswerReusePairEvidenceV2",
+  "x-schema-version": "eval-factory/answer-reuse-pair-evidence/v2"
+}

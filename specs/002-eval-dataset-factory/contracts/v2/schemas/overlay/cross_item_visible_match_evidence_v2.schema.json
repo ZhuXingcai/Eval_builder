@@ -1,0 +1,276 @@
+{
+  "$defs": {
+    "ContractAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_by": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Created By",
+          "type": "string"
+        },
+        "governing_versions": {
+          "items": {
+            "$ref": "#/$defs/VersionBinding"
+          },
+          "minItems": 1,
+          "title": "Governing Versions",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ObjectRef"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "eval-factory/contract-audit/v1",
+          "default": "eval-factory/contract-audit/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "created_by",
+        "governing_versions"
+      ],
+      "title": "ContractAudit",
+      "type": "object"
+    },
+    "CrossItemSafetyEvidenceKindV2": {
+      "enum": [
+        "LEAKAGE",
+        "CONTAMINATION"
+      ],
+      "title": "CrossItemSafetyEvidenceKindV2",
+      "type": "string"
+    },
+    "CrossItemSafetySurfaceKindV2": {
+      "enum": [
+        "PROMPT",
+        "ATTACHMENT"
+      ],
+      "title": "CrossItemSafetySurfaceKindV2",
+      "type": "string"
+    },
+    "ObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "object_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Id",
+          "type": "string"
+        },
+        "object_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_type": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Object Type",
+          "type": "string"
+        },
+        "object_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Object Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/object-ref/v1",
+          "default": "eval-factory/object-ref/v1",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "object_version",
+        "object_sha256"
+      ],
+      "title": "ObjectRef",
+      "type": "object"
+    },
+    "PromptLeakageCategoryV2": {
+      "enum": [
+        "FINAL_ANSWER",
+        "COMPLETED_DELIVERABLE",
+        "PRIVATE_REFERENCE",
+        "GRADER_RULE",
+        "HIDDEN_PASS_CONDITION",
+        "HIDDEN_SELECTION_SIGNAL",
+        "TRAJECTORY_SPECIFIC_STEP"
+      ],
+      "title": "PromptLeakageCategoryV2",
+      "type": "string"
+    },
+    "PromptLeakageMatchKindV2": {
+      "enum": [
+        "NORMALIZED_FULL_TEXT",
+        "TOKEN_WINDOW",
+        "PATH_COMPONENT"
+      ],
+      "title": "PromptLeakageMatchKindV2",
+      "type": "string"
+    },
+    "VersionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+          "title": "Component",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "eval-factory/version-binding/v1",
+          "default": "eval-factory/version-binding/v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component",
+        "version"
+      ],
+      "title": "VersionBinding",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/cross_item_visible_match_evidence_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_scan_evidence_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ObjectRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "audit": {
+      "$ref": "#/$defs/ContractAudit"
+    },
+    "category": {
+      "$ref": "#/$defs/PromptLeakageCategoryV2"
+    },
+    "evidence_kind": {
+      "$ref": "#/$defs/CrossItemSafetyEvidenceKindV2"
+    },
+    "evidence_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Evidence Sha256",
+      "type": "string"
+    },
+    "match_kinds": {
+      "items": {
+        "$ref": "#/$defs/PromptLeakageMatchKindV2"
+      },
+      "minItems": 1,
+      "title": "Match Kinds",
+      "type": "array"
+    },
+    "matched_fingerprint_refs": {
+      "items": {
+        "$ref": "#/$defs/ObjectRef"
+      },
+      "minItems": 1,
+      "title": "Matched Fingerprint Refs",
+      "type": "array"
+    },
+    "non_waivable": {
+      "const": true,
+      "default": true,
+      "title": "Non Waivable",
+      "type": "boolean"
+    },
+    "policy_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "schema_version": {
+      "const": "eval-factory/cross-item-visible-match-evidence/v2",
+      "default": "eval-factory/cross-item-visible-match-evidence/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Source Item Id",
+      "type": "string"
+    },
+    "source_reference_set_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "source_subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "target_item_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Target Item Id",
+      "type": "string"
+    },
+    "target_subject_ref": {
+      "$ref": "#/$defs/ObjectRef"
+    },
+    "target_surface": {
+      "$ref": "#/$defs/CrossItemSafetySurfaceKindV2"
+    },
+    "visible_match_evidence_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Visible Match Evidence Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "visible_match_evidence_id",
+    "evidence_kind",
+    "target_surface",
+    "source_item_id",
+    "target_item_id",
+    "source_reference_set_ref",
+    "source_subject_ref",
+    "target_subject_ref",
+    "category",
+    "matched_fingerprint_refs",
+    "match_kinds",
+    "policy_ref",
+    "evidence_sha256",
+    "audit"
+  ],
+  "title": "CrossItemVisibleMatchEvidenceV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "factory",
+  "x-python-type": "eval_factory.contracts.cross_item_safety_v2.CrossItemVisibleMatchEvidenceV2",
+  "x-schema-version": "eval-factory/cross-item-visible-match-evidence/v2"
+}

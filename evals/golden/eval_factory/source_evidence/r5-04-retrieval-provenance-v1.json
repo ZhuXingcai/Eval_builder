@@ -1,0 +1,86 @@
+{
+  "schema_version": "eval-factory/r5-04-retrieval-provenance-gold/v1",
+  "claim_scope": "CONTENT_FREE_PUBLIC_SOURCE_RETRIEVAL_POLICY_ONLY",
+  "cases": [
+    {
+      "case_id": "r5-04-no-requirements",
+      "setup": "NO_REQUIREMENTS",
+      "expected_outcome": "NOT_REQUIRED",
+      "expected_reason": null,
+      "covered_targets": 0,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-no-approved-intents",
+      "setup": "NO_APPROVED_INTENTS",
+      "expected_outcome": "NOT_REQUIRED",
+      "expected_reason": null,
+      "covered_targets": 0,
+      "not_required_targets": 1
+    },
+    {
+      "case_id": "r5-04-search-fetch-compiled",
+      "setup": "SEARCH_FETCH_COMPILED",
+      "expected_outcome": "COMPILED",
+      "expected_reason": null,
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-lead-refetch-compiled",
+      "setup": "LEAD_REFETCH_COMPILED",
+      "expected_outcome": "COMPILED",
+      "expected_reason": null,
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-secret-block",
+      "setup": "SECRET_FAILED",
+      "expected_outcome": "BLOCKED_SAFETY",
+      "expected_reason": "SECRET_SCAN_FAILED",
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-configured-pii-block",
+      "setup": "CONFIGURED_PII_FAILED",
+      "expected_outcome": "BLOCKED_SAFETY",
+      "expected_reason": "PII_SCAN_FAILED",
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-prompt-injection-block",
+      "setup": "PROMPT_INJECTION_FAILED",
+      "expected_outcome": "BLOCKED_SAFETY",
+      "expected_reason": "PROMPT_INJECTION_SCAN_FAILED",
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-answer-leakage-block",
+      "setup": "ANSWER_LEAKAGE_FAILED",
+      "expected_outcome": "BLOCKED_SAFETY",
+      "expected_reason": "ANSWER_LEAKAGE_SCAN_FAILED",
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-license-denied",
+      "setup": "LICENSE_FAILED",
+      "expected_outcome": "BLOCKED_POLICY",
+      "expected_reason": "LICENSE_DENIED",
+      "covered_targets": 1,
+      "not_required_targets": 0
+    },
+    {
+      "case_id": "r5-04-scan-capability-unavailable",
+      "setup": "SCAN_UNAVAILABLE",
+      "expected_outcome": "BLOCKED_CAPABILITY",
+      "expected_reason": "SCAN_CAPABILITY_UNAVAILABLE",
+      "covered_targets": 1,
+      "not_required_targets": 0
+    }
+  ]
+}

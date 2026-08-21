@@ -1,0 +1,44 @@
+{
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/attachment_resource_usage_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "network_requests": {
+      "minimum": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "process_starts": {
+      "minimum": 0,
+      "title": "Process Starts",
+      "type": "integer"
+    },
+    "renderer_operations": {
+      "minimum": 0,
+      "title": "Renderer Operations",
+      "type": "integer"
+    },
+    "retained_storage_bytes": {
+      "minimum": 0,
+      "title": "Retained Storage Bytes",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/attachment-resource-usage/v2",
+      "default": "env-mock-agent/attachment-resource-usage/v2",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "process_starts",
+    "renderer_operations",
+    "network_requests",
+    "retained_storage_bytes"
+  ],
+  "title": "AttachmentResourceUsageV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.resource_v2.AttachmentResourceUsageV2",
+  "x-schema-version": "env-mock-agent/attachment-resource-usage/v2"
+}
