@@ -83,6 +83,20 @@ Blocked until V1 Stable:
 - a materially different second first-party Pack;
 - cross-domain delivery and workspace contributions.
 
+## Dependency Audit Follow-Up
+
+Status: remediation pending.
+
+The current lockfiles reproduce the tested Node/Web builds, but `npm audit`
+reports unresolved advisories:
+
+- `web/eval_factory_console`: 1 high severity advisory;
+- `node/pi_bridge`: 2 moderate and 2 high severity advisories.
+
+These counts do not by themselves establish exploitability in this product,
+but each advisory must be triaged and resolved or explicitly accepted before
+a stable production release.
+
 ## Production
 
 Production release remains blocked. Existing release, attestation, and
@@ -90,6 +104,8 @@ publication fixtures are mechanism evidence only and do not authorize a
 production registry write.
 
 ## Current Verified Baseline
+
+Fully provisioned local workspace:
 
 ```text
 Python product suite: 2787 passed
@@ -99,6 +115,16 @@ Ruff/format/mypy: passed
 Generated contracts and wheel imports: passed
 Continuity validation: passed
 ```
+
+Sanitized public snapshot:
+
+```text
+Python product suite: 2750 passed, 39 skipped
+```
+
+Public-snapshot skips identify resources that are intentionally not published:
+the private 91-trace corpus, private CC/LH adapter fixtures, and local
+Beads/continuity state.
 
 These results prove deterministic implementation and recovery behavior, not
 real semantic quality or production readiness.
