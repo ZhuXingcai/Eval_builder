@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 from test_core_vertical_real_traces import (
+    RAW_ROOT,
     _audit,
     _gateway,
     _ref,
@@ -156,6 +157,11 @@ from eval_factory.contracts.orchestration_v2 import (
 from eval_factory.orchestration.job_store import JobStore
 
 USER = "user://dataset-item-runtime-owner"
+
+pytestmark = pytest.mark.skipif(
+    not (RAW_ROOT / "manifest.csv").is_file(),
+    reason="private 91-trace corpus is not installed",
+)
 
 
 def _requirement() -> EvaluationRequirementSpecV2:

@@ -10,6 +10,7 @@ from tests.eval_factory.integration.test_harness_agent_loop import (
     _components as _harness_components,
 )
 from tests.integration.test_evalfactory_agent_run_cli import (
+    RAW_ROOT,
     _approve_and_resume,
     _approve_review_batch,
     _args,
@@ -45,6 +46,11 @@ from eval_factory.packs.generic_agent_trace.product_builder import (
     GenericAgentGraphRuntimeConfigV1,
 )
 from eval_factory.team import TeamStore
+
+pytestmark = pytest.mark.skipif(
+    not (RAW_ROOT / "manifest.csv").is_file(),
+    reason="private 91-trace corpus is not installed",
+)
 
 
 def _ref(object_type: str, suffix: str) -> ObjectRef:

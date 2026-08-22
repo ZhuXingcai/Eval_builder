@@ -14,6 +14,7 @@ from test_canary_regression_builder import (
     RAW_ROOT,
     _policy,
     _template,
+    requires_private_corpus,
 )
 
 from eval_factory.contracts.canary_execution_v2 import (
@@ -228,6 +229,7 @@ class _RecordingExecutor:
 
 
 @pytest.mark.asyncio
+@requires_private_corpus
 async def test_runner_is_sequential_and_one_case_error_does_not_hide_later_cases(
     tmp_path: Path,
 ) -> None:
@@ -253,6 +255,7 @@ async def test_runner_is_sequential_and_one_case_error_does_not_hide_later_cases
 
 
 @pytest.mark.asyncio
+@requires_private_corpus
 async def test_real_repaired_heuristic_uses_final_child_audit_and_terminates(
     tmp_path: Path,
 ) -> None:

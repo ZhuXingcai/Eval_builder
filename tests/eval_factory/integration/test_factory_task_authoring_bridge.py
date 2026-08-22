@@ -89,6 +89,11 @@ from eval_factory.task_authoring import (
     TaskPromptSafetyOutcome,
 )
 
+pytestmark = pytest.mark.skipif(
+    not (RAW_ROOT / "manifest.csv").is_file(),
+    reason="private 91-trace corpus is not installed",
+)
+
 
 def _one_trace_root(tmp_path: Path) -> tuple[Path, str]:
     root = tmp_path / "raw"

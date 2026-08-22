@@ -11,7 +11,7 @@ import pytest
 from concurrency_experiment_fixtures import policy
 from pydantic import ValidationError
 from test_canary_pipeline_driver import _manifest
-from test_canary_regression_builder import RAW_ROOT
+from test_canary_regression_builder import RAW_ROOT, requires_private_corpus
 from test_concurrency_experiment_builder import _audit, _prepared_inputs
 
 import eval_factory.readiness.concurrency_experiment as concurrency_module
@@ -723,6 +723,7 @@ def test_recovery_failure_blocks_recommendation_without_crashing(
     )
 
 
+@requires_private_corpus
 def test_real_r6_executors_use_shared_job_store_and_exact_replay(
     tmp_path: Path,
 ) -> None:

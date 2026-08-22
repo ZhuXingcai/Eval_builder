@@ -31,6 +31,11 @@ RAW_ROOT = ROOT / "raw_traj"
 SID = "0217819691644661fad3a044f20103f8e4b726dec7c2fa4ebc6fa"
 SOURCE_PATH = RAW_ROOT / f"LH_002_{SID}.jsonl"
 
+pytestmark = pytest.mark.skipif(
+    not SOURCE_PATH.is_file(),
+    reason="private 91-trace corpus is not installed",
+)
+
 
 @dataclass(frozen=True)
 class _RefValue:

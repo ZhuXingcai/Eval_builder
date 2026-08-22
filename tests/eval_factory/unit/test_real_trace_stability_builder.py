@@ -30,6 +30,10 @@ ROOT = Path(__file__).resolve().parents[3]
 SOURCE_MANIFEST = ROOT.parent / "raw_traj/manifest.csv"
 RAW_ROOT = ROOT.parent / "raw_traj"
 NOW = datetime(2026, 8, 2, tzinfo=UTC)
+requires_private_corpus = pytest.mark.skipif(
+    not SOURCE_MANIFEST.is_file(),
+    reason="private 91-trace corpus is not installed",
+)
 
 
 def _audit() -> ContractAudit:
@@ -66,6 +70,7 @@ def _policy() -> RealTraceStabilityPolicyV2:
     )
 
 
+@requires_private_corpus
 def test_builder_admits_exact_91_source_inventory_and_fault_rotation() -> None:
     compilation = RealTraceStabilityBuilder().compile_inventory(
         source_manifest=SOURCE_MANIFEST,
@@ -90,6 +95,7 @@ def test_builder_admits_exact_91_source_inventory_and_fault_rotation() -> None:
     assert all(compilation.path_for(member.instance_id).is_file() for member in compilation.inventory.members)
 
 
+@requires_private_corpus
 def test_builder_compiles_one_private_r1_only_job_spec() -> None:
     builder = RealTraceStabilityBuilder()
     compilation = builder.compile_inventory(
@@ -140,6 +146,7 @@ def test_manifest_parser_rejects_schema_date_duplicate_and_limit() -> None:
         builder.parse_manifest(duplicate, max_sources=1)
 
 
+@requires_private_corpus
 def test_builder_rejects_manifest_and_raw_root_drift(tmp_path: Path) -> None:
     changed = tmp_path / "manifest.csv"
     changed.write_bytes(SOURCE_MANIFEST.read_bytes() + b"\n")

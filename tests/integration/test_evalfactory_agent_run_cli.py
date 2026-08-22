@@ -10,6 +10,7 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
+import pytest
 from typer.testing import CliRunner
 
 from env_mock_agent.facade import (
@@ -134,6 +135,10 @@ HASH = "a" * 64
 NOW = datetime(2026, 8, 7, tzinfo=UTC)
 ROOT = Path(__file__).resolve().parents[2]
 RAW_ROOT = ROOT.parent / "raw_traj"
+requires_private_corpus = pytest.mark.skipif(
+    not (RAW_ROOT / "manifest.csv").is_file(),
+    reason="private 91-trace corpus is not installed",
+)
 
 
 def _ref(object_type: str, suffix: str = "example") -> ObjectRef:
@@ -1643,6 +1648,7 @@ def test_agent_run_cli_rejects_overlapping_store_roots(
     assert str(tmp_path) not in result.stderr
 
 
+@requires_private_corpus
 def test_agent_run_cli_rejects_partial_core_admission(
     tmp_path: Path,
 ) -> None:
@@ -1745,6 +1751,7 @@ def test_agent_run_cli_rejects_stale_expected_version_before_provider(
         assert connection.execute("SELECT COUNT(*) FROM gateway_invocation_records").fetchone() == (1,)
 
 
+@requires_private_corpus
 def test_agent_run_cli_advances_one_real_trace_after_review(
     tmp_path: Path,
 ) -> None:
@@ -1811,6 +1818,7 @@ def test_agent_run_cli_advances_one_real_trace_after_review(
         assert connection.execute("SELECT COUNT(*) FROM gateway_invocation_records").fetchone() == (7,)
 
 
+@requires_private_corpus
 def test_agent_run_cli_reviews_executes_and_replays_attachment(
     tmp_path: Path,
 ) -> None:
@@ -1907,6 +1915,7 @@ def test_agent_run_cli_reviews_executes_and_replays_attachment(
         assert connection.execute("SELECT COUNT(*) FROM gateway_invocation_records").fetchone() == (8,)
 
 
+@requires_private_corpus
 def test_agent_run_cli_reviews_and_executes_specialist_chain(
     tmp_path: Path,
 ) -> None:
@@ -2007,6 +2016,7 @@ def test_agent_run_cli_reviews_and_executes_specialist_chain(
         assert connection.execute("SELECT COUNT(*) FROM gateway_invocation_records").fetchone() == (13,)
 
 
+@requires_private_corpus
 def test_agent_run_cli_delivers_two_candidates_and_exactly_replays(
     tmp_path: Path,
 ) -> None:
@@ -2227,6 +2237,7 @@ def test_agent_run_cli_delivers_two_candidates_and_exactly_replays(
     )
 
 
+@requires_private_corpus
 def test_agent_run_cli_isolates_one_blocked_trace_and_delivers_two_candidates(
     tmp_path: Path,
 ) -> None:

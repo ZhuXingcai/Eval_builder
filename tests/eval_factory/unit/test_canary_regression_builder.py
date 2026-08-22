@@ -33,6 +33,10 @@ ROOT = Path(__file__).resolve().parents[3]
 CANARY_PATH = ROOT / "evals/golden/eval_factory/canary_manifest.v4.json"
 RAW_ROOT = ROOT.parent / "raw_traj"
 NOW = datetime(2026, 8, 2, tzinfo=UTC)
+requires_private_corpus = pytest.mark.skipif(
+    not (RAW_ROOT / "manifest.csv").is_file(),
+    reason="private 91-trace corpus is not installed",
+)
 
 
 def _audit() -> ContractAudit:
@@ -107,6 +111,7 @@ def test_loader_rejects_hash_schema_and_case_drift(tmp_path: Path) -> None:
         FrozenCanaryCohortLoader().load(CANARY_PATH, policy=wrong_policy)
 
 
+@requires_private_corpus
 def test_raw_resolver_verifies_all_current_sources(tmp_path: Path) -> None:
     cohort = FrozenCanaryCohortLoader().load(CANARY_PATH, policy=_policy())
     resolved = CanaryRegressionBuilder().resolve_sources(
@@ -132,6 +137,7 @@ def test_raw_resolver_verifies_all_current_sources(tmp_path: Path) -> None:
         )
 
 
+@requires_private_corpus
 def test_raw_resolver_rejects_root_missing_duplicate_size_and_symlink(
     tmp_path: Path,
 ) -> None:
@@ -217,6 +223,7 @@ print(len(template.template_manifest.seed_objects))
     assert process.stdout.strip() == "3"
 
 
+@requires_private_corpus
 def test_builder_prepares_one_exact_real_child_manifest(tmp_path: Path) -> None:
     policy = _policy()
     cohort = FrozenCanaryCohortLoader().load(CANARY_PATH, policy=policy)
@@ -238,6 +245,7 @@ def test_builder_prepares_one_exact_real_child_manifest(tmp_path: Path) -> None:
     assert prepared.raw_path.name.startswith(f"{case.instance_id}_")
 
 
+@requires_private_corpus
 def test_builder_uses_final_execution_identity_before_fact_preparation(
     tmp_path: Path,
 ) -> None:
@@ -279,6 +287,7 @@ def test_builder_uses_final_execution_identity_before_fact_preparation(
     assert custom.child_manifest.audit.input_refs != (historical.child_manifest.audit.input_refs)
 
 
+@requires_private_corpus
 def test_builder_rejects_stale_template_before_preparation(
     tmp_path: Path,
 ) -> None:

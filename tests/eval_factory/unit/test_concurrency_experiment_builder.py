@@ -9,6 +9,7 @@ from test_canary_regression_builder import (
     CANARY_PATH,
     RAW_ROOT,
     _template,
+    requires_private_corpus,
 )
 from test_canary_regression_builder import (
     _policy as _canary_policy,
@@ -197,6 +198,7 @@ def test_workload_uses_exact_interleaved_schedule_and_storage(
     assert workload.retained_storage_bytes_per_cohort == (workload.retained_storage_bytes_per_case * 24)
 
 
+@requires_private_corpus
 def test_builder_prepares_trial_specific_final_child_identity(
     tmp_path: Path,
 ) -> None:
