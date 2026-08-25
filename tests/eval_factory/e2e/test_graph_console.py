@@ -58,6 +58,7 @@ def session(fixture: BrowserFixture) -> Iterator[BrowserSession]:
             str(fixture.store_path),
             "--registry",
             str(fixture.registry_path),
+            "--plan-review-only",
             "--host",
             "127.0.0.1",
             "--port",

@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "ReportedCostV2": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_microusd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount Microusd"
+        },
+        "availability": {
+          "$ref": "#/$defs/TelemetryAvailabilityV2"
+        },
+        "currency": {
+          "const": "USD",
+          "default": "USD",
+          "title": "Currency",
+          "type": "string"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "const": "HALF_EVEN_MICRO_USD",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rounding"
+        }
+      },
+      "required": [
+        "availability"
+      ],
+      "title": "ReportedCostV2",
+      "type": "object"
+    },
+    "TelemetryAvailabilityV2": {
+      "enum": [
+        "REPORTED",
+        "DERIVED",
+        "UNAVAILABLE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "TelemetryAvailabilityV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/unified_runtime_usage_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "cache_creation_input_tokens": {
+      "maximum": 10000000000,
+      "minimum": 0,
+      "title": "Cache Creation Input Tokens",
+      "type": "integer"
+    },
+    "cache_read_input_tokens": {
+      "maximum": 10000000000,
+      "minimum": 0,
+      "title": "Cache Read Input Tokens",
+      "type": "integer"
+    },
+    "duration_ms": {
+      "anyOf": [
+        {
+          "maximum": 1000000000000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duration Ms"
+    },
+    "input_tokens": {
+      "maximum": 10000000000,
+      "minimum": 0,
+      "title": "Input Tokens",
+      "type": "integer"
+    },
+    "model_requests": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Model Requests",
+      "type": "integer"
+    },
+    "output_tokens": {
+      "maximum": 10000000000,
+      "minimum": 0,
+      "title": "Output Tokens",
+      "type": "integer"
+    },
+    "reported_cost": {
+      "$ref": "#/$defs/ReportedCostV2"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/unified-runtime-usage/v2",
+      "default": "env-mock-agent/unified-runtime-usage/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_calls": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Tool Calls",
+      "type": "integer"
+    },
+    "turns": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Turns",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "model_requests",
+    "input_tokens",
+    "output_tokens",
+    "cache_creation_input_tokens",
+    "cache_read_input_tokens",
+    "tool_calls",
+    "turns",
+    "reported_cost"
+  ],
+  "title": "UnifiedRuntimeUsageV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.runtime_v2.UnifiedRuntimeUsageV2",
+  "x-schema-version": "env-mock-agent/unified-runtime-usage/v2"
+}

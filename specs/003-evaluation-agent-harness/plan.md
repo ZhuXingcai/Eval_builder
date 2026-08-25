@@ -32,6 +32,7 @@ later:
 | Store | Owns | Does not own |
 |---|---|---|
 | HarnessSessionStore | session commands, messages, events, turns, interpretation/policy refs, invocation journal, projection | provider bodies, Factory runs, Team tasks |
+| HarnessSourceAdmissionStore | private upload staging/CAS, immutable admission/member/envelope linkage, idempotency | session state, Graph execution, downstream Trace facts |
 | GatewayRecordStore | route, invocation, receipt, result | conversation transcript |
 | FactoryPrivateObjectStore | prompt/rendering/provider output bytes | public/session state |
 | FactoryControlStore | existing Factory run/plan/Agent authority | conversation event log |
@@ -87,8 +88,53 @@ Completed under ADR 0013:
 
 ### Stage 5 - Agent Shell
 
-- add HTTP/SSE and conversation-first React UI;
-- retain PlanReview as a workspace.
+- normalize Gateway and external runtime observations behind one safe event
+  protocol;
+- persist normalized runtime events and their Harness `SessionEventV1`
+  projections atomically;
+- expose strict Agent Shell session/message/event HTTP contracts and
+  committed-sequence SSE with exact reconnect;
+- admit one exact `manifest.csv` plus referenced `raw_traj_v1` JSONL inventory
+  through server-owned staging, private CAS, immutable SQLite authority, and
+  safe Artifact Envelope refs;
+- compose Team/Factory/Graph/PlanReview/workspace/delivery reads without a new
+  business authority;
+- require the READY message to carry admitted source Envelope refs before
+  starting the fixed Pack `1.2.0` Graph;
+- reconcile Team and Graph outboxes into Harness events through replay-safe
+  owner-first commands;
+- mount the complete fixture-backed Shell through explicit
+  `evalfactory agent serve` authority/config paths while retaining an explicit
+  `--plan-review-only` compatibility mode;
+- mount the conversation-first React UI as the default surface with persistent
+  sessions, transcript, fixed composer, explicit source confirmation, typed
+  interaction cards, Team/Activity inspectors, and contextual workspaces;
+- present that surface as a warm-light desktop Agent workbench with restrained
+  top modes, a document-width conversation, asymmetric user/Agent messages,
+  an inline Team strip, and a floating composer;
+- collapse backend projection categories under Conversation, Evaluation
+  Workbench, and Run History while retaining exact workspace deep links;
+- center the context composer before the first turn, then dock it with source
+  directory intake, goal templates, Plan mode, slash commands, and safe
+  Agent-output quotation. Keep project binding and plugin installation
+  explicitly unavailable until typed Host/registry authority exists;
+- close sessions through an idempotent `SESSION_CLOSED` event, hide them from
+  the default rail without deleting audit history, and require a
+  focus-managed destructive confirmation;
+- keep the Composer input surface free of controls and move add/mode plus
+  one model-and-reasoning trigger, browser voice input, and send actions into
+  a responsive lower toolbar;
+- provide a searchable model catalog with model-constrained discrete effort,
+  strict custom model metadata, credential environment-variable references,
+  and per-session browser persistence. Reject plaintext secrets and insecure
+  remote endpoints. These preferences remain non-authoritative until the Host
+  exposes typed registry, secret, routing, Provider-client, and message
+  contracts;
+- retain PlanReview as a workspace and preserve the review-only Host;
+- recover URL-addressable session/workspace state through HTTP projection plus
+  committed-cursor SSE, including a heartbeat-aware idle reconnect;
+- verify drawer focus/Escape/reduced-motion behavior and
+  1440/1024/768/375 layouts against the full fixture Host.
 
 ### Stage 6 - Delivery And Evidence
 

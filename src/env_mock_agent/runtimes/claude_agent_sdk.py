@@ -72,7 +72,7 @@ class ClaudeAgentSdkRuntime(AgentRuntime):
             version=version,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep", "WebSearch", "WebFetch"],
             supports_resume=True,
-            reason="credential readiness is verified by live smoke",
+            reason="SDK installation is available; credential readiness is not probed",
         )
 
     async def run(self, request: RuntimeRequest) -> AsyncIterator[RuntimeEvent]:

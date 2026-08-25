@@ -8,8 +8,9 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
+from env_mock_agent.facade import UnifiedRuntimeEventV2
 from eval_factory.contracts.core import ContractAudit, ContractModel, ObjectRef
 from eval_factory.harness.contracts import sorted_refs
 from eval_factory.harness.runtime_models import (
@@ -44,6 +45,7 @@ from eval_factory.harness.session_models import (
     SessionMessagePayloadV1,
     SessionRequirementEventKindV1,
     SessionRequirementPayloadV1,
+    SessionRuntimePayloadV1,
     SessionTeamPayloadV1,
 )
 
@@ -79,6 +81,12 @@ class HarnessTurnStart:
     user_message: HarnessMessageV1
     user_event: SessionEventV1
     replay: HarnessTurnResultV1 | None
+
+
+@dataclass(frozen=True, slots=True)
+class HarnessShellReconcileClaim:
+    replay: bool
+    effect_ref: ObjectRef | None
 
 
 class HarnessSessionStore:
@@ -150,6 +158,23 @@ class HarnessSessionStore:
                     command_object_id TEXT,
                     event_json TEXT NOT NULL,
                     PRIMARY KEY(session_id, sequence)
+                );
+
+                CREATE TABLE IF NOT EXISTS harness_runtime_events (
+                    runtime_event_object_id TEXT PRIMARY KEY,
+                    runtime_event_sha256 TEXT NOT NULL,
+                    session_id TEXT NOT NULL REFERENCES harness_sessions(session_id),
+                    runtime_id TEXT NOT NULL,
+                    run_id TEXT NOT NULL,
+                    work_id TEXT NOT NULL,
+                    source_sequence INTEGER NOT NULL,
+                    event_kind TEXT NOT NULL,
+                    session_event_object_id TEXT NOT NULL UNIQUE
+                        REFERENCES harness_events(event_object_id),
+                    runtime_event_json TEXT NOT NULL,
+                    UNIQUE (
+                        session_id, runtime_id, run_id, work_id, source_sequence
+                    )
                 );
 
                 CREATE TABLE IF NOT EXISTS harness_gateway_journals (
@@ -324,6 +349,182 @@ class HarnessSessionStore:
         finally:
             connection.close()
 
+    def close_session(
+        self,
+        *,
+        session_id: str,
+        expected_session_version: int,
+        principal_ref: ObjectRef,
+        idempotency_key: str,
+        audit: ContractAudit,
+    ) -> HarnessSessionProjectionV1:
+        request_sha256 = _hash_payload(
+            {
+                "session_id": session_id,
+                "expected_session_version": expected_session_version,
+                "principal_ref": principal_ref,
+            }
+        )
+        scope = f"close-harness-session:{session_id}"
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            replay_id = self._check_idempotency(
+                connection,
+                scope=scope,
+                idempotency_key=idempotency_key,
+                request_sha256=request_sha256,
+                response_type="harness-session",
+            )
+            if replay_id is not None:
+                projection = self._load_projection(connection, replay_id)
+                if projection.session.status is not HarnessSessionStatusV1.CLOSED:
+                    raise HarnessSessionIntegrityError(
+                        "closed session replay is not closed",
+                    )
+                connection.rollback()
+                return projection
+            state, identity = self._load_session(connection, session_id)
+            if state.status is HarnessSessionStatusV1.CLOSED:
+                raise HarnessSessionConflictError("session is already closed")
+            if state.session_version != expected_session_version:
+                raise HarnessSessionConcurrencyError("session version is stale")
+            now = self._clock()
+            next_state = HarnessSessionStateV1.create(
+                identity=identity,
+                session_version=state.session_version + 1,
+                status=HarnessSessionStatusV1.CLOSED,
+                last_event_sequence=state.last_event_sequence + 1,
+                current_interpretation_ref=state.current_interpretation_ref,
+                current_requirement_policy_ref=state.current_requirement_policy_ref,
+                updated_at=now,
+            )
+            event = SessionEventV1.create(
+                event_id=(
+                    f"session-event://{session_id}/"
+                    f"{next_state.last_event_sequence}"
+                ),
+                session=next_state.to_session_ref(),
+                sequence=next_state.last_event_sequence,
+                authority_version=next_state.session_version,
+                turn_id=None,
+                step_id=None,
+                command_ref=None,
+                payload=SessionLifecyclePayloadV1(
+                    event_kind=SessionLifecycleEventKindV1.SESSION_CLOSED,
+                ),
+                occurred_at=now,
+                audit=audit,
+            )
+            self._update_state(connection, next_state)
+            self._insert_event(connection, session_id, event, None)
+            projection = self._build_projection(connection, session_id)
+            self._write_projection(connection, projection)
+            self._insert_idempotency(
+                connection,
+                scope=scope,
+                idempotency_key=idempotency_key,
+                request_sha256=request_sha256,
+                response_type="harness-session",
+                response_id=session_id,
+            )
+            self._fault("before_close_session_commit")
+            connection.commit()
+            return projection
+        except Exception:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()
+
+    def claim_shell_reconcile(
+        self,
+        *,
+        session_id: str,
+        expected_session_version: int,
+        principal_ref: ObjectRef,
+        idempotency_key: str,
+        effect_ref: ObjectRef | None,
+    ) -> HarnessShellReconcileClaim:
+        """Persist a replayable reconcile intent before cross-store effects."""
+        request_sha256 = _hash_payload(
+            {
+                "session_id": session_id,
+                "expected_session_version": expected_session_version,
+                "principal_ref": principal_ref,
+            }
+        )
+        scope = f"agent-shell-reconcile:{session_id}"
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            replay_id = self._check_idempotency(
+                connection,
+                scope=scope,
+                idempotency_key=idempotency_key,
+                request_sha256=request_sha256,
+                response_type="agent-shell-reconcile-intent",
+            )
+            if replay_id is not None:
+                persisted_effect_ref = _shell_reconcile_effect_ref(
+                    replay_id,
+                )
+                connection.rollback()
+                return HarnessShellReconcileClaim(
+                    replay=True,
+                    effect_ref=persisted_effect_ref,
+                )
+            state, _identity = self._load_session(
+                connection,
+                session_id,
+            )
+            if state.session_version != expected_session_version:
+                raise HarnessSessionConcurrencyError(
+                    "Agent Shell reconcile uses stale session authority",
+                )
+            self._insert_idempotency(
+                connection,
+                scope=scope,
+                idempotency_key=idempotency_key,
+                request_sha256=request_sha256,
+                response_type="agent-shell-reconcile-intent",
+                response_id=_shell_reconcile_effect_id(effect_ref),
+            )
+            self._fault("before_shell_reconcile_claim_commit")
+            connection.commit()
+            return HarnessShellReconcileClaim(
+                replay=False,
+                effect_ref=effect_ref,
+            )
+        except Exception:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()
+
+    def has_message_command(
+        self,
+        *,
+        session_id: str,
+        idempotency_key: str,
+    ) -> bool:
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN")
+            self._load_session(connection, session_id)
+            row = connection.execute(
+                """
+                SELECT 1
+                FROM harness_commands
+                WHERE session_id = ? AND idempotency_key = ?
+                """,
+                (session_id, idempotency_key),
+            ).fetchone()
+            connection.rollback()
+            return row is not None
+        finally:
+            connection.close()
+
     def start_turn(
         self,
         *,
@@ -364,7 +565,7 @@ class HarnessSessionStore:
                     str(existing["command_json"]),
                     "session command",
                 )
-                if stored_command != command:
+                if stored_command.to_ref() != command.to_ref():
                     raise HarnessSessionConflictError("session idempotency key already binds another command")
                 user_message = self._load_message_by_id(
                     connection,
@@ -808,6 +1009,100 @@ class HarnessSessionStore:
         finally:
             connection.close()
 
+    def get_current_requirement(
+        self,
+        session_id: str,
+    ) -> tuple[RequirementInterpretationV1, HarnessRequirementPolicyV1]:
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN")
+            state, _identity = self._load_session(connection, session_id)
+            if state.current_interpretation_ref is None or state.current_requirement_policy_ref is None:
+                raise HarnessSessionNotFoundError(
+                    "session has no current READY requirement authority",
+                )
+            interpretation_row = connection.execute(
+                """
+                SELECT * FROM harness_interpretations
+                WHERE interpretation_object_id = ?
+                """,
+                (state.current_interpretation_ref.object_id,),
+            ).fetchone()
+            policy_row = connection.execute(
+                """
+                SELECT * FROM harness_requirement_policies
+                WHERE policy_object_id = ?
+                """,
+                (state.current_requirement_policy_ref.object_id,),
+            ).fetchone()
+            if interpretation_row is None or policy_row is None:
+                raise HarnessSessionIntegrityError(
+                    "current READY requirement authority is incomplete",
+                )
+            interpretation = _parse(
+                RequirementInterpretationV1,
+                str(interpretation_row["interpretation_json"]),
+                "requirement interpretation",
+            )
+            policy = _parse(
+                HarnessRequirementPolicyV1,
+                str(policy_row["policy_json"]),
+                "requirement policy",
+            )
+            if (
+                interpretation.to_ref() != state.current_interpretation_ref
+                or policy.to_ref() != state.current_requirement_policy_ref
+                or policy.interpretation_ref != interpretation.to_ref()
+                or str(interpretation_row["interpretation_sha256"]) != interpretation.object_sha256
+                or str(interpretation_row["session_id"]) != session_id
+                or str(policy_row["policy_sha256"]) != policy.object_sha256
+                or str(policy_row["session_id"]) != session_id
+            ):
+                raise HarnessSessionIntegrityError(
+                    "current READY requirement authority drifted",
+                )
+            connection.rollback()
+            return interpretation, policy
+        finally:
+            connection.close()
+
+    def get_interpretation(
+        self,
+        reference: ObjectRef,
+    ) -> RequirementInterpretationV1:
+        if reference.object_type != "requirement-interpretation":
+            raise HarnessSessionIntegrityError(
+                "requirement interpretation ref has the wrong type",
+            )
+        connection = self._connect()
+        try:
+            row = connection.execute(
+                """
+                SELECT * FROM harness_interpretations
+                WHERE interpretation_object_id = ?
+                """,
+                (reference.object_id,),
+            ).fetchone()
+            if row is None:
+                raise HarnessSessionNotFoundError(
+                    "requirement interpretation was not found",
+                )
+            interpretation = _parse(
+                RequirementInterpretationV1,
+                str(row["interpretation_json"]),
+                "requirement interpretation",
+            )
+            if (
+                interpretation.to_ref() != reference
+                or str(row["interpretation_sha256"]) != interpretation.object_sha256
+            ):
+                raise HarnessSessionIntegrityError(
+                    "requirement interpretation authority drifted",
+                )
+            return interpretation
+        finally:
+            connection.close()
+
     def get_projection_by_ref(
         self,
         reference: ObjectRef,
@@ -844,6 +1139,290 @@ class HarnessSessionStore:
                 )
             connection.rollback()
             return stored
+        finally:
+            connection.close()
+
+    def append_runtime_event(
+        self,
+        *,
+        session_ref: ObjectRef,
+        runtime_event: UnifiedRuntimeEventV2,
+        audit: ContractAudit,
+        idempotency_key: str,
+        turn_id: str | None = None,
+        step_id: str | None = None,
+        command_ref: ObjectRef | None = None,
+    ) -> SessionEventV1:
+        runtime_ref = _runtime_event_ref(runtime_event)
+        request_sha256 = _hash_payload(
+            {
+                "session_ref": session_ref,
+                "runtime_event": runtime_event,
+                "turn_id": turn_id,
+                "step_id": step_id,
+                "command_ref": command_ref,
+            }
+        )
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            identity_row = connection.execute(
+                """
+                SELECT session_id FROM harness_sessions
+                WHERE identity_object_id = ?
+                """,
+                (session_ref.object_id,),
+            ).fetchone()
+            if identity_row is None:
+                raise HarnessSessionNotFoundError(
+                    "Harness session was not found",
+                )
+            session_id = str(identity_row["session_id"])
+            scope = f"append-runtime-event:{session_id}"
+            replay_id = self._check_idempotency(
+                connection,
+                scope=scope,
+                idempotency_key=idempotency_key,
+                request_sha256=request_sha256,
+                response_type="session-event",
+            )
+            if replay_id is not None:
+                event = self._load_event_by_id(connection, replay_id)
+                connection.rollback()
+                return event
+
+            existing = connection.execute(
+                """
+                SELECT *
+                FROM harness_runtime_events
+                WHERE runtime_event_object_id = ?
+                """,
+                (runtime_event.runtime_event_id,),
+            ).fetchone()
+            if existing is not None:
+                stored = _parse_runtime_event(
+                    str(existing["runtime_event_json"]),
+                )
+                if stored != runtime_event:
+                    raise HarnessSessionConflictError(
+                        "runtime event identity already binds another value",
+                    )
+                if str(existing["session_id"]) != session_id:
+                    raise HarnessSessionConflictError(
+                        "runtime event is already projected by another session",
+                    )
+                if (
+                    stored.runtime_event_sha256 != str(existing["runtime_event_sha256"])
+                    or stored.runtime_id != str(existing["runtime_id"])
+                    or stored.run_id != str(existing["run_id"])
+                    or stored.work_id != str(existing["work_id"])
+                    or stored.sequence != int(existing["source_sequence"])
+                    or stored.kind.value != str(existing["event_kind"])
+                ):
+                    raise HarnessSessionIntegrityError(
+                        "runtime event columns drifted",
+                    )
+                event = self._load_event_by_id(
+                    connection,
+                    str(existing["session_event_object_id"]),
+                )
+                if (
+                    not isinstance(event.payload, SessionRuntimePayloadV1)
+                    or event.payload.runtime_event_ref != runtime_ref
+                    or event.payload.runtime_id != runtime_event.runtime_id
+                    or event.payload.event_kind is not runtime_event.kind
+                ):
+                    raise HarnessSessionIntegrityError(
+                        "runtime event projection drifted",
+                    )
+                self._insert_idempotency(
+                    connection,
+                    scope=scope,
+                    idempotency_key=idempotency_key,
+                    request_sha256=request_sha256,
+                    response_type="session-event",
+                    response_id=event.object_id,
+                )
+                connection.commit()
+                return event
+
+            state, identity = self._load_session(connection, session_id)
+            if state.session_ref != session_ref:
+                raise HarnessSessionConcurrencyError(
+                    "runtime event uses stale Harness session authority",
+                )
+            prior = connection.execute(
+                """
+                SELECT source_sequence, event_kind
+                FROM harness_runtime_events
+                WHERE session_id = ? AND runtime_id = ?
+                  AND run_id = ? AND work_id = ?
+                ORDER BY source_sequence DESC
+                LIMIT 1
+                """,
+                (
+                    session_id,
+                    runtime_event.runtime_id,
+                    runtime_event.run_id,
+                    runtime_event.work_id,
+                ),
+            ).fetchone()
+            expected_source_sequence = 1 if prior is None else int(prior["source_sequence"]) + 1
+            if runtime_event.sequence != expected_source_sequence:
+                raise HarnessSessionConflictError(
+                    "runtime event source sequence is not contiguous",
+                )
+            if prior is None and runtime_event.kind.value != "RUN_STARTED":
+                raise HarnessSessionConflictError(
+                    "runtime event stream must start with RUN_STARTED",
+                )
+            if prior is not None and runtime_event.kind.value == "RUN_STARTED":
+                raise HarnessSessionConflictError(
+                    "runtime event stream cannot restart",
+                )
+            if prior is not None and str(prior["event_kind"]) in {
+                "RUN_COMPLETED",
+                "RUN_FAILED",
+            }:
+                raise HarnessSessionConflictError(
+                    "runtime event cannot follow a terminal event",
+                )
+            if runtime_event.kind.value in {"RUN_COMPLETED", "RUN_FAILED"}:
+                usage_row = connection.execute(
+                    """
+                    SELECT 1
+                    FROM harness_runtime_events
+                    WHERE session_id = ? AND runtime_id = ?
+                      AND run_id = ? AND work_id = ?
+                      AND event_kind = 'USAGE_REPORTED'
+                    LIMIT 1
+                    """,
+                    (
+                        session_id,
+                        runtime_event.runtime_id,
+                        runtime_event.run_id,
+                        runtime_event.work_id,
+                    ),
+                ).fetchone()
+                if usage_row is None:
+                    raise HarnessSessionConflictError(
+                        "runtime terminal event requires prior usage",
+                    )
+
+            next_version = state.session_version + 1
+            next_sequence = state.last_event_sequence + 1
+            next_state = HarnessSessionStateV1.create(
+                identity=identity,
+                session_version=next_version,
+                status=state.status,
+                last_event_sequence=next_sequence,
+                current_interpretation_ref=state.current_interpretation_ref,
+                current_requirement_policy_ref=(state.current_requirement_policy_ref),
+                updated_at=self._clock(),
+            )
+            event = SessionEventV1.create(
+                event_id=(f"session-event://{session_id}/runtime/{_suffix(runtime_event.runtime_event_id)}"),
+                session=next_state.to_session_ref(),
+                sequence=next_sequence,
+                authority_version=next_version,
+                turn_id=turn_id,
+                step_id=step_id,
+                command_ref=command_ref,
+                payload=SessionRuntimePayloadV1(
+                    event_kind=runtime_event.kind,
+                    runtime_id=runtime_event.runtime_id,
+                    runtime_event_ref=runtime_ref,
+                ),
+                occurred_at=runtime_event.occurred_at,
+                audit=audit,
+            )
+            self._insert_event(
+                connection,
+                session_id,
+                event,
+                command_ref.object_id if command_ref is not None else None,
+            )
+            connection.execute(
+                """
+                INSERT INTO harness_runtime_events (
+                    runtime_event_object_id, runtime_event_sha256,
+                    session_id, runtime_id, run_id, work_id,
+                    source_sequence, event_kind, session_event_object_id,
+                    runtime_event_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    runtime_event.runtime_event_id,
+                    runtime_event.runtime_event_sha256,
+                    session_id,
+                    runtime_event.runtime_id,
+                    runtime_event.run_id,
+                    runtime_event.work_id,
+                    runtime_event.sequence,
+                    runtime_event.kind.value,
+                    event.object_id,
+                    runtime_event.model_dump_json(),
+                ),
+            )
+            self._update_state(connection, next_state)
+            self._write_projection(
+                connection,
+                self._build_projection(connection, session_id),
+            )
+            self._insert_idempotency(
+                connection,
+                scope=scope,
+                idempotency_key=idempotency_key,
+                request_sha256=request_sha256,
+                response_type="session-event",
+                response_id=event.object_id,
+            )
+            self._fault("before_runtime_event_commit")
+            connection.commit()
+            return event
+        except Exception:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()
+
+    def get_runtime_event(
+        self,
+        reference: ObjectRef,
+    ) -> UnifiedRuntimeEventV2:
+        if reference.object_type != "runtime-event" or reference.object_version != "v2":
+            raise HarnessSessionIntegrityError(
+                "runtime event ref has the wrong type or version",
+            )
+        connection = self._connect()
+        try:
+            row = connection.execute(
+                """
+                SELECT * FROM harness_runtime_events
+                WHERE runtime_event_object_id = ?
+                """,
+                (reference.object_id,),
+            ).fetchone()
+            if row is None:
+                raise HarnessSessionNotFoundError(
+                    "runtime event was not found",
+                )
+            value = _parse_runtime_event(
+                str(row["runtime_event_json"]),
+            )
+            if (
+                _runtime_event_ref(value) != reference
+                or value.runtime_event_sha256 != str(row["runtime_event_sha256"])
+                or value.runtime_id != str(row["runtime_id"])
+                or value.run_id != str(row["run_id"])
+                or value.work_id != str(row["work_id"])
+                or value.sequence != int(row["source_sequence"])
+                or value.kind.value != str(row["event_kind"])
+            ):
+                raise HarnessSessionIntegrityError(
+                    "runtime event columns drifted",
+                )
+            return value
         finally:
             connection.close()
 
@@ -991,19 +1570,37 @@ class HarnessSessionStore:
         finally:
             connection.close()
 
-    def list_sessions(self, *, offset: int, limit: int) -> HarnessSessionPageV1:
+    def list_sessions(
+        self,
+        *,
+        offset: int,
+        limit: int,
+        include_closed: bool = False,
+    ) -> HarnessSessionPageV1:
         if offset < 0 or limit < 1 or limit > 500:
             raise ValueError("session page is outside bounds")
         connection = self._connect()
         try:
-            total = int(connection.execute("SELECT COUNT(*) FROM harness_sessions").fetchone()[0])
+            where_clause = "" if include_closed else "WHERE status != ?"
+            parameters: tuple[object, ...] = (
+                ()
+                if include_closed
+                else (HarnessSessionStatusV1.CLOSED.value,)
+            )
+            total = int(
+                connection.execute(
+                    f"SELECT COUNT(*) FROM harness_sessions {where_clause}",
+                    parameters,
+                ).fetchone()[0]
+            )
             rows = connection.execute(
-                """
+                f"""
                 SELECT * FROM harness_sessions
+                {where_clause}
                 ORDER BY session_id
                 LIMIT ? OFFSET ?
                 """,
-                (limit, offset),
+                (*parameters, limit, offset),
             ).fetchall()
             return HarnessSessionPageV1(
                 offset=offset,
@@ -1653,11 +2250,25 @@ def _parse[ModelT: ContractModel](
     return value
 
 
+def _shell_reconcile_effect_id(effect_ref: ObjectRef | None) -> str:
+    return "NO_GRAPH_BINDING" if effect_ref is None else _json(effect_ref)
+
+
+def _shell_reconcile_effect_ref(response_id: str) -> ObjectRef | None:
+    if response_id == "NO_GRAPH_BINDING":
+        return None
+    return _parse(
+        ObjectRef,
+        response_id,
+        "Agent Shell reconcile effect ref",
+    )
+
+
 def _hash_payload(value: object) -> str:
     encoded = json.dumps(
         value,
         default=lambda item: (
-            item.model_dump(mode="json", exclude_none=False) if isinstance(item, ContractModel) else str(item)
+            item.model_dump(mode="json", exclude_none=False) if isinstance(item, BaseModel) else str(item)
         ),
         ensure_ascii=False,
         sort_keys=True,
@@ -1665,6 +2276,29 @@ def _hash_payload(value: object) -> str:
         allow_nan=False,
     ).encode()
     return hashlib.sha256(encoded).hexdigest()
+
+
+def _runtime_event_ref(value: UnifiedRuntimeEventV2) -> ObjectRef:
+    return ObjectRef(
+        object_type="runtime-event",
+        object_id=value.runtime_event_id,
+        object_version="v2",
+        object_sha256=value.runtime_event_sha256,
+    )
+
+
+def _parse_runtime_event(payload: str) -> UnifiedRuntimeEventV2:
+    try:
+        value = UnifiedRuntimeEventV2.model_validate_json(payload)
+    except ValidationError as exc:
+        raise HarnessSessionIntegrityError(
+            "runtime event is invalid",
+        ) from exc
+    if value.model_dump_json() != payload:
+        raise HarnessSessionIntegrityError(
+            "runtime event is not canonical",
+        )
+    return value
 
 
 __all__ = [

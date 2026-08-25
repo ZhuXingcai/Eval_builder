@@ -2988,6 +2988,30 @@
     },
     {
       "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.runtime_v2.UnifiedRuntimeEventV2",
+      "schema_path": "schemas/overlay/unified_runtime_event_v2.schema.json",
+      "schema_sha256": "b3c0388970b0b964be1cc83491b2f008c9fe8bd31e5ddbfd2e449a83e97776dd",
+      "schema_version": "env-mock-agent/unified-runtime-event/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.runtime_v2.UnifiedRuntimeReadinessV2",
+      "schema_path": "schemas/overlay/unified_runtime_readiness_v2.schema.json",
+      "schema_sha256": "da1d106119cbd764822261899a1009d828f19960fcf72cc65319d4c1e5f6f3ad",
+      "schema_version": "env-mock-agent/unified-runtime-readiness/v2"
+    },
+    {
+      "layer": "v2-overlay",
+      "owner": "facade",
+      "python_type": "env_mock_agent.facade.runtime_v2.UnifiedRuntimeUsageV2",
+      "schema_path": "schemas/overlay/unified_runtime_usage_v2.schema.json",
+      "schema_sha256": "2b4e1cddb24c8cd5caf078e71b0a66b3d1383cdf7d68187976e5681547bdba7d",
+      "schema_version": "env-mock-agent/unified-runtime-usage/v2"
+    },
+    {
+      "layer": "v2-overlay",
       "owner": "factory",
       "python_type": "eval_factory.contracts.approval.UserApprovalPolicy",
       "schema_path": "schemas/overlay/user_approval_policy.schema.json",
@@ -3350,12 +3374,16 @@
       "sha256": "f93c0120f9cf1eaa5d2efeae5ea30e3dd295d15bf1fa2121f1c572211dfa5590"
     },
     {
+      "path": "src/env_mock_agent/facade/runtime_v2.py",
+      "sha256": "7a840f0e7548b2f76d4bc3387a4d3bb935caeab4448e96c8a204880e70d74e14"
+    },
+    {
       "path": "src/env_mock_agent/facade/semantic_review_v2.py",
       "sha256": "505678a13b4771e7f2800d85e5d828b2954bfa8df96105e31f01232e57a0afce"
     },
     {
       "path": "src/env_mock_agent/facade/telemetry_v2.py",
-      "sha256": "f3e8c7757cfe53eb9531b5e2806c558f72793d8ec6ab15fd2b5d85b318c7a642"
+      "sha256": "3003f98be55d96111642c7857d748842f30a10cfaf3146e70431d650a40c7831"
     },
     {
       "path": "src/env_mock_agent/facade/validation_v2.py",

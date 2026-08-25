@@ -2,9 +2,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import openapi from "./generated/openapi.json";
 import {
+  ApiError,
   decidePlanReview,
   editPlanReview,
   listPlanReviews,
+  requestJson,
 } from "./api";
 import {
   editableFields,
@@ -338,6 +340,17 @@ afterEach(() => {
 });
 
 describe("shared API contract", () => {
+  it("closes non-JSON proxy failures without exposing parser errors", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response("", { status: 502 })),
+    );
+
+    await expect(requestJson("/api/harness/sessions")).rejects.toEqual(
+      new ApiError(502, "HTTP_ERROR", "Agent Host 请求失败。"),
+    );
+  });
+
   it("contains every frontend plan-review operation", () => {
     expect(openapi.paths["/api/plan-reviews"]).toHaveProperty("get");
     expect(openapi.paths["/api/plan-reviews/show"]).toHaveProperty("get");

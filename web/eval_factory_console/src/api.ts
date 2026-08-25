@@ -22,7 +22,7 @@ export class ApiError extends Error {
 }
 
 export async function fetchApiContract(): Promise<PlanReviewApiContract> {
-  const value = await request("/api/plan-reviews/contract");
+  const value = await requestJson("/api/plan-reviews/contract");
   if (!value || typeof value !== "object") throw invalidResponse();
   const record = value as Record<string, unknown>;
   if (
@@ -40,14 +40,14 @@ export async function listPlanReviews(
   state = "PENDING_REVIEW",
 ): Promise<PlanReviewPage> {
   const parameters = new URLSearchParams({ state });
-  const value = await request(`/api/plan-reviews?${parameters.toString()}`);
+  const value = await requestJson(`/api/plan-reviews?${parameters.toString()}`);
   if (!isPlanReviewPage(value)) throw invalidResponse();
   return value;
 }
 
 export async function showPlanReview(reviewId: string): Promise<PlanReviewView> {
   const parameters = new URLSearchParams({ review_id: reviewId });
-  const value = await request(`/api/plan-reviews/show?${parameters.toString()}`);
+  const value = await requestJson(`/api/plan-reviews/show?${parameters.toString()}`);
   if (!isPlanReviewView(value)) throw invalidResponse();
   return value;
 }
@@ -65,7 +65,9 @@ export async function decidePlanReview(
       decision,
       decided_by: principal,
       reason_code: reasonCode,
-      idempotency_key: idempotency(`${decision}-${view.request.review_request_id}`),
+      idempotency_key: createIdempotencyKey(
+        `${decision}-${view.request.review_request_id}`,
+      ),
     },
   });
 }
@@ -85,7 +87,9 @@ export async function editPlanReview(
       invalidated_object_refs: [],
       decided_by: principal,
       reason_code: "USER_EDITED_PLAN",
-      idempotency_key: idempotency(`EDIT-${view.request.review_request_id}`),
+      idempotency_key: createIdempotencyKey(
+        `EDIT-${view.request.review_request_id}`,
+      ),
     },
   });
 }
@@ -99,7 +103,9 @@ export async function resumePlanReview(
     submission: {
       expected_plan_version: view.request.plan_version,
       resumed_by: principal,
-      idempotency_key: idempotency(`RESUME-${view.request.review_request_id}`),
+      idempotency_key: createIdempotencyKey(
+        `RESUME-${view.request.review_request_id}`,
+      ),
     },
   });
 }
@@ -109,7 +115,7 @@ async function command(
   principal: string,
   body: object,
 ): Promise<PlanReviewView> {
-  const value = await request(path, {
+  const value = await requestJson(path, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -121,28 +127,49 @@ async function command(
   return value;
 }
 
-async function request(path: string, init?: RequestInit): Promise<unknown> {
-  const response = await fetch(`${API_BASE}${path}`, init);
-  const body: unknown = await response.json();
+export async function requestJson(
+  path: string,
+  init?: RequestInit,
+): Promise<unknown> {
+  const response = await fetch(apiUrl(path), init);
+  let body: unknown;
+  try {
+    body = await response.json();
+  } catch {
+    if (response.ok) throw invalidResponse();
+    throw new ApiError(
+      response.status,
+      "HTTP_ERROR",
+      "Agent Host 请求失败。",
+    );
+  }
   if (!response.ok) {
     const record =
       body && typeof body === "object" ? (body as Record<string, unknown>) : {};
     throw new ApiError(
       response.status,
       typeof record.error_code === "string" ? record.error_code : "HTTP_ERROR",
-      typeof record.message === "string" ? record.message : "Plan console request failed.",
+      typeof record.message === "string" ? record.message : "Agent Host 请求失败。",
     );
   }
   return body;
 }
 
 function invalidResponse(): ApiError {
-  return new ApiError(500, "INVALID_RESPONSE", "API response failed contract validation.");
+  return new ApiError(
+    500,
+    "INVALID_RESPONSE",
+    "Agent Host 返回了无效响应。",
+  );
 }
 
-function idempotency(seed: string): string {
+export function createIdempotencyKey(seed: string): string {
   const suffix =
     globalThis.crypto?.randomUUID?.() ??
     `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
   return `${seed}-${suffix}`;
+}
+
+export function apiUrl(path: string): string {
+  return `${API_BASE}${path}`;
 }

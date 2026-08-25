@@ -60,14 +60,20 @@ def test_pi_bridge_events_normalize_to_tool_pair(tmp_path: Path) -> None:
         "tool_execution_start",
         {"toolName": "write", "toolCallId": "tool-1"},
     )
+    progress = PiRpcRuntime._normalize(
+        events,
+        "tool_execution_update",
+        {"toolName": "write", "toolCallId": "tool-1"},
+    )
     finished = PiRpcRuntime._normalize(
         events,
         "tool_execution_end",
         {"toolName": "write", "toolCallId": "tool-1"},
     )
     assert started.event_type == RuntimeEventType.TOOL_STARTED
+    assert progress.event_type == RuntimeEventType.TOOL_PROGRESS
     assert finished.event_type == RuntimeEventType.TOOL_FINISHED
-    assert started.tool_call_id == finished.tool_call_id == "tool-1"
+    assert started.tool_call_id == progress.tool_call_id == finished.tool_call_id == "tool-1"
 
 
 def test_pi_ark_model_config_references_environment_without_writing_secret(

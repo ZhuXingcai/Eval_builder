@@ -87,7 +87,6 @@ class ClaudeCodeCliRuntime(AgentRuntime):
         )
         stdout, stderr = await process.communicate()
         version = (stdout or stderr).decode(errors="replace").strip()
-        auth_mode = "api_key" if os.environ.get("ANTHROPIC_API_KEY") else "local_cli_session"
         return RuntimeCapabilities(
             name=RuntimeName.CLAUDE_CODE_CLI,
             available=process.returncode == 0,
@@ -95,7 +94,7 @@ class ClaudeCodeCliRuntime(AgentRuntime):
             models=[],
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep", "WebSearch", "WebFetch"],
             supports_resume=True,
-            reason=f"credential readiness is verified by live smoke ({auth_mode})",
+            reason="CLI protocol is available; credential readiness is not probed",
         )
 
     async def run(self, request: RuntimeRequest) -> AsyncIterator[RuntimeEvent]:

@@ -64,6 +64,7 @@ OVERLAY_MODULES = (
     ("facade", "env_mock_agent.facade.retrieval_v2"),
     ("facade", "env_mock_agent.facade.resource_v2"),
     ("facade", "env_mock_agent.facade.routing_v2"),
+    ("facade", "env_mock_agent.facade.runtime_v2"),
     ("facade", "env_mock_agent.facade.semantic_review_v2"),
     ("facade", "env_mock_agent.facade.telemetry_v2"),
     ("facade", "env_mock_agent.facade.validation_v2"),

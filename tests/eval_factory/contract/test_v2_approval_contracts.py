@@ -381,8 +381,8 @@ def test_v2_overlay_manifest_is_current_and_closed() -> None:
     manifest_path = ROOT / "specs/002-eval-dataset-factory/contracts/v2/manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["architecture"] == "v1-base-plus-v2-overlay"
-    assert len(manifest["contracts"]) == 412
-    assert sum(item["owner"] == "facade" for item in manifest["contracts"]) == 56
+    assert len(manifest["contracts"]) == 415
+    assert sum(item["owner"] == "facade" for item in manifest["contracts"]) == 59
     assert sum(item["owner"] == "factory" for item in manifest["contracts"]) == 356
     contracts = {item["python_type"]: item for item in manifest["contracts"]}
     expected_external_evidence_types = {

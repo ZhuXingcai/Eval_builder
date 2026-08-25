@@ -166,6 +166,8 @@ from eval_factory.trace.query.cli import run_app, trace_app
 from eval_factory.trace.storage import TraceIndexStore
 
 if TYPE_CHECKING:
+    from fastapi import FastAPI
+
     from eval_factory.readiness.concurrency_experiment_models import (
         PreparedConcurrencyRecoveryCase,
     )
@@ -367,19 +369,119 @@ def agent_run(
 @agent_app.command("serve")
 def agent_serve(
     factory_store: Annotated[Path, typer.Option("--factory-store")],
-    registry: Annotated[Path, typer.Option("--registry")],
+    registry: Annotated[
+        Path | None,
+        typer.Option("--registry"),
+    ] = None,
+    shell_config: Annotated[
+        Path | None,
+        typer.Option("--shell-config"),
+    ] = None,
+    private_store: Annotated[
+        Path | None,
+        typer.Option("--private-store"),
+    ] = None,
+    gateway_store: Annotated[
+        Path | None,
+        typer.Option("--gateway-store"),
+    ] = None,
+    harness_store: Annotated[
+        Path | None,
+        typer.Option("--harness-store"),
+    ] = None,
+    source_store: Annotated[
+        Path | None,
+        typer.Option("--source-store"),
+    ] = None,
+    team_store: Annotated[
+        Path | None,
+        typer.Option("--team-store"),
+    ] = None,
+    capability_request_store: Annotated[
+        Path | None,
+        typer.Option("--capability-request-store"),
+    ] = None,
+    graph_journal: Annotated[
+        Path | None,
+        typer.Option("--graph-journal"),
+    ] = None,
+    graph_checkpoint: Annotated[
+        Path | None,
+        typer.Option("--graph-checkpoint"),
+    ] = None,
+    core_workspace: Annotated[
+        Path | None,
+        typer.Option("--core-workspace"),
+    ] = None,
+    attachment_workspace: Annotated[
+        Path | None,
+        typer.Option("--attachment-workspace"),
+    ] = None,
+    job_store: Annotated[
+        Path | None,
+        typer.Option("--job-store"),
+    ] = None,
+    specialist_workspace: Annotated[
+        Path | None,
+        typer.Option("--specialist-workspace"),
+    ] = None,
+    candidate_output: Annotated[
+        Path | None,
+        typer.Option("--candidate-output"),
+    ] = None,
+    user: Annotated[
+        str | None,
+        typer.Option("--user"),
+    ] = None,
+    plan_review_only: Annotated[
+        bool,
+        typer.Option(
+            "--plan-review-only",
+            help="Run the legacy PlanReview-only compatibility host.",
+        ),
+    ] = False,
     host: Annotated[str, typer.Option("--host")] = "127.0.0.1",
     port: Annotated[int, typer.Option("--port", min=1024, max=65535)] = 8174,
 ) -> None:
     import uvicorn
 
-    from eval_factory.console_api import create_app
-
-    service = _plan_review_service(
-        factory_store,
-        registry_path=registry,
-    )
-    uvicorn.run(create_app(service), host=host, port=port)
+    try:
+        application = _agent_serve_application(
+            factory_store=factory_store,
+            registry=registry,
+            shell_config=shell_config,
+            private_store=private_store,
+            gateway_store=gateway_store,
+            harness_store=harness_store,
+            source_store=source_store,
+            team_store=team_store,
+            capability_request_store=capability_request_store,
+            graph_journal=graph_journal,
+            graph_checkpoint=graph_checkpoint,
+            core_workspace=core_workspace,
+            attachment_workspace=attachment_workspace,
+            job_store=job_store,
+            specialist_workspace=specialist_workspace,
+            candidate_output=candidate_output,
+            user=user,
+            plan_review_only=plan_review_only,
+        )
+    except Exception as exc:
+        code, message = _error(exc)
+        typer.echo(
+            json.dumps(
+                {
+                    "schema_version": ("eval-factory/agent-shell-cli-error/v1"),
+                    "error_code": code,
+                    "message": message,
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+            err=True,
+        )
+        raise typer.Exit(code=2) from None
+    uvicorn.run(application, host=host, port=port)
 
 
 @pipeline_app.command("plan")
@@ -1121,6 +1223,119 @@ def pipeline_production_release(
         and result.outcome is not ProductionReleaseOutcomeV2.PUBLISHED
     ):
         raise typer.Exit(code=3)
+
+
+def _agent_serve_application(
+    *,
+    factory_store: Path,
+    registry: Path | None,
+    shell_config: Path | None,
+    private_store: Path | None,
+    gateway_store: Path | None,
+    harness_store: Path | None,
+    source_store: Path | None,
+    team_store: Path | None,
+    capability_request_store: Path | None,
+    graph_journal: Path | None,
+    graph_checkpoint: Path | None,
+    core_workspace: Path | None,
+    attachment_workspace: Path | None,
+    job_store: Path | None,
+    specialist_workspace: Path | None,
+    candidate_output: Path | None,
+    user: str | None,
+    plan_review_only: bool,
+) -> FastAPI:
+    from eval_factory.console_api import (
+        create_agent_app,
+        create_app,
+    )
+
+    shell_values = (
+        shell_config,
+        private_store,
+        gateway_store,
+        harness_store,
+        source_store,
+        team_store,
+        capability_request_store,
+        graph_journal,
+        graph_checkpoint,
+        core_workspace,
+        attachment_workspace,
+        job_store,
+        specialist_workspace,
+        candidate_output,
+        user,
+    )
+    if plan_review_only:
+        if registry is None or any(value is not None for value in shell_values):
+            raise ValueError(
+                "PlanReview-only serve requires only factory store and registry",
+            )
+        return create_app(
+            _plan_review_service(
+                factory_store,
+                registry_path=registry,
+            )
+        )
+    if registry is not None or any(value is None for value in shell_values):
+        raise ValueError(
+            "Agent Shell serve requires every explicit authority and config path",
+        )
+    assert shell_config is not None
+    assert private_store is not None
+    assert gateway_store is not None
+    assert harness_store is not None
+    assert source_store is not None
+    assert team_store is not None
+    assert capability_request_store is not None
+    assert graph_journal is not None
+    assert graph_checkpoint is not None
+    assert core_workspace is not None
+    assert attachment_workspace is not None
+    assert job_store is not None
+    assert specialist_workspace is not None
+    assert candidate_output is not None
+    assert user is not None
+    from eval_factory.console_api.fixture_host import (
+        AgentShellFixtureHostConfigV1,
+        AgentShellFixtureHostPaths,
+        build_fixture_agent_shell_host,
+    )
+
+    _require_pipeline_file(
+        shell_config,
+        "Agent Shell fixture config",
+    )
+    fixture_host = build_fixture_agent_shell_host(
+        paths=AgentShellFixtureHostPaths(
+            factory_store=factory_store,
+            private_store=private_store,
+            gateway_store=gateway_store,
+            harness_store=harness_store,
+            source_store=source_store,
+            team_store=team_store,
+            capability_request_store=capability_request_store,
+            graph_journal=graph_journal,
+            graph_checkpoint=graph_checkpoint,
+            core_workspace=core_workspace,
+            attachment_workspace=attachment_workspace,
+            job_store=job_store,
+            specialist_workspace=specialist_workspace,
+            candidate_output=candidate_output,
+        ),
+        config=_load_model(
+            shell_config,
+            AgentShellFixtureHostConfigV1,
+        ),
+        requested_by=user,
+    )
+    return create_agent_app(
+        fixture_host.reviews,
+        fixture_host.shell,
+        fixture_host.sources,
+    )
 
 
 def _agent_dataset_run(

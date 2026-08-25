@@ -283,14 +283,16 @@ def _audit() -> ContractAudit:
 
 def _binding(
     *,
+    binding_id: str = "graph-binding.stage4",
+    session_ref: ObjectRef | None = None,
     factory_run_suffix: str = "run-1",
     team_suffix: str = "team-1",
     factory_run_ref: ObjectRef | None = None,
     expected_factory_run_version: int = 2,
 ) -> HarnessGraphExecutionBindingV1:
     return HarnessGraphExecutionBindingV1.create(
-        binding_id="graph-binding.stage4",
-        session_ref=_ref("harness-session"),
+        binding_id=binding_id,
+        session_ref=session_ref or _ref("harness-session"),
         requirement_ref=_ref(
             "evaluation-requirement-spec",
             version="v2",
@@ -324,6 +326,43 @@ def _binding(
         max_transitions=64,
         audit=_audit(),
     )
+
+
+def test_binding_lookup_by_harness_session_is_unique(
+    tmp_path: Path,
+) -> None:
+    store = FactoryGraphJournalStore(
+        tmp_path / "graph-session-lookup.sqlite3",
+    )
+    binding = _binding()
+    store.commit_binding(
+        binding,
+        idempotency_key="bind-session-lookup",
+    )
+
+    assert store.get_binding_for_session(binding.session_ref) == binding
+    with pytest.raises(FactoryGraphJournalNotFoundError):
+        store.get_binding_for_session(
+            _ref(
+                "harness-session",
+                "missing-session",
+            )
+        )
+    with pytest.raises(
+        FactoryGraphJournalIntegrityError,
+        match="multiple",
+    ):
+        second = _binding(
+            binding_id="graph-binding.stage4-second",
+            factory_run_suffix="run-2",
+            team_suffix="team-2",
+            session_ref=binding.session_ref,
+        )
+        store.commit_binding(
+            second,
+            idempotency_key="bind-session-lookup-second",
+        )
+        store.get_binding_for_session(binding.session_ref)
 
 
 def _checkpoint(

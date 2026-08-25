@@ -6,6 +6,7 @@ from typing import Annotated, ClassVar, Literal, Self
 
 from pydantic import Field, model_validator
 
+from env_mock_agent.facade import RuntimeEventKindV2
 from eval_factory.contracts.core import ContractAudit, Identifier, ObjectRef
 from eval_factory.contracts.core_v2 import ContractModelV2
 from eval_factory.harness.contracts import (
@@ -244,6 +245,26 @@ class SessionRequirementPayloadV1(ContractModelV2):
         return self
 
 
+class SessionRuntimePayloadV1(ContractModelV2):
+    schema_version: Literal["eval-harness/session-runtime-payload/v1"] = (
+        "eval-harness/session-runtime-payload/v1"
+    )
+    family: Literal["RUNTIME"] = "RUNTIME"
+    event_kind: RuntimeEventKindV2
+    runtime_id: Identifier
+    runtime_event_ref: ObjectRef
+
+    @model_validator(mode="after")
+    def validate_runtime_event(self) -> Self:
+        require_ref(
+            self.runtime_event_ref,
+            "runtime-event",
+            "runtime_event_ref",
+            object_version="v2",
+        )
+        return self
+
+
 SessionEventPayloadV1 = Annotated[
     SessionLifecyclePayloadV1
     | SessionMessagePayloadV1
@@ -252,7 +273,8 @@ SessionEventPayloadV1 = Annotated[
     | SessionCheckpointPayloadV1
     | SessionTeamPayloadV1
     | SessionGatewayPayloadV1
-    | SessionRequirementPayloadV1,
+    | SessionRequirementPayloadV1
+    | SessionRuntimePayloadV1,
     Field(discriminator="family"),
 ]
 
@@ -395,6 +417,7 @@ __all__ = [
     "SessionMessagePayloadV1",
     "SessionRequirementEventKindV1",
     "SessionRequirementPayloadV1",
+    "SessionRuntimePayloadV1",
     "SessionTeamEventKindV1",
     "SessionTeamPayloadV1",
     "validate_session_commands",

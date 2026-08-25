@@ -1,6 +1,1692 @@
 {
   "components": {
     "schemas": {
+      "AgentShellApiContractV1": {
+        "additionalProperties": false,
+        "properties": {
+          "event_families": {
+            "default": [
+              "LIFECYCLE",
+              "MESSAGE",
+              "CAPABILITY",
+              "INTERACTION",
+              "CHECKPOINT",
+              "TEAM",
+              "GATEWAY",
+              "REQUIREMENT",
+              "RUNTIME"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellEventFamilyV1"
+            },
+            "title": "Event Families",
+            "type": "array"
+          },
+          "event_stream_media_type": {
+            "const": "text/event-stream",
+            "default": "text/event-stream",
+            "title": "Event Stream Media Type",
+            "type": "string"
+          },
+          "max_event_page_size": {
+            "const": 500,
+            "default": 500,
+            "title": "Max Event Page Size",
+            "type": "integer"
+          },
+          "principal_header": {
+            "const": "X-Eval-Factory-Principal",
+            "default": "X-Eval-Factory-Principal",
+            "title": "Principal Header",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-api-contract/v1",
+            "default": "eval-factory/agent-shell-api-contract/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "title": "AgentShellApiContractV1",
+        "type": "object"
+      },
+      "AgentShellDeliverySummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "bundle_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Bundle Sha256",
+            "type": "string"
+          },
+          "completion_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "file_count": {
+            "maximum": 10000000.0,
+            "minimum": 1.0,
+            "title": "File Count",
+            "type": "integer"
+          },
+          "inventory_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "item_count": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Item Count",
+            "type": "integer"
+          },
+          "manifest_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-delivery-summary/v1",
+            "default": "eval-factory/agent-shell-delivery-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "total_bytes": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Total Bytes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "completion_ref",
+          "manifest_ref",
+          "inventory_ref",
+          "item_count",
+          "file_count",
+          "total_bytes",
+          "bundle_sha256"
+        ],
+        "title": "AgentShellDeliverySummaryV1",
+        "type": "object"
+      },
+      "AgentShellEventFamilyV1": {
+        "enum": [
+          "LIFECYCLE",
+          "MESSAGE",
+          "CAPABILITY",
+          "INTERACTION",
+          "CHECKPOINT",
+          "TEAM",
+          "GATEWAY",
+          "REQUIREMENT",
+          "RUNTIME"
+        ],
+        "title": "AgentShellEventFamilyV1",
+        "type": "string"
+      },
+      "AgentShellEventPageV1": {
+        "additionalProperties": false,
+        "properties": {
+          "after_sequence": {
+            "maximum": 1000000000.0,
+            "minimum": 0.0,
+            "title": "After Sequence",
+            "type": "integer"
+          },
+          "events": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellEventV1"
+            },
+            "maxItems": 500,
+            "title": "Events",
+            "type": "array"
+          },
+          "next_sequence": {
+            "anyOf": [
+              {
+                "maximum": 1000000001.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Sequence"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-event-page/v1",
+            "default": "eval-factory/agent-shell-event-page/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "session_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Session Id",
+            "type": "string"
+          },
+          "watermark": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Watermark",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "session_id",
+          "after_sequence",
+          "watermark"
+        ],
+        "title": "AgentShellEventPageV1",
+        "type": "object"
+      },
+      "AgentShellEventV1": {
+        "additionalProperties": false,
+        "properties": {
+          "authority_version": {
+            "maximum": 1000000000.0,
+            "minimum": 0.0,
+            "title": "Authority Version",
+            "type": "integer"
+          },
+          "event_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Event Id",
+            "type": "string"
+          },
+          "event_kind": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SessionLifecycleEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionMessageEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionCapabilityEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionInteractionEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionCheckpointEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionTeamEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionGatewayEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/SessionRequirementEventKindV1"
+              },
+              {
+                "$ref": "#/components/schemas/RuntimeEventKindV2"
+              }
+            ],
+            "title": "Event Kind"
+          },
+          "failure_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RuntimeFailureCodeV2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "family": {
+            "$ref": "#/components/schemas/AgentShellEventFamilyV1"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "runtime_id": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime Id"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-event/v1",
+            "default": "eval-factory/agent-shell-event/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sequence": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Sequence",
+            "type": "integer"
+          },
+          "step_id": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step Id"
+          },
+          "tool_family": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ToolFamilyV2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "turn_id": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn Id"
+          },
+          "usage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UnifiedRuntimeUsageV2"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "event_id",
+          "sequence",
+          "authority_version",
+          "family",
+          "event_kind",
+          "occurred_at"
+        ],
+        "title": "AgentShellEventV1",
+        "type": "object"
+      },
+      "AgentShellExecutionPhaseV1": {
+        "enum": [
+          "NOT_CONFIGURED",
+          "WAITING_REQUIREMENT",
+          "WAITING_SOURCE",
+          "READY",
+          "RUNNING",
+          "WAITING_REVIEW",
+          "VERIFICATION_REQUIRED",
+          "BLOCKED",
+          "COMPLETED"
+        ],
+        "title": "AgentShellExecutionPhaseV1",
+        "type": "string"
+      },
+      "AgentShellFactorySummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregate_result_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "blocked_count": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Blocked Count",
+            "type": "integer"
+          },
+          "candidate_count": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Candidate Count",
+            "type": "integer"
+          },
+          "delivery_manifest_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "incomplete_count": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Incomplete Count",
+            "type": "integer"
+          },
+          "next_action": {
+            "$ref": "#/components/schemas/FactoryDatasetNextActionV2"
+          },
+          "pending_review_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 500,
+            "title": "Pending Review Refs",
+            "type": "array"
+          },
+          "rejected_count": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Rejected Count",
+            "type": "integer"
+          },
+          "run_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "run_version": {
+            "maximum": 100000000.0,
+            "minimum": 0.0,
+            "title": "Run Version",
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-factory-summary/v1",
+            "default": "eval-factory/agent-shell-factory-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FactoryRunStatusV2"
+          }
+        },
+        "required": [
+          "run_ref",
+          "run_version",
+          "status",
+          "next_action",
+          "candidate_count",
+          "rejected_count",
+          "blocked_count",
+          "incomplete_count"
+        ],
+        "title": "AgentShellFactorySummaryV1",
+        "type": "object"
+      },
+      "AgentShellGraphSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "binding_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "checkpoint_outcome": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GraphCheckpointOutcomeV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checkpoint_phase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GraphCheckpointPhaseV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checkpoint_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "node": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Node"
+          },
+          "reason_codes": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-graph-summary/v1",
+            "default": "eval-factory/agent-shell-graph-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "transition_number": {
+            "default": 0,
+            "maximum": 100000.0,
+            "minimum": 0.0,
+            "title": "Transition Number",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "binding_ref"
+        ],
+        "title": "AgentShellGraphSummaryV1",
+        "type": "object"
+      },
+      "AgentShellInteractionCardV1": {
+        "additionalProperties": false,
+        "properties": {
+          "interaction_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Interaction Id",
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/AgentShellInteractionKindV1"
+          },
+          "questions": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 32,
+            "title": "Questions",
+            "type": "array"
+          },
+          "reason_codes": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 256,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-interaction-card/v1",
+            "default": "eval-factory/agent-shell-interaction-card/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/components/schemas/AgentShellInteractionStateV1"
+          },
+          "subject_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          }
+        },
+        "required": [
+          "interaction_id",
+          "kind",
+          "state",
+          "subject_ref"
+        ],
+        "title": "AgentShellInteractionCardV1",
+        "type": "object"
+      },
+      "AgentShellInteractionKindV1": {
+        "enum": [
+          "CLARIFICATION",
+          "PERMISSION",
+          "PLAN_REVIEW",
+          "VERIFICATION"
+        ],
+        "title": "AgentShellInteractionKindV1",
+        "type": "string"
+      },
+      "AgentShellInteractionStateV1": {
+        "enum": [
+          "PENDING",
+          "BLOCKED"
+        ],
+        "title": "AgentShellInteractionStateV1",
+        "type": "string"
+      },
+      "AgentShellMemberProjectionV1": {
+        "additionalProperties": false,
+        "properties": {
+          "acceptance_check_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000,
+            "title": "Acceptance Check Refs",
+            "type": "array"
+          },
+          "artifact_envelope_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 10000,
+            "title": "Artifact Envelope Refs",
+            "type": "array"
+          },
+          "member": {
+            "$ref": "#/components/schemas/AgentShellTeamMemberSummaryV1"
+          },
+          "messages": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellTeamMessageSummaryV1"
+            },
+            "maxItems": 10000,
+            "title": "Messages",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-member-projection/v1",
+            "default": "eval-factory/agent-shell-member-projection/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "source_fingerprint": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Fingerprint",
+            "type": "string"
+          },
+          "subscription_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 10000,
+            "title": "Subscription Refs",
+            "type": "array"
+          },
+          "task_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 10000,
+            "title": "Task Refs",
+            "type": "array"
+          },
+          "team_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          }
+        },
+        "required": [
+          "team_ref",
+          "member",
+          "source_fingerprint"
+        ],
+        "title": "AgentShellMemberProjectionV1",
+        "type": "object"
+      },
+      "AgentShellPlanReviewSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "decision_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "plan_kind": {
+            "$ref": "#/components/schemas/PlanKindV2"
+          },
+          "plan_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "plan_version": {
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Plan Version",
+            "type": "integer"
+          },
+          "request_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "result_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "revision_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "run_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Run Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-plan-review-summary/v1",
+            "default": "eval-factory/agent-shell-plan-review-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/components/schemas/PlanReviewStateV2"
+          }
+        },
+        "required": [
+          "run_id",
+          "request_ref",
+          "result_ref",
+          "plan_ref",
+          "plan_kind",
+          "plan_version",
+          "state"
+        ],
+        "title": "AgentShellPlanReviewSummaryV1",
+        "type": "object"
+      },
+      "AgentShellProjectionV1": {
+        "additionalProperties": false,
+        "properties": {
+          "activity": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellEventV1"
+            },
+            "maxItems": 500,
+            "title": "Activity",
+            "type": "array"
+          },
+          "delivery": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentShellDeliverySummaryV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidence_class": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProviderEvidenceClassV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "execution_phase": {
+            "$ref": "#/components/schemas/AgentShellExecutionPhaseV1",
+            "default": "NOT_CONFIGURED"
+          },
+          "factory": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentShellFactorySummaryV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "graph": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentShellGraphSummaryV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pending_interactions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellInteractionCardV1"
+            },
+            "maxItems": 500,
+            "title": "Pending Interactions",
+            "type": "array"
+          },
+          "plan_reviews": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellPlanReviewSummaryV1"
+            },
+            "maxItems": 500,
+            "title": "Plan Reviews",
+            "type": "array"
+          },
+          "reconnect_cursor": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Reconnect Cursor",
+            "type": "integer"
+          },
+          "requirement_outcome": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RequirementInterpretationOutcomeV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-projection/v1",
+            "default": "eval-factory/agent-shell-projection/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "session": {
+            "$ref": "#/components/schemas/AgentShellSessionSummaryV1"
+          },
+          "source_admission_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_fingerprint": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Fingerprint",
+            "type": "string"
+          },
+          "team": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AgentShellTeamSummaryV1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transcript": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellTranscriptEntryV1"
+            },
+            "maxItems": 10000,
+            "title": "Transcript",
+            "type": "array"
+          },
+          "workspaces": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellWorkspaceDescriptorV1"
+            },
+            "maxItems": 32,
+            "title": "Workspaces",
+            "type": "array"
+          }
+        },
+        "required": [
+          "session",
+          "reconnect_cursor",
+          "source_fingerprint"
+        ],
+        "title": "AgentShellProjectionV1",
+        "type": "object"
+      },
+      "AgentShellSessionPageV1": {
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "minimum": 0.0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-session-page/v1",
+            "default": "eval-factory/agent-shell-session-page/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sessions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellSessionSummaryV1"
+            },
+            "maxItems": 500,
+            "title": "Sessions",
+            "type": "array"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offset",
+          "limit",
+          "total"
+        ],
+        "title": "AgentShellSessionPageV1",
+        "type": "object"
+      },
+      "AgentShellSessionSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "last_event_sequence": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Last Event Sequence",
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-session-summary/v1",
+            "default": "eval-factory/agent-shell-session-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "session_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Session Id",
+            "type": "string"
+          },
+          "session_version": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Session Version",
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/HarnessSessionStatusV1"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 160,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_id",
+          "status",
+          "session_version",
+          "last_event_sequence",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "AgentShellSessionSummaryV1",
+        "type": "object"
+      },
+      "AgentShellSourceAdmissionContractV1": {
+        "additionalProperties": false,
+        "properties": {
+          "error_codes": {
+            "default": [
+              "SOURCE_ADMISSION_CONFLICT",
+              "SOURCE_ADMISSION_HASH_MISMATCH",
+              "SOURCE_ADMISSION_INVALID",
+              "SOURCE_ADMISSION_INTEGRITY",
+              "SOURCE_ADMISSION_INVENTORY_MISMATCH",
+              "SOURCE_ADMISSION_LIMIT_EXCEEDED",
+              "SOURCE_ADMISSION_MANIFEST_INVALID",
+              "SOURCE_ADMISSION_MULTIPART_INVALID",
+              "SOURCE_ADMISSION_NOT_CONFIGURED",
+              "SOURCE_ADMISSION_NOT_FOUND",
+              "SOURCE_ADMISSION_SOURCE_INVALID",
+              "SOURCE_ADMISSION_SOURCE_METADATA_MISMATCH",
+              "SOURCE_ADMISSION_UNSAFE_NAME"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AgentShellSourceAdmissionErrorCodeV1"
+            },
+            "title": "Error Codes",
+            "type": "array"
+          },
+          "manifest_columns": {
+            "default": [
+              "instance_id",
+              "sid",
+              "p_date",
+              "business",
+              "category",
+              "pool_id",
+              "pool_category"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "title": "Manifest Columns",
+            "type": "array"
+          },
+          "manifest_name": {
+            "const": "manifest.csv",
+            "default": "manifest.csv",
+            "title": "Manifest Name",
+            "type": "string"
+          },
+          "max_manifest_bytes": {
+            "maximum": 16777216.0,
+            "minimum": 1.0,
+            "title": "Max Manifest Bytes",
+            "type": "integer"
+          },
+          "max_request_bytes": {
+            "maximum": 2000000000.0,
+            "minimum": 1.0,
+            "title": "Max Request Bytes",
+            "type": "integer"
+          },
+          "max_source_bytes": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Max Source Bytes",
+            "type": "integer"
+          },
+          "max_source_files": {
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Max Source Files",
+            "type": "integer"
+          },
+          "max_total_source_bytes": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Max Total Source Bytes",
+            "type": "integer"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-source-admission-contract/v1",
+            "default": "eval-factory/agent-shell-source-admission-contract/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "max_source_files",
+          "max_manifest_bytes",
+          "max_source_bytes",
+          "max_total_source_bytes",
+          "max_request_bytes"
+        ],
+        "title": "AgentShellSourceAdmissionContractV1",
+        "type": "object"
+      },
+      "AgentShellSourceAdmissionErrorCodeV1": {
+        "enum": [
+          "SOURCE_ADMISSION_CONFLICT",
+          "SOURCE_ADMISSION_HASH_MISMATCH",
+          "SOURCE_ADMISSION_INVALID",
+          "SOURCE_ADMISSION_INTEGRITY",
+          "SOURCE_ADMISSION_INVENTORY_MISMATCH",
+          "SOURCE_ADMISSION_LIMIT_EXCEEDED",
+          "SOURCE_ADMISSION_MANIFEST_INVALID",
+          "SOURCE_ADMISSION_MULTIPART_INVALID",
+          "SOURCE_ADMISSION_NOT_CONFIGURED",
+          "SOURCE_ADMISSION_NOT_FOUND",
+          "SOURCE_ADMISSION_SOURCE_INVALID",
+          "SOURCE_ADMISSION_SOURCE_METADATA_MISMATCH",
+          "SOURCE_ADMISSION_UNSAFE_NAME"
+        ],
+        "title": "AgentShellSourceAdmissionErrorCodeV1",
+        "type": "string"
+      },
+      "AgentShellSourceAdmissionV1": {
+        "additionalProperties": false,
+        "properties": {
+          "admission_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "artifact_envelope_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 500,
+            "minItems": 1,
+            "title": "Artifact Envelope Refs",
+            "type": "array"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/AgentShellSourceFileV1"
+            },
+            "maxItems": 501,
+            "minItems": 2,
+            "title": "Files",
+            "type": "array"
+          },
+          "manifest_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Manifest Sha256",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-source-admission/v1",
+            "default": "eval-factory/agent-shell-source-admission/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "session_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Session Id",
+            "type": "string"
+          },
+          "session_version": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Session Version",
+            "type": "integer"
+          },
+          "source_count": {
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Source Count",
+            "type": "integer"
+          },
+          "status": {
+            "const": "ADMITTED",
+            "default": "ADMITTED",
+            "title": "Status",
+            "type": "string"
+          },
+          "total_source_bytes": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Total Source Bytes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "admission_ref",
+          "session_id",
+          "session_version",
+          "manifest_sha256",
+          "source_count",
+          "total_source_bytes",
+          "files",
+          "artifact_envelope_refs",
+          "created_at"
+        ],
+        "title": "AgentShellSourceAdmissionV1",
+        "type": "object"
+      },
+      "AgentShellSourceFileKindV1": {
+        "enum": [
+          "MANIFEST",
+          "TRACE"
+        ],
+        "title": "AgentShellSourceFileKindV1",
+        "type": "string"
+      },
+      "AgentShellSourceFileV1": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_envelope_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "$ref": "#/components/schemas/AgentShellSourceFileKindV1"
+          },
+          "media_type": {
+            "enum": [
+              "text/csv",
+              "application/x-ndjson"
+            ],
+            "title": "Media Type",
+            "type": "string"
+          },
+          "relative_name": {
+            "maxLength": 255,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,254}$",
+            "title": "Relative Name",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-source-file/v1",
+            "default": "eval-factory/agent-shell-source-file/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Sha256",
+            "type": "string"
+          },
+          "size_bytes": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Size Bytes",
+            "type": "integer"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "kind",
+          "relative_name",
+          "media_type",
+          "size_bytes",
+          "sha256"
+        ],
+        "title": "AgentShellSourceFileV1",
+        "type": "object"
+      },
+      "AgentShellTeamMemberSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "capability_definition_refs": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 256,
+            "minItems": 1,
+            "title": "Capability Definition Refs",
+            "type": "array"
+          },
+          "independent_session_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "is_coordinator": {
+            "title": "Is Coordinator",
+            "type": "boolean"
+          },
+          "member_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Member Id",
+            "type": "string"
+          },
+          "member_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "role": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Role",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-team-member-summary/v1",
+            "default": "eval-factory/agent-shell-team-member-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TeamMemberStatusV1"
+          }
+        },
+        "required": [
+          "member_ref",
+          "member_id",
+          "role",
+          "status",
+          "independent_session_ref",
+          "capability_definition_refs",
+          "is_coordinator"
+        ],
+        "title": "AgentShellTeamMemberSummaryV1",
+        "type": "object"
+      },
+      "AgentShellTeamMessageSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_envelope_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 10000,
+            "title": "Artifact Envelope Refs",
+            "type": "array"
+          },
+          "audience": {
+            "$ref": "#/components/schemas/TeamMessageAudienceV1"
+          },
+          "message_kind": {
+            "$ref": "#/components/schemas/TeamMessageKindV1"
+          },
+          "message_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "recipient_member_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 1000,
+            "title": "Recipient Member Refs",
+            "type": "array"
+          },
+          "reply_to_message_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-team-message-summary/v1",
+            "default": "eval-factory/agent-shell-team-message-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sender_member_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "task_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "message_ref",
+          "sender_member_ref",
+          "audience",
+          "message_kind"
+        ],
+        "title": "AgentShellTeamMessageSummaryV1",
+        "type": "object"
+      },
+      "AgentShellTeamSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_head_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 100000,
+            "title": "Artifact Head Refs",
+            "type": "array"
+          },
+          "authority_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "checkpoint_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lifecycle": {
+            "$ref": "#/components/schemas/TeamLifecycleV1"
+          },
+          "members": {
+            "items": {
+              "$ref": "#/components/schemas/AgentShellTeamMemberSummaryV1"
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Members",
+            "type": "array"
+          },
+          "open_conflict_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 10000,
+            "title": "Open Conflict Refs",
+            "type": "array"
+          },
+          "roster_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-team-summary/v1",
+            "default": "eval-factory/agent-shell-team-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "task_graph_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/AgentShellTeamTaskSummaryV1"
+            },
+            "maxItems": 100000,
+            "minItems": 1,
+            "title": "Tasks",
+            "type": "array"
+          },
+          "team_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "team_version": {
+            "maximum": 1000000000.0,
+            "minimum": 1.0,
+            "title": "Team Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "team_ref",
+          "team_version",
+          "lifecycle",
+          "roster_ref",
+          "task_graph_ref",
+          "authority_ref",
+          "members",
+          "tasks"
+        ],
+        "title": "AgentShellTeamSummaryV1",
+        "type": "object"
+      },
+      "AgentShellTeamTaskSummaryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "assigned_member_id": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Member Id"
+          },
+          "attempt": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Attempt",
+            "type": "integer"
+          },
+          "capability_definition_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          },
+          "claim_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dependency_task_ids": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 10000,
+            "title": "Dependency Task Ids",
+            "type": "array"
+          },
+          "event_version": {
+            "maximum": 1000000000.0,
+            "minimum": 0.0,
+            "title": "Event Version",
+            "type": "integer"
+          },
+          "latest_event_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lease_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObjectRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-team-task-summary/v1",
+            "default": "eval-factory/agent-shell-team-task-summary/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TeamTaskStatusV1"
+          },
+          "task_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "task_kind": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Task Kind",
+            "type": "string"
+          },
+          "task_ref": {
+            "$ref": "#/components/schemas/ObjectRef"
+          }
+        },
+        "required": [
+          "task_ref",
+          "task_id",
+          "task_kind",
+          "status",
+          "capability_definition_ref",
+          "attempt",
+          "event_version"
+        ],
+        "title": "AgentShellTeamTaskSummaryV1",
+        "type": "object"
+      },
+      "AgentShellTranscriptEntryV1": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_envelope_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 256,
+            "title": "Artifact Envelope Refs",
+            "type": "array"
+          },
+          "content": {
+            "maxLength": 32768,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "message_id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+            "title": "Message Id",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/HarnessMessageRoleV1"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-transcript-entry/v1",
+            "default": "eval-factory/agent-shell-transcript-entry/v1",
+            "title": "Schema Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id",
+          "role",
+          "content",
+          "created_at"
+        ],
+        "title": "AgentShellTranscriptEntryV1",
+        "type": "object"
+      },
+      "AgentShellWorkspaceDescriptorV1": {
+        "additionalProperties": false,
+        "properties": {
+          "item_count": {
+            "maximum": 1000000.0,
+            "minimum": 0.0,
+            "title": "Item Count",
+            "type": "integer"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/AgentShellWorkspaceKindV1"
+          },
+          "owner_refs": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ObjectRef"
+            },
+            "maxItems": 100000,
+            "title": "Owner Refs",
+            "type": "array"
+          },
+          "reason_codes": {
+            "default": [],
+            "items": {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "eval-factory/agent-shell-workspace/v1",
+            "default": "eval-factory/agent-shell-workspace/v1",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AgentShellWorkspaceStatusV1"
+          }
+        },
+        "required": [
+          "kind",
+          "status",
+          "item_count"
+        ],
+        "title": "AgentShellWorkspaceDescriptorV1",
+        "type": "object"
+      },
+      "AgentShellWorkspaceKindV1": {
+        "enum": [
+          "CONVERSATION",
+          "PLAN_REVIEW",
+          "TRACE",
+          "TASK",
+          "ATTACHMENT",
+          "RUBRIC",
+          "GRADING",
+          "QUALITY",
+          "TEAM",
+          "ACTIVITY",
+          "DELIVERY"
+        ],
+        "title": "AgentShellWorkspaceKindV1",
+        "type": "string"
+      },
+      "AgentShellWorkspaceStatusV1": {
+        "enum": [
+          "AVAILABLE",
+          "EMPTY",
+          "BLOCKED",
+          "COMPLETE"
+        ],
+        "title": "AgentShellWorkspaceStatusV1",
+        "type": "string"
+      },
       "AttachmentGenerationPlanV2": {
         "additionalProperties": false,
         "properties": {
@@ -1085,6 +2771,30 @@
         "title": "DatasetDeliveryPlanV2",
         "type": "object"
       },
+      "FactoryDatasetNextActionV2": {
+        "enum": [
+          "ADVANCE",
+          "REVIEW_PLAN",
+          "INSPECT_OUTPUT",
+          "NONE"
+        ],
+        "title": "FactoryDatasetNextActionV2",
+        "type": "string"
+      },
+      "FactoryRunStatusV2": {
+        "enum": [
+          "CREATED",
+          "PLANNING",
+          "WAITING_REVIEW",
+          "RUNNING",
+          "BLOCKED",
+          "COMPLETED",
+          "FAILED",
+          "CANCELLED"
+        ],
+        "title": "FactoryRunStatusV2",
+        "type": "string"
+      },
       "GradingDesignPlanV2": {
         "additionalProperties": false,
         "properties": {
@@ -1321,6 +3031,26 @@
         "title": "GradingDesignPlanV2",
         "type": "object"
       },
+      "GraphCheckpointOutcomeV1": {
+        "enum": [
+          "READY",
+          "COMMITTED",
+          "WAITING_REVIEW",
+          "VERIFICATION_REQUIRED",
+          "BLOCKED"
+        ],
+        "title": "GraphCheckpointOutcomeV1",
+        "type": "string"
+      },
+      "GraphCheckpointPhaseV1": {
+        "enum": [
+          "PRE_TRANSITION",
+          "POST_TRANSITION",
+          "RECONCILED"
+        ],
+        "title": "GraphCheckpointPhaseV1",
+        "type": "string"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -1333,6 +3063,23 @@
         },
         "title": "HTTPValidationError",
         "type": "object"
+      },
+      "HarnessMessageRoleV1": {
+        "enum": [
+          "USER",
+          "ASSISTANT"
+        ],
+        "title": "HarnessMessageRoleV1",
+        "type": "string"
+      },
+      "HarnessSessionStatusV1": {
+        "enum": [
+          "ACTIVE",
+          "BLOCKED",
+          "CLOSED"
+        ],
+        "title": "HarnessSessionStatusV1",
+        "type": "string"
       },
       "JudgeAggregationModeV2": {
         "enum": [
@@ -2028,6 +3775,14 @@
         "title": "PlanRevisionV2",
         "type": "object"
       },
+      "ProviderEvidenceClassV1": {
+        "enum": [
+          "REAL_SEMANTIC",
+          "MECHANISM_FIXTURE"
+        ],
+        "title": "ProviderEvidenceClassV1",
+        "type": "string"
+      },
       "ReferenceMode": {
         "enum": [
           "NONE",
@@ -2037,6 +3792,60 @@
           "HUMAN_ONLY"
         ],
         "title": "ReferenceMode",
+        "type": "string"
+      },
+      "ReportedCostV2": {
+        "additionalProperties": false,
+        "properties": {
+          "amount_microusd": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Microusd"
+          },
+          "availability": {
+            "$ref": "#/components/schemas/TelemetryAvailabilityV2"
+          },
+          "currency": {
+            "const": "USD",
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "rounding": {
+            "anyOf": [
+              {
+                "const": "HALF_EVEN_MICRO_USD",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rounding"
+          }
+        },
+        "required": [
+          "availability"
+        ],
+        "title": "ReportedCostV2",
+        "type": "object"
+      },
+      "RequirementInterpretationOutcomeV1": {
+        "enum": [
+          "CLARIFICATION_REQUIRED",
+          "READY",
+          "ABSTAINED",
+          "BLOCKED_CAPABILITY",
+          "BLOCKED_POLICY"
+        ],
+        "title": "RequirementInterpretationOutcomeV1",
         "type": "string"
       },
       "ReviewablePlanV2": {
@@ -2068,6 +3877,292 @@
         ],
         "title": "RubricJudgedObjectKindV2",
         "type": "string"
+      },
+      "RuntimeEventKindV2": {
+        "enum": [
+          "RUN_STARTED",
+          "MODEL_REQUEST_STARTED",
+          "MODEL_OUTPUT_DELTA",
+          "MODEL_RESPONSE_AVAILABLE",
+          "TOOL_CALL_STARTED",
+          "TOOL_CALL_PROGRESS",
+          "TOOL_CALL_COMPLETED",
+          "ARTIFACT_CHANGED",
+          "WARNING",
+          "USAGE_REPORTED",
+          "RUN_COMPLETED",
+          "RUN_FAILED"
+        ],
+        "title": "RuntimeEventKindV2",
+        "type": "string"
+      },
+      "RuntimeFailureCodeV2": {
+        "enum": [
+          "AUTHENTICATION_FAILED",
+          "CANCELLED",
+          "CONTEXT_OVERFLOW",
+          "INVALID_REQUEST",
+          "MODEL_UNAVAILABLE",
+          "OVERLOADED",
+          "PROTOCOL_ERROR",
+          "PROVIDER_FAILED",
+          "RATE_LIMITED",
+          "SANDBOX_UNAVAILABLE",
+          "TIMEOUT",
+          "TOOL_DENIED",
+          "TOOL_FAILED",
+          "TRANSPORT_FAILED",
+          "UNKNOWN"
+        ],
+        "title": "RuntimeFailureCodeV2",
+        "type": "string"
+      },
+      "SessionCapabilityEventKindV1": {
+        "enum": [
+          "CAPABILITY_CALLED",
+          "CAPABILITY_RETURNED"
+        ],
+        "title": "SessionCapabilityEventKindV1",
+        "type": "string"
+      },
+      "SessionCheckpointEventKindV1": {
+        "enum": [
+          "GRAPH_CHECKPOINTED",
+          "TEAM_CHECKPOINTED"
+        ],
+        "title": "SessionCheckpointEventKindV1",
+        "type": "string"
+      },
+      "SessionGatewayEventKindV1": {
+        "enum": [
+          "GATEWAY_PREPARED",
+          "GATEWAY_COMPLETED",
+          "GATEWAY_FAILED",
+          "GATEWAY_UNKNOWN"
+        ],
+        "title": "SessionGatewayEventKindV1",
+        "type": "string"
+      },
+      "SessionInteractionEventKindV1": {
+        "enum": [
+          "INTERACTION_REQUESTED",
+          "INTERACTION_DECIDED"
+        ],
+        "title": "SessionInteractionEventKindV1",
+        "type": "string"
+      },
+      "SessionLifecycleEventKindV1": {
+        "enum": [
+          "SESSION_OPENED",
+          "SESSION_CLOSED",
+          "TURN_STARTED",
+          "TURN_COMPLETED",
+          "STEP_STARTED",
+          "STEP_COMPLETED"
+        ],
+        "title": "SessionLifecycleEventKindV1",
+        "type": "string"
+      },
+      "SessionMessageEventKindV1": {
+        "enum": [
+          "USER_MESSAGE",
+          "ASSISTANT_MESSAGE",
+          "ASSISTANT_CHUNK"
+        ],
+        "title": "SessionMessageEventKindV1",
+        "type": "string"
+      },
+      "SessionRequirementEventKindV1": {
+        "enum": [
+          "CLARIFICATION_REQUIRED",
+          "REQUIREMENT_READY",
+          "REQUIREMENT_BLOCKED"
+        ],
+        "title": "SessionRequirementEventKindV1",
+        "type": "string"
+      },
+      "SessionTeamEventKindV1": {
+        "enum": [
+          "TEAM_CHANGED",
+          "TEAM_MESSAGE_POSTED",
+          "ARTIFACT_HEAD_CHANGED",
+          "CONFLICT_OPENED",
+          "CONFLICT_RESOLVED"
+        ],
+        "title": "SessionTeamEventKindV1",
+        "type": "string"
+      },
+      "TeamLifecycleV1": {
+        "enum": [
+          "PROPOSED",
+          "FORMING",
+          "ACTIVE",
+          "CONVERGING",
+          "WAITING_USER",
+          "WAITING_REVIEW",
+          "BLOCKED",
+          "COMPLETED",
+          "FAILED",
+          "CANCELLED"
+        ],
+        "title": "TeamLifecycleV1",
+        "type": "string"
+      },
+      "TeamMemberStatusV1": {
+        "enum": [
+          "PROPOSED",
+          "READY",
+          "ACTIVE",
+          "WAITING",
+          "BLOCKED",
+          "COMPLETED",
+          "FAILED",
+          "CANCELLED"
+        ],
+        "title": "TeamMemberStatusV1",
+        "type": "string"
+      },
+      "TeamMessageAudienceV1": {
+        "enum": [
+          "DIRECT",
+          "BROADCAST",
+          "SYSTEM"
+        ],
+        "title": "TeamMessageAudienceV1",
+        "type": "string"
+      },
+      "TeamMessageKindV1": {
+        "enum": [
+          "QUESTION",
+          "ANSWER",
+          "PROPOSAL",
+          "CHALLENGE",
+          "ACKNOWLEDGEMENT",
+          "BLOCKED",
+          "HANDOFF",
+          "REVIEW_REQUEST",
+          "REVIEW_RESPONSE",
+          "SYSTEM"
+        ],
+        "title": "TeamMessageKindV1",
+        "type": "string"
+      },
+      "TeamTaskStatusV1": {
+        "enum": [
+          "PENDING",
+          "READY",
+          "CLAIMED",
+          "ACTIVE",
+          "BLOCKED",
+          "COMPLETED",
+          "FAILED",
+          "CANCELLED"
+        ],
+        "title": "TeamTaskStatusV1",
+        "type": "string"
+      },
+      "TelemetryAvailabilityV2": {
+        "enum": [
+          "REPORTED",
+          "DERIVED",
+          "UNAVAILABLE",
+          "NOT_APPLICABLE"
+        ],
+        "title": "TelemetryAvailabilityV2",
+        "type": "string"
+      },
+      "ToolFamilyV2": {
+        "enum": [
+          "FILE",
+          "SHELL",
+          "SEARCH",
+          "FETCH",
+          "RENDERER",
+          "OTHER"
+        ],
+        "title": "ToolFamilyV2",
+        "type": "string"
+      },
+      "UnifiedRuntimeUsageV2": {
+        "additionalProperties": false,
+        "properties": {
+          "cache_creation_input_tokens": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Cache Creation Input Tokens",
+            "type": "integer"
+          },
+          "cache_read_input_tokens": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Cache Read Input Tokens",
+            "type": "integer"
+          },
+          "duration_ms": {
+            "anyOf": [
+              {
+                "maximum": 1000000000000000.0,
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Ms"
+          },
+          "input_tokens": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Input Tokens",
+            "type": "integer"
+          },
+          "model_requests": {
+            "maximum": 10000000.0,
+            "minimum": 0.0,
+            "title": "Model Requests",
+            "type": "integer"
+          },
+          "output_tokens": {
+            "maximum": 10000000000.0,
+            "minimum": 0.0,
+            "title": "Output Tokens",
+            "type": "integer"
+          },
+          "reported_cost": {
+            "$ref": "#/components/schemas/ReportedCostV2"
+          },
+          "schema_version": {
+            "const": "env-mock-agent/unified-runtime-usage/v2",
+            "default": "env-mock-agent/unified-runtime-usage/v2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "tool_calls": {
+            "maximum": 10000000.0,
+            "minimum": 0.0,
+            "title": "Tool Calls",
+            "type": "integer"
+          },
+          "turns": {
+            "maximum": 10000000.0,
+            "minimum": 0.0,
+            "title": "Turns",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "model_requests",
+          "input_tokens",
+          "output_tokens",
+          "cache_creation_input_tokens",
+          "cache_read_input_tokens",
+          "tool_calls",
+          "turns",
+          "reported_cost"
+        ],
+        "title": "UnifiedRuntimeUsageV2",
+        "type": "object"
       },
       "ValidationError": {
         "properties": {
@@ -2152,12 +4247,1045 @@
     }
   },
   "info": {
-    "description": "Strict shared PlanReview API for CLI/Web HITL parity.",
-    "title": "Eval Dataset Factory Plan Console API",
-    "version": "1.0.0"
+    "description": "Conversation-first Harness session API with committed sequence SSE, bounded source admission, and owner-backed service composition.",
+    "title": "Eval Dataset Factory Agent API",
+    "version": "1.3.0"
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/harness/contract": {
+      "get": {
+        "operationId": "contract_api_harness_contract_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellApiContractV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Contract"
+      }
+    },
+    "/api/harness/sessions": {
+      "get": {
+        "operationId": "list_sessions_api_harness_sessions_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 500,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellSessionPageV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Sessions"
+      },
+      "post": {
+        "operationId": "create_session_api_harness_sessions_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "idempotency_key": {
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                    "title": "Idempotency Key",
+                    "type": "string"
+                  },
+                  "incarnation_id": {
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                    "title": "Incarnation Id",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/agent-shell-create-session-command/v1",
+                    "default": "eval-factory/agent-shell-create-session-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  },
+                  "session_id": {
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                    "title": "Session Id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "session_id",
+                  "incarnation_id",
+                  "idempotency_key"
+                ],
+                "title": "AgentShellCreateSessionCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellProjectionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Session"
+      }
+    },
+    "/api/harness/sessions/{session_id}": {
+      "delete": {
+        "operationId": "close_session_api_harness_sessions__session_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "expected_session_version": {
+                    "maximum": 1000000000,
+                    "minimum": 1,
+                    "title": "Expected Session Version",
+                    "type": "integer"
+                  },
+                  "idempotency_key": {
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                    "title": "Idempotency Key",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/agent-shell-close-session-command/v1",
+                    "default": "eval-factory/agent-shell-close-session-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expected_session_version",
+                  "idempotency_key"
+                ],
+                "title": "AgentShellCloseSessionCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellProjectionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Close Session"
+      },
+      "get": {
+        "operationId": "get_session_api_harness_sessions__session_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellProjectionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Session"
+      }
+    },
+    "/api/harness/sessions/{session_id}/delivery": {
+      "get": {
+        "operationId": "get_delivery_api_harness_sessions__session_id__delivery_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellDeliverySummaryV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Delivery"
+      }
+    },
+    "/api/harness/sessions/{session_id}/events": {
+      "get": {
+        "operationId": "list_events_api_harness_sessions__session_id__events_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "after_sequence",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "After Sequence",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 500,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellEventPageV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Events"
+      }
+    },
+    "/api/harness/sessions/{session_id}/members/{member_id}": {
+      "get": {
+        "operationId": "get_member_api_harness_sessions__session_id__members__member_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "schema": {
+              "title": "Member Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellMemberProjectionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Member"
+      }
+    },
+    "/api/harness/sessions/{session_id}/messages": {
+      "post": {
+        "operationId": "post_message_api_harness_sessions__session_id__messages_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$defs": {
+                  "ObjectRef": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "object_id": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Object Id",
+                        "type": "string"
+                      },
+                      "object_sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "title": "Object Sha256",
+                        "type": "string"
+                      },
+                      "object_type": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                        "title": "Object Type",
+                        "type": "string"
+                      },
+                      "object_version": {
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "title": "Object Version",
+                        "type": "string"
+                      },
+                      "schema_version": {
+                        "const": "eval-factory/object-ref/v1",
+                        "default": "eval-factory/object-ref/v1",
+                        "title": "Schema Version",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "object_type",
+                      "object_id",
+                      "object_version",
+                      "object_sha256"
+                    ],
+                    "title": "ObjectRef",
+                    "type": "object"
+                  }
+                },
+                "additionalProperties": false,
+                "properties": {
+                  "artifact_envelope_refs": {
+                    "default": [],
+                    "items": {
+                      "$ref": "#/$defs/ObjectRef"
+                    },
+                    "maxItems": 256,
+                    "title": "Artifact Envelope Refs",
+                    "type": "array"
+                  },
+                  "content": {
+                    "maxLength": 32768,
+                    "minLength": 1,
+                    "title": "Content",
+                    "type": "string"
+                  },
+                  "expected_session_version": {
+                    "maximum": 1000000000,
+                    "minimum": 1,
+                    "title": "Expected Session Version",
+                    "type": "integer"
+                  },
+                  "idempotency_key": {
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                    "title": "Idempotency Key",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/agent-shell-post-message-command/v1",
+                    "default": "eval-factory/agent-shell-post-message-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expected_session_version",
+                  "content",
+                  "idempotency_key"
+                ],
+                "title": "AgentShellPostMessageCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellProjectionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Message"
+      }
+    },
+    "/api/harness/sessions/{session_id}/reconcile": {
+      "post": {
+        "operationId": "reconcile_session_api_harness_sessions__session_id__reconcile_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "expected_session_version": {
+                    "maximum": 1000000000,
+                    "minimum": 1,
+                    "title": "Expected Session Version",
+                    "type": "integer"
+                  },
+                  "idempotency_key": {
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                    "title": "Idempotency Key",
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "eval-factory/agent-shell-reconcile-command/v1",
+                    "default": "eval-factory/agent-shell-reconcile-command/v1",
+                    "title": "Schema Version",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expected_session_version",
+                  "idempotency_key"
+                ],
+                "title": "AgentShellReconcileCommandV1",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellProjectionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reconcile Session"
+      }
+    },
+    "/api/harness/sessions/{session_id}/sources": {
+      "get": {
+        "operationId": "get_sources_api_harness_sessions__session_id__sources_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellSourceAdmissionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Sources"
+      },
+      "post": {
+        "operationId": "admit_sources_api_harness_sessions__session_id__sources_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Eval-Factory-Principal",
+            "required": true,
+            "schema": {
+              "title": "X-Eval-Factory-Principal",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "command": {
+                    "contentMediaType": "application/json",
+                    "contentSchema": {
+                      "$defs": {
+                        "AgentShellSourceFileClaimV1": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expected_sha256": {
+                              "pattern": "^[a-f0-9]{64}$",
+                              "title": "Expected Sha256",
+                              "type": "string"
+                            },
+                            "expected_size_bytes": {
+                              "maximum": 1000000000,
+                              "minimum": 1,
+                              "title": "Expected Size Bytes",
+                              "type": "integer"
+                            },
+                            "relative_name": {
+                              "maxLength": 255,
+                              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,254}$",
+                              "title": "Relative Name",
+                              "type": "string"
+                            },
+                            "schema_version": {
+                              "const": "eval-factory/agent-shell-source-file-claim/v1",
+                              "default": "eval-factory/agent-shell-source-file-claim/v1",
+                              "title": "Schema Version",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "relative_name",
+                            "expected_sha256",
+                            "expected_size_bytes"
+                          ],
+                          "title": "AgentShellSourceFileClaimV1",
+                          "type": "object"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "properties": {
+                        "expected_session_version": {
+                          "maximum": 1000000000,
+                          "minimum": 1,
+                          "title": "Expected Session Version",
+                          "type": "integer"
+                        },
+                        "idempotency_key": {
+                          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+                          "title": "Idempotency Key",
+                          "type": "string"
+                        },
+                        "manifest_sha256": {
+                          "pattern": "^[a-f0-9]{64}$",
+                          "title": "Manifest Sha256",
+                          "type": "string"
+                        },
+                        "manifest_size_bytes": {
+                          "maximum": 16777216,
+                          "minimum": 1,
+                          "title": "Manifest Size Bytes",
+                          "type": "integer"
+                        },
+                        "schema_version": {
+                          "const": "eval-factory/agent-shell-source-admission-command/v1",
+                          "default": "eval-factory/agent-shell-source-admission-command/v1",
+                          "title": "Schema Version",
+                          "type": "string"
+                        },
+                        "trace_files": {
+                          "items": {
+                            "$ref": "#/$defs/AgentShellSourceFileClaimV1"
+                          },
+                          "maxItems": 500,
+                          "minItems": 1,
+                          "title": "Trace Files",
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "expected_session_version",
+                        "manifest_sha256",
+                        "manifest_size_bytes",
+                        "trace_files",
+                        "idempotency_key"
+                      ],
+                      "title": "AgentShellSourceAdmissionCommandV1",
+                      "type": "object"
+                    },
+                    "type": "string"
+                  },
+                  "manifest": {
+                    "format": "binary",
+                    "type": "string"
+                  },
+                  "traces": {
+                    "items": {
+                      "format": "binary",
+                      "type": "string"
+                    },
+                    "maxItems": 500,
+                    "minItems": 1,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "command",
+                  "manifest",
+                  "traces"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellSourceAdmissionV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Admit Sources"
+      }
+    },
+    "/api/harness/sessions/{session_id}/stream": {
+      "get": {
+        "operationId": "stream_api_harness_sessions__session_id__stream_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "after_sequence",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "After Sequence"
+            }
+          },
+          {
+            "in": "query",
+            "name": "follow",
+            "required": false,
+            "schema": {
+              "default": true,
+              "title": "Follow",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Last-Event-ID",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Last-Event-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stream"
+      }
+    },
+    "/api/harness/sessions/{session_id}/team": {
+      "get": {
+        "operationId": "get_team_api_harness_sessions__session_id__team_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellTeamSummaryV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Team"
+      }
+    },
+    "/api/harness/sessions/{session_id}/workspaces/{kind}": {
+      "get": {
+        "operationId": "get_workspace_api_harness_sessions__session_id__workspaces__kind__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AgentShellWorkspaceKindV1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellWorkspaceDescriptorV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Workspace"
+      }
+    },
+    "/api/harness/source-admission/contract": {
+      "get": {
+        "operationId": "source_contract_api_harness_source_admission_contract_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentShellSourceAdmissionContractV1"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Source Contract"
+      }
+    },
     "/api/plan-reviews": {
       "get": {
         "operationId": "list_reviews_api_plan_reviews_get",

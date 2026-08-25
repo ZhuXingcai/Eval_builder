@@ -54,7 +54,14 @@ import {
   type ReviewablePlan,
 } from "./types";
 
-const PRINCIPAL = "user://plan-owner";
+const DEFAULT_PRINCIPAL = "user://plan-owner";
+
+export interface PlanReviewWorkspaceProps {
+  embedded?: boolean;
+  initialReviewId?: string | null;
+  onReviewChange?: (view: PlanReviewView) => void;
+  principal?: string;
+}
 
 type ActiveView = "overview" | "json";
 
@@ -95,7 +102,12 @@ const NAV_ITEMS: ReadonlyArray<{
   { label: "产物", Icon: Archive },
 ];
 
-export default function App() {
+export default function App({
+  embedded = false,
+  initialReviewId = null,
+  onReviewChange,
+  principal = DEFAULT_PRINCIPAL,
+}: PlanReviewWorkspaceProps = {}) {
   const [contract, setContract] =
     useState<PlanReviewApiContract | null>(null);
   const [reviews, setReviews] = useState<PlanReviewView[]>([]);
@@ -217,7 +229,8 @@ export default function App() {
       setReviews(page.items);
 
       const currentId =
-        selectedRef.current?.request.review_request_id;
+        selectedRef.current?.request.review_request_id ??
+        initialReviewId;
       const nextSelected =
         page.items.find(
           (item) =>
@@ -259,6 +272,7 @@ export default function App() {
         ),
       );
       setNotice(success);
+      onReviewChange?.(next);
     } catch (reason) {
       setError(message(reason));
       setActivityOpen(true);
@@ -295,7 +309,7 @@ export default function App() {
           view,
           parsed,
           changedPaths,
-          PRINCIPAL,
+          principal,
         ),
       "正在提交修改",
       "后继计划已编译并记录",
@@ -320,7 +334,7 @@ export default function App() {
         decidePlanReview(
           view,
           "APPROVE",
-          PRINCIPAL,
+          principal,
           "APPROVE_BY_WEB",
         ),
       "正在批准计划",
@@ -332,7 +346,7 @@ export default function App() {
         decidePlanReview(
           view,
           "REQUEST_MORE",
-          PRINCIPAL,
+          principal,
           "REQUEST_MORE_BY_WEB",
         ),
       "正在请求补充材料",
@@ -344,7 +358,7 @@ export default function App() {
         decidePlanReview(
           view,
           "DEFER",
-          PRINCIPAL,
+          principal,
           "DEFER_BY_WEB",
         ),
       "正在暂缓计划",
@@ -356,7 +370,7 @@ export default function App() {
         decidePlanReview(
           view,
           "REJECT",
-          PRINCIPAL,
+          principal,
           "REJECT_BY_WEB",
         ),
       "正在拒绝计划",
@@ -364,7 +378,7 @@ export default function App() {
     );
   const resume = () =>
     act(
-      (view) => resumePlanReview(view, PRINCIPAL),
+      (view) => resumePlanReview(view, principal),
       "正在恢复图执行",
       "图恢复权限已提交",
     );
@@ -374,6 +388,7 @@ export default function App() {
       className={[
         "workbench-shell",
         activityOpen ? "has-activity" : "",
+        embedded ? "embedded-plan-review" : "",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -406,6 +421,7 @@ export default function App() {
         query={query}
         selectedId={selected?.request.review_request_id ?? null}
         total={reviews.length}
+        principal={principal}
       />
 
       <main className="workbench-main">
@@ -501,6 +517,7 @@ export default function App() {
           onApprove={() => void approve()}
           onResume={() => void resume()}
           selected={selected}
+          principal={principal}
         />
       </main>
     </div>
@@ -519,6 +536,7 @@ function ReviewNavigation({
   query,
   selectedId,
   total,
+  principal,
 }: {
   contract: PlanReviewApiContract | null;
   groups: ReviewGroup[];
@@ -531,6 +549,7 @@ function ReviewNavigation({
   query: string;
   selectedId: string | null;
   total: number;
+  principal: string;
 }) {
   return (
     <aside
@@ -679,7 +698,7 @@ function ReviewNavigation({
         <ShieldCheck size={15} aria-hidden="true" />
         <span>
           <small>当前主体</small>
-          <code>{PRINCIPAL}</code>
+          <code>{principal}</code>
         </span>
       </footer>
     </aside>
@@ -1318,6 +1337,7 @@ function AuthorityBar({
   onApprove,
   onResume,
   selected,
+  principal,
 }: {
   activeOperation: string | null;
   canDecide: boolean;
@@ -1327,6 +1347,7 @@ function AuthorityBar({
   onApprove: () => void;
   onResume: () => void;
   selected: PlanReviewView | null;
+  principal: string;
 }) {
   return (
     <footer className="authority-bar">
@@ -1344,7 +1365,7 @@ function AuthorityBar({
       <dl>
         <div>
           <dt>当前主体</dt>
-          <dd>{PRINCIPAL}</dd>
+          <dd>{principal}</dd>
         </div>
         <div>
           <dt>版本</dt>

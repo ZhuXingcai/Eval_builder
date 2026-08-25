@@ -5,38 +5,38 @@
   },
   "cross_stage_contract": {
     "path": "specs/002-eval-dataset-factory/contracts/v2/manifest.json",
-    "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc"
+    "sha256": "758d62b283560462f8e39237274557c8bbc3950698ec3ea7db2e20e264a56257"
   },
   "fixture_count": 5,
   "fixtures": [
     {
       "instance_id": "LH_005",
       "path": "LH_005.reference-fixture.json",
-      "sha256": "b3e8a142967ccd26f079db3aa3a8ee9bbda7f84f3699d0da3988a78c21978f21",
+      "sha256": "76022405bb5d2853573dbd2a76da1d15a953869dc38fe1b2b18f011cc19a7f84",
       "status": "REVIEW_READY_NOT_GOLD"
     },
     {
       "instance_id": "LH_011",
       "path": "LH_011.reference-fixture.json",
-      "sha256": "53f69a9ea6104166dc54c9c65a5ce02d0b242cc57d644934ca768d1e9f4ce99d",
+      "sha256": "c281c0073c7830a2361fff88433ef9491eb651bb455552e526d14467c92a0bf7",
       "status": "REVIEW_READY_NOT_GOLD"
     },
     {
       "instance_id": "LH_015",
       "path": "LH_015.reference-fixture.json",
-      "sha256": "a6b28172f88b12e6ac67ff590622dae5eb4d378c34ec6146cb851857056513d1",
+      "sha256": "b0447cb33524bc6ad3021fa04d95a0685950accb687882f2aee3056021dd8a3b",
       "status": "REVIEW_READY_NOT_GOLD"
     },
     {
       "instance_id": "LH_058",
       "path": "LH_058.reference-fixture.json",
-      "sha256": "f143df7964b009af17a370f293b07b5ac1da3c499fc5b4364a33dff9cdc8fc06",
+      "sha256": "27a5f905ac3f572c80cb0782a0ecf46ab2acbb343f0726a63c608323fcd52989",
       "status": "REVIEW_READY_NOT_GOLD"
     },
     {
       "instance_id": "LH_067",
       "path": "LH_067.reference-fixture.json",
-      "sha256": "d36712d9dac97b000261eacfec5bf6263708814937c7fa1c7a4827d2318c29f4",
+      "sha256": "053d2636a645cedff782c817af8484ea34589b0f5c1effdb478e7fe0c7d0e771",
       "status": "REVIEW_READY_NOT_GOLD"
     }
   ],

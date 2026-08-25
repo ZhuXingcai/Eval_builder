@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from pathlib import Path
 
 from eval_factory.agent_system.attachment_execution_material import (
@@ -106,6 +107,7 @@ class GenericAgentFirstPartyGraphBuilder:
         requirement: EvaluationRequirementSpecV2,
         candidate_output_root: Path,
         audit: ContractAudit,
+        source_ref_overrides: Mapping[str, ObjectRef] | None = None,
     ) -> GenericAgentGraphProduct:
         runtime = components.runtime
         private_store = components.private_store
@@ -131,6 +133,7 @@ class GenericAgentFirstPartyGraphBuilder:
         admission = GenericAgentTraceSourceAdmissionService().admit(
             core_input=core_input,
             registry=source_registry,
+            source_ref_overrides=source_ref_overrides,
         )
         materials = CompositeCapabilityMaterialResolver()
         candidate_store = FactoryTraceCandidateMaterialStore(

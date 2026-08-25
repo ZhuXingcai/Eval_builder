@@ -7,11 +7,13 @@ from env_mock_agent.runtimes.base import AgentRuntime, RuntimeEventSequencer
 from env_mock_agent.runtimes.workspace_manifest import changed_files, snapshot_workspace
 from env_mock_agent.schemas import (
     RuntimeCapabilities,
+    RuntimeCredentialStatus,
     RuntimeEvent,
     RuntimeEventType,
     RuntimeName,
     RuntimeRequest,
     RuntimeResumeRequest,
+    RuntimeSandboxEnforcement,
     RuntimeSessionRef,
     RuntimeUsage,
 )
@@ -29,6 +31,8 @@ class FakeRuntime(AgentRuntime):
             models=["fake"],
             tools=["write"],
             supports_resume=True,
+            credential_status=RuntimeCredentialStatus.NOT_REQUIRED,
+            sandbox_enforcement=RuntimeSandboxEnforcement.NOT_APPLICABLE,
         )
 
     async def run(self, request: RuntimeRequest) -> AsyncIterator[RuntimeEvent]:

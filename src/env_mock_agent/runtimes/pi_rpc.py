@@ -12,12 +12,14 @@ from env_mock_agent.runtimes.workspace_manifest import changed_files, snapshot_w
 from env_mock_agent.schemas import (
     ModelProfile,
     RuntimeCapabilities,
+    RuntimeCredentialStatus,
     RuntimeErrorCode,
     RuntimeEvent,
     RuntimeEventType,
     RuntimeName,
     RuntimeRequest,
     RuntimeResumeRequest,
+    RuntimeSandboxEnforcement,
     RuntimeSessionRef,
     RuntimeUsage,
 )
@@ -85,7 +87,13 @@ class PiRpcRuntime(AgentRuntime):
                 version=str(details.get("piVersion") or ""),
                 tools=["read", "write", "edit", "bash", "grep", "find", "ls"],
                 supports_resume=bool(details.get("supportsResume")),
-                reason="credential readiness is verified by live smoke",
+                supports_event_streaming=bool(details.get("supportsEventStreaming", True)),
+                supports_tool_progress=bool(details.get("supportsToolProgress")),
+                credential_status=RuntimeCredentialStatus(str(details.get("credentialStatus") or "UNKNOWN")),
+                sandbox_enforcement=RuntimeSandboxEnforcement(
+                    str(details.get("sandboxEnforcement") or "NONE")
+                ),
+                reason="protocol readiness verified; credential readiness is reported separately",
             )
         except Exception as exc:
             await terminate_process(process)
@@ -294,6 +302,8 @@ class PiRpcRuntime(AgentRuntime):
         tool_call_id = str(details.get("toolCallId") or "") or None
         if raw_type == "tool_execution_start":
             event_type = RuntimeEventType.TOOL_STARTED
+        elif raw_type == "tool_execution_update":
+            event_type = RuntimeEventType.TOOL_PROGRESS
         elif raw_type == "tool_execution_end":
             event_type = RuntimeEventType.TOOL_FINISHED
         elif raw_type in {"message_update", "message_end"}:

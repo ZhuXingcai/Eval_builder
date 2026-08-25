@@ -17,9 +17,12 @@ agent rather than a chat application with miscellaneous tools:
 - every output is linked to typed evidence, provenance, and immutable refs.
 
 > **Current status:** V1 Stages 0-4 are mechanism-complete and fully
-> regression-tested. Stage 5 Agent Shell and Stage 6 user delivery are
-> specified but not implemented. Real semantic acceptance is blocked by
-> Provider authentication. See [Unfinished Work](docs/UNFINISHED.md).
+> regression-tested. Stage 5.0-5.4 now includes the runtime protocol,
+> Agent Shell event/SSE transport, bounded Source Admission, owner-backed
+> service composition, and the conversation-first React UI. Stage 6 delivery
+> remains.
+> Real semantic acceptance is blocked by Provider authentication. See
+> [Unfinished Work](docs/UNFINISHED.md).
 
 ## Product Model
 
@@ -76,14 +79,23 @@ overwrite specialist artifacts, relay every peer message, or grant authority.
 - Canonical candidate JSON/JSONL output and immutable delivery manifest.
 - Zero-, one-, and multi-candidate terminal behavior with exact replay.
 
-### Existing Web Surface
+### Agent Shell
 
 - React 19/Vite PlanReview workbench.
-- FastAPI typed PlanReview API.
-- Responsive desktop/tablet/mobile behavior.
-- Vitest and Playwright coverage.
-
-The conversation-first Agent Shell described in Stage 5 is not yet available.
+- Combined FastAPI PlanReview and Agent Shell session/event API.
+- Committed-sequence SSE with exact reconnect and ephemeral heartbeats.
+- Bounded `manifest.csv` plus `raw_traj_v1` JSONL Source Admission backed by
+  private staging/CAS and immutable SQLite authority.
+- Owner-backed Factory, Graph, Team, PlanReview, workspace, member, and
+  delivery projections with replay-safe outbox reconciliation.
+- READY plus explicit admitted-source confirmation starts the fixed Pack
+  `1.2.0` Graph in `DEVELOPMENT_FIXTURE_ONLY` mode.
+- Conversation-first session rail, transcript, fixed composer, explicit
+  source picker, inline interaction cards, and contextual workspaces.
+- Team and Activity inspectors with member/task/projection summaries.
+- URL-addressable session/workspace/member state and HTTP-backed SSE recovery.
+- Responsive 1440/1024/768/375 layouts, drawer focus handling, reduced motion,
+  Vitest, and real-host Playwright coverage.
 
 ## Version Lines
 
@@ -91,7 +103,7 @@ The conversation-first Agent Shell described in Stage 5 is not yet available.
 |---|---|---|
 | EDF Foundation | Trace-to-evaluation dataset pipeline and release safety | Implemented |
 | V1 Stages 0-4 | Static `generic-agent-trace` Harness, Team, and Graph runtime | Mechanism complete |
-| V1 Stage 5 | Conversation-first Agent Shell and HTTP/SSE product host | Planned |
+| V1 Stage 5 | Conversation-first Agent Shell and HTTP/SSE product host | Stage 5.0-5.4 mechanism complete |
 | V1 Stage 6 | CSV/XLSX/ZIP delivery and V1 evidence freeze | Planned |
 | V2 Platform | Installable cross-domain Eval Packs and dynamic Blueprint composition | Blocked until V1 Stable |
 
@@ -189,13 +201,17 @@ The current UI is a PlanReview/Graph workbench:
 ```bash
 uv run evalfactory agent serve \
   --factory-store PATH \
-  --registry PATH
+  --registry PATH \
+  --plan-review-only
 
 npm run dev --prefix web/eval_factory_console
 ```
 
-Stage 5 will make persistent conversation the default surface and add session,
-Team, Activity, source admission, SSE, and delivery workspaces.
+Stage 5.0-5.4 provide the normalized runtime protocol, persistent session
+event/SSE API, bounded Source Admission, owner-backed unified Host, and the
+conversation-first React surface. Run `evalfactory agent serve --help` for
+the explicit full fixture Host authority/config paths. Use
+`--plan-review-only` only for the compatibility workbench.
 
 ## Evidence Classes
 

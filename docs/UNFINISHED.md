@@ -33,24 +33,46 @@ documentation.
 
 ## Stage 5: Conversation-First Agent Shell
 
-Status: planned, not implemented.
+Status: Stage 5.0-5.4 mechanism complete.
+
+Completed:
+
+- provider-neutral runtime readiness/event/usage/failure protocol;
+- atomic runtime-event to Harness session projection;
+- strict session/message/event HTTP contracts;
+- committed-sequence SSE replay, reconnect, heartbeat, and disconnect
+  isolation;
+- bounded `manifest.csv` plus exact `raw_traj_v1` JSONL admission;
+- private server-owned staging/CAS, immutable SQLite admission authority,
+  exact replay/recovery, and safe Artifact Envelope refs;
+- unified owner-backed Harness/Source/Team/Factory/Graph/PlanReview/workspace/
+  delivery projection;
+- READY plus explicitly confirmed admitted source to fixed Pack `1.2.0`
+  Graph start;
+- replay-safe Team/Graph outbox reconciliation, Graph-bound new-turn
+  rejection, and restart-equivalent aggregate projection;
+- full fixture Agent Host with explicit authority/config paths and explicit
+  `--plan-review-only` compatibility mode;
+- combined Agent Shell/PlanReview OpenAPI;
+- conversation-first session rail, transcript, fixed composer, and explicit
+  source selection/confirmation;
+- inline clarification, permission, PlanReview, verification, and delivery
+  states;
+- Activity and Team inspectors plus contextual Trace, Task, Attachment,
+  Rubric, Grading, Quality, PlanReview, and Delivery workspaces;
+- URL-addressable session/workspace/member state;
+- heartbeat-aware SSE reconnect with HTTP projection refresh;
+- 1440/1024/768/375 responsive behavior, modal drawer focus/Escape handling,
+  reduced motion, and Full Host Browser E2E.
 
 Remaining work:
 
-- unified Agent Host over Harness, Team, Factory Graph, PlanReview, and
-  delivery authorities;
-- persistent session navigation and rename;
-- conversation transcript and fixed composer;
-- bounded `manifest.csv` plus JSONL source upload;
-- typed command API and sequence-based SSE reconnect;
-- inline clarification, permission, review, failure, and delivery cards;
-- Activity and Team workbenches;
-- contextual Trace, Task, Attachment, Rubric, Grading, Quality, PlanReview,
-  and Delivery workspaces;
-- desktop/tablet/mobile accessibility and Browser E2E.
+- session rename and explicit cancel/interrupt controls;
+- separately authorized real-provider semantic acceptance;
+- Stage 6 delivery package generation and download actions.
 
-The current React application is a PlanReview/Graph workbench, not the final
-Agent Shell.
+The React application now opens as the Agent Shell. PlanReview remains
+available as a contextual workspace and as the explicit compatibility Host.
 
 ## Stage 6: Delivery And Evidence
 
@@ -83,20 +105,6 @@ Blocked until V1 Stable:
 - a materially different second first-party Pack;
 - cross-domain delivery and workspace contributions.
 
-## Dependency Audit Follow-Up
-
-Status: remediation pending.
-
-The current lockfiles reproduce the tested Node/Web builds, but `npm audit`
-reports unresolved advisories:
-
-- `web/eval_factory_console`: 1 high severity advisory;
-- `node/pi_bridge`: 2 moderate and 2 high severity advisories.
-
-These counts do not by themselves establish exploitability in this product,
-but each advisory must be triaged and resolved or explicitly accepted before
-a stable production release.
-
 ## Production
 
 Production release remains blocked. Existing release, attestation, and
@@ -105,26 +113,19 @@ production registry write.
 
 ## Current Verified Baseline
 
-Fully provisioned local workspace:
-
 ```text
-Python product suite: 2787 passed
-Stage 0-3 focused suite: 133 passed
-Node/Web/Browser gates: passed
-Ruff/format/mypy: passed
-Generated contracts and wheel imports: passed
+Full-suite run: 2868 passed plus one corrected Stage 5.4 Browser assertion
+Final Full Agent Shell Browser E2E: 7 passed
+PlanReview compatibility Browser E2E: 22 passed
+Focused Shell/Source/SSE/Graph/Host backend: 31 passed
+Web Vitest: 14 passed
+Node Pi: 4 passed
+Ruff lint and mypy: passed
+Full format: one pre-existing tests/integration/test_context.py drift
+Generated contracts: 73/415/7/5
+Wheel build, isolated install, cold imports, and CLI help: passed
 Continuity validation: passed
 ```
-
-Sanitized public snapshot:
-
-```text
-Python product suite: 2750 passed, 39 skipped
-```
-
-Public-snapshot skips identify resources that are intentionally not published:
-the private 91-trace corpus, private CC/LH adapter fixtures, and local
-Beads/continuity state.
 
 These results prove deterministic implementation and recovery behavior, not
 real semantic quality or production readiness.

@@ -2,16 +2,22 @@ from __future__ import annotations
 
 from collections.abc import AsyncIterator
 
+from env_mock_agent.facade import UnifiedRuntimeEventV2
 from eval_factory.contracts.core import ContractAudit, ObjectRef
 from eval_factory.harness.requirement_agent import GatewayRequirementAgentLoop
 from eval_factory.harness.runtime_models import (
     HarnessEventPageV1,
+    HarnessRequirementPolicyV1,
     HarnessSessionPageV1,
     HarnessSessionProjectionV1,
     HarnessTurnResultV1,
+    RequirementInterpretationV1,
 )
 from eval_factory.harness.session_models import SessionEventV1
-from eval_factory.harness.session_store import HarnessSessionStore
+from eval_factory.harness.session_store import (
+    HarnessSessionStore,
+    HarnessShellReconcileClaim,
+)
 
 
 class HarnessSessionService:
@@ -43,8 +49,65 @@ class HarnessSessionService:
             audit=audit,
         )
 
+    def close_session(
+        self,
+        *,
+        session_id: str,
+        expected_session_version: int,
+        principal_ref: ObjectRef,
+        idempotency_key: str,
+        audit: ContractAudit,
+    ) -> HarnessSessionProjectionV1:
+        return self.store.close_session(
+            session_id=session_id,
+            expected_session_version=expected_session_version,
+            principal_ref=principal_ref,
+            idempotency_key=idempotency_key,
+            audit=audit,
+        )
+
     def get_session(self, session_id: str) -> HarnessSessionProjectionV1:
         return self.store.get_projection(session_id)
+
+    def get_current_requirement(
+        self,
+        session_id: str,
+    ) -> tuple[RequirementInterpretationV1, HarnessRequirementPolicyV1]:
+        return self.store.get_current_requirement(session_id)
+
+    def get_interpretation(
+        self,
+        reference: ObjectRef,
+    ) -> RequirementInterpretationV1:
+        return self.store.get_interpretation(reference)
+
+    def claim_shell_reconcile(
+        self,
+        *,
+        session_id: str,
+        expected_session_version: int,
+        principal_ref: ObjectRef,
+        idempotency_key: str,
+        effect_ref: ObjectRef | None,
+    ) -> HarnessShellReconcileClaim:
+        return self.store.claim_shell_reconcile(
+            session_id=session_id,
+            expected_session_version=expected_session_version,
+            principal_ref=principal_ref,
+            idempotency_key=idempotency_key,
+            effect_ref=effect_ref,
+        )
+
+    def has_message_command(
+        self,
+        *,
+        session_id: str,
+        idempotency_key: str,
+    ) -> bool:
+        return self.store.has_message_command(
+            session_id=session_id,
+            idempotency_key=idempotency_key,
+        )
 
     def list_sessions(
         self,
@@ -66,6 +129,12 @@ class HarnessSessionService:
             after_sequence=after_sequence,
             limit=limit,
         )
+
+    def get_runtime_event(
+        self,
+        reference: ObjectRef,
+    ) -> UnifiedRuntimeEventV2:
+        return self.store.get_runtime_event(reference)
 
     async def post_message(
         self,

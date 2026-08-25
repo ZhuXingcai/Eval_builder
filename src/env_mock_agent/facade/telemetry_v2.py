@@ -177,7 +177,7 @@ def normalize_reported_cost_usd(value: object | None) -> ReportedCostV2:
 
 
 def normalize_tool_family_counts(tool_names: Iterable[str]) -> tuple[ToolFamilyCountV2, ...]:
-    counts = Counter(_tool_family(name) for name in tool_names)
+    counts = Counter(normalize_tool_family(name) for name in tool_names)
     return tuple(
         ToolFamilyCountV2(tool_family=family, calls=counts[family])
         for family in ToolFamilyV2
@@ -227,7 +227,7 @@ def validate_execution_telemetry_identity(value: ExecutionTelemetryV2) -> None:
         raise ValueError("execution telemetry identity is stale or invalid")
 
 
-def _tool_family(name: str) -> ToolFamilyV2:
+def normalize_tool_family(name: str) -> ToolFamilyV2:
     normalized = name.strip().casefold().replace("-", "_")
     if normalized in {
         "read",

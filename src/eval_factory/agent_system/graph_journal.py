@@ -120,6 +120,45 @@ class FactoryGraphJournalStore(FactoryGraphJournalHistory):
                 )
             return binding
 
+    def get_binding_for_session(
+        self,
+        session_ref: ObjectRef,
+    ) -> HarnessGraphExecutionBindingV1:
+        if session_ref.object_type != "harness-session":
+            raise FactoryGraphJournalIntegrityError(
+                "Graph session ref has the wrong type",
+            )
+        with self._read() as connection:
+            rows = connection.execute(
+                """
+                SELECT bindings.object_id
+                FROM graph_binding_current_heads AS heads
+                JOIN graph_execution_bindings AS bindings
+                  ON bindings.object_id = heads.object_id
+                ORDER BY bindings.binding_id
+                """
+            ).fetchall()
+            matches = tuple(
+                binding
+                for row in rows
+                for binding in (
+                    self._load_binding(
+                        connection,
+                        str(row["object_id"]),
+                    ),
+                )
+                if binding.session_ref == session_ref
+            )
+        if not matches:
+            raise FactoryGraphJournalNotFoundError(
+                "Graph binding was not found for the Harness session",
+            )
+        if len(matches) != 1:
+            raise FactoryGraphJournalIntegrityError(
+                "Harness session has multiple current Graph bindings",
+            )
+        return matches[0]
+
     def get_binding_by_ref(
         self,
         reference: ObjectRef,

@@ -31,6 +31,32 @@ export type ProbeCommand = {
   requestId: string;
 };
 
+export type ProbeResultPayload = {
+  available: boolean;
+  protocolAvailable: boolean;
+  bridgeVersion: string;
+  piVersion: string;
+  supportsCancel: boolean;
+  supportsResume: boolean;
+  supportsEventStreaming: boolean;
+  supportsToolProgress: boolean;
+  credentialStatus: "READY" | "NOT_REQUIRED" | "UNKNOWN" | "MISSING" | "INVALID";
+  sandboxEnforcement: "FULL" | "PARTIAL" | "NONE" | "NOT_APPLICABLE";
+};
+
+export const PI_BRIDGE_PROBE_RESULT: Readonly<ProbeResultPayload> = Object.freeze({
+  available: true,
+  protocolAvailable: true,
+  bridgeVersion: "0.2.0",
+  piVersion: "0.80.10",
+  supportsCancel: true,
+  supportsResume: true,
+  supportsEventStreaming: true,
+  supportsToolProgress: true,
+  credentialStatus: "UNKNOWN",
+  sandboxEnforcement: "NONE",
+});
+
 export type ShutdownCommand = {
   type: "shutdown";
   requestId: string;

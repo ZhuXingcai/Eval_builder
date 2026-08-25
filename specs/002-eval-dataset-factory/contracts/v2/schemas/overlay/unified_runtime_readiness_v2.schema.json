@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "RuntimeCredentialStatusV2": {
+      "enum": [
+        "READY",
+        "NOT_REQUIRED",
+        "UNKNOWN",
+        "MISSING",
+        "INVALID"
+      ],
+      "title": "RuntimeCredentialStatusV2",
+      "type": "string"
+    },
+    "RuntimeFeatureV2": {
+      "enum": [
+        "CANCEL",
+        "EVENT_STREAMING",
+        "RESUME",
+        "TOOL_EVENTS",
+        "TOOL_PROGRESS",
+        "USAGE"
+      ],
+      "title": "RuntimeFeatureV2",
+      "type": "string"
+    },
+    "RuntimeReadinessReasonV2": {
+      "enum": [
+        "CREDENTIAL_INVALID",
+        "CREDENTIAL_MISSING",
+        "CREDENTIAL_NOT_PROBED",
+        "EVENT_STREAMING_UNAVAILABLE",
+        "PROTOCOL_UNAVAILABLE",
+        "SANDBOX_PARTIAL",
+        "SANDBOX_UNAVAILABLE"
+      ],
+      "title": "RuntimeReadinessReasonV2",
+      "type": "string"
+    },
+    "RuntimeReadinessStatusV2": {
+      "enum": [
+        "READY",
+        "DEGRADED",
+        "BLOCKED"
+      ],
+      "title": "RuntimeReadinessStatusV2",
+      "type": "string"
+    },
+    "RuntimeSandboxEnforcementV2": {
+      "enum": [
+        "FULL",
+        "PARTIAL",
+        "NONE",
+        "NOT_APPLICABLE"
+      ],
+      "title": "RuntimeSandboxEnforcementV2",
+      "type": "string"
+    },
+    "ToolFamilyV2": {
+      "enum": [
+        "FILE",
+        "SHELL",
+        "SEARCH",
+        "FETCH",
+        "RENDERER",
+        "OTHER"
+      ],
+      "title": "ToolFamilyV2",
+      "type": "string"
+    }
+  },
+  "$id": "https://schemas.eval-factory.local/contracts/v2/overlay/unified_runtime_readiness_v2.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "credential_status": {
+      "$ref": "#/$defs/RuntimeCredentialStatusV2"
+    },
+    "features": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RuntimeFeatureV2"
+      },
+      "maxItems": 32,
+      "title": "Features",
+      "type": "array"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "protocol_version": {
+      "const": "runtime-protocol/stage5-0-v1",
+      "default": "runtime-protocol/stage5-0-v1",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "reason_codes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RuntimeReadinessReasonV2"
+      },
+      "maxItems": 16,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "runtime_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{2,255}$",
+      "title": "Runtime Id",
+      "type": "string"
+    },
+    "runtime_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Runtime Version"
+    },
+    "sandbox_enforcement": {
+      "$ref": "#/$defs/RuntimeSandboxEnforcementV2"
+    },
+    "schema_version": {
+      "const": "env-mock-agent/unified-runtime-readiness/v2",
+      "default": "env-mock-agent/unified-runtime-readiness/v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/RuntimeReadinessStatusV2"
+    },
+    "tool_families": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ToolFamilyV2"
+      },
+      "maxItems": 16,
+      "title": "Tool Families",
+      "type": "array"
+    }
+  },
+  "required": [
+    "runtime_id",
+    "status",
+    "credential_status",
+    "sandbox_enforcement",
+    "observed_at"
+  ],
+  "title": "UnifiedRuntimeReadinessV2",
+  "type": "object",
+  "x-contract-layer": "v2-overlay",
+  "x-contract-owner": "facade",
+  "x-python-type": "env_mock_agent.facade.runtime_v2.UnifiedRuntimeReadinessV2",
+  "x-schema-version": "env-mock-agent/unified-runtime-readiness/v2"
+}

@@ -1,5 +1,5 @@
 import readline from "node:readline";
-import { emit, now, type BridgeCommand } from "./protocol.js";
+import { emit, now, PI_BRIDGE_PROBE_RESULT, type BridgeCommand } from "./protocol.js";
 import { startSession, type ActiveSession, type RuntimeStartCommand } from "./runtime.js";
 
 const active = new Map<string, ActiveSession>();
@@ -138,13 +138,7 @@ async function handle(command: BridgeCommand): Promise<void> {
       type: "probe_result",
       requestId: command.requestId,
       timestamp: now(),
-      payload: {
-        available: true,
-        bridgeVersion: "0.2.0",
-        piVersion: "0.80.10",
-        supportsCancel: true,
-        supportsResume: true,
-      },
+      payload: { ...PI_BRIDGE_PROBE_RESULT },
     });
     return;
   }

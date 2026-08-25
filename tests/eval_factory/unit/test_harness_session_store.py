@@ -22,6 +22,7 @@ from eval_factory.harness import (
     ProviderEvidenceClassV1,
     RequirementInterpretationOutcomeV1,
     RequirementInterpretationV1,
+    SessionLifecycleEventKindV1,
 )
 
 HASH = "a" * 64
@@ -215,6 +216,118 @@ def test_session_store_reopens_replays_and_rebuilds_projection(tmp_path: Path) -
     assert rebuilt == reopened.get_projection("session-store-001")
 
 
+def test_session_store_closes_without_deleting_audit_history(
+    tmp_path: Path,
+) -> None:
+    store = _store(tmp_path / "harness.sqlite3")
+    created = store.create_session(
+        session_id="session-store-close",
+        incarnation_id="session-store-close-incarnation",
+        composition_ref=_ref("harness-composition"),
+        created_by="session-user",
+        idempotency_key="create-session-store-close",
+        audit=_audit(),
+    )
+    with pytest.raises(HarnessSessionConcurrencyError):
+        store.close_session(
+            session_id=created.session.session_id,
+            expected_session_version=created.session.session_version + 1,
+            principal_ref=_ref("principal"),
+            idempotency_key="close-session-store-stale",
+            audit=_audit(),
+        )
+    closed = store.close_session(
+        session_id=created.session.session_id,
+        expected_session_version=created.session.session_version,
+        principal_ref=_ref("principal"),
+        idempotency_key="close-session-store",
+        audit=_audit(),
+    )
+
+    assert closed.session.status is HarnessSessionStatusV1.CLOSED
+    assert closed.session.session_version == 2
+    events = store.list_events(
+        created.session.session_id,
+        after_sequence=0,
+        limit=100,
+    ).events
+    assert events[-1].payload.event_kind is (
+        SessionLifecycleEventKindV1.SESSION_CLOSED
+    )
+    assert store.list_sessions(offset=0, limit=100).total == 0
+    assert store.list_sessions(
+        offset=0,
+        limit=100,
+        include_closed=True,
+    ).sessions == (closed.session,)
+
+    replay = store.close_session(
+        session_id=created.session.session_id,
+        expected_session_version=created.session.session_version,
+        principal_ref=_ref("principal"),
+        idempotency_key="close-session-store",
+        audit=_audit(),
+    )
+    assert replay == closed
+    with pytest.raises(HarnessSessionConflictError):
+        store.close_session(
+            session_id=created.session.session_id,
+            expected_session_version=created.session.session_version,
+            principal_ref=_ref("principal", version="v2"),
+            idempotency_key="close-session-store",
+            audit=_audit(),
+        )
+    with pytest.raises(HarnessSessionConflictError):
+        store.close_session(
+            session_id=created.session.session_id,
+            expected_session_version=created.session.session_version,
+            principal_ref=_ref("principal"),
+            idempotency_key="close-session-store-second",
+            audit=_audit(),
+        )
+
+
+def test_session_store_close_fault_rolls_back(tmp_path: Path) -> None:
+    path = tmp_path / "harness-close-fault.sqlite3"
+    created = _store(path).create_session(
+        session_id="session-store-close-fault",
+        incarnation_id="session-store-close-fault-incarnation",
+        composition_ref=_ref("harness-composition"),
+        created_by="session-user",
+        idempotency_key="create-session-store-close-fault",
+        audit=_audit(),
+    )
+    faulted = HarnessSessionStore(
+        path,
+        clock=lambda: NOW,
+        fault_injector=lambda point: (
+            (_ for _ in ()).throw(RuntimeError("injected"))
+            if point == "before_close_session_commit"
+            else None
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="injected"):
+        faulted.close_session(
+            session_id=created.session.session_id,
+            expected_session_version=created.session.session_version,
+            principal_ref=_ref("principal"),
+            idempotency_key="close-session-store-fault",
+            audit=_audit(),
+        )
+
+    reopened = _store(path)
+    assert reopened.get_projection(created.session.session_id) == created
+    assert reopened.list_sessions(offset=0, limit=100).total == 1
+    assert len(
+        reopened.list_events(
+            created.session.session_id,
+            after_sequence=0,
+            limit=100,
+        ).events
+    ) == 1
+
+
 def test_session_store_rejects_changed_idempotency_request(tmp_path: Path) -> None:
     store = _store(tmp_path / "harness.sqlite3")
     store.create_session(
@@ -362,3 +475,96 @@ def test_session_store_bounds_faults_and_prepared_replay_are_closed(
     with pytest.raises(HarnessSessionIntegrityError):
         store.get_projection("session-store-003")
     assert store.rebuild_projection("session-store-003").session.session_id == ("session-store-003")
+
+
+def test_shell_reconcile_intent_is_idempotent_and_restart_safe(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "harness-reconcile.sqlite3"
+    store = _store(path)
+    created = store.create_session(
+        session_id="session-shell-reconcile",
+        incarnation_id="session-shell-reconcile-incarnation",
+        composition_ref=_ref("harness-composition"),
+        created_by="session-user",
+        idempotency_key="create-session-shell-reconcile",
+        audit=_audit(),
+    )
+    values = {
+        "session_id": created.session.session_id,
+        "expected_session_version": created.session.session_version,
+        "principal_ref": _ref("principal"),
+        "idempotency_key": "reconcile-session-shell",
+        "effect_ref": _ref("graph-binding"),
+    }
+
+    claimed = store.claim_shell_reconcile(**values)
+    replayed = _store(path).claim_shell_reconcile(
+        **{
+            **values,
+            "effect_ref": _ref(
+                "graph-binding",
+                version="v2",
+            ),
+        }
+    )
+    assert claimed.replay is False
+    assert claimed.effect_ref == values["effect_ref"]
+    assert replayed.replay is True
+    assert replayed.effect_ref == values["effect_ref"]
+
+    with pytest.raises(HarnessSessionConflictError, match="idempotency"):
+        store.claim_shell_reconcile(
+            **{
+                **values,
+                "principal_ref": _ref(
+                    "principal",
+                    version="v2",
+                ),
+            }
+        )
+    with pytest.raises(HarnessSessionConcurrencyError, match="stale"):
+        store.claim_shell_reconcile(
+            **{
+                **values,
+                "expected_session_version": 2,
+                "idempotency_key": "reconcile-session-shell-stale",
+            }
+        )
+
+
+def test_shell_reconcile_intent_fault_rolls_back(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "harness-reconcile-fault.sqlite3"
+    store = HarnessSessionStore(
+        path,
+        clock=lambda: NOW,
+        fault_injector=lambda point: (
+            (_ for _ in ()).throw(RuntimeError("injected"))
+            if point == "before_shell_reconcile_claim_commit"
+            else None
+        ),
+    )
+    created = store.create_session(
+        session_id="session-shell-reconcile-fault",
+        incarnation_id="session-shell-reconcile-fault-incarnation",
+        composition_ref=_ref("harness-composition"),
+        created_by="session-user",
+        idempotency_key="create-session-shell-reconcile-fault",
+        audit=_audit(),
+    )
+    values = {
+        "session_id": created.session.session_id,
+        "expected_session_version": created.session.session_version,
+        "principal_ref": _ref("principal"),
+        "idempotency_key": "reconcile-session-shell-fault",
+        "effect_ref": None,
+    }
+
+    with pytest.raises(RuntimeError, match="injected"):
+        store.claim_shell_reconcile(**values)
+
+    recovered = _store(path).claim_shell_reconcile(**values)
+    assert recovered.replay is False
+    assert recovered.effect_ref is None

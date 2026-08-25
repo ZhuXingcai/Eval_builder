@@ -5,12 +5,14 @@ import json
 from pathlib import Path
 
 from eval_factory.agent_system.plan_review import PlanReviewService
-from eval_factory.console_api.app import create_app
+from eval_factory.console_api.agent_app import create_agent_app
+from eval_factory.console_api.agent_service import AgentShellService
 
 
 def contract_document() -> dict[str, object]:
-    service = PlanReviewService.__new__(PlanReviewService)
-    return create_app(service).openapi()
+    plan_reviews = PlanReviewService.__new__(PlanReviewService)
+    agent_shell = AgentShellService.__new__(AgentShellService)
+    return create_agent_app(plan_reviews, agent_shell).openapi()
 
 
 def contract_bytes() -> bytes:

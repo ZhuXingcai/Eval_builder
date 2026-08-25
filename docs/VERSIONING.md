@@ -37,7 +37,7 @@ Current status:
 | 2 | complete |
 | 3 | complete |
 | 4 | mechanism complete; real semantic pending |
-| 5 | planned |
+| 5 | in progress; runtime protocol, event/SSE transport, Source Admission, and service composition complete |
 | 6 | planned |
 
 V1 keeps one statically registered `generic-agent-trace` Pack. It does not

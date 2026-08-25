@@ -80,6 +80,49 @@ but must pass before V1 Stable evidence is frozen.
    - CLI/facade Graph bootstrap is required by default;
    - direct runtime remains explicit compatibility only.
 
+## Stage 5 Work Packages
+
+1. **Unified runtime protocol**
+   - provider-neutral readiness, event, usage, tool, and failure contracts;
+   - legacy runtime and Gateway adapters with private source evidence.
+2. **Agent Shell event transport**
+   - strict public session/message/event projections;
+   - atomic runtime-event to SessionEvent persistence;
+   - committed-sequence HTTP pagination and SSE reconnect.
+3. **Source admission**
+   - bounded `manifest.csv` plus JSONL admission;
+   - private staging/CAS, immutable per-session authority, exact replay, and
+     safe Artifact Envelope refs.
+4. **Service composition**
+   - owner-backed Team/Factory/Graph/PlanReview/workspace/delivery
+     projections;
+   - READY plus explicit admitted-source confirmation to Pack `1.2.0` Graph
+     start;
+   - replay-safe Team/Graph outbox reconciliation and restart recovery;
+   - explicit full-Shell versus PlanReview-only `agent serve` composition.
+5. **Conversation-first UI and browser evidence**
+   - React session shell, composer, Activity/Team/workspaces;
+   - CC-Haha-inspired warm-light workbench hierarchy, asymmetric
+     user/Agent messages, inline Team status, and floating composer;
+   - task-level primary navigation plus a centered/docked context composer
+     with source directories, goal templates, Plan mode, slash commands,
+     explicit extension status, and safe Agent-output quotation;
+   - auditable soft-close session removal with confirmation, plus a
+     text-only Composer surface and responsive lower toolbar for add/mode, one
+     model-and-reasoning trigger, browser voice input, and send;
+   - searchable built-in/custom model catalog, per-model discrete effort
+     slider, strict non-secret custom model metadata, and per-session
+     browser-local preferences that do not claim Host routing authority;
+   - responsive, accessibility, reconnect, and privacy E2E.
+
+Stage 5.4 mechanism evidence covers the full fixture conversation-to-review
+flow, PlanReview-only compatibility, API restart/SSE reconnect, deep-link
+reload, Delivery empty state, drawer/model/delete-dialog focus/Escape, reduced
+motion, custom model reload/delete, and 1440/1024/768/375 no-overflow
+rendering. This remains
+`MECHANISM_FIXTURE`; real Provider semantics and Stage 6 packages are separate
+gates.
+
 ## Authority
 
 Beads owns active/closed task state and evidence. Trellis owns implementation

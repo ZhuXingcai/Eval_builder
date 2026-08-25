@@ -1,7 +1,7 @@
 {
   "active_cross_stage_contract": {
     "path": "specs/002-eval-dataset-factory/contracts/v2/manifest.json",
-    "sha256": "6d7014a6693169dacc1ac6c24c7164f376985219cbf9ace229a9be62fa6f0bfc"
+    "sha256": "758d62b283560462f8e39237274557c8bbc3950698ec3ea7db2e20e264a56257"
   },
   "architecture": "v1-domain-base-plus-v2-workflow-overlay",
   "base_annotation_contract": {

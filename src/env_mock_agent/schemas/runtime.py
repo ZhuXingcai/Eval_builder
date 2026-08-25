@@ -18,6 +18,7 @@ class RuntimeEventType(StrEnum):
     RUNTIME_STARTED = "runtime_started"
     MESSAGE_DELTA = "message_delta"
     TOOL_STARTED = "tool_started"
+    TOOL_PROGRESS = "tool_progress"
     TOOL_FINISHED = "tool_finished"
     ARTIFACT_WRITTEN = "artifact_written"
     WARNING = "warning"
@@ -38,6 +39,21 @@ class RuntimeErrorCode(StrEnum):
     PROCESS_ERROR = "process_error"
 
 
+class RuntimeCredentialStatus(StrEnum):
+    READY = "READY"
+    NOT_REQUIRED = "NOT_REQUIRED"
+    UNKNOWN = "UNKNOWN"
+    MISSING = "MISSING"
+    INVALID = "INVALID"
+
+
+class RuntimeSandboxEnforcement(StrEnum):
+    FULL = "FULL"
+    PARTIAL = "PARTIAL"
+    NONE = "NONE"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
+
+
 class RuntimeCapabilities(BaseModel):
     name: RuntimeName
     available: bool
@@ -46,6 +62,10 @@ class RuntimeCapabilities(BaseModel):
     tools: list[str] = Field(default_factory=list)
     supports_resume: bool = False
     supports_cancel: bool = True
+    supports_event_streaming: bool = True
+    supports_tool_progress: bool = False
+    credential_status: RuntimeCredentialStatus = RuntimeCredentialStatus.UNKNOWN
+    sandbox_enforcement: RuntimeSandboxEnforcement = RuntimeSandboxEnforcement.NONE
     reason: str = ""
 
 
